@@ -1,0 +1,72 @@
+[
+  {
+    "index": "1",
+    "Rule ID": "R002",
+    "Evidence IDs": "E002; E011",
+    "Layer": "Rhetorical",
+    "Candidate rule": "Connect abstractions to practical or normative consequences.",
+    "Review note": "Candidate across two responses.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "3",
+    "Rule ID": "R004",
+    "Evidence IDs": "E008; E009; E010",
+    "Layer": "Rhetorical",
+    "Candidate rule": "Decompose compound claims, concede plausible components, challenge inference or inevitability.",
+    "Review note": "One response; seek independent example.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "7",
+    "Rule ID": "R008",
+    "Evidence IDs": "E019; E021; E022; E024",
+    "Layer": "Rhetorical",
+    "Candidate rule": "Adapt context and care to audience familiarity; provide more context in writing.",
+    "Review note": "Self-report; verify against authored prose.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "10",
+    "Rule ID": "R011",
+    "Evidence IDs": "E025; E026; E027",
+    "Layer": "Rhetorical",
+    "Candidate rule": "Distinguish disagreement from inaccuracy; correct selectively by restatement and decline ideas without dismissing merit.",
+    "Review note": "Context-sensitive; direct correction exceptions unresolved.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "11",
+    "Rule ID": "R012",
+    "Evidence IDs": "E050; E067; E070",
+    "Layer": "Rhetorical",
+    "Candidate rule": "Preserve the historical chain while tightening expression.",
+    "Review note": "Candidate; test in written prototype",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "14",
+    "Rule ID": "R015",
+    "Evidence IDs": "E060; E079",
+    "Layer": "Rhetorical",
+    "Candidate rule": "Use concrete examples before abstract explanation when helpful.",
+    "Review note": "Candidate; test in written prototype",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "16",
+    "Rule ID": "R017",
+    "Evidence IDs": "E041; E076",
+    "Layer": "Rhetorical",
+    "Candidate rule": "Connect technological opportunity and risk to practical human agency.",
+    "Review note": "Candidate; test in written prototype",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  }
+]
