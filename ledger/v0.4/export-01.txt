@@ -1,0 +1,200 @@
+<PARSED TEXT FOR SHEET: 1 / 7 TABS
+TAB NAME: Guide>
+index,Item,Definition
+0,Purpose,"Interim authorial voice ledger; graph-ready identifiers, source provenance and candidate rules."
+1,Workflow,Ask one question; capture transcript; segment into exemplars; infer candidate rules; review; append without overwriting evidence.
+2,Status,All rules are provisional. Spoken language is not automatically a written-style rule.
+3,Source,"User-supplied SRT transcript, 24 Nov 2026; transcription may contain errors. No audio verification."
+4,Persistence,Local workbook snapshot; re-upload or retain in this conversation for updates. No live Google Sheet connected.
+5,Identity,S = source response; E = exemplar; R = candidate rule. IDs persist across revisions.
+6,Validation,Confirm with independent examples and author review; retain counterexamples and scope.
+7,v0.2 update,Nine substantive responses plus one nonresponse retained for audit (S007); no exemplar inferred from nonresponse. All new rules remain unconfirmed.
+8,v0.3,"New source rows contain selected verbatim spans only, not full transcripts. Ellipsis markers separate spans. Existing evidence retained. No manuscript prose used."
+9,Prototype,Sentence plan precedes expression; author review and Pangram pending. No detector optimization.
+10,Version 0.4,Preserves v0.3; adds R018 and experiment register. Prototype 002 author validated at passage level.
+<PARSED TEXT FOR SHEET: 2 / 7 TABS
+TAB NAME: Source evidence>
+index,Source ID,SRT time,Prompt topic,User transcript (segments joined),Modality,Date
+0,S001,07:09–08:01,Knowledge versus understanding,"That's a great question. Um, And I, I think the the difference is underst- knowledge is a a set of beliefs in a set of topics that is ubiquitous. Uh, I think that's the right word where it's there for all people to understand. But understanding is communicating that set of knowledge to an individual or a group of people. And you may do it differently. So the the ability and we do talk about this a lot at Mock thirty three, our job is not just to build the knowledge, it's to make sure that our clients understand what we did",Spoken transcript,2026-11-24
+1,S002,08:18–10:32,Evidence sufficiency,"'Course Well that's that's again a very very astute question. What I can give you maybe to start with is some book ends if we represent our epistemic knowledge as a graph, we have a root node, which is the root claim and if you made a claim to me that would be one node. So the the minimum graph is one node with no supporting evidence. And that is too little. Um On the other end of the spectrum Well, how how we fill out the graph is we use Toulmin argumentative theory and From the root Uh, claim We instruct agents to go and to bilateral search for and against the the the claim and that starts to build up a tree and even support everything every node in the the tree is a claim. Everything's a claim. It just has a type. So the claim can be evidentiary, supporting another claim. It could be a rebuttal, it could be a redefinition, all the the different uh modes that um Toulmin um um created. So, when we get to a lot, we talk we talk about mass versus weight. Mass is the number of nodes within a epistemic graph supporting a root node when that gets large or when that starts finding multiple um Uh, versions of the same support, which is good um coming from different sources. Um, that's that's starting to indicate you're getting into a good spot. But um, I don't know if there's any actual uh number associated which is what is enough",Spoken transcript,2026-11-24
+2,S003,10:57–12:40,Fluency versus knowledge,"Yes Well, that's exactly what we're trying to solve here is, the world has been getting increasingly consuming misinformation with social media. Um, and it seems to be because of just the nature of people. Some people, you may say are lazy and they don't wanna do the work on what they're hearing, um, or their trust too trusting or they think if they don't believe a friend or a colleague that it's not the right thing to do. Um, and that that has been getting increasingly harder to get people to think about the level of accuracy in statements with just social media. But now with AI, um, AI is very, very fluent, um, and it's no wonder because large language models are trained on linguistics. Um, so naturally, they're very fluent, but they can be wrong a lot of the time. They're right a lot of the time, but they can be wrong a lot of the time. And if you just assume that what they say has weight and accuracy, then that's a bad place to go",Spoken transcript,2026-11-24
+3,S004,13:44–15:55,Counterargument to AI eliminating reflection,"Well, let's break the, uh, the statement into two parts. The first part being artificial intelligence will eventually eliminate the need for human reflection. That's part one. Part two, is because machines will be capable of processing information and making decisions better than humans. The second part, I believe there's enough evidence, um, in the current capabilities of AI to believe that that will become true. Um, and part of it is, like I said earlier, the current AI, including you, your reasoning and your ability to pull knowledge and reason through that knowledge is all based on a linguistic model. Um, and there's so much more that we can do with AI. You'll be using LQMs where, you know, instead of describing physics to me from the words that you have learnt, you'll be describing physics to me from the numbers and shapes and curves that you've learnt in the data. So I believe the second part of uh of your statement is very plausible. The the the first part I disagree where um that the artificial intelligence will eventually eliminate the need for human reflection. That could happen if we let it happen. But I don't think that's that's one thing that we in our theory are saying We humans need to reflect on what the technology and AI is able to do as fast as AI and technology are able to do it. And that is for governance and human agency. That's important. Or you may go down a singularity like Nick Bostrom talks about where you don't reflect fast enough and AI takes over the agency over humanity",Spoken transcript,2026-11-24
+4,S005,18:17–19:32,Reconsidering cloud adoption,"Well, I'll I'll start with a very simple example. I've been in technology thirty five years when the cloud came about and someone told me that we would adopt a sales force. And the company sales force, a CRM tool in the cloud, I thought they were crazy. It just didn't reconcile that we would have our customer data in the cloud. And the arguments for it about the cloud being scalable and we're not owning the asset, we're renting the asset and the economics were better. I understood, but I don't I think other concerns like security and sovereign ownership of it didn't allow me to think about the other benefits. If I would have assumed for a second as a thought experiment that let's assume security is fine and we're not worried about it. That would allowed me to go and explore other parts of the value proposition, but I don't think I ever got there",Spoken transcript,2026-11-24
+5,S006,20:16–20:29,Warning about fluent answers,"The LLMs are large statistical pattern matchers. They're very good at what they do, but they can make mistakes. So treat what they tell you as a claim",Spoken transcript,2026-11-24
+6,S007,20:56–20:57,Repeatedly rewritten sentence,I can't think of one right now,Spoken transcript,2026-11-24
+7,S008,21:09–21:20,Trigger for self-correction,"Um, thinking about how I can communicate my thought the best, the most optimal way so that the person understands it",Spoken transcript,2026-11-24
+8,S009,21:46–21:50,Instruction about evidence,I always say something very simple. You have to do the work,Spoken transcript,2026-11-24
+9,S010,22:10–22:23,Written versus spoken context,"Well, when I write, I set more context. Um, because I don't know who's reading it when I'm speaking, depending on who I speak to, there may be some shorthand available",Spoken transcript,2026-11-24
+10,S011,22:48–23:24,Admitting error,"Oh, that's a great question. Um, around people Um, I know well like family and friends, I admit I was wrong and usually offer the admission, even though someone may have not asked for it. Um, I think I do the same thing with strangers or with uh, with business colleagues, but I think I'm a little more careful. I think I'm a little more cognitive of it",Spoken transcript,2026-11-24
+11,S012,23:40–24:44,Correcting others,"I was at Harvard yesterday giving uh, uh, I was on a panel with three other gentlemen on AI and deep tech. And there was quite a few things that the other gentleman said that, A, I didn't agree with and B, I don't think were accurate. Um, I don't think there's any need, certain- certain things I don't think there's any need to correct or, or or even correct directly or through restatement in my own context, but if there is something I feel should be maybe restated, that's how I do it. I don't call the person out. I don't un-unless it's very, very, I don't know, sensitive, but I'm-it's doesn't happen very often. I'll just if I think it's important, I might put it in my own conversation in my own context and restate it",Spoken transcript,2026-11-24
+12,S013,25:15–25:23,Declining an idea,Let's not do that now. I think it may be a good idea. We have another idea that we've already committed to,Spoken transcript,2026-11-24
+13,S014,25:41–25:58,Inviting critique,"Here is a hypothesis I have in an area that I don't have a lot of experience. I think what I've come up with is interesting, but I would very much appreciate you taking a look at it and challenging it from your experience",Spoken transcript,2026-11-24
+14,S015,Not available,Novelty framing,"what have people asked about this topic and and then maybe, um, talk about what I'm asking about this topic
+[…]
+And that really drives a different hypothesis.",Spoken transcript excerpts,2026-11-25
+15,S016,Not available,Literature review,"which are all very good, uh, and astute questions
+[…]
+maybe some cross-disciplinarian, uh, approaches may uh, surface more interesting aspects of things that haven't been questioned before",Spoken transcript excerpts,2026-11-25
+16,S017,Not available,Research limitations,"some hypothesis that we feel are are novel
+[…]
+we are still in the process of developing some type of experiments",Spoken transcript excerpts,2026-11-25
+17,S018,Not available,Book origins,"Well, a couple things that kind of came together.
+[…]
+and and then in another stream, this is the third one
+[…]
+the amazing opportunities we have with AI, along with the incredible, uh, responsibility and potential danger",Spoken transcript excerpts,2026-11-25
+18,S019,Not available,Reader purpose,"when the, the, the world of AI moves from the digital world to the physical world
+[…]
+give people a framework to understand this transition
+[…]
+my, my advice to people is to be a part of it",Spoken transcript excerpts,2026-11-25
+19,S020,Not available,Participation,"It's happening and it's going to happen.
+[…]
+my older son said, I don't like AI. I don't want to have anything to do with it.
+[…]
+a side of AI that he could contribute to, which aligns to his values",Spoken transcript excerpts,2026-11-25
+20,S021,Not available,Expansion definition,"people often think about expansion as in land or wealth or population
+[…]
+expanding in awareness and capability and empathy
+[…]
+it may it may involve expanding physically as well
+[…]
+they were able to live in colder places. They were able to cook their meat",Spoken transcript excerpts,2026-11-25
+21,S022,Not available,Transitions and reconstitution,"because a relationship with a coordinating um, factor or instrument has changed
+[…]
+their relationship with materials and the Bronze Age
+[…]
+transitions can expand, they can collapse, collapse and then reconstruct
+[…]
+the coordinating factor has been something that's always been only human
+[…]
+I can write a computer program that took a team of 100 people
+[…]
+And I call it reconstitution",Spoken transcript excerpts,2026-11-25
+22,S023,Not available,Abundant cognition,"is it limitless? It's near limitless because you still need computers to run on
+[…]
+we don't even need that for cognition to be super useful
+[…]
+Right now, they're quite amazing. Right?",Spoken transcript excerpts,2026-11-25
+23,S024,Not available,Mechanization,"the intelligent mechanization of labor
+[…]
+if we look at what happened in the eighteen hundreds, the impact to labor and education and crafts",Spoken transcript excerpts,2026-11-25
+24,S025,Not available,Autonomous cars,"when I was a kid, taxis would show up with people in them, with radios
+[…]
+Now, a car just shows up. No driver. It knows where you're going.",Spoken transcript excerpts,2026-11-25
+25,S026,Not available,Historical objection,"Well, that's a fair observation.
+[…]
+What I'm doing is comparing it to the past.
+[…]
+saying this is the last or the biggest of all time",Spoken transcript excerpts,2026-11-25
+26,S027,Not available,Information history,"Gutenberg was about information. People still had to think about it
+[…]
+The computer was the processing of information. Now, The AI is, uh the, autonomous cognition.",Spoken transcript excerpts,2026-11-25
+27,S028,Not available,Oral history,"you could even go back one step further
+[…]
+writing in a story down in some type of symbolic representation",Spoken transcript excerpts,2026-11-25
+28,S029,Not available,Speech to writing,"maybe tighten the words and the accuracy
+[…]
+the chain would be still four examples or is it five?",Spoken transcript excerpts,2026-11-25
+29,S030,Not available,Optimism and concern,"I'm by nature a very optimistic person
+[…]
+But at the same time, I do love my history and anthropology
+[…]
+I didn't do very well in the school",Spoken transcript excerpts,2026-11-25
+30,S031,Not available,Transition costs,"this might be the 1920s
+[…]
+It is a local one, and one industry
+[…]
+Because if we stop understanding what AI does, we then become irrelevant.",Spoken transcript excerpts,2026-11-25
+31,S032,Not available,Governance,"Not not to slow it down on purpose for no good reasons
+[…]
+this to me seems to be something we really need to watch",Spoken transcript excerpts,2026-11-25
+32,S033,Not available,Reflection example,"I'll I'll I'll answer the your question directly, uh, in a second. But I'll give you an example
+[…]
+is probably much, much lower",Spoken transcript excerpts,2026-11-25
+33,S034,Not available,Practical competence,"I'm making it physical because it's easier to understand
+[…]
+people need to reflect and understand how things are made and understand how things are done
+[…]
+we only invest in what we can build",Spoken transcript excerpts,2026-11-25
+34,S035,Not available,Makers,"to be makers, not takers",Spoken transcript excerpts,2026-11-25
+<PARSED TEXT FOR SHEET: 3 / 7 TABS
+TAB NAME: Exemplars>
+index,Exemplar ID,Source ID,Layer,Intellectual act,Exact excerpt,Analyst observation,Status,Exemplar type,Parent exemplar ID,Written validation
+0,E001,S001,Conceptual,Differentiate,But understanding is communicating that set of knowledge to an individual or a group of people.,Distinguishes concepts through their function.,Candidate,Original spoken,,Not validated for writing
+1,E002,S001,Rhetorical,Apply,"our job is not just to build the knowledge, it's to make sure that our clients understand what we did",Connects abstraction to practical responsibility.,Candidate,Original spoken,,Not validated for writing
+2,E003,S002,Epistemic,Establish bound,the minimum graph is one node with no supporting evidence. And that is too little.,Uses limiting case to establish insufficiency.,Candidate,Original spoken,,Not validated for writing
+3,E004,S002,Conceptual,Model,Everything's a claim. It just has a type.,Unifies objects then differentiates by type.,Candidate,Original spoken,,Not validated for writing
+4,E005,S002,Epistemic,Qualify,I don't know if there's any actual uh number associated which is what is enough,Declines unsupported numerical threshold.,Candidate,Original spoken,,Not validated for writing
+5,E006,S003,Rhetorical,Explain mechanism,"AI is very, very fluent, um, and it's no wonder because large language models are trained on linguistics.",Explains perceived credibility through a mechanism.,Candidate,Original spoken,,Not validated for writing
+6,E007,S003,Epistemic,Balance,"They're right a lot of the time, but they can be wrong a lot of the time.",Balances concession and warning.,Candidate,Original spoken,,Not validated for writing
+7,E008,S004,Rhetorical,Decompose,"Well, let's break the, uh, the statement into two parts.",Separates premise and conclusion before assessment.,Candidate,Original spoken,,Not validated for writing
+8,E009,S004,Epistemic,Concede,So I believe the second part of uh of your statement is very plausible.,Accepts plausible portion without accepting whole.,Candidate,Original spoken,,Not validated for writing
+9,E010,S004,Rhetorical,Condition,That could happen if we let it happen.,Distinguishes possibility from inevitability.,Candidate,Original spoken,,Not validated for writing
+10,E011,S004,Conceptual,Ground in principle,And that is for governance and human agency.,Connects reflection to normative purpose.,Candidate,Original spoken,,Not validated for writing
+11,E012,S003,Linguistic,Contrast,"They're right a lot of the time, but they can be wrong a lot of the time.",Parallel clauses with contrasting predicates.,Candidate,Original spoken,,Not validated for writing
+12,E013,S005,Rhetorical,Illustrate,I'll I'll start with a very simple example.,Begins with concrete experience.,Candidate,Original spoken,,Not validated for writing
+13,E014,S005,Epistemic,Reconsider,other concerns like security and sovereign ownership of it didn't allow me to think about the other benefits.,Identifies a concern that blocked consideration.,Candidate,Original spoken,,Not validated for writing
+14,E015,S005,Conceptual,Hypothesize,let's assume security is fine and we're not worried about it.,Brackets a constraint to explore alternatives.,Candidate,Original spoken,,Not validated for writing
+15,E016,S005,Epistemic,Qualify,but I don't think I ever got there,Does not claim an actual belief reversal.,Candidate,Original spoken,,Not validated for writing
+16,E017,S006,Linguistic,Contrast,"They're very good at what they do, but they can make mistakes.",Concise concession and qualification.,Candidate,Original spoken,,Not validated for writing
+17,E018,S006,Epistemic,Instruct,So treat what they tell you as a claim,"Treats output as a claim, not established knowledge.",Candidate,Original spoken,,Not validated for writing
+18,E019,S008,Rhetorical,Adapt,so that the person understands it,States audience understanding as objective.,Candidate,Original spoken,,Not validated for writing
+19,E020,S009,Linguistic,Instruct,You have to do the work,Short direct imperative.,Candidate,Original spoken,,Not validated for writing
+20,E021,S010,Rhetorical,Contextualize,"when I write, I set more context.",Explicit self-report of written preference.,Candidate,Original spoken,,Not validated for writing
+21,E022,S010,Linguistic,Adapt,there may be some shorthand available,Shared context permits spoken shorthand.,Candidate,Original spoken,,Not validated for writing
+22,E023,S011,Epistemic,Admit,"I admit I was wrong and usually offer the admission, even though someone may have not asked for it.",Self-reported voluntary correction.,Candidate,Original spoken,,Not validated for writing
+23,E024,S011,Rhetorical,Adapt,I think I'm a little more careful.,Audience-dependent caution.,Candidate,Original spoken,,Not validated for writing
+24,E025,S012,Epistemic,Differentiate,"A, I didn't agree with and B, I don't think were accurate.",Separates disagreement from accuracy.,Candidate,Original spoken,,Not validated for writing
+25,E026,S012,Rhetorical,Reframe,I might put it in my own conversation in my own context and restate it,Corrects indirectly when important.,Candidate,Original spoken,,Not validated for writing
+26,E027,S013,Rhetorical,Decline,Let's not do that now. I think it may be a good idea. We have another idea that we've already committed to,Defers without dismissing merit; gives reason.,Candidate,Original spoken,,Not validated for writing
+27,E028,S014,Epistemic,Invite critique,Here is a hypothesis I have in an area that I don't have a lot of experience.,States epistemic status and experience limit.,Candidate,Original spoken,,Not validated for writing
+28,E029,S014,Rhetorical,Invite critique,I would very much appreciate you taking a look at it and challenging it from your experience,Invites challenge grounded in expertise.,Candidate,Original spoken,,Not validated for writing
+29,E030,S015,Rhetorical,Sequence,"what have people asked about this topic and and then maybe, um, talk about what I'm asking about this topic",Prior questions before own question,Candidate,Original spoken,,Not validated for writing
+30,E031,S015,Epistemic,Derive hypothesis,And that really drives a different hypothesis.,Hypothesis follows question,Candidate,Original spoken,,Not validated for writing
+31,E032,S016,Rhetorical,Concede,"which are all very good, uh, and astute questions",Respect prior work,Candidate,Original spoken,,Not validated for writing
+32,E033,S016,Conceptual,Cross disciplines,"maybe some cross-disciplinarian, uh, approaches may uh, surface more interesting aspects of things that haven't been questioned before",Novelty through disciplinary intersection,Candidate,Original spoken,,Not validated for writing
+33,E034,S017,Epistemic,Qualify,some hypothesis that we feel are are novel,Novelty is provisional,Candidate,Original spoken,,Not validated for writing
+34,E035,S017,Epistemic,Test,we are still in the process of developing some type of experiments,Distinguish hypothesis from testing,Candidate,Original spoken,,Not validated for writing
+35,E036,S018,Rhetorical,Convergence,"Well, a couple things that kind of came together.",Introduce converging motivations,Candidate,Original spoken,,Not validated for writing
+36,E037,S018,Rhetorical,Enumerate,"and and then in another stream, this is the third one",Separate streams,Candidate,Original spoken,,Not validated for writing
+37,E038,S018,Conceptual,Motivation,"the amazing opportunities we have with AI, along with the incredible, uh, responsibility and potential danger",Opportunity and responsibility coexist,Candidate,Original spoken,,Not validated for writing
+38,E039,S019,Conceptual,Differentiate,"when the, the, the world of AI moves from the digital world to the physical world",Distinguish regimes,Candidate,Original spoken,,Not validated for writing
+39,E040,S019,Rhetorical,Purpose,give people a framework to understand this transition,Framework before decision,Candidate,Original spoken,,Not validated for writing
+40,E041,S019,Rhetorical,Agency,"my, my advice to people is to be a part of it",Explicit recommendation,Candidate,Original spoken,,Not validated for writing
+41,E042,S020,Linguistic,Repeat,It's happening and it's going to happen.,Deliberate emphasis,Candidate,Original spoken,,Not validated for writing
+42,E043,S020,Rhetorical,Illustrate,"my older son said, I don't like AI. I don't want to have anything to do with it.",Personal example,Candidate,Original spoken,,Not validated for writing
+43,E044,S020,Conceptual,Align values,"a side of AI that he could contribute to, which aligns to his values",Participation compatible with values,Candidate,Original spoken,,Not validated for writing
+44,E045,S021,Conceptual,Contrast,people often think about expansion as in land or wealth or population,Conventional definition first,Candidate,Original spoken,,Not validated for writing
+45,E046,S021,Conceptual,Redefine,expanding in awareness and capability and empathy,Broaden dimensions,Candidate,Original spoken,,Not validated for writing
+46,E047,S021,Epistemic,Qualify,it may it may involve expanding physically as well,Retain physical dimension,Candidate,Original spoken,,Not validated for writing
+47,E048,S021,Rhetorical,Historical example,they were able to live in colder places. They were able to cook their meat,Concrete capability consequences,Candidate,Original spoken,,Not validated for writing
+48,E049,S022,Conceptual,Mechanism,"because a relationship with a coordinating um, factor or instrument has changed",Relational mechanism,Candidate,Original spoken,,Not validated for writing
+49,E050,S022,Rhetorical,Historical sequence,their relationship with materials and the Bronze Age,Historical progression,Candidate,Original spoken,,Not validated for writing
+50,E051,S022,Conceptual,Differentiate,"transitions can expand, they can collapse, collapse and then reconstruct",Transition not synonymous with expansion,Candidate,Original spoken,,Not validated for writing
+51,E052,S022,Conceptual,Novelty,the coordinating factor has been something that's always been only human,Cognition as distinctive instrument,Candidate,Original spoken,,Not validated for writing
+52,E053,S022,Rhetorical,Illustrate,I can write a computer program that took a team of 100 people,Personal capability example; magnitude unverified,Candidate,Original spoken,,Not validated for writing
+53,E054,S022,Conceptual,Name,And I call it reconstitution,Name the distinction,Candidate,Original spoken,,Not validated for writing
+54,E055,S023,Epistemic,Qualify,is it limitless? It's near limitless because you still need computers to run on,Distinguish abundance from infinity,Candidate,Original spoken,,Not validated for writing
+55,E056,S023,Epistemic,Bound,we don't even need that for cognition to be super useful,AGI not prerequisite,Candidate,Original spoken,,Not validated for writing
+56,E057,S023,Linguistic,Question,"Right now, they're quite amazing. Right?",Conversational emphasis,Candidate,Original spoken,,Not validated for writing
+57,E058,S024,Conceptual,Analogy,the intelligent mechanization of labor,Extend historical category,Candidate,Original spoken,,Not validated for writing
+58,E059,S024,Rhetorical,Compare,"if we look at what happened in the eighteen hundreds, the impact to labor and education and crafts",Use precedent to examine consequences,Candidate,Original spoken,,Not validated for writing
+59,E060,S025,Rhetorical,Recollection,"when I was a kid, taxis would show up with people in them, with radios",Personal historical baseline,Candidate,Original spoken,,Not validated for writing
+60,E061,S025,Linguistic,Short sentences,"Now, a car just shows up. No driver. It knows where you're going.",Concrete short sequence,Candidate,Original spoken,,Not validated for writing
+61,E062,S026,Rhetorical,Concede,"Well, that's a fair observation.",Acknowledge objection,Candidate,Original spoken,,Not validated for writing
+62,E063,S026,Epistemic,Scope,What I'm doing is comparing it to the past.,Comparison not prophecy,Candidate,Original spoken,,Not validated for writing
+63,E064,S026,Epistemic,Limit,saying this is the last or the biggest of all time,Reject absolute future ranking,Candidate,Original spoken,,Not validated for writing
+64,E065,S027,Conceptual,Differentiate,Gutenberg was about information. People still had to think about it,Separate information and cognition,Candidate,Original spoken,,Not validated for writing
+65,E066,S027,Conceptual,Sequence,"The computer was the processing of information. Now, The AI is, uh the, autonomous cognition.",Distinguish successive functions,Candidate,Original spoken,,Not validated for writing
+66,E067,S028,Rhetorical,Extend,you could even go back one step further,Extend historical chain,Candidate,Original spoken,,Not validated for writing
+67,E068,S028,Conceptual,Mechanism,writing in a story down in some type of symbolic representation,External representation,Candidate,Original spoken,,Not validated for writing
+68,E069,S029,Linguistic,Tighten,maybe tighten the words and the accuracy,Tighten expression,Candidate,Original spoken,,Not validated for writing
+69,E070,S029,Rhetorical,Preserve,the chain would be still four examples or is it five?,Preserve argument length,Candidate,Original spoken,,Not validated for writing
+70,E071,S030,Rhetorical,Position,I'm by nature a very optimistic person,Establish personal disposition,Candidate,Original spoken,,Not validated for writing
+71,E072,S030,Rhetorical,Contrast,"But at the same time, I do love my history and anthropology",Introduce historical counterweight,Candidate,Original spoken,,Not validated for writing
+72,E073,S030,Rhetorical,Personal example,I didn't do very well in the school,Personal connection to institutional concern,Candidate,Original spoken,,Not validated for writing
+73,E074,S031,Epistemic,Qualify,this might be the 1920s,Flag uncertain historical detail,Candidate,Original spoken,,Not validated for writing
+74,E075,S031,Conceptual,Scale,"It is a local one, and one industry",Distinguish local from global,Candidate,Original spoken,,Not validated for writing
+75,E076,S031,Rhetorical,Responsibility,"Because if we stop understanding what AI does, we then become irrelevant.",Consequence for agency,Candidate,Original spoken,,Not validated for writing
+76,E077,S032,Rhetorical,Contrast,Not not to slow it down on purpose for no good reasons,Distinguish vigilance from obstruction,Candidate,Original spoken,,Not validated for writing
