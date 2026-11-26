@@ -1,0 +1,29 @@
+{
+  "run": "RUN_002",
+  "pangram": {
+    "version": "4.1",
+    "provenance": "user reported",
+    "words": 374,
+    "ai_percent": 73,
+    "human_percent": 27,
+    "flagged_segments": 9,
+    "total_segments": 12,
+    "high": 4,
+    "medium": 3,
+    "likely_ai_low": 2,
+    "first_flagged": "What interests us about this period of human history",
+    "opening_passed_through": "In Eurasia they encountered other hominins."
+  },
+  "author_feedback": "I don’t know what to say. I can we be so far off",
+  "analysis": {
+    "status": "hypotheses, not isolated causal findings",
+    "suspected_defects": [
+      "R018 direct realization violated by rhetorical scaffolding",
+      "same-model checking missed defect",
+      "rule binding incomplete",
+      "expression not independently executed per act"
+    ],
+    "next": "diagnose first failing act before full rewrite"
+  },
+  "closure": "not accepted; no formal author approval"
+}
