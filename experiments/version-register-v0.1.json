@@ -1,0 +1,54 @@
+{
+  "version": "0.1",
+  "policy": "Append new version records; never overwrite completed runs. Separate authorial fidelity, epistemic fidelity, structural checks and detector observations. Unknown is not pass.",
+  "records": [
+    {
+      "id": "prototype-001",
+      "human": 92,
+      "provenance": "user supplied historical conversation",
+      "author": null
+    },
+    {
+      "id": "prototype-002",
+      "human": 100,
+      "author": "voice accepted",
+      "provenance": "user supplied historical conversation"
+    },
+    {
+      "id": "prototype-003",
+      "human": 100,
+      "author": "ten-source illustration accepted; remaining review incomplete",
+      "provenance": "user supplied historical conversation"
+    },
+    {
+      "id": "prototype-007",
+      "human": 100,
+      "words": 409,
+      "provenance": "recovered record; exact expression missing"
+    },
+    {
+      "id": "RUN_002",
+      "human": 27,
+      "words": 374,
+      "author": "not accepted",
+      "record": "experiments/RUN_002/assessment.json"
+    },
+    {
+      "id": "RUN_003",
+      "human": null,
+      "status": "construction open",
+      "record": "experiments/RUN_003/construction.json"
+    }
+  ],
+  "required": [
+    "procedure revision",
+    "ledger revision",
+    "source",
+    "construction",
+    "expression",
+    "checks",
+    "author judgment",
+    "detector result and version",
+    "limitations"
+  ]
+}
