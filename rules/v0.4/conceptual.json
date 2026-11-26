@@ -1,0 +1,22 @@
+[
+  {
+    "index": "0",
+    "Rule ID": "R001",
+    "Evidence IDs": "E001; E004",
+    "Layer": "Conceptual",
+    "Candidate rule": "Define concepts through functional distinctions and typed structure.",
+    "Review note": "Two different contexts; confirm written usage.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "13",
+    "Rule ID": "R014",
+    "Evidence IDs": "E049; E052; E068",
+    "Layer": "Conceptual",
+    "Candidate rule": "Explain transitions through changes in coordinating relationships.",
+    "Review note": "Candidate; test in written prototype",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  }
+]
