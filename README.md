@@ -1,0 +1,2 @@
+# Authorial Agent procedure
+Independent version control for execution procedures, separate from voice ledger versions. Original successful prompts are not recovered. Baseline is a reconstruction, not a verified reproduction. Every run must record commit, ledger identity and hash, exact prompts, model, intermediate outputs, author assessment and detector observations. Never overwrite a completed run. No credentials or private manuscripts should be pushed without authorization.

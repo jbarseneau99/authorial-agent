@@ -1,0 +1,1 @@
+Each run gets a unique directory containing source, manifest, exact resolved prompts, intermediate graph and bindings, prose, findings, author decision and detector report. Manifest references procedure commit and ledger SHA-256. Historical results without full provenance must be marked incomplete.
