@@ -1,0 +1,8 @@
+index,Rule ID,Evidence IDs,Layer,Candidate rule,Review note,Status,Applicability
+1,R002,E002; E011,Rhetorical,Connect abstractions to practical or normative consequences.,Candidate across two responses.,Unconfirmed,Spoken; written untested
+3,R004,E008; E009; E010,Rhetorical,"Decompose compound claims, concede plausible components, challenge inference or inevitability.",One response; seek independent example.,Unconfirmed,Spoken; written untested
+7,R008,E019; E021; E022; E024,Rhetorical,Adapt context and care to audience familiarity; provide more context in writing.,Self-report; verify against authored prose.,Unconfirmed,Spoken; written untested
+10,R011,E025; E026; E027,Rhetorical,Distinguish disagreement from inaccuracy; correct selectively by restatement and decline ideas without dismissing merit.,Context-sensitive; direct correction exceptions unresolved.,Unconfirmed,Spoken; written untested
+11,R012,E050; E067; E070,Rhetorical,Preserve the historical chain while tightening expression.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+14,R015,E060; E079,Rhetorical,Use concrete examples before abstract explanation when helpful.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+16,R017,E041; E076,Rhetorical,Connect technological opportunity and risk to practical human agency.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
