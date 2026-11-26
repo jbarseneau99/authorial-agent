@@ -1,0 +1,16 @@
+{
+  "version": "0.3",
+  "parent": "experiments/version-register-v0.2.json",
+  "delta": [
+    {
+      "run": "RUN_004",
+      "procedure": "v0.3",
+      "ledger": "v0.4",
+      "human": 100,
+      "words": 347,
+      "author": "pending",
+      "compliance": "partial",
+      "assessment": "experiments/RUN_004/assessment-v0.1.json"
+    }
+  ]
+}
