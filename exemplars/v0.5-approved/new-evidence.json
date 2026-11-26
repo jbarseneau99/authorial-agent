@@ -1,0 +1,50 @@
+[
+  {
+    "index": "0",
+    "ID": "N01",
+    "Lesson": "5",
+    "Verbatim excerpt": "Well, it's all relative. It may think it's coherent",
+    "Interpretation": "Frame of reference",
+    "Status": "Observed; inferred rule"
+  },
+  {
+    "index": "1",
+    "ID": "N02",
+    "Lesson": "5",
+    "Verbatim excerpt": "Well, that's the, that's the role of human authority",
+    "Interpretation": "Authority distinction",
+    "Status": "Observed; inferred rule"
+  },
+  {
+    "index": "2",
+    "ID": "N03",
+    "Lesson": "5",
+    "Verbatim excerpt": "Negotiated",
+    "Interpretation": "Conflict resolution; elicited answer",
+    "Status": "Author agreed to candidate pattern"
+  },
+  {
+    "index": "3",
+    "ID": "N04",
+    "Lesson": "6",
+    "Verbatim excerpt": "always explicit. So it's either building up with the punchline",
+    "Interpretation": "Explicit reasoning",
+    "Status": "Stated preference"
+  },
+  {
+    "index": "4",
+    "ID": "N05",
+    "Lesson": "6",
+    "Verbatim excerpt": "maybe at the beginning of a chapter where you're making a big point and then the rest of the chapter kind of builds it up",
+    "Interpretation": "Conclusion placement",
+    "Status": "Conditional stated preference"
+  },
+  {
+    "index": "5",
+    "ID": "N06",
+    "Lesson": "6",
+    "Verbatim excerpt": "That's it, is the dawn of civilization was created out of this because people stayed in one place",
+    "Interpretation": "Conclusion after reasoning",
+    "Status": "Observed; historical claim not verified"
+  }
+]
