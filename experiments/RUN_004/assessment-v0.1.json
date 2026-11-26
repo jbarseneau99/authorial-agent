@@ -1,0 +1,28 @@
+{
+  "run": "RUN_004",
+  "procedure": "v0.3",
+  "ledger": "v0.4",
+  "expression": "experiments/RUN_004/result-v0.1.json",
+  "detector": {
+    "name": "Pangram",
+    "version": "4.1",
+    "human_percent": 100,
+    "ai_percent": 0,
+    "words": 347,
+    "classification": "Human Written",
+    "segments": 1,
+    "segment_classification": "Human High",
+    "flagged": 0
+  },
+  "provenance": "user reported",
+  "author_validation": "pending",
+  "status": "frozen detector-success baseline; not fully compliant procedure execution",
+  "limitations": [
+    "No isolated expression context",
+    "Construction not formally closed",
+    "Acts recorded retrospectively",
+    "Species-characteristic hypothesis and Australia example omitted; pleasure conjecture added",
+    "No independent four-layer check"
+  ],
+  "next": "Author validation then generalization test with frozen procedure and ledger"
+}
