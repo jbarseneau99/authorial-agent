@@ -1,0 +1,34 @@
+{
+  "run_id": "RUN_014",
+  "configuration_version": "0.1",
+  "status": "configured_before_generation",
+  "baseline_commit": "d269595747289c3a1c7e59a974d890d33a41f768",
+  "procedure_paths": [
+    "procedures/v0.3.json",
+    "procedures/v0.2.json"
+  ],
+  "ledger_revision": "v0.4",
+  "ledger_workbook_sha256": "3628683a302638de40363395e2f4db79a1537f177533331294c6f371f3951b92",
+  "rule_or_corpus_changes": false,
+  "execution": "ChatGPT LLM orchestration; separate construction and fresh expression context; independent fidelity review. Python used only for metadata and validation.",
+  "model": "GPT-6 Astra Pro per session identity; deployment ID and sampling parameters unavailable",
+  "stages": [
+    "construct semantic argument",
+    "review and freeze construction",
+    "express from construction and existing authentic exemplars",
+    "independent fidelity review",
+    "record author judgment and detector observations separately"
+  ],
+  "persistence": "This public registration contains only experiment settings and references to existing repository artifacts. New manuscript text, source extracts, construction, expressions and private source identifiers remain private pending explicit public-publication approval.",
+  "constraints": [
+    "No detector-guided revision",
+    "No new authorial rules",
+    "Preserve exact revisions and all substantive source content"
+  ],
+  "authorial_validation": "pending",
+  "detector": "not_run",
+  "limitations": [
+    "Actual separate-context enforcement differs from recent manual runs",
+    "No causal claim about comparative performance"
+  ]
+}
