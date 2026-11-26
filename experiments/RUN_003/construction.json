@@ -1,0 +1,123 @@
+{
+  "run": "RUN_003",
+  "status": "construction_open",
+  "source": "corpus/PoE/chapter-02/2.1-out-of-africa.txt",
+  "ledger": "v0.4",
+  "layers": [
+    "conceptual",
+    "epistemic"
+  ],
+  "concepts": {
+    "necessity": "pressure to migrate",
+    "capability": "feasibility of migration and settlement",
+    "curiosity": "hypothesized motivation",
+    "expansion": "enlargement of occupied environments"
+  },
+  "acts": [
+    "historical grounding",
+    "substantiation",
+    "inquiry",
+    "challenge",
+    "hypothesis",
+    "historical comparison"
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "First dispersal circa 70ka",
+      "status": "revision proposed",
+      "counter": "Earlier dispersals; major ancestral expansion circa 50ka",
+      "evidence": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "C2",
+      "claim": "Climate influenced migration feasibility",
+      "status": "supported",
+      "evidence": [
+        "S2"
+      ]
+    },
+    {
+      "id": "C3",
+      "claim": "Population pressure contributed",
+      "status": "plausible unisolated",
+      "evidence": [
+        "S1"
+      ]
+    },
+    {
+      "id": "C4",
+      "claim": "Ecological flexibility enabled dispersal",
+      "status": "supported",
+      "evidence": [
+        "S1"
+      ]
+    },
+    {
+      "id": "C5",
+      "claim": "Curiosity motivated expansion",
+      "status": "hypothesis not demonstrated",
+      "evidence": []
+    },
+    {
+      "id": "C6",
+      "claim": "Dispersal uniquely human",
+      "status": "counterexample",
+      "evidence": [
+        "S3"
+      ]
+    },
+    {
+      "id": "C7",
+      "claim": "Every population expands given opportunity",
+      "status": "unsupported universal",
+      "evidence": []
+    }
+  ],
+  "edges": [
+    [
+      "necessity",
+      "motivation",
+      "hypothesized"
+    ],
+    [
+      "curiosity",
+      "motivation",
+      "hypothesized"
+    ],
+    [
+      "capability",
+      "feasibility",
+      "enables"
+    ],
+    [
+      "motivation",
+      "expansion",
+      "possible cause"
+    ],
+    [
+      "feasibility",
+      "expansion",
+      "enables"
+    ]
+  ],
+  "sources": {
+    "S1": "https://www.nature.com/articles/s41586-025-09154-0",
+    "S2": "https://www.nature.com/articles/s41467-021-24779-1",
+    "S3": "https://onlinelibrary.wiley.com/doi/10.4061/2011/615094"
+  },
+  "checks": {
+    "status": "open",
+    "limitations": [
+      "Initial research only; no independent check",
+      "No direct evidence of curiosity motivation",
+      "Remaining source claims and historical examples not fully mapped or researched",
+      "Exact ledger bindings not yet complete",
+      "Author approval of epistemic revisions pending"
+    ]
+  },
+  "expression": null
+}
