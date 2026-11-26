@@ -1,0 +1,20 @@
+{
+  "version": "0.2",
+  "parent": "experiments/version-register-v0.1.json",
+  "delta": [
+    {
+      "run": "RUN_003",
+      "procedure": "v0.2",
+      "ledger": "v0.4",
+      "human": 89,
+      "author": "pending",
+      "result": "experiments/RUN_003/result-v0.1.json",
+      "feedback": "experiments/RUN_003/pangram-feedback-v0.1.json"
+    },
+    {
+      "procedure": "v0.3",
+      "status": "proposed untested",
+      "human": null
+    }
+  ]
+}
