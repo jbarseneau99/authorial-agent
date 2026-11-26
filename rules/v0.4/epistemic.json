@@ -1,0 +1,62 @@
+[
+  {
+    "index": "2",
+    "Rule ID": "R003",
+    "Evidence IDs": "E003; E005",
+    "Layer": "Epistemic",
+    "Candidate rule": "Use limiting cases and avoid unsupported precision.",
+    "Review note": "One response; seek independent example.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "4",
+    "Rule ID": "R005",
+    "Evidence IDs": "E006; E007; E018",
+    "Layer": "Epistemic",
+    "Candidate rule": "Distinguish apparent credibility from evidentiary warrant.",
+    "Review note": "Two responses; still topic-specific.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "6",
+    "Rule ID": "R007",
+    "Evidence IDs": "E013; E014; E015; E016",
+    "Layer": "Epistemic",
+    "Candidate rule": "Use concrete experience and bracket a blocking assumption to explore alternatives; distinguish hypothetical from actual revision.",
+    "Review note": "One retrospective example.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "9",
+    "Rule ID": "R010",
+    "Evidence IDs": "E023; E028; E029",
+    "Layer": "Epistemic",
+    "Candidate rule": "Acknowledge error or limits and invite challenge from relevant experience.",
+    "Review note": "Self-report and elicited example.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "12",
+    "Rule ID": "R013",
+    "Evidence IDs": "E063; E064",
+    "Layer": "Epistemic",
+    "Candidate rule": "Distinguish historical comparison from absolute prediction.",
+    "Review note": "Candidate; test in written prototype",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "15",
+    "Rule ID": "R016",
+    "Evidence IDs": "E034; E047; E055; E074; E080",
+    "Layer": "Epistemic",
+    "Candidate rule": "Qualify abundance and uncertain historical detail precisely.",
+    "Review note": "Candidate; test in written prototype",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  }
+]
