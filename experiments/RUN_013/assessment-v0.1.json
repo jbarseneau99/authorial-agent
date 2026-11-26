@@ -1,0 +1,41 @@
+{
+  "run": "RUN_013",
+  "chapter": "43 Multiplanetary Expansion",
+  "procedure": "v0.3",
+  "ledger": "v0.4",
+  "experiment": "A preliminary baseline",
+  "detector": "Pangram 4.1",
+  "source": "user reported",
+  "human_percent": 93,
+  "ai_percent": 7,
+  "classification": "Mostly Human",
+  "words": 1814,
+  "flagged_words": 124,
+  "flagged_segments": [
+    {
+      "rating": "Likely AI Low",
+      "text": "Much of that reduction has come from our ability to recover and reuse the rockets we build. At the same time, we are developing the means of doing much of the cognitive work that would be involved in establishing a settlement on another planet. Will we still be in this position fifty years from now?"
+    },
+    {
+      "rating": "AI Medium",
+      "text": "We tend to assume that once civilization acquires a capability it will continue to develop that capability. History gives us considerable reason to question that assumption. The people who have acquired the knowledge necessary to build these systems will eventually retire."
+    },
+    {
+      "rating": "Likely AI Low",
+      "text": "The capital we are committing to their development could be directed elsewhere."
+    },
+    {
+      "rating": "Likely AI Low",
+      "text": "There could be events on the Earth that would occupy the attention of an entire generation."
+    }
+  ],
+  "credits_remaining": 14668,
+  "limitations": [
+    "43.5 reused RUN_012 verbatim",
+    "manual execution without context isolation or formal construction closure",
+    "exact chapter expression not yet persisted",
+    "independent checking and author validation pending",
+    "stylistic diversity not yet quantified"
+  ],
+  "next": "Diagnose baseline before independent corpus and procedure extensions"
+}
