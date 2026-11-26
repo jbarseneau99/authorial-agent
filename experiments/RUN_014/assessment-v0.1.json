@@ -1,0 +1,35 @@
+{
+  "run_id": "RUN_014",
+  "configuration_commit": "720ba1d30f30da07bf64ccfb99ad90e0300c1c70",
+  "procedure": "v0.3 inherits v0.2",
+  "ledger": "v0.4",
+  "rule_and_corpus_changes": false,
+  "status": "candidate_ready_for_author_and_detector_measurement",
+  "versions": [
+    {
+      "version": "v0.1",
+      "words_including_headings": 1953,
+      "sha256": "21d3eef1446960a8e42935196e90ad0e965603ead9207dc6c687880e8413542d",
+      "internal_fidelity_review": "targeted_corrections_required",
+      "external_detector": null,
+      "author_voice_validation": null
+    },
+    {
+      "version": "v0.2",
+      "words_including_headings": 1975,
+      "sha256": "16d96e7016ad819156ffd58b769c77b009ef56942d186f608bdf3a15526d11aa",
+      "internal_fidelity_review": "pass_after_targeted_corrections",
+      "mechanical_checks_passed": 14,
+      "external_detector": null,
+      "author_voice_validation": null
+    }
+  ],
+  "revision": "Six sentences changed;114 others plus headings and order unchanged. Earlier draft retained privately.",
+  "generation": "LLM workers; Python used for file operations and validation, not prose generation.",
+  "limitations": [
+    "Internal review is not author approval or empirical validation.",
+    "No detector score is available.",
+    "Separate-context execution differs from recent manual runs; no causal performance claim."
+  ],
+  "publication_scope": "Metadata only. New manuscript, source excerpts, construction and voice payload remain withheld from public GitHub pending explicit publication approval."
+}
