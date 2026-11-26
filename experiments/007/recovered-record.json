@@ -1,0 +1,30 @@
+{
+  "experiment": "007",
+  "source": "corpus/PoE/chapter-02/2.1-out-of-africa.txt",
+  "provenance": "Prior assistant recollection, not independently verified against original execution trace",
+  "act_labels": [
+    "Historical grounding",
+    "Substantiation",
+    "Inquiry",
+    "Consideration",
+    "Hypothesis",
+    "Generalization"
+  ],
+  "diagnosis_summary": [
+    "dramatic language",
+    "repetition",
+    "premature generalization",
+    "unsupported universal claim",
+    "underdeveloped necessity/curiosity distinction"
+  ],
+  "reported_pangram": {
+    "human_percent": 100,
+    "words": 409
+  },
+  "missing": [
+    "exact prompts",
+    "complete intellectual graph",
+    "successful expression",
+    "execution trace"
+  ]
+}
