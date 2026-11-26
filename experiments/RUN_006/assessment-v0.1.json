@@ -1,0 +1,38 @@
+{
+  "run": "RUN_006",
+  "procedure": "v0.3",
+  "ledger": "v0.4",
+  "detector": {
+    "name": "Pangram",
+    "version": "4.1",
+    "human_percent": 100,
+    "ai_percent": 0,
+    "words": 308,
+    "classification": "Human Written",
+    "segments": 1,
+    "segment_classification": "Human High",
+    "flagged": 0,
+    "credits_remaining": 14729
+  },
+  "provenance": "user reported",
+  "author_validation": null,
+  "comparison": {
+    "RUN_004": 100,
+    "RUN_005": 26,
+    "RUN_006": 100
+  },
+  "diagnostic_hypotheses": [
+    "Functional distinction rather than scaffolding",
+    "Shared cognitive experience rather than invented coastal example",
+    "Reduced exposition",
+    "Inquiry rather than formal synthesis"
+  ],
+  "limitations": [
+    "Manual execution; context not isolated",
+    "Prior detector feedback visible",
+    "Construction not fixed across runs",
+    "No individual rule causal attribution",
+    "RUN_006 expression commit not independently confirmed"
+  ],
+  "next": "Replicate v0.5 before isolating candidates"
+}
