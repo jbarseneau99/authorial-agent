@@ -1,0 +1,77 @@
+{
+  "status": "extracted candidate design; not reconciled with platform catalog",
+  "source": "design/DSD-v0.1.txt",
+  "regions": [
+    "subject",
+    "writing",
+    "authorial",
+    "operational"
+  ],
+  "objects": [
+    {
+      "type": "Work",
+      "design": "DS-03.01",
+      "references": [
+        "Composition",
+        "IntellectualAct",
+        "Expression"
+      ]
+    },
+    {
+      "type": "Composition",
+      "design": "DS-06.01",
+      "references": [
+        "IntellectualAct",
+        "Expression"
+      ],
+      "constraint": "placement order separate from intellectual dependencies"
+    },
+    {
+      "type": "IntellectualAct",
+      "design": "DS-05.01",
+      "references": [
+        "Intent",
+        "input knowledge",
+        "outcome",
+        "constituent acts"
+      ],
+      "constraint": "acyclic containment; shared references allowed"
+    },
+    {
+      "type": "Argument",
+      "design": "DS-05.02",
+      "candidate_composite": true,
+      "roles": [
+        "premise",
+        "conclusion"
+      ]
+    },
+    {
+      "type": "Expression",
+      "design": "DS-08.01",
+      "references": [
+        "realized acts",
+        "selected rules",
+        "exemplars",
+        "text",
+        "generation execution"
+      ]
+    }
+  ],
+  "common_contract": [
+    "stable identity",
+    "version",
+    "declared type",
+    "attributes",
+    "typed references",
+    "allowed operations",
+    "constraints",
+    "authority policy"
+  ],
+  "open": [
+    "catalog reconciliation",
+    "act taxonomy",
+    "cardinalities",
+    "revision semantics"
+  ]
+}
