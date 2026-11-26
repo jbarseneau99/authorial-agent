@@ -1,0 +1,72 @@
+{
+  "version": "0.2",
+  "parent": "procedures/v0.1.json",
+  "status": "unvalidated reconstruction",
+  "reference": "Prototype 003 user-supplied history",
+  "ledger": "v0.4",
+  "stages": [
+    {
+      "id": "construction",
+      "layers": [
+        "conceptual",
+        "epistemic"
+      ],
+      "inputs": [
+        "author intent",
+        "authorial knowledge",
+        "source claims",
+        "relevant evidence"
+      ],
+      "operations": [
+        "identify concepts and distinctions",
+        "construct typed claims and warrants",
+        "challenge claims bilaterally where needed",
+        "define ordered intellectual acts and content",
+        "record proposed extensions separately",
+        "check structure and evidence"
+      ],
+      "closure": "all required acts and claims mapped; uncertainties explicit; substantive changes authorized"
+    },
+    {
+      "id": "expression",
+      "layers": [
+        "rhetorical",
+        "linguistic"
+      ],
+      "inputs": [
+        "closed construction revision",
+        "applicable voice rules and authentic exemplars"
+      ],
+      "exclude": "original target prose as rewrite prompt",
+      "operations": [
+        "realize each act directly",
+        "map sentences to acts",
+        "request reopening for substantive deficiencies"
+      ],
+      "closure": "all acts expressed; no unauthorized claim changes"
+    },
+    {
+      "id": "checking",
+      "layers": [
+        "conceptual",
+        "epistemic",
+        "rhetorical",
+        "linguistic"
+      ],
+      "closure": "findings resolved or explicitly deferred by authorized reviewer"
+    },
+    {
+      "id": "validation",
+      "operations": [
+        "author judgment",
+        "record detector result without optimization"
+      ]
+    }
+  ],
+  "limitations": [
+    "exact historical prompts unavailable",
+    "manual execution does not enforce model isolation",
+    "rhetorical act ordering belongs to construction; realization belongs to expression"
+  ],
+  "persistence": "immutable versioned run artifacts and performance register"
+}
