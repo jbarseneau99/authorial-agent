@@ -1,0 +1,247 @@
+<PARSED TEXT FOR PAGE: 1 / 9>
+Design Specification
+AUTHORIAL AGENT / VERSION 0.1 / 24 NOVEMBER 2026
+A graph-native authorial agent for constructing and maintaining the author’s intellectual work.
+
+
+
+Purpose and scope
+The author remains the intellectual authority. The system constructs symbolic intellectual content before
+prose, reuses the canonical loop, and maintains traceability from intent to expression and from requirements
+to implementation and evidence.
+Baseline status: proposed for review. The agreed architectural direction is distinguished from detailed
+candidate requirements and design choices. No implementation or verification completion is asserted.
+
+
+
+Reading the identifiers
+BR-xx identifies a requirement category; BR-xx.yy identifies a subrequirement. DS-xx.yy identifies its initial
+design realization. Mappings are many-to-many in the target graph; matching numbers are a convenient
+initial allocation, not a restriction.
+
+
+
+Architectural boundaries
+Subject ontology: subject knowledge. Writing ontology: intellectual acts, composition and expression.
+Authorial ontology: particular voice and exemplars. Operational ontology: canonical loops, evidence,
+authority and closure. These are connected graph regions, not necessarily separate stores.
+Candidate design contract: each object has a stable identity, version, declared type, attributes, typed
+references, allowed operations, constraints and authority policy. Reuse existing platform classes where
+possible. Do not declare new classes or capability extensions without the applicable authorization.
+<PARSED TEXT FOR PAGE: 2 / 9>
+DS-01 Authorial ownership and authority
+DS-01.01 | BR-01.01
+Attach origin, endorsement and authority references to propositions and acts; route endorsement through
+the existing approval mechanism.
+Verification: An agent-originated claim cannot be represented as author-endorsed without recorded
+authority.
+Requirement: Preserve the human as author; distinguish author-established positions, external evidence and
+agent proposals.
+
+DS-01.02 | BR-01.02
+Evaluate operation scope against delegated authority; bind decisions to the proposed revision and record
+actor and evidence.
+Verification: An unapproved change to an authorial position is blocked or staged for review.
+Requirement: Respect delegated scope and seek human authorization for changes outside it.
+
+
+
+DS-02 Intent and input evidence
+DS-02.01 | BR-02.01
+Reference existing Intent or input-evidence objects; connect parent and contributing intents with typed
+edges.
+Verification: Every construction loop resolves a versioned intent and relevant input evidence.
+Requirement: Represent intent explicitly at work, chapter, section, paragraph and act scales as canonical-
+loop input evidence.
+
+DS-02.02 | BR-02.02
+Resolve intent-derived criteria independently from structural checks; record both outcomes.
+Verification: A conforming paragraph that misses its intent fails validation.
+Requirement: Assess fulfilment of intent separately from conformance.
+<PARSED TEXT FOR PAGE: 3 / 9>
+DS-03 Writing Domain Ontology
+DS-03.01 | BR-03.01
+Declare candidate Work, Composition, IntellectualAct and Expression types only after catalog reconciliation;
+use typed references and versioned identities.
+Verification: A work can be retrieved with its acts, knowledge, composition and expressions separately.
+Requirement: Represent writing as persistent graph objects independent of subject and prose.
+
+DS-03.02 | BR-03.02
+Represent contextual roles on edges; enforce declared types and cardinalities at construction.
+Verification: A proposition used as premise and conclusion retains one identity.
+Requirement: Distinguish classes, attributes, roles, states and relationships.
+
+
+
+DS-04 Knowledge and research
+DS-04.01 | BR-04.01
+Research loop resolves graph references, creates findings for gaps, and records source provenance and
+evidence relationships.
+Verification: A chapter plan identifies unsupported claims and records sources or open questions.
+Requirement: Retrieve author knowledge and relevant external sources before constructing content; identify
+gaps.
+
+DS-04.02 | BR-04.02
+Separate semantic content, epistemic assessment, justification and provenance; use supersedes links for
+semantic revisions.
+Verification: Refuting a proposition preserves its identity and history; a changed proposition links to its
+predecessor.
+Requirement: Preserve proposition identity across epistemic state changes and track content revisions.
+<PARSED TEXT FOR PAGE: 4 / 9>
+DS-05 Intellectual construction and reasoning
+DS-05.01 | BR-05.01
+Act records reference intent, input knowledge, outcome and constituent acts; enforce acyclic containment
+while allowing shared references.
+Verification: A chapter can be inspected as acts and dependencies without reading prose.
+Requirement: Construct intellectual acts before generating prose; support atomic and composite acts.
+
+DS-05.02 | BR-05.02
+Use Argument as candidate composite act; premise and conclusion are contextual proposition roles;
+inference and qualification are typed acts or edges.
+Verification: A conclusion can be traced to premises, inference, assumptions, evidence and objections.
+Requirement: Represent argumentation and intellectual dependencies.
+
+
+
+DS-06 Composition and literary structure
+DS-06.01 | BR-06.01
+Composition placements reference acts and expressions with contextual order; maintain separate intellectual
+dependency edges.
+Verification: Reordering paragraphs does not silently alter the underlying argument.
+Requirement: Maintain intellectual and literary structures separately with many-to-many mappings.
+
+DS-06.02 | BR-06.02
+Version work snapshots and placement edges; export manuscript from selected expression revisions.
+Verification: Two works may reference an act without duplicating its identity.
+Requirement: Support reusable acts and multiple manuscript versions.
+<PARSED TEXT FOR PAGE: 5 / 9>
+DS-07 Authorial voice and exemplars
+DS-07.01 | BR-07.01
+Rule records contain symbolic constraint, natural-language realization, applicability, exceptions, conflicts and
+justification.
+Verification: Prompt construction can resolve applicable rules across all four layers.
+Requirement: Represent linguistic, rhetorical, epistemic and conceptual voice rules.
+
+DS-07.02 | BR-07.02
+Reference source spans, acts, author decisions and exemplar role; distinguish authentic material from
+generated examples.
+Verification: A voice rule can be traced to an exact source passage or author correction.
+Requirement: Use authentic positive, negative and corrective exemplars.
+
+
+
+DS-08 Expression and prompt construction
+DS-08.01 | BR-08.01
+Expression revisions reference realized acts, selected voice rules, exemplars, text and generation execution.
+Verification: Alternative expressions can be generated without changing the proposition or act.
+Requirement: Generate prose as a realization of encoded intellectual structure, not as the authoritative
+knowledge source.
+
+DS-08.02 | BR-08.02
+Assemble intent, knowledge, composition, voice, exemplars and criteria; persist prompt snapshot and
+execution references under platform policy.
+Verification: A generated passage can be traced to the prompt, model and input versions.
+Requirement: Construct prompts from resolved symbolic inputs and preserve execution provenance.
+<PARSED TEXT FOR PAGE: 6 / 9>
+DS-09 Checking, validation and closure
+DS-09.01 | BR-09.01
+Adapt existing loop interfaces; distinguish termination, justified closure and authority to close; no parallel
+lifecycle engine.
+Verification: Each operation has input evidence, output, checking, validation and closure evidence or an
+explicit unresolved state.
+Requirement: Use the canonical loop for research, composition, expression, editing and learning.
+
+DS-09.02 | BR-09.02
+Instrument adapters return versioned observations; assess against explicit criteria, record uncertainty and
+escalate disputed findings.
+Verification: A detector flag alone cannot establish authorship or justify automatic rejection.
+Requirement: Separate criteria, instruments and findings; use Pangram as a signal, not proof.
+
+
+
+DS-10 Editing and deficiency resolution
+DS-10.01 | BR-10.01
+Finding references affected object, criterion and observation; confirmed deficiency records adjudication and
+resolution loop.
+Verification: A missing premise and a stylistic defect route to different appropriate operations.
+Requirement: Represent deficiencies as traceable discrepancies and distinguish findings from confirmed
+deficiencies.
+
+DS-10.02 | BR-10.02
+Expression checks emit findings; route by deficiency type to research, composition, voice or expression loop;
+reassess affected closure.
+Verification: A discovered unsupported claim triggers research rather than cosmetic rewriting.
+Requirement: Allow writing to reveal research and reasoning gaps.
+<PARSED TEXT FOR PAGE: 7 / 9>
+DS-11 Authorial learning
+DS-11.01 | BR-11.01
+Classify correction as local preference, rule enforcement, exception or candidate rule; use learning loop with
+evidence and authority.
+Verification: A single correction is not promoted to a universal rule without justification.
+Requirement: Learn from author corrections without automatically generalizing local preferences.
+
+DS-11.02 | BR-11.02
+Route knowledge and voice updates to distinct graph regions; preserve provenance and review rule changes.
+Verification: A new subject fact does not silently modify a voice rule.
+Requirement: Separate subject learning from authorial learning.
+
+
+
+DS-12 Change propagation and integrity
+DS-12.01 | BR-12.01
+Record versioned dependency edges and closure witnesses; compute impact, evaluate relevance and reopen
+only invalidated or uncertain closures.
+Verification: A refuted premise reopens dependent reasoning where justification fails; punctuation alone
+does not reopen research.
+Requirement: Track dependencies and reassess affected closures when relevant inputs change.
+
+DS-12.02 | BR-12.02
+Use immutable revisions or equivalent audit history; mark stale dependencies and retain prior closure
+records.
+Verification: Previous manuscript and evidence versions remain reconstructable.
+Requirement: Preserve history and prevent silent overwrites.
+<PARSED TEXT FOR PAGE: 8 / 9>
+DS-13 Platform integration and traceability
+DS-13.01 | BR-13.01
+Maintain typed satisfies, realizes and verifies edges; resolve reverse links; bind code references to repository
+revision and symbol or artifact identity.
+Verification: Every approved requirement resolves to design; implemented design resolves to code and
+evidence, with missing links visible.
+Requirement: Bind requirements, design, implementation and verification evidence bidirectionally through
+persistent identities.
+
+DS-13.02 | BR-13.02
+Render versioned graph projections; use existing catalog and change authority; refuse invalid construction
+where enforceable and report procedural checks separately.
+Verification: A changed requirement marks affected design and code links for reassessment; regenerated
+documents show the new baseline.
+Requirement: Generate requirements and design documents from the authoritative graph and govern
+changes through the same canonical architecture.
+<PARSED TEXT FOR PAGE: 9 / 9>
+Open decisions and integration gates
+   Reconcile candidate classes and operations against the current platform catalog and canonical loop
+    interfaces; establish actual enforcement points.
+   Confirm authority matrix for authorial endorsement, rule generalization, criterion changes, ontology
+    extensions and closure.
+   Finalize intellectual-act taxonomy, epistemic states, composition cardinalities and revision semantics.
+   Select model and Pangram integration, source permissions, retention, security, cost and latency targets.
+   Define code registration granularity, deployment checks, telemetry coverage and independent
+    verification protocol.
+   Establish evaluation corpus of authentic writing and author-reviewed outputs; calibrate fidelity and
+    intent-fulfilment criteria.
+
+
+
+End-to-end acceptance scenario
+Request a chapter distinguishing checking from validation. Resolve author intent and source knowledge;
+construct and inspect the distinction and argument; select voice rules and exemplars; generate alternative
+prose; check fidelity and validate intent; record closure evidence and authority. Change a premise and verify
+selective reopening. Change a requirement and verify impact through design, code and evidence. Missing
+links must remain visible, not be treated as successful verification.
+
+
+
+Reference basis
+Authorial Agent design conversation, 24 November 2026. Platform background: An Autogenic Agent,
+manuscript paper-round22.pdf, section III (declared ontology and coherence framework). Current runtime
+interfaces and enforcement have not been verified.
