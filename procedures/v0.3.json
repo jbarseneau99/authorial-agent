@@ -1,0 +1,36 @@
+{
+  "version": "0.3",
+  "parent": "procedures/v0.2.json",
+  "status": "proposed; untested",
+  "ledger": "v0.4 unchanged",
+  "evidence": "experiments/RUN_003/pangram-feedback-v0.1.json",
+  "inherits": "All v0.2 gates and stages",
+  "changes": [
+    {
+      "id": "P03-01",
+      "stage": "decomposition",
+      "constraint": "Extract semantic claims, warrants and acts without carrying source sentence skeleton into expression inputs"
+    },
+    {
+      "id": "P03-02",
+      "stage": "expression",
+      "constraint": "Provide closed encoded structure, applicable rules and authentic exemplars only; exclude AI source prose and detector feedback; use separate context to enforce isolation"
+    },
+    {
+      "id": "P03-03",
+      "stage": "checking",
+      "constraint": "Compare expression to source for unintended inherited phrasing and syntax; preserve legitimate terminology and authentic author expressions; findings require diagnosis, not automatic synonym substitution"
+    },
+    {
+      "id": "P03-04",
+      "stage": "measurement",
+      "constraint": "Record detector score and segment findings after expression; do not optimize against detector"
+    }
+  ],
+  "limitations": [
+    "RUN_003 did not enforce isolation or close construction; v0.3 is a proposed repair not the procedure actually executed",
+    "No causal isolation of changes",
+    "Authorial validation pending"
+  ],
+  "next": "Test on same source with frozen ledger and separate expression context; record actual compliance and results"
+}
