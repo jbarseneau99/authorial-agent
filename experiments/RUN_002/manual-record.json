@@ -1,0 +1,206 @@
+{
+  "run": "RUN_002",
+  "status": "awaiting_author_review",
+  "execution": "manual single model; no independent checker or external research",
+  "procedure": "main:procedures/v0.1.json",
+  "ledger": "v0.4 exported rules and exemplars; workbook hash not independently checked",
+  "source": "corpus/PoE/chapter-02/2.1-out-of-africa.txt",
+  "prompts": [
+    "Identify intellectual acts and their purpose without rewriting prose.",
+    "Encode claims, dependencies, qualifications and evidence; expose missing mechanisms and unsupported inferences.",
+    "Select applicable rules and original exemplars for each act; record identifiers and exact source spans.",
+    "Realize each act in prose without inventing claims; preserve justified qualifications and authorial intent.",
+    "Assess conceptual, epistemic, rhetorical and linguistic fidelity independently; route defects to originating operation."
+  ],
+  "acts": [
+    {
+      "id": "A01",
+      "source": "paragraph 1",
+      "claims": [
+        "C01 migration circa 70k years",
+        "C02 population estimate uncertain",
+        "C03 Africa long inhabited"
+      ],
+      "rules": [
+        "R003",
+        "R016"
+      ],
+      "exemplars": [
+        [
+          "E005",
+          "I don't know if there's any actual uh number associated which is what is enough"
+        ],
+        [
+          "E034",
+          "some hypothesis that we feel are are novel"
+        ]
+      ]
+    },
+    {
+      "id": "A02",
+      "source": "paragraph 2",
+      "claims": [
+        "C04 environmental adaptation",
+        "C05 other hominins",
+        "C06 continued movement"
+      ],
+      "rules": [
+        "R012",
+        "R018"
+      ],
+      "exemplars": [
+        [
+          "E048",
+          "they were able to live in colder places. They were able to cook their meat"
+        ]
+      ]
+    },
+    {
+      "id": "A03",
+      "source": "paragraph 3",
+      "claims": [
+        "C07 climate hypothesis",
+        "C08 population pressure hypothesis",
+        "C09 technology enables settlement"
+      ],
+      "rules": [
+        "R004",
+        "R001"
+      ],
+      "exemplars": [
+        [
+          "E009",
+          "So I believe the second part of uh of your statement is very plausible"
+        ],
+        [
+          "E004",
+          "Everything's a claim. It just has a type."
+        ]
+      ]
+    },
+    {
+      "id": "A04",
+      "source": "paragraph 4",
+      "claims": [
+        "C10 populations remained",
+        "C11 voluntary departure inference unsupported"
+      ],
+      "rules": [
+        "R005",
+        "R006"
+      ],
+      "exemplars": [
+        [
+          "E018",
+          "So treat what they tell you as a claim"
+        ],
+        [
+          "E017",
+          "They're very good at what they do, but they can make mistakes."
+        ]
+      ]
+    },
+    {
+      "id": "A05",
+      "source": "paragraph 5",
+      "claims": [
+        "C12 imagination may motivate exploration",
+        "C13 planning enables action"
+      ],
+      "rules": [
+        "R001",
+        "R018"
+      ],
+      "exemplars": [
+        [
+          "E004",
+          "Everything's a claim. It just has a type."
+        ],
+        [
+          "E028",
+          "Here is a hypothesis I have in an area that I don't have a lot of experience."
+        ]
+      ]
+    },
+    {
+      "id": "A06",
+      "source": "paragraph 6",
+      "claims": [
+        "C14 recurring settlement examples",
+        "C15 universal expansion unsupported"
+      ],
+      "rules": [
+        "R013",
+        "R015"
+      ],
+      "exemplars": [
+        [
+          "E010",
+          "That could happen if we let it happen."
+        ],
+        [
+          "E048",
+          "they were able to live in colder places. They were able to cook their meat"
+        ]
+      ]
+    }
+  ],
+  "edges": [
+    [
+      "C04",
+      "C06",
+      "context"
+    ],
+    [
+      "C07",
+      "C06",
+      "possible cause"
+    ],
+    [
+      "C08",
+      "C06",
+      "possible cause"
+    ],
+    [
+      "C09",
+      "C04",
+      "enables"
+    ],
+    [
+      "C10",
+      "C11",
+      "insufficient warrant"
+    ],
+    [
+      "C12",
+      "C06",
+      "hypothesized motive"
+    ],
+    [
+      "C13",
+      "C06",
+      "hypothesized enabler"
+    ],
+    [
+      "C14",
+      "C12",
+      "compatible not proof"
+    ],
+    [
+      "C14",
+      "C15",
+      "insufficient warrant"
+    ]
+  ],
+  "expression": "2.1 Out of Africa: The Original Expansion\n\nApproximately seventy thousand years ago, a population of anatomically modern humans, perhaps only a few thousand individuals, began to move out of Africa [Klein 2009]. Africa had been home to humans for hundreds of thousands of years. Within the generations that followed, humans would come to inhabit environments very different from those in which they had evolved.\n\nTo do so they had to learn to live in colder climates, cross deserts and mountain ranges, and find food in environments unfamiliar to them. In Eurasia they encountered other hominins. What interests us about this period of human history is why the expansion continued.\n\nThere are several explanations for why humans left Africa. Changes in climate may have made it difficult to survive in parts of the continent. As populations grew, there may have been competition for food and other resources. There is also the question of capability. As humans developed better tools and ways of obtaining food, they became capable of living in places where they previously could not.\n\nBut much of the human population remained in Africa. We cannot infer from this that those who left did not have to leave. What we can ask is whether the need to survive was the only force at work.\n\nConsider what it means for an animal to be able to imagine an environment other than the one in which it lives, and to plan how it might live there. The capacity to imagine what lies elsewhere may itself give rise to a desire to explore. Planning, on the other hand, gives humans some ability to act on that desire. My hypothesis is that both capacities contributed to human expansion.\n\nThe settlement of Australia at least fifty thousand years ago, the movement of people into the Arctic, and the much later voyages of the Polynesians are interesting in this regard. In each case humans came to occupy environments in which they had not previously lived. The circumstances of these expansions were different, and we should not assume that their motivations were the same. But the recurrence of expansion across human history gives us reason to consider whether there is something in our cognitive architecture that predisposes us to it.",
+  "sentence_map": "Paragraphs 1–6 correspond to A01–A06 respectively.",
+  "check": {
+    "conceptual": "Distinguishes motivation and capability.",
+    "epistemic": "Proposed weakening of C11 and C15; historical claims not independently verified; author approval required.",
+    "rhetorical": "Six acts retained; final examples remain after hypothesis as source order.",
+    "linguistic": "Direct expression and qualified contrast; written voice unvalidated.",
+    "gaps": "Some bound exemplars are supplemental rather than listed evidence for rule; R012/R018 exact linked evidence not retrieved in full. Prompts are procedure instructions applied in one conversation, not isolated model calls or complete runtime prompt."
+  },
+  "author_decision": null,
+  "pangram": null
+}
