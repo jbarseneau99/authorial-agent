@@ -1,0 +1,200 @@
+77,E078,S032,Linguistic,Emphasis,this to me seems to be something we really need to watch,Direct concern,Candidate,Original spoken,,Not validated for writing
+78,E079,S033,Rhetorical,Example first,"I'll I'll I'll answer the your question directly, uh, in a second. But I'll give you an example",Concrete before abstract,Candidate,Original spoken,,Not validated for writing
+79,E080,S033,Epistemic,Qualify,"is probably much, much lower",Mark uncertainty,Candidate,Original spoken,,Not validated for writing
+80,E081,S034,Conceptual,Transfer,I'm making it physical because it's easier to understand,Physical analogy for cognition,Candidate,Original spoken,,Not validated for writing
+81,E082,S034,Conceptual,Define,people need to reflect and understand how things are made and understand how things are done,Practical understanding,Candidate,Original spoken,,Not validated for writing
+82,E083,S034,Linguistic,Maxim,we only invest in what we can build,Concise principle,Candidate,Original spoken,,Not validated for writing
+83,E084,S035,Linguistic,Maxim,"to be makers, not takers",Parallel contrast,Candidate,Original spoken,,Not validated for writing
+<PARSED TEXT FOR SHEET: 4 / 12 TABS
+TAB NAME: Candidate rules>
+index,Rule ID,Evidence IDs,Layer,Candidate rule,Review note,Status,Applicability
+0,R001,E001; E004,Conceptual,Define concepts through functional distinctions and typed structure.,Two different contexts; confirm written usage.,Unconfirmed,Spoken; written untested
+1,R002,E002; E011,Rhetorical,Connect abstractions to practical or normative consequences.,Candidate across two responses.,Unconfirmed,Spoken; written untested
+2,R003,E003; E005,Epistemic,Use limiting cases and avoid unsupported precision.,One response; seek independent example.,Unconfirmed,Spoken; written untested
+3,R004,E008; E009; E010,Rhetorical,"Decompose compound claims, concede plausible components, challenge inference or inevitability.",One response; seek independent example.,Unconfirmed,Spoken; written untested
+4,R005,E006; E007; E018,Epistemic,Distinguish apparent credibility from evidentiary warrant.,Two responses; still topic-specific.,Unconfirmed,Spoken; written untested
+5,R006,E012; E017,Linguistic,Use parallel contrast to express a balanced distinction.,Repeated spoken contrast; written usage unverified.,Unconfirmed,Spoken; written untested
+6,R007,E013; E014; E015; E016,Epistemic,Use concrete experience and bracket a blocking assumption to explore alternatives; distinguish hypothetical from actual revision.,One retrospective example.,Unconfirmed,Spoken; written untested
+7,R008,E019; E021; E022; E024,Rhetorical,Adapt context and care to audience familiarity; provide more context in writing.,Self-report; verify against authored prose.,Unconfirmed,Spoken; written untested
+8,R009,E020,Linguistic,Use short direct imperatives for core obligations.,One elicited example.,Unconfirmed,Spoken; written untested
+9,R010,E023; E028; E029,Epistemic,Acknowledge error or limits and invite challenge from relevant experience.,Self-report and elicited example.,Unconfirmed,Spoken; written untested
+10,R011,E025; E026; E027,Rhetorical,Distinguish disagreement from inaccuracy; correct selectively by restatement and decline ideas without dismissing merit.,Context-sensitive; direct correction exceptions unresolved.,Unconfirmed,Spoken; written untested
+11,R012,E050; E067; E070,Rhetorical,Preserve the historical chain while tightening expression.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+12,R013,E063; E064,Epistemic,Distinguish historical comparison from absolute prediction.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+13,R014,E049; E052; E068,Conceptual,Explain transitions through changes in coordinating relationships.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+14,R015,E060; E079,Rhetorical,Use concrete examples before abstract explanation when helpful.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+15,R016,E034; E047; E055; E074; E080,Epistemic,Qualify abundance and uncertain historical detail precisely.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+16,R017,E041; E076,Rhetorical,Connect technological opportunity and risk to practical human agency.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+17,R018,E054; Prototype 001/002,Linguistic; rhetorical,Realize intellectual acts directly rather than announcing them unnecessarily.,One paragraph revised; Pangram 92% to 100%; author validated full revised passage. Not isolated from rhetorical changes.,Provisionally supported,Written; generalization pending
+<PARSED TEXT FOR SHEET: 5 / 12 TABS
+TAB NAME: Coverage>
+index,Layer,Current evidence,Next elicitation
+0,Conceptual,"Distinction, typed model, principle, hypothetical bracketing",Construct a new abstraction from examples.
+1,Epistemic,"Bounds, qualification, concession, revision, error admission, critique",Test conflicting evidence and actual belief reversal.
+2,Rhetorical,"Decomposition, audience adaptation, indirect correction, refusal",Compare actual written and spoken explanations.
+3,Linguistic,"Parallel contrast, direct imperative, reported context preference",Collect authentic written prose and revision pairs.
+4,Written translation,No author-validated written exemplars yet,Validate prototype sentence by sentence; record revisions and parent IDs.
+5,Written validation update,Prototype 002: author confirmed sounds like me; Pangram 100% human classification.,Test generalization on Prototype 003; no new rules.
+<PARSED TEXT FOR SHEET: 6 / 12 TABS
+TAB NAME: Prototype structure>
+index,Sentence ID,Intellectual act,Epistemic content / boundary,Source ID,Voice rule / pattern
+0,P01,Illustrate,Software engineering role changes from coding toward curation,S024,Concrete example first
+1,P02,Illustrate,Driverless car changes taxi process,S025,Concrete example
+2,P03,Compare,Earlier changes in information handling,S027; S028,Historical progression
+3,P04,Distinguish,Oral storytelling to symbolic writing,S028,Functional distinction
+4,P05,Distinguish,Printing enables transmission at scale,S027,Functional distinction
+5,P06,Distinguish,Computers process information,S027,Functional distinction
+6,P07,Distinguish,AI introduces autonomous cognition,S027,Mechanism
+7,P08,Qualify,AGI not required; computation remains a constraint,S023,Precise qualification
+8,P09,Generalize,Transitions change relationships with coordinating instruments,S022,Mechanism
+9,P10,Distinguish,Reconstitution touches multiple institutions simultaneously; thesis not established universal fact,S022; S030,Scope
+10,P11,Compare,Industrial mechanization and intelligent mechanization,S024,Historical analogy
+11,P12,Qualify,Compare with past; do not claim final or greatest future transition,S026,Bound prediction
+12,P13,Conclude,Reflection and practical understanding preserve agency,S032; S034,Practical consequence
+<PARSED TEXT FOR SHEET: 7 / 12 TABS
+TAB NAME: Experiments>
+index,Prototype,Topic,Ledger,Pangram human classification,Author validation,Change / limitations,Lineage
+0,1,From Reconstruction to Reconstitution,0.3,0.92,Not separately validated,Baseline; three flagged sentences,Original interview; S021-S034
+1,2,From Reconstruction to Reconstitution,0.3 + R018,1.0,Validated: Yes this sounds like me.,One paragraph changed; rhetorical and linguistic changes confounded,001; S022; S026
+2,3,Mass and Weight in an Epistemic Graph,0.4,,Pending,New topic; illustrative examples and research direction inferred by agent,S002; S003; S006; R018
+<PARSED TEXT FOR SHEET: 8 / 12 TABS
+TAB NAME: v0.5 Rule audit>
+index,Candidate ID,Parent rule,Proposed rule,Status,Evidence / limitation
+0,C05-001,R001,Define concepts by function,Provisional,E001
+1,C05-002,R001,Classify objects by type,Provisional,E004
+2,C05-003,R002; R017,Connect abstractions to practical consequences for affected parties,Provisional,E002; E011; E041; E076
+3,C05-004,R003,Use limiting cases to establish bounds,Provisional,E003
+4,C05-005,R003; R016,Calibrate precision and certainty to evidence,Provisional,E005; E034; E047; E055; E074; E080
+5,C05-006,R004,Decompose compound claims,Provisional,E008
+6,C05-007,R004,Concede plausible components,Provisional,E009
+7,C05-008,R004,Challenge inference or inevitability,Provisional,E010
+8,C05-009,R005,Distinguish apparent credibility from evidentiary warrant,Provisional,E006; E007; E018; earlier lesson summary: distinguish thought experiments from empirical experiments (not verbatim)
+9,C05-010,R006,Use parallel contrast,Provisional,E012; E017
+10,C05-011,R007,Reason from concrete experience,Provisional,E013; E014
+11,C05-012,R007,Temporarily bracket blocking assumptions,Provisional,E015
+12,C05-013,R007,Distinguish hypothetical from actual belief revision,Provisional,E016
+13,C05-014,R008,Adapt context to audience familiarity,Provisional,E019; E021; E022; E024
+14,C05-015,R008,Provide additional context in writing when needed,Provisional,Self-report; verify written usage
+15,C05-016,R009,Use short direct imperatives for obligations,Provisional,E020
+16,C05-017,R010,Acknowledge error or limitations,Provisional,E023; E028; E029; mapping pending
+17,C05-018,R010,Invite informed criticism,Provisional,E023; E028; E029; mapping pending
+18,C05-019,R011,Distinguish disagreement from factual error,Provisional,E025; E026; E027; mapping pending
+19,C05-020,R011,Correct selectively through restatement,Provisional,E025; E026; E027; mapping pending
+20,C05-021,R011,Acknowledge merit when rejecting an argument,Provisional,E025; E026; E027; mapping pending
+21,C05-022,R012,Preserve logical and causal relationships when tightening prose,Provisional,E050; E067; E070
+22,C05-023,R013,Distinguish precedent from prediction,Provisional,E063; E064
+23,C05-024,R014,Explain change through underlying mechanisms,Provisional,E049; E052; E068
+24,C05-025,R015,Use concrete examples to explain abstractions when helpful,Provisional,E060; E079
+25,C05-026,R017,Evaluate opportunities and risks together,Provisional,E038; E041; E076; E038 direct support; hold for stronger evidence per batch recommendation
+26,C05-027,R018,Perform intellectual acts directly rather than announcing them unnecessarily,Provisional,E054; prototypes 001/002; passage-level validation only
+27,C05-028,Lesson 5,Establish the relevant frame of reference or basis of comparison before evaluating a property,Provisional,N01; earlier lesson summary: absolute versus relative scarcity (not verbatim)
+28,C05-029,Lesson 5,Distinguish capability from authority,Provisional,N02
+29,C05-030,Lesson 5,Identify mechanisms for resolving conflicts,Provisional,N03
+30,C05-031,Lesson 6,Make reasoning explicit regardless of conclusion placement,Provisional,N04
+31,C05-032,Lesson 6,Consider conclusion first for major chapter-level claims,Provisional,N05; conditional preference
+32,C05-033,Lessons 1–4,"Evaluate outcomes against their intended purpose, not output volume alone",Provisional,"Earlier lesson summary: 60 systems, five useful; exact transcript and time period unverified"
+33,C05-034,Lessons 1–4,Identify the underlying constraint limiting a system’s effectiveness,Provisional,Earlier lesson summary: limits on learning and human attention; exact transcript unverified
+<PARSED TEXT FOR SHEET: 9 / 12 TABS
+TAB NAME: v0.5 New evidence>
+index,ID,Lesson,Verbatim excerpt,Interpretation,Status
+0,N01,5,"Well, it's all relative. It may think it's coherent",Frame of reference,Observed; inferred rule
+1,N02,5,"Well, that's the, that's the role of human authority",Authority distinction,Observed; inferred rule
+2,N03,5,Negotiated,Conflict resolution; elicited answer,Author agreed to candidate pattern
+3,N04,6,always explicit. So it's either building up with the punchline,Explicit reasoning,Stated preference
+4,N05,6,maybe at the beginning of a chapter where you're making a big point and then the rest of the chapter kind of builds it up,Conclusion placement,Conditional stated preference
+5,N06,6,"That's it, is the dawn of civilization was created out of this because people stayed in one place",Conclusion after reasoning,Observed; historical claim not verified
+<PARSED TEXT FOR SHEET: 10 / 12 TABS
+TAB NAME: v0.5 Review>
+index,Item,Value / decision
+0,Status,Working draft; not approved
+1,Baseline,84 exemplars; 18 original rules; preserved in original tabs
+2,Candidate count,34
+3,Restructured baseline,27
+4,Proposed lesson additions,7
+5,New evidence excerpts,6
+6,Limitations,Earlier lessons reconciled at summary level only; verbatim evidence and mapping validation incomplete; counts provisional.
+7,Method,"Separate beliefs from intellectual acts; distinguish spoken, stated preference, repeated and written validation."
+8,Regression,Freeze rules before retesting all book passages; preserve previous results; test unfamiliar topics.
+9,Source,Current conversation transcript and v0.4 workbook. Earlier lesson summaries are not verbatim evidence.
+10,Reconciliation decision,Merged basis of comparison into C05-028; added C05-033 and C05-034; strengthened C05-009. No new verbatim exemplars.
+11,Audit decision: context,Retain C05-014 and C05-015 separately: audience familiarity versus written modality. Written usage remains unverified.
+12,Audit decision: argument,"Retain C05-006, C05-007, C05-008 and C05-021 separately: decomposition, concession, inference challenge and acknowledging merit are distinguishable acts; evidence mapping pending."
+13,Architecture,Epistemic and conceptual rules govern encoded reasoning; rhetorical and linguistic rules govern expression. Expression must not override evidentiary accuracy.
+14,Audit status,"Decisions authorized for recording, not individual rule approval. Full exemplar verification and cross-subject regression remain pending."
+15,Batch assessment,5 recommend approval; 1 conditional; 25 test; 3 hold. Prior assessments preserved; differences require review. No formal approval.
+16,"Author decision, 2026-11-26","Batch recommendations accepted; five approved, one conditional, 25 testing only, three held."
+17,Regression scope,Preserve previous results; test prior book passages and prototypes plus unrelated topics. Original passage text and prior outputs must be recovered before historical regression.
+<PARSED TEXT FOR SHEET: 11 / 12 TABS
+TAB NAME: v0.5 Evidence assessment>
+index,Candidate ID,Recommendation,Evidence assessment,Validation boundary
+0,C05-001,Test,E001 functional definition; one episode,Candidate only; written transfer and author approval pending
+1,C05-002,Test,E004 typed classification; one episode,Candidate only; written transfer and author approval pending
+2,C05-003,Test,E002 practical responsibility; E076 consequence; multiple episodes,Candidate only; written transfer and author approval pending
+3,C05-004,Test,E003 explicit limiting case; one episode,Candidate only; written transfer and author approval pending
+4,C05-005,Recommend approval,E005 declines threshold; E055 qualifies limit; E074 uncertain date; repeated,Candidate only; written transfer and author approval pending
+5,C05-006,Test,E008 explicit decomposition; one episode,Candidate only; written transfer and author approval pending
+6,C05-007,Test,E009 concedes component; one episode,Candidate only; written transfer and author approval pending
+7,C05-008,Test,"E010 supports conditionality, not all inference challenges; narrow to inevitability",Candidate only; written transfer and author approval pending
+8,C05-009,Test,E018 direct instruction; E006/E007 contextual support,Candidate only; written transfer and author approval pending
+9,C05-010,Recommend approval,E012 and E017 parallel contrasts in separate episodes,Candidate only; written transfer and author approval pending
+10,C05-011,Test,E014 experience; E013 announces example rather than demonstrates it,Candidate only; written transfer and author approval pending
+11,C05-012,Test,E015 explicit bracketing; one episode,Candidate only; written transfer and author approval pending
+12,C05-013,Test,E016 with E015 distinguishes actual from hypothetical; context dependent,Candidate only; written transfer and author approval pending
+13,C05-014,Test,E019 audience understanding; E022 shorthand; E024 weak,Candidate only; written transfer and author approval pending
+14,C05-015,Recommend conditional approval,E021 direct self-report about writing; E022 context,Candidate only; written transfer and author approval pending
+15,C05-016,Test,E020 direct imperative; one episode,Candidate only; written transfer and author approval pending
+16,C05-017,Recommend approval,E023 explicit self-report; E028 acknowledges limited experience,Candidate only; written transfer and author approval pending
+17,C05-018,Test,E029 explicit invitation; E028 context,Candidate only; written transfer and author approval pending
+18,C05-019,Test,E025 explicitly separates disagreement and accuracy,Candidate only; written transfer and author approval pending
+19,C05-020,Test,E026 self-report of restatement; selective aspect needs context,Candidate only; written transfer and author approval pending
+20,C05-021,Test,E027 acknowledges merit while declining; one episode,Candidate only; written transfer and author approval pending
+21,C05-022,Test,E070 preserves chain; E069 supports tightening; E050/E067 contextual,Candidate only; written transfer and author approval pending
+22,C05-023,Test,E063 comparison; E064 fragment needs context,Candidate only; written transfer and author approval pending
+23,C05-024,Test,E049 causal mechanism; E052/E068 contextual,Candidate only; written transfer and author approval pending
+24,C05-025,Test,E060/E061 example; E079 announces example; E081 supports accessibility,Candidate only; written transfer and author approval pending
+25,C05-026,Test,E038 directly supports opportunity/risk; E041/E076 indirect,Candidate only; written transfer and author approval pending
+26,C05-027,Test,E054 naming is not direct support; prototype approval passage-level only,Candidate only; written transfer and author approval pending
+27,C05-028,Test,N01 frame of reference; earlier summary not verbatim,Candidate only; written transfer and author approval pending
+28,C05-029,Test,N02 inferred distinction; transfer untested,Candidate only; written transfer and author approval pending
+29,C05-030,Test,N03 negotiation example; transfer untested,Candidate only; written transfer and author approval pending
+30,C05-031,Recommend approval,N04 explicit preference for reasoning,Candidate only; written transfer and author approval pending
+31,C05-032,Recommend conditional approval,N05 tentative chapter-level preference,Candidate only; written transfer and author approval pending
+32,C05-033,Hold,Summary only; exact transcript and period unverified,Candidate only; written transfer and author approval pending
+33,C05-034,Hold,Summary only; original wording unavailable,Candidate only; written transfer and author approval pending
+<PARSED TEXT FOR SHEET: 12 / 12 TABS
+TAB NAME: v0.5 Batch recommendations>
+index,Candidate ID,Batch recommendation,Prior assessment,Evidence assessment,Validation boundary,Author decision,Decision date
+0,C05-001,Retain for regression testing,Test,E001 functional definition; one episode,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+1,C05-002,Retain for regression testing,Test,E004 typed classification; one episode,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+2,C05-003,Retain for regression testing,Test,E002 practical responsibility; E076 consequence; multiple episodes,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+3,C05-004,Retain for regression testing,Test,E003 explicit limiting case; one episode,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+4,C05-005,Retain for regression testing,Recommend approval,E005 declines threshold; E055 qualifies limit; E074 uncertain date; repeated,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+5,C05-006,Retain for regression testing,Test,E008 explicit decomposition; one episode,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+6,C05-007,Retain for regression testing,Test,E009 concedes component; one episode,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+7,C05-008,Retain for regression testing,Test,"E010 supports conditionality, not all inference challenges; narrow to inevitability",Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+8,C05-009,Retain for regression testing,Test,E018 direct instruction; E006/E007 contextual support,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+9,C05-010,Retain for regression testing,Recommend approval,E012 and E017 parallel contrasts in separate episodes,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+10,C05-011,Retain for regression testing,Test,E014 experience; E013 announces example rather than demonstrates it,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+11,C05-012,Retain for regression testing,Test,E015 explicit bracketing; one episode,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+12,C05-013,Retain for regression testing,Test,E016 with E015 distinguishes actual from hypothetical; context dependent,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+13,C05-014,Recommend approval,Test,E019 audience understanding; E022 shorthand; E024 weak,Candidate only; written transfer and author approval pending,Approved as stated preference,2026-11-26
+14,C05-015,Recommend approval,Recommend conditional approval,E021 direct self-report about writing; E022 context,Candidate only; written transfer and author approval pending,Approved as stated preference,2026-11-26
+15,C05-016,Retain for regression testing,Test,E020 direct imperative; one episode,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+16,C05-017,Recommend approval,Recommend approval,E023 explicit self-report; E028 acknowledges limited experience,Candidate only; written transfer and author approval pending,Approved as stated preference,2026-11-26
+17,C05-018,Recommend approval,Test,E029 explicit invitation; E028 context,Candidate only; written transfer and author approval pending,Approved as stated preference,2026-11-26
+18,C05-019,Retain for regression testing,Test,E025 explicitly separates disagreement and accuracy,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+19,C05-020,Retain for regression testing,Test,E026 self-report of restatement; selective aspect needs context,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+20,C05-021,Retain for regression testing,Test,E027 acknowledges merit while declining; one episode,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+21,C05-022,Retain for regression testing,Test,E070 preserves chain; E069 supports tightening; E050/E067 contextual,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+22,C05-023,Retain for regression testing,Test,E063 comparison; E064 fragment needs context,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+23,C05-024,Retain for regression testing,Test,E049 causal mechanism; E052/E068 contextual,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+24,C05-025,Retain for regression testing,Test,E060/E061 example; E079 announces example; E081 supports accessibility,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+25,C05-026,Hold for stronger evidence,Test,E038 directly supports opportunity/risk; E041/E076 indirect,Candidate only; written transfer and author approval pending,Held pending evidence,2026-11-26
+26,C05-027,Retain for regression testing,Test,E054 naming is not direct support; prototype approval passage-level only,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+27,C05-028,Retain for regression testing,Test,N01 frame of reference; earlier summary not verbatim,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+28,C05-029,Retain for regression testing,Test,N02 inferred distinction; transfer untested,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+29,C05-030,Retain for regression testing,Test,N03 negotiation example; transfer untested,Candidate only; written transfer and author approval pending,Authorized for testing only,2026-11-26
+30,C05-031,Recommend approval,Recommend approval,N04 explicit preference for reasoning,Candidate only; written transfer and author approval pending,Approved as stated preference,2026-11-26
+31,C05-032,Conditional approval,Recommend conditional approval,N05 tentative chapter-level preference,Candidate only; written transfer and author approval pending,Approved conditionally,2026-11-26
+32,C05-033,Hold for stronger evidence,Hold,Summary only; exact transcript and period unverified,Candidate only; written transfer and author approval pending,Held pending evidence,2026-11-26
+33,C05-034,Hold for stronger evidence,Hold,Summary only; original wording unavailable,Candidate only; written transfer and author approval pending,Held pending evidence,2026-11-26
