@@ -1,0 +1,129 @@
+{
+  "coverage": {
+    "Conceptual": {
+      "exemplars": 21,
+      "sources": 15,
+      "acts": {
+        "Differentiate": 4,
+        "Model": 1,
+        "Ground in principle": 1,
+        "Hypothesize": 1,
+        "Cross disciplines": 1,
+        "Motivation": 1,
+        "Align values": 1,
+        "Contrast": 1,
+        "Redefine": 1,
+        "Mechanism": 2,
+        "Novelty": 1,
+        "Name": 1,
+        "Analogy": 1,
+        "Sequence": 1,
+        "Scale": 1,
+        "Transfer": 1,
+        "Define": 1
+      },
+      "written_validated": 0,
+      "candidate_rules": 2,
+      "active_rules": 0
+    },
+    "Epistemic": {
+      "exemplars": 20,
+      "sources": 15,
+      "acts": {
+        "Establish bound": 1,
+        "Qualify": 7,
+        "Balance": 1,
+        "Concede": 1,
+        "Reconsider": 1,
+        "Instruct": 1,
+        "Admit": 1,
+        "Differentiate": 1,
+        "Invite critique": 1,
+        "Derive hypothesis": 1,
+        "Test": 1,
+        "Bound": 1,
+        "Scope": 1,
+        "Limit": 1
+      },
+      "written_validated": 0,
+      "candidate_rules": 6,
+      "active_rules": 0
+    },
+    "Rhetorical": {
+      "exemplars": 32,
+      "sources": 26,
+      "acts": {
+        "Apply": 1,
+        "Explain mechanism": 1,
+        "Decompose": 1,
+        "Condition": 1,
+        "Illustrate": 3,
+        "Adapt": 2,
+        "Contextualize": 1,
+        "Reframe": 1,
+        "Decline": 1,
+        "Invite critique": 1,
+        "Sequence": 1,
+        "Concede": 2,
+        "Convergence": 1,
+        "Enumerate": 1,
+        "Purpose": 1,
+        "Agency": 1,
+        "Historical example": 1,
+        "Historical sequence": 1,
+        "Compare": 1,
+        "Recollection": 1,
+        "Extend": 1,
+        "Preserve": 1,
+        "Position": 1,
+        "Contrast": 2,
+        "Personal example": 1,
+        "Responsibility": 1,
+        "Example first": 1
+      },
+      "written_validated": 0,
+      "candidate_rules": 7,
+      "active_rules": 0
+    },
+    "Linguistic": {
+      "exemplars": 11,
+      "sources": 11,
+      "acts": {
+        "Contrast": 2,
+        "Instruct": 1,
+        "Adapt": 1,
+        "Repeat": 1,
+        "Question": 1,
+        "Short sentences": 1,
+        "Tighten": 1,
+        "Emphasis": 1,
+        "Maxim": 2
+      },
+      "written_validated": 0,
+      "candidate_rules": 2,
+      "active_rules": 0
+    }
+  },
+  "objectives": [
+    {
+      "layer": "Conceptual",
+      "objective": "Acquire author-written or author-validated examples of conceptual behavior through a focused exercise.",
+      "reason": "No author-validated written exemplars in frozen baseline"
+    },
+    {
+      "layer": "Epistemic",
+      "objective": "Acquire author-written or author-validated examples of epistemic behavior through a focused exercise.",
+      "reason": "No author-validated written exemplars in frozen baseline"
+    },
+    {
+      "layer": "Rhetorical",
+      "objective": "Acquire author-written or author-validated examples of rhetorical behavior through a focused exercise.",
+      "reason": "No author-validated written exemplars in frozen baseline"
+    },
+    {
+      "layer": "Linguistic",
+      "objective": "Acquire author-written or author-validated examples of linguistic behavior through a focused exercise.",
+      "reason": "No author-validated written exemplars in frozen baseline"
+    }
+  ]
+}

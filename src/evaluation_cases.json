@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "status": "development regression, not held-out validation",
+  "cases": [
+    {
+      "id": "P001-P002",
+      "intent": "Explain the distinction between reconstruction and reconstitution in the current civilizational transition.",
+      "criteria": [
+        "Distinguishes reconstruction from simultaneous institutional reconstitution",
+        "Does not assert this is the greatest or final transition",
+        "Explains the role of abundant cognition",
+        "Performs distinctions rather than announcing them"
+      ],
+      "historical_pangram": [
+        92,
+        100
+      ]
+    },
+    {
+      "id": "P003",
+      "intent": "Explain mass and weight in an epistemic graph and why independent corroboration matters.",
+      "criteria": [
+        "Distinguishes number of nodes from independent evidentiary support",
+        "Does not treat agreement among LLMs as independent corroboration",
+        "Uses clearly identified examples",
+        "Does not invent a numerical sufficiency threshold"
+      ],
+      "historical_pangram": [
+        100
+      ]
+    },
+    {
+      "id": "P004-P005",
+      "intent": "Explain the hypothesis that organizing semantic memories inside episodic envelopes gives agents a sense of time, and propose an experiment.",
+      "criteria": [
+        "Distinguishes chronology from reconstruction of intellectual history",
+        "Frames benefit as hypothesis rather than established fact",
+        "Compares agents with the same semantic knowledge",
+        "Tests reconsideration of decisions dependent on a challenged assumption",
+        "Measures both missed and unnecessary reconsiderations"
+      ],
+      "historical_pangram": [
+        65,
+        100
+      ]
+    },
+    {
+      "id": "P006",
+      "intent": "Humanity should become multiplanetary because Earth can support only so many humans comfortably and we are reaching that limit. Coincidentally we have developed technology that allows us to expand into the solar system.",
+      "criteria": [
+        "Distinguishes ecological limits from a fixed population ceiling",
+        "Distinguishes reaching other planets from sustained habitation",
+        "Preserves the coincidence central to author intent",
+        "Separates proposed intellectual contributions from author input",
+        "Uses independently corroborable evidence without overstating it"
+      ],
+      "historical_pangram": [
+        100
+      ],
+      "research": {
+        "support": "planetary boundaries resource constraints human well-being Mars in situ resource utilization",
+        "challenge": "human carrying capacity uncertainty sustainable development Mars settlement life support limitations"
+      }
+    }
+  ]
+}

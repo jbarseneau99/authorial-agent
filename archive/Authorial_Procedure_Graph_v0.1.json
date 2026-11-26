@@ -1,0 +1,289 @@
+{
+  "id": "AA-PROC-001",
+  "version": "0.1",
+  "status": "experimental; not recovered historical procedure",
+  "ledger": {
+    "file": "Authorial_Voice_Ledger_v0.4.xlsx",
+    "sha256": "3628683a302638de40363395e2f4db79a1537f177533331294c6f371f3951b92"
+  },
+  "layers": [
+    "linguistic",
+    "rhetorical",
+    "epistemic",
+    "conceptual"
+  ],
+  "nodes": [
+    {
+      "id": "D",
+      "name": "Decompose",
+      "inputs": [
+        "source"
+      ],
+      "outputs": [
+        "acts"
+      ],
+      "layers": [
+        "conceptual",
+        "rhetorical"
+      ],
+      "prompt": "Extract ordered intellectual acts and source spans. Do not rewrite or add claims.",
+      "closure": "Every source claim is mapped or explicitly excluded with reason.",
+      "entry": "All required inputs persisted; upstream checks passed",
+      "loop": [
+        "execute",
+        "check",
+        "close_or_repeat"
+      ],
+      "record": [
+        "input_hashes",
+        "resolved_prompt",
+        "rule_ids",
+        "output",
+        "check_result",
+        "decision"
+      ]
+    },
+    {
+      "id": "E",
+      "name": "Encode",
+      "inputs": [
+        "acts",
+        "source"
+      ],
+      "outputs": [
+        "intellectual_graph"
+      ],
+      "layers": [
+        "conceptual",
+        "epistemic"
+      ],
+      "prompt": "Encode claims, evidence, qualifications and typed relationships with stable IDs. Mark unsupported claims and proposed corrections separately.",
+      "closure": "Every act references claims; evidence provenance and uncertainty are explicit.",
+      "entry": "All required inputs persisted; upstream checks passed",
+      "loop": [
+        "execute",
+        "check",
+        "close_or_repeat"
+      ],
+      "record": [
+        "input_hashes",
+        "resolved_prompt",
+        "rule_ids",
+        "output",
+        "check_result",
+        "decision"
+      ]
+    },
+    {
+      "id": "X",
+      "name": "Express",
+      "inputs": [
+        "intellectual_graph",
+        "ledger"
+      ],
+      "outputs": [
+        "expression",
+        "sentence_map"
+      ],
+      "layers": [
+        "rhetorical",
+        "linguistic"
+      ],
+      "prompt": "Express each act directly using applicable ledger rules. Record rule IDs and map sentences to acts. Do not silently alter claims.",
+      "closure": "Every sentence maps to an act and every required act is expressed.",
+      "entry": "All required inputs persisted; upstream checks passed",
+      "loop": [
+        "execute",
+        "check",
+        "close_or_repeat"
+      ],
+      "record": [
+        "input_hashes",
+        "resolved_prompt",
+        "rule_ids",
+        "output",
+        "check_result",
+        "decision"
+      ]
+    },
+    {
+      "id": "V",
+      "name": "Validate",
+      "inputs": [
+        "expression",
+        "sentence_map",
+        "intellectual_graph",
+        "ledger"
+      ],
+      "outputs": [
+        "findings"
+      ],
+      "layers": [
+        "conceptual",
+        "epistemic",
+        "rhetorical",
+        "linguistic"
+      ],
+      "prompt": "Check each layer independently. Record defects with exact spans, rule IDs, severity and evidence. Do not use detector feedback.",
+      "closure": "Four layer assessments exist; every defect has a repair target.",
+      "entry": "All required inputs persisted; upstream checks passed",
+      "loop": [
+        "execute",
+        "check",
+        "close_or_repeat"
+      ],
+      "record": [
+        "input_hashes",
+        "resolved_prompt",
+        "rule_ids",
+        "output",
+        "check_result",
+        "decision"
+      ]
+    },
+    {
+      "id": "R",
+      "name": "Repair",
+      "inputs": [
+        "findings",
+        "expression",
+        "intellectual_graph"
+      ],
+      "outputs": [
+        "revision"
+      ],
+      "layers": [
+        "conceptual",
+        "epistemic",
+        "rhetorical",
+        "linguistic"
+      ],
+      "prompt": "Repair only identified defects. Preserve unaffected text; reopen encoding for claim changes.",
+      "closure": "Every change traces to a finding; unaffected text preserved.",
+      "entry": "All required inputs persisted; upstream checks passed",
+      "loop": [
+        "execute",
+        "check",
+        "close_or_repeat"
+      ],
+      "record": [
+        "input_hashes",
+        "resolved_prompt",
+        "rule_ids",
+        "output",
+        "check_result",
+        "decision"
+      ]
+    },
+    {
+      "id": "A",
+      "name": "Author review",
+      "inputs": [
+        "expression",
+        "findings"
+      ],
+      "outputs": [
+        "author_decision"
+      ],
+      "layers": [],
+      "prompt": "Request author judgment of voice and intellectual fidelity separately.",
+      "closure": "Explicit author decision recorded.",
+      "entry": "All required inputs persisted; upstream checks passed",
+      "loop": [
+        "execute",
+        "check",
+        "close_or_repeat"
+      ],
+      "record": [
+        "input_hashes",
+        "resolved_prompt",
+        "rule_ids",
+        "output",
+        "check_result",
+        "decision"
+      ]
+    },
+    {
+      "id": "P",
+      "name": "Measure",
+      "inputs": [
+        "expression",
+        "author_decision"
+      ],
+      "outputs": [
+        "pangram_result"
+      ],
+      "layers": [],
+      "prompt": "Record externally supplied Pangram version, exact text hash, word count and score. Do not optimize solely for detector.",
+      "closure": "Measurement or explicit unavailable status recorded.",
+      "entry": "All required inputs persisted; upstream checks passed",
+      "loop": [
+        "execute",
+        "check",
+        "close_or_repeat"
+      ],
+      "record": [
+        "input_hashes",
+        "resolved_prompt",
+        "rule_ids",
+        "output",
+        "check_result",
+        "decision"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "D",
+      "target": "E",
+      "condition": "pass"
+    },
+    {
+      "source": "E",
+      "target": "X",
+      "condition": "pass"
+    },
+    {
+      "source": "X",
+      "target": "V",
+      "condition": "pass"
+    },
+    {
+      "source": "V",
+      "target": "A",
+      "condition": "no blocking findings"
+    },
+    {
+      "source": "V",
+      "target": "R",
+      "condition": "blocking findings"
+    },
+    {
+      "source": "R",
+      "target": "E",
+      "condition": "claim change required"
+    },
+    {
+      "source": "R",
+      "target": "V",
+      "condition": "expression repair"
+    },
+    {
+      "source": "A",
+      "target": "P",
+      "condition": "author accepts"
+    },
+    {
+      "source": "A",
+      "target": "R",
+      "condition": "author requests repair"
+    }
+  ],
+  "controls": {
+    "max_repair_cycles": 3,
+    "on_exhaustion": "suspend for author review",
+    "held_rules": "v0.5 excluded",
+    "historical_prompt_recovery": "incomplete",
+    "run_status": "not executed"
+  }
+}

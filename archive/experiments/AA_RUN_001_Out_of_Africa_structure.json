@@ -1,0 +1,275 @@
+{
+  "id": "AA-RUN-001",
+  "status": "manual experimental execution; no prose generated",
+  "procedure_sha256": "2f33457c0230f14f544a7a70240bae42bae9b16f84cb7098fb9135260323f986",
+  "ledger_sha256": "3628683a302638de40363395e2f4db79a1537f177533331294c6f371f3951b92",
+  "source_sha256": "3c220e55c8c3bf9710c9edbfa7059f7cec21506bd1d1b256c226a46903548309",
+  "source": "2.1 Out of Africa: The Original Expansion\nThe human story begins with expansion. Approximately seventy thousand years ago, a population of anatomically modern humans, perhaps numbering only a few thousand individuals, began moving out of the African continent that had been humanity’s home for hundreds of thousands of years [Klein 2009]. This migration, which would eventually place humans on every continent and in every habitable environment on Earth, represents the first great expansion and establishes patterns that have repeated throughout human history.\nThe migrants faced extraordinary challenges. They crossed deserts and mountain ranges, adapted to climates radically different from the African savanna where human physiology evolved, and encountered other hominin species who had preceded them into Eurasia. They had no maps, no knowledge of what lay ahead, no guarantee of survival. Yet they kept moving, generation after generation, until they had spread across the globe.\nWhy did they leave? The question has occupied anthropologists and archaeologists for decades. Climate change may have played a role, shifts in African environments that made migration more attractive or necessary. Population pressure in specific regions may have pushed groups outward. The development of new technologies (better tools, better techniques for obtaining food) may have made previously inaccessible environments viable.\nBut these explanations feel incomplete. Africa was not uninhabitable; many human populations remained and thrived. The migrants were not fleeing certain death but choosing uncertain life. Something beyond immediate necessity drove the expansion.\nOne compelling hypothesis centers on human cognitive architecture itself. The same capacities that make humans uniquely capable (imagination, planning, the ability to envision states of affairs that do not yet exist) may also make us uniquely restless. An animal that can imagine “somewhere else” will wonder what is there. A species that can plan for contingencies will seek environments where contingencies can be met. The cognitive revolution that made humans human may have simultaneously made us expansive.\nThis hypothesis finds support in the universality of the pattern. Every human population, in every environment, has expanded when given the opportunity. The Polynesian voyagers who colonized the Pacific, the Arctic peoples who spread across the polar regions, the Aboriginal Australians who reached their continent at least 50,000 years ago, all exhibited the same restless outward movement. Expansion appears not as historical accident but as species characteristic.",
+  "stages": [
+    {
+      "id": "D",
+      "prompt": "Extract ordered intellectual acts and source spans. Do not rewrite or add claims.",
+      "rule_ids": [
+        "R004",
+        "R012"
+      ],
+      "output": [
+        {
+          "id": "A1",
+          "type": "Historical grounding",
+          "source_span": "The human story begins with expansion. Approximately seventy thousand years ago, a population of anatomically modern humans, perhaps numbering only a few thousand individuals, began moving out of the African continent that had been humanity’s home for hundreds of thousands of years [Klein 2009]. This migration, which would eventually place humans on every continent and in every habitable environment on Earth, represents the first great expansion and establishes patterns that have repeated throughout human history.",
+          "source_line": 2,
+          "claim_ids": [
+            "C1",
+            "C2",
+            "C3"
+          ]
+        },
+        {
+          "id": "A2",
+          "type": "Substantiation",
+          "source_span": "The migrants faced extraordinary challenges. They crossed deserts and mountain ranges, adapted to climates radically different from the African savanna where human physiology evolved, and encountered other hominin species who had preceded them into Eurasia. They had no maps, no knowledge of what lay ahead, no guarantee of survival. Yet they kept moving, generation after generation, until they had spread across the globe.",
+          "source_line": 3,
+          "claim_ids": [
+            "C4",
+            "C5"
+          ]
+        },
+        {
+          "id": "A3",
+          "type": "Inquiry",
+          "source_span": "Why did they leave? The question has occupied anthropologists and archaeologists for decades. Climate change may have played a role, shifts in African environments that made migration more attractive or necessary. Population pressure in specific regions may have pushed groups outward. The development of new technologies (better tools, better techniques for obtaining food) may have made previously inaccessible environments viable.",
+          "source_line": 4,
+          "claim_ids": [
+            "C6",
+            "C7",
+            "C8"
+          ]
+        },
+        {
+          "id": "A4",
+          "type": "Consideration",
+          "source_span": "But these explanations feel incomplete. Africa was not uninhabitable; many human populations remained and thrived. The migrants were not fleeing certain death but choosing uncertain life. Something beyond immediate necessity drove the expansion.",
+          "source_line": 5,
+          "claim_ids": [
+            "C9",
+            "C10"
+          ]
+        },
+        {
+          "id": "A5",
+          "type": "Hypothesis",
+          "source_span": "One compelling hypothesis centers on human cognitive architecture itself. The same capacities that make humans uniquely capable (imagination, planning, the ability to envision states of affairs that do not yet exist) may also make us uniquely restless. An animal that can imagine “somewhere else” will wonder what is there. A species that can plan for contingencies will seek environments where contingencies can be met. The cognitive revolution that made humans human may have simultaneously made us expansive.",
+          "source_line": 6,
+          "claim_ids": [
+            "C11",
+            "C12"
+          ]
+        },
+        {
+          "id": "A6",
+          "type": "Generalization",
+          "source_span": "This hypothesis finds support in the universality of the pattern. Every human population, in every environment, has expanded when given the opportunity. The Polynesian voyagers who colonized the Pacific, the Arctic peoples who spread across the polar regions, the Aboriginal Australians who reached their continent at least 50,000 years ago, all exhibited the same restless outward movement. Expansion appears not as historical accident but as species characteristic.",
+          "source_line": 7,
+          "claim_ids": [
+            "C13",
+            "C14"
+          ]
+        }
+      ],
+      "check_result": "All six source paragraphs mapped; title retained separately",
+      "decision": "closed for structural coverage only"
+    },
+    {
+      "id": "E",
+      "prompt": "Encode claims, evidence, qualifications and typed relationships with stable IDs. Mark unsupported claims and proposed corrections separately.",
+      "rule_ids": [
+        "R001",
+        "R003",
+        "R005",
+        "R016"
+      ],
+      "output": {
+        "claims": [
+          {
+            "id": "C1",
+            "act": "A1",
+            "claim": "Migration circa 70,000 years ago; population perhaps thousands",
+            "kind": "historical estimate",
+            "qualification_or_proposed_correction": "Retain uncertainty; Klein 2009 supplied, not verified",
+            "provenance": "A1: supplied passage"
+          },
+          {
+            "id": "C2",
+            "act": "A1",
+            "claim": "Africa long inhabited by humans; migration extended habitation globally",
+            "kind": "historical claim",
+            "qualification_or_proposed_correction": "Avoid literal every habitable environment and first-ever migration",
+            "provenance": "A1: supplied passage"
+          },
+          {
+            "id": "C3",
+            "act": "A1",
+            "claim": "Expansion is a recurring historical pattern",
+            "kind": "interpretation",
+            "qualification_or_proposed_correction": "Opening framing, not demonstrated universal law",
+            "provenance": "A1: supplied passage"
+          },
+          {
+            "id": "C4",
+            "act": "A2",
+            "claim": "Migrants crossed geographic barriers, adapted to climates and encountered other hominins",
+            "kind": "historical claim",
+            "qualification_or_proposed_correction": "Source assertion, not independently verified",
+            "provenance": "A2: supplied passage"
+          },
+          {
+            "id": "C5",
+            "act": "A2",
+            "claim": "No maps, no knowledge ahead, no survival guarantee; continued across generations",
+            "kind": "historical inference",
+            "qualification_or_proposed_correction": "Qualify absolute lack of knowledge; retain uncertainty and continuity",
+            "provenance": "A2: supplied passage"
+          },
+          {
+            "id": "C6",
+            "act": "A3",
+            "claim": "Why did they leave? Scholars have investigated for decades",
+            "kind": "question and context",
+            "qualification_or_proposed_correction": "Retain question; duration unverified",
+            "provenance": "A3: supplied passage"
+          },
+          {
+            "id": "C7",
+            "act": "A3",
+            "claim": "Climate and population pressure may motivate migration",
+            "kind": "hypothesis",
+            "qualification_or_proposed_correction": "Retain alternatives",
+            "provenance": "A3: supplied passage"
+          },
+          {
+            "id": "C8",
+            "act": "A3",
+            "claim": "Technology may enable occupation of new environments",
+            "kind": "hypothesis",
+            "qualification_or_proposed_correction": "Distinguish enabling from motivating",
+            "provenance": "A3: supplied passage"
+          },
+          {
+            "id": "C9",
+            "act": "A4",
+            "claim": "Many populations remained in habitable Africa",
+            "kind": "historical claim",
+            "qualification_or_proposed_correction": "Does not rule out local necessity",
+            "provenance": "A4: supplied passage"
+          },
+          {
+            "id": "C10",
+            "act": "A4",
+            "claim": "Migrants chose uncertain life rather than fleeing death; beyond necessity",
+            "kind": "inference",
+            "qualification_or_proposed_correction": "Proposed correction: local necessity remains possible; additional motives not established",
+            "provenance": "A4: supplied passage"
+          },
+          {
+            "id": "C11",
+            "act": "A5",
+            "claim": "Imagination and planning enable envisaging and pursuing alternatives",
+            "kind": "mechanism hypothesis",
+            "qualification_or_proposed_correction": "Distinguish ability from desire; avoid uniqueness claim",
+            "provenance": "A5: supplied passage"
+          },
+          {
+            "id": "C12",
+            "act": "A5",
+            "claim": "Cognitive revolution may have made humans expansive",
+            "kind": "hypothesis",
+            "qualification_or_proposed_correction": "Curiosity or exploration as possible motive, not proven",
+            "provenance": "A5: supplied passage"
+          },
+          {
+            "id": "C13",
+            "act": "A6",
+            "claim": "Polynesian, Arctic and Australian settlement exemplify geographic expansion",
+            "kind": "historical examples",
+            "qualification_or_proposed_correction": "Dates and details unverified; examples establish occurrence, not motive",
+            "provenance": "A6: supplied passage"
+          },
+          {
+            "id": "C14",
+            "act": "A6",
+            "claim": "Every population expands when possible; expansion is species characteristic",
+            "kind": "generalization",
+            "qualification_or_proposed_correction": "Proposed correction: recurring pattern consistent with hypothesis, not universal or causal proof",
+            "provenance": "A6: supplied passage"
+          }
+        ],
+        "edges": [
+          {
+            "from": "C1",
+            "to": "C3",
+            "type": "context_for"
+          },
+          {
+            "from": "C4",
+            "to": "C3",
+            "type": "illustrates"
+          },
+          {
+            "from": "C5",
+            "to": "C3",
+            "type": "illustrates"
+          },
+          {
+            "from": "C7",
+            "to": "C6",
+            "type": "candidate_answer"
+          },
+          {
+            "from": "C8",
+            "to": "C6",
+            "type": "candidate_answer"
+          },
+          {
+            "from": "C9",
+            "to": "C10",
+            "type": "limited_support"
+          },
+          {
+            "from": "C7",
+            "to": "C10",
+            "type": "alternative_explanation"
+          },
+          {
+            "from": "C11",
+            "to": "C12",
+            "type": "possible_mechanism"
+          },
+          {
+            "from": "C12",
+            "to": "C6",
+            "type": "candidate_answer"
+          },
+          {
+            "from": "C13",
+            "to": "C14",
+            "type": "illustrates_not_proves"
+          },
+          {
+            "from": "C12",
+            "to": "C14",
+            "type": "hypothesis_for"
+          }
+        ]
+      },
+      "check_result": "All acts reference claims; qualifications explicit; external verification not performed",
+      "decision": "structurally checked; proposed substantive corrections pending author review"
+    }
+  ],
+  "limitations": [
+    "Manual application of declared prompts, not isolated provider calls",
+    "Rule selection is a new experimental decision, not recovered historical selection",
+    "No external historical verification",
+    "No exact historical intermediate graph recovered"
+  ]
+}
