@@ -1,0 +1,39 @@
+{
+  "run": "RUN_009",
+  "procedure": "v0.3",
+  "ledger": "v0.4",
+  "section": "20.1 What Abundant Means",
+  "source": "user reported",
+  "detector": "Pangram 4.1",
+  "human_percent": 83,
+  "ai_percent": 17,
+  "ai_range": "10–25%",
+  "classification": "AI Detected, Mixed",
+  "words": 725,
+  "segments": 21,
+  "flagged": 3,
+  "credits_remaining": 14705,
+  "flags": [
+    {
+      "severity": "AI Medium",
+      "text": "What interests me as much as those numbers is what the researchers did not include in them. There was work associated with overseeing the machine, having it make further attempts and incorporating what it produced into the work being done."
+    },
+    {
+      "severity": "Likely AI Low",
+      "text": "The researchers also found that the machines they used to assess the work were not yet as reliable as the people doing the assessment."
+    },
+    {
+      "severity": "Likely AI Low",
+      "text": "The other is the extent of the work we can give a machine before a person has to become involved again. It is the relationship between these two that will give us a better understanding of what is becoming abundant."
+    }
+  ],
+  "limitations": [
+    "manual execution",
+    "no isolated context",
+    "no independent source verification",
+    "construction not formally closed",
+    "exact expression not yet persisted",
+    "diagnoses hypothetical",
+    "author validation pending"
+  ]
+}
