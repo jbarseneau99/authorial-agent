@@ -1,0 +1,20 @@
+{
+  "run": "RUN_003",
+  "external_label": "v14",
+  "human_percent": 89,
+  "segments": {
+    "total": 12,
+    "human_or_likely_human": 11,
+    "likely_ai_low": 1
+  },
+  "provenance": "User supplied Pangram feedback",
+  "observations": [
+    "Original AI opening and sentence skeleton abandoned",
+    "Inherited AI phrasing and essay transitions removed",
+    "Natural syntax and first-person reasoning restored",
+    "Only closing sentence flagged Likely AI Low"
+  ],
+  "flagged": "But the recurrence of expansion under such different circumstances gives us reason to consider whether expansion itself is a characteristic of our species.",
+  "comparison": "User supplied feedback reports v8-v13 92–100% AI, v6 69% human, earlier draft 100% human",
+  "interpretation": "Source-expression contamination is a candidate mechanism, not proven causality."
+}
