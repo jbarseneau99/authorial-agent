@@ -1,0 +1,32 @@
+[
+  {
+    "index": "5",
+    "Rule ID": "R006",
+    "Evidence IDs": "E012; E017",
+    "Layer": "Linguistic",
+    "Candidate rule": "Use parallel contrast to express a balanced distinction.",
+    "Review note": "Repeated spoken contrast; written usage unverified.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "8",
+    "Rule ID": "R009",
+    "Evidence IDs": "E020",
+    "Layer": "Linguistic",
+    "Candidate rule": "Use short direct imperatives for core obligations.",
+    "Review note": "One elicited example.",
+    "Status": "Unconfirmed",
+    "Applicability": "Spoken; written untested"
+  },
+  {
+    "index": "17",
+    "Rule ID": "R018",
+    "Evidence IDs": "E054; Prototype 001/002",
+    "Layer": "Linguistic; rhetorical",
+    "Candidate rule": "Realize intellectual acts directly rather than announcing them unnecessarily.",
+    "Review note": "One paragraph revised; Pangram 92% to 100%; author validated full revised passage. Not isolated from rhetorical changes.",
+    "Status": "Provisionally supported",
+    "Applicability": "Written; generalization pending"
+  }
+]
