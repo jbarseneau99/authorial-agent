@@ -1,0 +1,14 @@
+{
+  "run": "RUN_004",
+  "assessment": "experiments/RUN_004/assessment-v0.1.json",
+  "author_voice": "accepted",
+  "evidence": "User answered yes to whether passage sounds like them",
+  "epistemic_fidelity": "not separately validated",
+  "next_experiment": {
+    "run": "RUN_005",
+    "procedure": "v0.3",
+    "ledger": "v0.5",
+    "subject": "same",
+    "status": "planned; ledger must be retrieved and inspected first"
+  }
+}
