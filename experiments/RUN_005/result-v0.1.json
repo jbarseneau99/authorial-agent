@@ -1,0 +1,27 @@
+{
+  "run": "RUN_005",
+  "procedure": "v0.3",
+  "ledger": "v0.5-approved",
+  "ledger_blob": "4af3734e4d33a33ed0a6ebae16d97497c7b246c7",
+  "candidate_rules": [
+    "C05-005",
+    "C05-006",
+    "C05-007",
+    "C05-008",
+    "C05-015",
+    "C05-022",
+    "C05-024",
+    "C05-025",
+    "C05-027",
+    "C05-031"
+  ],
+  "expression": "Some seventy thousand years ago, humans began moving out of Africa. Over the generations that followed, they acquired the knowledge and developed the technologies that would allow them to live in much of the world.\n\nWhy did this happen?\n\nIf we look at the conditions under which humans were living in Africa, we can identify a number of things that may have contributed to their migration. Changes in climate would have affected the availability of food. An increase in the population of a region may have had much the same effect.\n\nWe also need to consider what was happening technologically. If a population had the means to obtain food in one environment but not in another, there was a limit to where that population could go. As their knowledge increased, so too did the number of places in which they could live.\n\nNeither of these explanations requires us to assume that humans had any particular desire to explore. But I wonder how much of our history we can account for without making that assumption.\n\nWe have the cognitive ability to contemplate things that do not yet exist in our lives. A person living near the coast can wonder what lies beyond the water. Given sufficient knowledge, that person can begin to work out how to get there. There need not be anything particularly wrong with life on the coast for that person to want to do so.\n\nBy the time Europeans began exploring the Pacific, people were already living on islands separated from one another by considerable distances. In a very different part of the world, humans had acquired the knowledge necessary to live in the Arctic.\n\nI don't know that we can establish from the historical evidence how much of this was driven by necessity and how much by curiosity. We can, however, observe what humans have done with their increasing knowledge over a considerable period of time.\n\nMy hypothesis is that the cognitive abilities that made these expansions possible also contributed to our desire to undertake them.",
+  "human_percent": null,
+  "author_validation": null,
+  "limitations": [
+    "Manual execution; no context isolation or independently closed construction",
+    "Rule bindings retrospective",
+    "Coastal hypothetical example added; European exploration comparison added; historical claims not independently verified",
+    "Not a controlled causal comparison"
+  ]
+}
