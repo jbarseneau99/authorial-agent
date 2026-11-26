@@ -1,0 +1,28 @@
+{
+  "run": "RUN_008",
+  "procedure": "v0.3",
+  "ledger": "v0.4",
+  "subject": "1.5 The Expansion Equation",
+  "measurement": {
+    "source": "user reported",
+    "detector": "Pangram 4.1",
+    "classification": "Human Written",
+    "human_percent": 100,
+    "ai_percent": 0,
+    "scanned_words": 1569,
+    "segments": 7,
+    "flagged": 0,
+    "human_high": 4,
+    "human_medium": 3,
+    "credits_remaining": 14713
+  },
+  "measurement_scope": "prose-only extraction excluding equations diagrams tables captions",
+  "author_voice_validation": "pending",
+  "limitations": [
+    "construction open",
+    "no independent research",
+    "no context isolation",
+    "exact expression not yet committed",
+    "detector result not proof of authorship or fidelity"
+  ]
+}
