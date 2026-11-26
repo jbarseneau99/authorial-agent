@@ -1,0 +1,7 @@
+index,Rule ID,Evidence IDs,Layer,Candidate rule,Review note,Status,Applicability
+2,R003,E003; E005,Epistemic,Use limiting cases and avoid unsupported precision.,One response; seek independent example.,Unconfirmed,Spoken; written untested
+4,R005,E006; E007; E018,Epistemic,Distinguish apparent credibility from evidentiary warrant.,Two responses; still topic-specific.,Unconfirmed,Spoken; written untested
+6,R007,E013; E014; E015; E016,Epistemic,Use concrete experience and bracket a blocking assumption to explore alternatives; distinguish hypothetical from actual revision.,One retrospective example.,Unconfirmed,Spoken; written untested
+9,R010,E023; E028; E029,Epistemic,Acknowledge error or limits and invite challenge from relevant experience.,Self-report and elicited example.,Unconfirmed,Spoken; written untested
+12,R013,E063; E064,Epistemic,Distinguish historical comparison from absolute prediction.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+15,R016,E034; E047; E055; E074; E080,Epistemic,Qualify abundance and uncertain historical detail precisely.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
