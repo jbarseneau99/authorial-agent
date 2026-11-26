@@ -1,0 +1,614 @@
+[
+  {
+    "index": "0",
+    "Candidate ID": "C05-001",
+    "Parent rule": "R001",
+    "Proposed rule": "Define concepts by function",
+    "Status": "Provisional",
+    "Evidence / limitation": "E001",
+    "decision": {
+      "index": "0",
+      "Candidate ID": "C05-001",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E001 functional definition; one episode",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "1",
+    "Candidate ID": "C05-002",
+    "Parent rule": "R001",
+    "Proposed rule": "Classify objects by type",
+    "Status": "Provisional",
+    "Evidence / limitation": "E004",
+    "decision": {
+      "index": "1",
+      "Candidate ID": "C05-002",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E004 typed classification; one episode",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "2",
+    "Candidate ID": "C05-003",
+    "Parent rule": "R002; R017",
+    "Proposed rule": "Connect abstractions to practical consequences for affected parties",
+    "Status": "Provisional",
+    "Evidence / limitation": "E002; E011; E041; E076",
+    "decision": {
+      "index": "2",
+      "Candidate ID": "C05-003",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E002 practical responsibility; E076 consequence; multiple episodes",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "3",
+    "Candidate ID": "C05-004",
+    "Parent rule": "R003",
+    "Proposed rule": "Use limiting cases to establish bounds",
+    "Status": "Provisional",
+    "Evidence / limitation": "E003",
+    "decision": {
+      "index": "3",
+      "Candidate ID": "C05-004",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E003 explicit limiting case; one episode",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "4",
+    "Candidate ID": "C05-005",
+    "Parent rule": "R003; R016",
+    "Proposed rule": "Calibrate precision and certainty to evidence",
+    "Status": "Provisional",
+    "Evidence / limitation": "E005; E034; E047; E055; E074; E080",
+    "decision": {
+      "index": "4",
+      "Candidate ID": "C05-005",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Recommend approval",
+      "Evidence assessment": "E005 declines threshold; E055 qualifies limit; E074 uncertain date; repeated",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "5",
+    "Candidate ID": "C05-006",
+    "Parent rule": "R004",
+    "Proposed rule": "Decompose compound claims",
+    "Status": "Provisional",
+    "Evidence / limitation": "E008",
+    "decision": {
+      "index": "5",
+      "Candidate ID": "C05-006",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E008 explicit decomposition; one episode",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "6",
+    "Candidate ID": "C05-007",
+    "Parent rule": "R004",
+    "Proposed rule": "Concede plausible components",
+    "Status": "Provisional",
+    "Evidence / limitation": "E009",
+    "decision": {
+      "index": "6",
+      "Candidate ID": "C05-007",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E009 concedes component; one episode",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "7",
+    "Candidate ID": "C05-008",
+    "Parent rule": "R004",
+    "Proposed rule": "Challenge inference or inevitability",
+    "Status": "Provisional",
+    "Evidence / limitation": "E010",
+    "decision": {
+      "index": "7",
+      "Candidate ID": "C05-008",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E010 supports conditionality, not all inference challenges; narrow to inevitability",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "8",
+    "Candidate ID": "C05-009",
+    "Parent rule": "R005",
+    "Proposed rule": "Distinguish apparent credibility from evidentiary warrant",
+    "Status": "Provisional",
+    "Evidence / limitation": "E006; E007; E018; earlier lesson summary: distinguish thought experiments from empirical experiments (not verbatim)",
+    "decision": {
+      "index": "8",
+      "Candidate ID": "C05-009",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E018 direct instruction; E006/E007 contextual support",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "9",
+    "Candidate ID": "C05-010",
+    "Parent rule": "R006",
+    "Proposed rule": "Use parallel contrast",
+    "Status": "Provisional",
+    "Evidence / limitation": "E012; E017",
+    "decision": {
+      "index": "9",
+      "Candidate ID": "C05-010",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Recommend approval",
+      "Evidence assessment": "E012 and E017 parallel contrasts in separate episodes",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "10",
+    "Candidate ID": "C05-011",
+    "Parent rule": "R007",
+    "Proposed rule": "Reason from concrete experience",
+    "Status": "Provisional",
+    "Evidence / limitation": "E013; E014",
+    "decision": {
+      "index": "10",
+      "Candidate ID": "C05-011",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E014 experience; E013 announces example rather than demonstrates it",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "11",
+    "Candidate ID": "C05-012",
+    "Parent rule": "R007",
+    "Proposed rule": "Temporarily bracket blocking assumptions",
+    "Status": "Provisional",
+    "Evidence / limitation": "E015",
+    "decision": {
+      "index": "11",
+      "Candidate ID": "C05-012",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E015 explicit bracketing; one episode",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "12",
+    "Candidate ID": "C05-013",
+    "Parent rule": "R007",
+    "Proposed rule": "Distinguish hypothetical from actual belief revision",
+    "Status": "Provisional",
+    "Evidence / limitation": "E016",
+    "decision": {
+      "index": "12",
+      "Candidate ID": "C05-013",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E016 with E015 distinguishes actual from hypothetical; context dependent",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "13",
+    "Candidate ID": "C05-014",
+    "Parent rule": "R008",
+    "Proposed rule": "Adapt context to audience familiarity",
+    "Status": "Provisional",
+    "Evidence / limitation": "E019; E021; E022; E024",
+    "decision": {
+      "index": "13",
+      "Candidate ID": "C05-014",
+      "Batch recommendation": "Recommend approval",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E019 audience understanding; E022 shorthand; E024 weak",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Approved as stated preference",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "14",
+    "Candidate ID": "C05-015",
+    "Parent rule": "R008",
+    "Proposed rule": "Provide additional context in writing when needed",
+    "Status": "Provisional",
+    "Evidence / limitation": "Self-report; verify written usage",
+    "decision": {
+      "index": "14",
+      "Candidate ID": "C05-015",
+      "Batch recommendation": "Recommend approval",
+      "Prior assessment": "Recommend conditional approval",
+      "Evidence assessment": "E021 direct self-report about writing; E022 context",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Approved as stated preference",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "15",
+    "Candidate ID": "C05-016",
+    "Parent rule": "R009",
+    "Proposed rule": "Use short direct imperatives for obligations",
+    "Status": "Provisional",
+    "Evidence / limitation": "E020",
+    "decision": {
+      "index": "15",
+      "Candidate ID": "C05-016",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E020 direct imperative; one episode",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "16",
+    "Candidate ID": "C05-017",
+    "Parent rule": "R010",
+    "Proposed rule": "Acknowledge error or limitations",
+    "Status": "Provisional",
+    "Evidence / limitation": "E023; E028; E029; mapping pending",
+    "decision": {
+      "index": "16",
+      "Candidate ID": "C05-017",
+      "Batch recommendation": "Recommend approval",
+      "Prior assessment": "Recommend approval",
+      "Evidence assessment": "E023 explicit self-report; E028 acknowledges limited experience",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Approved as stated preference",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "17",
+    "Candidate ID": "C05-018",
+    "Parent rule": "R010",
+    "Proposed rule": "Invite informed criticism",
+    "Status": "Provisional",
+    "Evidence / limitation": "E023; E028; E029; mapping pending",
+    "decision": {
+      "index": "17",
+      "Candidate ID": "C05-018",
+      "Batch recommendation": "Recommend approval",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E029 explicit invitation; E028 context",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Approved as stated preference",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "18",
+    "Candidate ID": "C05-019",
+    "Parent rule": "R011",
+    "Proposed rule": "Distinguish disagreement from factual error",
+    "Status": "Provisional",
+    "Evidence / limitation": "E025; E026; E027; mapping pending",
+    "decision": {
+      "index": "18",
+      "Candidate ID": "C05-019",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E025 explicitly separates disagreement and accuracy",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "19",
+    "Candidate ID": "C05-020",
+    "Parent rule": "R011",
+    "Proposed rule": "Correct selectively through restatement",
+    "Status": "Provisional",
+    "Evidence / limitation": "E025; E026; E027; mapping pending",
+    "decision": {
+      "index": "19",
+      "Candidate ID": "C05-020",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E026 self-report of restatement; selective aspect needs context",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "20",
+    "Candidate ID": "C05-021",
+    "Parent rule": "R011",
+    "Proposed rule": "Acknowledge merit when rejecting an argument",
+    "Status": "Provisional",
+    "Evidence / limitation": "E025; E026; E027; mapping pending",
+    "decision": {
+      "index": "20",
+      "Candidate ID": "C05-021",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E027 acknowledges merit while declining; one episode",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "21",
+    "Candidate ID": "C05-022",
+    "Parent rule": "R012",
+    "Proposed rule": "Preserve logical and causal relationships when tightening prose",
+    "Status": "Provisional",
+    "Evidence / limitation": "E050; E067; E070",
+    "decision": {
+      "index": "21",
+      "Candidate ID": "C05-022",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E070 preserves chain; E069 supports tightening; E050/E067 contextual",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "22",
+    "Candidate ID": "C05-023",
+    "Parent rule": "R013",
+    "Proposed rule": "Distinguish precedent from prediction",
+    "Status": "Provisional",
+    "Evidence / limitation": "E063; E064",
+    "decision": {
+      "index": "22",
+      "Candidate ID": "C05-023",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E063 comparison; E064 fragment needs context",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "23",
+    "Candidate ID": "C05-024",
+    "Parent rule": "R014",
+    "Proposed rule": "Explain change through underlying mechanisms",
+    "Status": "Provisional",
+    "Evidence / limitation": "E049; E052; E068",
+    "decision": {
+      "index": "23",
+      "Candidate ID": "C05-024",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E049 causal mechanism; E052/E068 contextual",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "24",
+    "Candidate ID": "C05-025",
+    "Parent rule": "R015",
+    "Proposed rule": "Use concrete examples to explain abstractions when helpful",
+    "Status": "Provisional",
+    "Evidence / limitation": "E060; E079",
+    "decision": {
+      "index": "24",
+      "Candidate ID": "C05-025",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E060/E061 example; E079 announces example; E081 supports accessibility",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "25",
+    "Candidate ID": "C05-026",
+    "Parent rule": "R017",
+    "Proposed rule": "Evaluate opportunities and risks together",
+    "Status": "Provisional",
+    "Evidence / limitation": "E038; E041; E076; E038 direct support; hold for stronger evidence per batch recommendation",
+    "decision": {
+      "index": "25",
+      "Candidate ID": "C05-026",
+      "Batch recommendation": "Hold for stronger evidence",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E038 directly supports opportunity/risk; E041/E076 indirect",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Held pending evidence",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "26",
+    "Candidate ID": "C05-027",
+    "Parent rule": "R018",
+    "Proposed rule": "Perform intellectual acts directly rather than announcing them unnecessarily",
+    "Status": "Provisional",
+    "Evidence / limitation": "E054; prototypes 001/002; passage-level validation only",
+    "decision": {
+      "index": "26",
+      "Candidate ID": "C05-027",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "E054 naming is not direct support; prototype approval passage-level only",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "27",
+    "Candidate ID": "C05-028",
+    "Parent rule": "Lesson 5",
+    "Proposed rule": "Establish the relevant frame of reference or basis of comparison before evaluating a property",
+    "Status": "Provisional",
+    "Evidence / limitation": "N01; earlier lesson summary: absolute versus relative scarcity (not verbatim)",
+    "decision": {
+      "index": "27",
+      "Candidate ID": "C05-028",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "N01 frame of reference; earlier summary not verbatim",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "28",
+    "Candidate ID": "C05-029",
+    "Parent rule": "Lesson 5",
+    "Proposed rule": "Distinguish capability from authority",
+    "Status": "Provisional",
+    "Evidence / limitation": "N02",
+    "decision": {
+      "index": "28",
+      "Candidate ID": "C05-029",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "N02 inferred distinction; transfer untested",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "29",
+    "Candidate ID": "C05-030",
+    "Parent rule": "Lesson 5",
+    "Proposed rule": "Identify mechanisms for resolving conflicts",
+    "Status": "Provisional",
+    "Evidence / limitation": "N03",
+    "decision": {
+      "index": "29",
+      "Candidate ID": "C05-030",
+      "Batch recommendation": "Retain for regression testing",
+      "Prior assessment": "Test",
+      "Evidence assessment": "N03 negotiation example; transfer untested",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Authorized for testing only",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "30",
+    "Candidate ID": "C05-031",
+    "Parent rule": "Lesson 6",
+    "Proposed rule": "Make reasoning explicit regardless of conclusion placement",
+    "Status": "Provisional",
+    "Evidence / limitation": "N04",
+    "decision": {
+      "index": "30",
+      "Candidate ID": "C05-031",
+      "Batch recommendation": "Recommend approval",
+      "Prior assessment": "Recommend approval",
+      "Evidence assessment": "N04 explicit preference for reasoning",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Approved as stated preference",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "31",
+    "Candidate ID": "C05-032",
+    "Parent rule": "Lesson 6",
+    "Proposed rule": "Consider conclusion first for major chapter-level claims",
+    "Status": "Provisional",
+    "Evidence / limitation": "N05; conditional preference",
+    "decision": {
+      "index": "31",
+      "Candidate ID": "C05-032",
+      "Batch recommendation": "Conditional approval",
+      "Prior assessment": "Recommend conditional approval",
+      "Evidence assessment": "N05 tentative chapter-level preference",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Approved conditionally",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "32",
+    "Candidate ID": "C05-033",
+    "Parent rule": "Lessons 1–4",
+    "Proposed rule": "Evaluate outcomes against their intended purpose, not output volume alone",
+    "Status": "Provisional",
+    "Evidence / limitation": "Earlier lesson summary: 60 systems, five useful; exact transcript and time period unverified",
+    "decision": {
+      "index": "32",
+      "Candidate ID": "C05-033",
+      "Batch recommendation": "Hold for stronger evidence",
+      "Prior assessment": "Hold",
+      "Evidence assessment": "Summary only; exact transcript and period unverified",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Held pending evidence",
+      "Decision date": "2026-11-26"
+    }
+  },
+  {
+    "index": "33",
+    "Candidate ID": "C05-034",
+    "Parent rule": "Lessons 1–4",
+    "Proposed rule": "Identify the underlying constraint limiting a system’s effectiveness",
+    "Status": "Provisional",
+    "Evidence / limitation": "Earlier lesson summary: limits on learning and human attention; exact transcript unverified",
+    "decision": {
+      "index": "33",
+      "Candidate ID": "C05-034",
+      "Batch recommendation": "Hold for stronger evidence",
+      "Prior assessment": "Hold",
+      "Evidence assessment": "Summary only; original wording unavailable",
+      "Validation boundary": "Candidate only; written transfer and author approval pending",
+      "Author decision": "Held pending evidence",
+      "Decision date": "2026-11-26"
+    }
+  }
+]
