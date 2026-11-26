@@ -1,0 +1,40 @@
+{
+  "status": "design extraction; existing platform interface not recovered",
+  "source": "design/DSD-v0.1.txt",
+  "design": "DS-09.01",
+  "reuse": "Adapt existing loop interfaces; no parallel lifecycle engine.",
+  "specializations": [
+    "research",
+    "composition",
+    "expression",
+    "editing",
+    "learning"
+  ],
+  "required_evidence": [
+    "input evidence",
+    "output",
+    "checking",
+    "validation",
+    "closure evidence or explicit unresolved state"
+  ],
+  "closure_distinctions": [
+    "termination",
+    "justified closure",
+    "authority to close"
+  ],
+  "routing": {
+    "source": "DS-10.02",
+    "targets": [
+      "research",
+      "composition",
+      "voice",
+      "expression"
+    ],
+    "reassess_affected_closure": true
+  },
+  "open": [
+    "actual canonical loop interface",
+    "enforcement points",
+    "authority matrix"
+  ]
+}
