@@ -1,0 +1,94 @@
+{
+  "previous": "section-register-v0.2.json",
+  "sections": [
+    {
+      "section": "2.1",
+      "title": "Out of Africa",
+      "runs": [
+        {
+          "id": "RUN_002",
+          "human": 27
+        },
+        {
+          "id": "RUN_003",
+          "human": 89
+        },
+        {
+          "id": "RUN_004",
+          "human": 100,
+          "words": 347
+        },
+        {
+          "id": "RUN_005",
+          "ledger": "v0.5",
+          "human": 26,
+          "words": 348
+        },
+        {
+          "id": "RUN_006",
+          "human": 100,
+          "words": 308
+        }
+      ]
+    },
+    {
+      "section": "1.5",
+      "title": "The Expansion Equation",
+      "runs": [
+        {
+          "id": "RUN_008",
+          "human": 100,
+          "words": 1569
+        }
+      ]
+    },
+    {
+      "section": "20.1",
+      "title": "What Abundant Means",
+      "runs": [
+        {
+          "id": "RUN_009",
+          "human": 83,
+          "words": 725
+        }
+      ]
+    },
+    {
+      "section": "34.7",
+      "title": "Why Energy Dominated When It Did",
+      "runs": [
+        {
+          "id": "RUN_010",
+          "human": 100,
+          "words": 713
+        }
+      ]
+    },
+    {
+      "section": "24.1",
+      "title": "The Baseline: Healthy Alignment",
+      "runs": [
+        {
+          "id": "RUN_011",
+          "human": 100,
+          "words": 425,
+          "scope": "partial"
+        }
+      ]
+    },
+    {
+      "section": "43.5",
+      "title": "A Second Civilization",
+      "runs": [
+        {
+          "id": "RUN_012",
+          "human": 100,
+          "words": 442
+        }
+      ]
+    }
+  ],
+  "latest_v04_words": 4182,
+  "approx_weighted_human": 97.1,
+  "measurement": "user reported detector scores, not author validation"
+}
