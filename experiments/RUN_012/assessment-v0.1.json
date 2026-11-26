@@ -1,0 +1,24 @@
+{
+  "run": "RUN_012",
+  "section": "43.5 A Second Civilization",
+  "procedure": "v0.3",
+  "ledger": "v0.4",
+  "detector": "Pangram 4.1",
+  "source": "user reported",
+  "human_percent": 100,
+  "ai_percent": 0,
+  "words": 442,
+  "segments": 1,
+  "flagged": 0,
+  "classification": "Human Written",
+  "segment": "Human High",
+  "credits_remaining": 14687,
+  "limitations": [
+    "manual execution",
+    "no context isolation",
+    "formal construction closure and independent checking pending",
+    "exact expression not persisted",
+    "author validation pending",
+    "introduced Mars-born grandparents example and qualified autonomy claim"
+  ]
+}
