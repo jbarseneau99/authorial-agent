@@ -1,0 +1,25 @@
+{
+  "run": "RUN_003",
+  "procedure": "procedures/v0.2.json",
+  "ledger": "v0.4",
+  "human_percent": 89,
+  "detector": "Pangram; version not confirmed for this run",
+  "provenance": "user reported",
+  "author_validation": "pending",
+  "construction": "experiments/RUN_003/construction.json",
+  "expression": "Some seventy thousand years ago, groups of humans began moving out of Africa. Over a period of thousands of years, their descendants occupied parts of the world in which humans had never lived. They crossed mountain ranges and deserts, encountered other species of humans and learned to live in climates very different from those in which they had evolved.\n\nWhy did they leave Africa?\n\nThere are a number of possible explanations. Changes in climate may have made it difficult for some populations to sustain themselves where they were living. As populations grew, there may have been competition for food. There were also developments in technology that would have allowed humans to live in environments in which they could not previously have survived.\n\nThe first two explanations give us reasons why people may have wanted to move. The third gives us some understanding of how they were able to do so.\n\nWhat I question is whether we can account for the extent of human expansion on the basis of necessity. There were populations that remained in Africa and continued to thrive. For those who left, there was no way of knowing whether life would be better where they were going.\n\nConsider what it means to be able to imagine an environment in which you have never been. You can contemplate living there, think about how you might get there and begin developing the means by which you could sustain yourself there. You can do much of this before you have any need to leave the environment in which you currently live.\n\nI think there is something in the cognitive architecture of humans that predisposes us to expansion.\n\nWe see this much later in human history with the Polynesians. We see it in the populations that learned to live in the Arctic. Humans had reached Australia at least fifty thousand years ago. These populations were separated by considerable periods of time and had very different technologies available to them.\n\nI don't know that we can establish what motivated each of these populations to expand. But the recurrence of expansion under such different circumstances gives us reason to consider whether expansion itself is a characteristic of our species.",
+  "limitations": [
+    "Construction remained open; expression was provisional and bypassed closure gate",
+    "Original source prose visible to model; no isolation",
+    "Historical evidence not independently verified; prior source references unverified",
+    "No independent four-layer check",
+    "Multiple changes confounded; causal attribution not established"
+  ],
+  "changes": [
+    "Functional distinction between necessity, capability and curiosity",
+    "Preserved author hypothesis with uncertainty",
+    "Direct realization of acts",
+    "First-person epistemic judgment"
+  ],
+  "next": "Freeze and repeat without rule changes; obtain segment-level results and author validation"
+}
