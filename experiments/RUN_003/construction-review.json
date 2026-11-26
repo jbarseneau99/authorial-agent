@@ -1,0 +1,94 @@
+{
+  "run": "RUN_003",
+  "status": "awaiting_author_authorization",
+  "historical_cases": [
+    {
+      "case": "Sahul",
+      "support": "Water crossings and early settlement; chronology disputed",
+      "sources": [
+        "https://www.sciencedirect.com/science/article/pii/S0305440325001566",
+        "https://faculty.washington.edu/bmarwick/PDFs/Clarkson_Jacobs_Marwick_2017.pdf"
+      ]
+    },
+    {
+      "case": "Arctic",
+      "support": "Two major migration episodes",
+      "alternatives": "Climate, hardship, resource acquisition",
+      "sources": [
+        "https://doi.org/10.1093/oxfordhb/9780199766956.013.40"
+      ]
+    },
+    {
+      "case": "Polynesia",
+      "support": "Serial founder expansion",
+      "alternatives": "Drought and social pressures",
+      "sources": [
+        "https://doi.org/10.1038/s41586-021-03902-8",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183181/"
+      ]
+    }
+  ],
+  "bindings": {
+    "R001": {
+      "application": "Distinguish motivation and capability",
+      "exemplars": [
+        "E001",
+        "E004"
+      ]
+    },
+    "R003": {
+      "application": "Uncertain chronology",
+      "exemplars": [
+        "E003",
+        "E005"
+      ]
+    },
+    "R005": {
+      "application": "Separate observation from inferred motive",
+      "exemplars": [
+        "E007",
+        "E018"
+      ]
+    },
+    "R007": {
+      "application": "Alternative concurrent drivers",
+      "exemplars": [
+        "E014",
+        "E015"
+      ]
+    },
+    "R013": {
+      "application": "Recurrence not universality",
+      "exemplars": [
+        "E063",
+        "E064"
+      ],
+      "exact_excerpts_verified": false
+    },
+    "R016": {
+      "application": "Historical qualifications",
+      "exemplars": [
+        "E034",
+        "E047"
+      ]
+    }
+  },
+  "proposed_revisions": [
+    "Distinguish earlier dispersals from major ancestral expansion without imposing a disputed exact date",
+    "Do not infer voluntary departure from populations remaining in Africa",
+    "Retain cognitive predisposition and curiosity as hypotheses",
+    "Replace universal population expansion assertion with recurrence across documented cases"
+  ],
+  "checks": {
+    "historical_examples": "supported with qualifications",
+    "causal_warrant": "hypothesis only",
+    "closure": "not granted",
+    "limitations": [
+      "No independent checker",
+      "Exact exemplar bindings incomplete",
+      "Earlier bilateral research citations not independently reverified in this step",
+      "Author authorization pending"
+    ]
+  },
+  "expression": null
+}
