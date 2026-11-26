@@ -1,0 +1,59 @@
+77,E078,S032,Linguistic,Emphasis,this to me seems to be something we really need to watch,Direct concern,Candidate,Original spoken,,Not validated for writing
+78,E079,S033,Rhetorical,Example first,"I'll I'll I'll answer the your question directly, uh, in a second. But I'll give you an example",Concrete before abstract,Candidate,Original spoken,,Not validated for writing
+79,E080,S033,Epistemic,Qualify,"is probably much, much lower",Mark uncertainty,Candidate,Original spoken,,Not validated for writing
+80,E081,S034,Conceptual,Transfer,I'm making it physical because it's easier to understand,Physical analogy for cognition,Candidate,Original spoken,,Not validated for writing
+81,E082,S034,Conceptual,Define,people need to reflect and understand how things are made and understand how things are done,Practical understanding,Candidate,Original spoken,,Not validated for writing
+82,E083,S034,Linguistic,Maxim,we only invest in what we can build,Concise principle,Candidate,Original spoken,,Not validated for writing
+83,E084,S035,Linguistic,Maxim,"to be makers, not takers",Parallel contrast,Candidate,Original spoken,,Not validated for writing
+<PARSED TEXT FOR SHEET: 4 / 7 TABS
+TAB NAME: Candidate rules>
+index,Rule ID,Evidence IDs,Layer,Candidate rule,Review note,Status,Applicability
+0,R001,E001; E004,Conceptual,Define concepts through functional distinctions and typed structure.,Two different contexts; confirm written usage.,Unconfirmed,Spoken; written untested
+1,R002,E002; E011,Rhetorical,Connect abstractions to practical or normative consequences.,Candidate across two responses.,Unconfirmed,Spoken; written untested
+2,R003,E003; E005,Epistemic,Use limiting cases and avoid unsupported precision.,One response; seek independent example.,Unconfirmed,Spoken; written untested
+3,R004,E008; E009; E010,Rhetorical,"Decompose compound claims, concede plausible components, challenge inference or inevitability.",One response; seek independent example.,Unconfirmed,Spoken; written untested
+4,R005,E006; E007; E018,Epistemic,Distinguish apparent credibility from evidentiary warrant.,Two responses; still topic-specific.,Unconfirmed,Spoken; written untested
+5,R006,E012; E017,Linguistic,Use parallel contrast to express a balanced distinction.,Repeated spoken contrast; written usage unverified.,Unconfirmed,Spoken; written untested
+6,R007,E013; E014; E015; E016,Epistemic,Use concrete experience and bracket a blocking assumption to explore alternatives; distinguish hypothetical from actual revision.,One retrospective example.,Unconfirmed,Spoken; written untested
+7,R008,E019; E021; E022; E024,Rhetorical,Adapt context and care to audience familiarity; provide more context in writing.,Self-report; verify against authored prose.,Unconfirmed,Spoken; written untested
+8,R009,E020,Linguistic,Use short direct imperatives for core obligations.,One elicited example.,Unconfirmed,Spoken; written untested
+9,R010,E023; E028; E029,Epistemic,Acknowledge error or limits and invite challenge from relevant experience.,Self-report and elicited example.,Unconfirmed,Spoken; written untested
+10,R011,E025; E026; E027,Rhetorical,Distinguish disagreement from inaccuracy; correct selectively by restatement and decline ideas without dismissing merit.,Context-sensitive; direct correction exceptions unresolved.,Unconfirmed,Spoken; written untested
+11,R012,E050; E067; E070,Rhetorical,Preserve the historical chain while tightening expression.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+12,R013,E063; E064,Epistemic,Distinguish historical comparison from absolute prediction.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+13,R014,E049; E052; E068,Conceptual,Explain transitions through changes in coordinating relationships.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+14,R015,E060; E079,Rhetorical,Use concrete examples before abstract explanation when helpful.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+15,R016,E034; E047; E055; E074; E080,Epistemic,Qualify abundance and uncertain historical detail precisely.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+16,R017,E041; E076,Rhetorical,Connect technological opportunity and risk to practical human agency.,Candidate; test in written prototype,Unconfirmed,Spoken; written untested
+17,R018,E054; Prototype 001/002,Linguistic; rhetorical,Realize intellectual acts directly rather than announcing them unnecessarily.,One paragraph revised; Pangram 92% to 100%; author validated full revised passage. Not isolated from rhetorical changes.,Provisionally supported,Written; generalization pending
+<PARSED TEXT FOR SHEET: 5 / 7 TABS
+TAB NAME: Coverage>
+index,Layer,Current evidence,Next elicitation
+0,Conceptual,"Distinction, typed model, principle, hypothetical bracketing",Construct a new abstraction from examples.
+1,Epistemic,"Bounds, qualification, concession, revision, error admission, critique",Test conflicting evidence and actual belief reversal.
+2,Rhetorical,"Decomposition, audience adaptation, indirect correction, refusal",Compare actual written and spoken explanations.
+3,Linguistic,"Parallel contrast, direct imperative, reported context preference",Collect authentic written prose and revision pairs.
+4,Written translation,No author-validated written exemplars yet,Validate prototype sentence by sentence; record revisions and parent IDs.
+5,Written validation update,Prototype 002: author confirmed sounds like me; Pangram 100% human classification.,Test generalization on Prototype 003; no new rules.
+<PARSED TEXT FOR SHEET: 6 / 7 TABS
+TAB NAME: Prototype structure>
+index,Sentence ID,Intellectual act,Epistemic content / boundary,Source ID,Voice rule / pattern
+0,P01,Illustrate,Software engineering role changes from coding toward curation,S024,Concrete example first
+1,P02,Illustrate,Driverless car changes taxi process,S025,Concrete example
+2,P03,Compare,Earlier changes in information handling,S027; S028,Historical progression
+3,P04,Distinguish,Oral storytelling to symbolic writing,S028,Functional distinction
+4,P05,Distinguish,Printing enables transmission at scale,S027,Functional distinction
+5,P06,Distinguish,Computers process information,S027,Functional distinction
+6,P07,Distinguish,AI introduces autonomous cognition,S027,Mechanism
+7,P08,Qualify,AGI not required; computation remains a constraint,S023,Precise qualification
+8,P09,Generalize,Transitions change relationships with coordinating instruments,S022,Mechanism
+9,P10,Distinguish,Reconstitution touches multiple institutions simultaneously; thesis not established universal fact,S022; S030,Scope
+10,P11,Compare,Industrial mechanization and intelligent mechanization,S024,Historical analogy
+11,P12,Qualify,Compare with past; do not claim final or greatest future transition,S026,Bound prediction
+12,P13,Conclude,Reflection and practical understanding preserve agency,S032; S034,Practical consequence
+<PARSED TEXT FOR SHEET: 7 / 7 TABS
+TAB NAME: Experiments>
+index,Prototype,Topic,Ledger,Pangram human classification,Author validation,Change / limitations,Lineage
+0,1,From Reconstruction to Reconstitution,0.3,0.92,Not separately validated,Baseline; three flagged sentences,Original interview; S021-S034
+1,2,From Reconstruction to Reconstitution,0.3 + R018,1.0,Validated: Yes this sounds like me.,One paragraph changed; rhetorical and linguistic changes confounded,001; S022; S026
+2,3,Mass and Weight in an Epistemic Graph,0.4,,Pending,New topic; illustrative examples and research direction inferred by agent,S002; S003; S006; R018
