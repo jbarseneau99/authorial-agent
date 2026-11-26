@@ -1,0 +1,70 @@
+{
+  "stage": "construction",
+  "status": "open",
+  "sources": [
+    {
+      "id": "S4",
+      "url": "https://www.nature.com/articles/s41586-025-09154-0",
+      "supports": [
+        "ecological flexibility"
+      ],
+      "challenges": [
+        "sudden cognitive trigger",
+        "population size inference"
+      ]
+    },
+    {
+      "id": "S5",
+      "url": "https://www.nhm.ac.uk/discover/when-how-did-modern-humans-homo-sapiens-spread-out-of-africa.html",
+      "challenges": [
+        "deliberate exploration necessary"
+      ],
+      "alternative": "subsistence tracking"
+    },
+    {
+      "id": "S6",
+      "url": "https://www.nature.com/articles/nature22968",
+      "supports": [
+        "early Australian settlement"
+      ],
+      "qualification": "65ka disputed"
+    },
+    {
+      "id": "S7",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0305440325001566",
+      "supports": [
+        "maritime barriers"
+      ],
+      "challenges": [
+        "settled chronology"
+      ]
+    },
+    {
+      "id": "S8",
+      "url": "https://www.nature.com/articles/s41586-021-03902-8",
+      "supports": [
+        "serial Polynesian settlement"
+      ]
+    },
+    {
+      "id": "S9",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183181/",
+      "supports": [
+        "drought and social pressure alternative",
+        "discontinuous settlement"
+      ]
+    }
+  ],
+  "decisions_proposed": [
+    "Distinguish enabling capability from motive",
+    "Retain curiosity as unconfirmed hypothesis",
+    "Reject universal quantifier pending author approval"
+  ],
+  "remaining": [
+    "Arctic source verification",
+    "complete graph and exact conceptual epistemic ledger bindings",
+    "author approval of substantive revisions",
+    "independent check unavailable"
+  ],
+  "expression": null
+}
