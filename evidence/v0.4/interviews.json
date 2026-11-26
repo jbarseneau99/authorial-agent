@@ -1,0 +1,317 @@
+[
+  {
+    "index": "0",
+    "Source ID": "S001",
+    "SRT time": "07:09–08:01",
+    "Prompt topic": "Knowledge versus understanding",
+    "User transcript (segments joined)": "That's a great question. Um, And I, I think the the difference is underst- knowledge is a a set of beliefs in a set of topics that is ubiquitous. Uh, I think that's the right word where it's there for all people to understand. But understanding is communicating that set of knowledge to an individual or a group of people. And you may do it differently. So the the ability and we do talk about this a lot at Mock thirty three, our job is not just to build the knowledge, it's to make sure that our clients understand what we did",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "1",
+    "Source ID": "S002",
+    "SRT time": "08:18–10:32",
+    "Prompt topic": "Evidence sufficiency",
+    "User transcript (segments joined)": "'Course Well that's that's again a very very astute question. What I can give you maybe to start with is some book ends if we represent our epistemic knowledge as a graph, we have a root node, which is the root claim and if you made a claim to me that would be one node. So the the minimum graph is one node with no supporting evidence. And that is too little. Um On the other end of the spectrum Well, how how we fill out the graph is we use Toulmin argumentative theory and From the root Uh, claim We instruct agents to go and to bilateral search for and against the the the claim and that starts to build up a tree and even support everything every node in the the tree is a claim. Everything's a claim. It just has a type. So the claim can be evidentiary, supporting another claim. It could be a rebuttal, it could be a redefinition, all the the different uh modes that um Toulmin um um created. So, when we get to a lot, we talk we talk about mass versus weight. Mass is the number of nodes within a epistemic graph supporting a root node when that gets large or when that starts finding multiple um Uh, versions of the same support, which is good um coming from different sources. Um, that's that's starting to indicate you're getting into a good spot. But um, I don't know if there's any actual uh number associated which is what is enough",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "2",
+    "Source ID": "S003",
+    "SRT time": "10:57–12:40",
+    "Prompt topic": "Fluency versus knowledge",
+    "User transcript (segments joined)": "Yes Well, that's exactly what we're trying to solve here is, the world has been getting increasingly consuming misinformation with social media. Um, and it seems to be because of just the nature of people. Some people, you may say are lazy and they don't wanna do the work on what they're hearing, um, or their trust too trusting or they think if they don't believe a friend or a colleague that it's not the right thing to do. Um, and that that has been getting increasingly harder to get people to think about the level of accuracy in statements with just social media. But now with AI, um, AI is very, very fluent, um, and it's no wonder because large language models are trained on linguistics. Um, so naturally, they're very fluent, but they can be wrong a lot of the time. They're right a lot of the time, but they can be wrong a lot of the time. And if you just assume that what they say has weight and accuracy, then that's a bad place to go",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "3",
+    "Source ID": "S004",
+    "SRT time": "13:44–15:55",
+    "Prompt topic": "Counterargument to AI eliminating reflection",
+    "User transcript (segments joined)": "Well, let's break the, uh, the statement into two parts. The first part being artificial intelligence will eventually eliminate the need for human reflection. That's part one. Part two, is because machines will be capable of processing information and making decisions better than humans. The second part, I believe there's enough evidence, um, in the current capabilities of AI to believe that that will become true. Um, and part of it is, like I said earlier, the current AI, including you, your reasoning and your ability to pull knowledge and reason through that knowledge is all based on a linguistic model. Um, and there's so much more that we can do with AI. You'll be using LQMs where, you know, instead of describing physics to me from the words that you have learnt, you'll be describing physics to me from the numbers and shapes and curves that you've learnt in the data. So I believe the second part of uh of your statement is very plausible. The the the first part I disagree where um that the artificial intelligence will eventually eliminate the need for human reflection. That could happen if we let it happen. But I don't think that's that's one thing that we in our theory are saying We humans need to reflect on what the technology and AI is able to do as fast as AI and technology are able to do it. And that is for governance and human agency. That's important. Or you may go down a singularity like Nick Bostrom talks about where you don't reflect fast enough and AI takes over the agency over humanity",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "4",
+    "Source ID": "S005",
+    "SRT time": "18:17–19:32",
+    "Prompt topic": "Reconsidering cloud adoption",
+    "User transcript (segments joined)": "Well, I'll I'll start with a very simple example. I've been in technology thirty five years when the cloud came about and someone told me that we would adopt a sales force. And the company sales force, a CRM tool in the cloud, I thought they were crazy. It just didn't reconcile that we would have our customer data in the cloud. And the arguments for it about the cloud being scalable and we're not owning the asset, we're renting the asset and the economics were better. I understood, but I don't I think other concerns like security and sovereign ownership of it didn't allow me to think about the other benefits. If I would have assumed for a second as a thought experiment that let's assume security is fine and we're not worried about it. That would allowed me to go and explore other parts of the value proposition, but I don't think I ever got there",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "5",
+    "Source ID": "S006",
+    "SRT time": "20:16–20:29",
+    "Prompt topic": "Warning about fluent answers",
+    "User transcript (segments joined)": "The LLMs are large statistical pattern matchers. They're very good at what they do, but they can make mistakes. So treat what they tell you as a claim",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "6",
+    "Source ID": "S007",
+    "SRT time": "20:56–20:57",
+    "Prompt topic": "Repeatedly rewritten sentence",
+    "User transcript (segments joined)": "I can't think of one right now",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "7",
+    "Source ID": "S008",
+    "SRT time": "21:09–21:20",
+    "Prompt topic": "Trigger for self-correction",
+    "User transcript (segments joined)": "Um, thinking about how I can communicate my thought the best, the most optimal way so that the person understands it",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "8",
+    "Source ID": "S009",
+    "SRT time": "21:46–21:50",
+    "Prompt topic": "Instruction about evidence",
+    "User transcript (segments joined)": "I always say something very simple. You have to do the work",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "9",
+    "Source ID": "S010",
+    "SRT time": "22:10–22:23",
+    "Prompt topic": "Written versus spoken context",
+    "User transcript (segments joined)": "Well, when I write, I set more context. Um, because I don't know who's reading it when I'm speaking, depending on who I speak to, there may be some shorthand available",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "10",
+    "Source ID": "S011",
+    "SRT time": "22:48–23:24",
+    "Prompt topic": "Admitting error",
+    "User transcript (segments joined)": "Oh, that's a great question. Um, around people Um, I know well like family and friends, I admit I was wrong and usually offer the admission, even though someone may have not asked for it. Um, I think I do the same thing with strangers or with uh, with business colleagues, but I think I'm a little more careful. I think I'm a little more cognitive of it",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "11",
+    "Source ID": "S012",
+    "SRT time": "23:40–24:44",
+    "Prompt topic": "Correcting others",
+    "User transcript (segments joined)": "I was at Harvard yesterday giving uh, uh, I was on a panel with three other gentlemen on AI and deep tech. And there was quite a few things that the other gentleman said that, A, I didn't agree with and B, I don't think were accurate. Um, I don't think there's any need, certain- certain things I don't think there's any need to correct or, or or even correct directly or through restatement in my own context, but if there is something I feel should be maybe restated, that's how I do it. I don't call the person out. I don't un-unless it's very, very, I don't know, sensitive, but I'm-it's doesn't happen very often. I'll just if I think it's important, I might put it in my own conversation in my own context and restate it",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "12",
+    "Source ID": "S013",
+    "SRT time": "25:15–25:23",
+    "Prompt topic": "Declining an idea",
+    "User transcript (segments joined)": "Let's not do that now. I think it may be a good idea. We have another idea that we've already committed to",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "13",
+    "Source ID": "S014",
+    "SRT time": "25:41–25:58",
+    "Prompt topic": "Inviting critique",
+    "User transcript (segments joined)": "Here is a hypothesis I have in an area that I don't have a lot of experience. I think what I've come up with is interesting, but I would very much appreciate you taking a look at it and challenging it from your experience",
+    "Modality": "Spoken transcript",
+    "Date": "2026-11-24"
+  },
+  {
+    "index": "14",
+    "Source ID": "S015",
+    "SRT time": "Not available",
+    "Prompt topic": "Novelty framing",
+    "User transcript (segments joined)": "what have people asked about this topic and and then maybe, um, talk about what I'm asking about this topic\n[…]\nAnd that really drives a different hypothesis.",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "15",
+    "Source ID": "S016",
+    "SRT time": "Not available",
+    "Prompt topic": "Literature review",
+    "User transcript (segments joined)": "which are all very good, uh, and astute questions\n[…]\nmaybe some cross-disciplinarian, uh, approaches may uh, surface more interesting aspects of things that haven't been questioned before",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "16",
+    "Source ID": "S017",
+    "SRT time": "Not available",
+    "Prompt topic": "Research limitations",
+    "User transcript (segments joined)": "some hypothesis that we feel are are novel\n[…]\nwe are still in the process of developing some type of experiments",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "17",
+    "Source ID": "S018",
+    "SRT time": "Not available",
+    "Prompt topic": "Book origins",
+    "User transcript (segments joined)": "Well, a couple things that kind of came together.\n[…]\nand and then in another stream, this is the third one\n[…]\nthe amazing opportunities we have with AI, along with the incredible, uh, responsibility and potential danger",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "18",
+    "Source ID": "S019",
+    "SRT time": "Not available",
+    "Prompt topic": "Reader purpose",
+    "User transcript (segments joined)": "when the, the, the world of AI moves from the digital world to the physical world\n[…]\ngive people a framework to understand this transition\n[…]\nmy, my advice to people is to be a part of it",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "19",
+    "Source ID": "S020",
+    "SRT time": "Not available",
+    "Prompt topic": "Participation",
+    "User transcript (segments joined)": "It's happening and it's going to happen.\n[…]\nmy older son said, I don't like AI. I don't want to have anything to do with it.\n[…]\na side of AI that he could contribute to, which aligns to his values",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "20",
+    "Source ID": "S021",
+    "SRT time": "Not available",
+    "Prompt topic": "Expansion definition",
+    "User transcript (segments joined)": "people often think about expansion as in land or wealth or population\n[…]\nexpanding in awareness and capability and empathy\n[…]\nit may it may involve expanding physically as well\n[…]\nthey were able to live in colder places. They were able to cook their meat",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "21",
+    "Source ID": "S022",
+    "SRT time": "Not available",
+    "Prompt topic": "Transitions and reconstitution",
+    "User transcript (segments joined)": "because a relationship with a coordinating um, factor or instrument has changed\n[…]\ntheir relationship with materials and the Bronze Age\n[…]\ntransitions can expand, they can collapse, collapse and then reconstruct\n[…]\nthe coordinating factor has been something that's always been only human\n[…]\nI can write a computer program that took a team of 100 people\n[…]\nAnd I call it reconstitution",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "22",
+    "Source ID": "S023",
+    "SRT time": "Not available",
+    "Prompt topic": "Abundant cognition",
+    "User transcript (segments joined)": "is it limitless? It's near limitless because you still need computers to run on\n[…]\nwe don't even need that for cognition to be super useful\n[…]\nRight now, they're quite amazing. Right?",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "23",
+    "Source ID": "S024",
+    "SRT time": "Not available",
+    "Prompt topic": "Mechanization",
+    "User transcript (segments joined)": "the intelligent mechanization of labor\n[…]\nif we look at what happened in the eighteen hundreds, the impact to labor and education and crafts",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "24",
+    "Source ID": "S025",
+    "SRT time": "Not available",
+    "Prompt topic": "Autonomous cars",
+    "User transcript (segments joined)": "when I was a kid, taxis would show up with people in them, with radios\n[…]\nNow, a car just shows up. No driver. It knows where you're going.",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "25",
+    "Source ID": "S026",
+    "SRT time": "Not available",
+    "Prompt topic": "Historical objection",
+    "User transcript (segments joined)": "Well, that's a fair observation.\n[…]\nWhat I'm doing is comparing it to the past.\n[…]\nsaying this is the last or the biggest of all time",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "26",
+    "Source ID": "S027",
+    "SRT time": "Not available",
+    "Prompt topic": "Information history",
+    "User transcript (segments joined)": "Gutenberg was about information. People still had to think about it\n[…]\nThe computer was the processing of information. Now, The AI is, uh the, autonomous cognition.",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "27",
+    "Source ID": "S028",
+    "SRT time": "Not available",
+    "Prompt topic": "Oral history",
+    "User transcript (segments joined)": "you could even go back one step further\n[…]\nwriting in a story down in some type of symbolic representation",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "28",
+    "Source ID": "S029",
+    "SRT time": "Not available",
+    "Prompt topic": "Speech to writing",
+    "User transcript (segments joined)": "maybe tighten the words and the accuracy\n[…]\nthe chain would be still four examples or is it five?",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "29",
+    "Source ID": "S030",
+    "SRT time": "Not available",
+    "Prompt topic": "Optimism and concern",
+    "User transcript (segments joined)": "I'm by nature a very optimistic person\n[…]\nBut at the same time, I do love my history and anthropology\n[…]\nI didn't do very well in the school",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "30",
+    "Source ID": "S031",
+    "SRT time": "Not available",
+    "Prompt topic": "Transition costs",
+    "User transcript (segments joined)": "this might be the 1920s\n[…]\nIt is a local one, and one industry\n[…]\nBecause if we stop understanding what AI does, we then become irrelevant.",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "31",
+    "Source ID": "S032",
+    "SRT time": "Not available",
+    "Prompt topic": "Governance",
+    "User transcript (segments joined)": "Not not to slow it down on purpose for no good reasons\n[…]\nthis to me seems to be something we really need to watch",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "32",
+    "Source ID": "S033",
+    "SRT time": "Not available",
+    "Prompt topic": "Reflection example",
+    "User transcript (segments joined)": "I'll I'll I'll answer the your question directly, uh, in a second. But I'll give you an example\n[…]\nis probably much, much lower",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "33",
+    "Source ID": "S034",
+    "SRT time": "Not available",
+    "Prompt topic": "Practical competence",
+    "User transcript (segments joined)": "I'm making it physical because it's easier to understand\n[…]\npeople need to reflect and understand how things are made and understand how things are done\n[…]\nwe only invest in what we can build",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  },
+  {
+    "index": "34",
+    "Source ID": "S035",
+    "SRT time": "Not available",
+    "Prompt topic": "Makers",
+    "User transcript (segments joined)": "to be makers, not takers",
+    "Modality": "Spoken transcript excerpts",
+    "Date": "2026-11-25"
+  }
+]
