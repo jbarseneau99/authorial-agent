@@ -1,0 +1,55 @@
+{
+  "run": "RUN_013",
+  "status": "preliminary manual audit",
+  "baseline": {
+    "procedure": "v0.3",
+    "ledger": "v0.4",
+    "words": 1814,
+    "human_percent": 93
+  },
+  "rule_inventory": {
+    "conceptual": 2,
+    "epistemic": 6,
+    "rhetorical": 7,
+    "linguistic": 3
+  },
+  "findings": {
+    "conceptual": "core distinctions maintained",
+    "epistemic": "declining curiosity as civilizational problem omitted; qualifications require approval",
+    "rhetorical": "recurrent question/explanation and hypothetical examples",
+    "linguistic": "recurrent sentence constructions"
+  },
+  "coverage_candidates": [
+    "alternative definitions",
+    "historical narrative pacing",
+    "sustained causal explanation",
+    "direct and indirect challenges",
+    "degrees of certainty",
+    "alternative contrasts",
+    "emphasis",
+    "chapter openings",
+    "extended arguments",
+    "chapter conclusions",
+    "cadence and syntax"
+  ],
+  "proposed_procedure": {
+    "object": "Expression Context",
+    "status": "candidate not implemented",
+    "references": [
+      "surrounding prose",
+      "realized intellectual acts",
+      "sentence constructions",
+      "rhetorical sequences",
+      "stylistic patterns"
+    ],
+    "principle": "expression changes do not alter epistemic graph unless epistemic facts change"
+  },
+  "limitations": [
+    "manual counts not independently verified",
+    "individual exemplar inventory not yet completed",
+    "no authentic long-form comparison baseline",
+    "exact chapter expression not persisted",
+    "no independent checking"
+  ],
+  "controls": "No changes to corpus or procedure"
+}
