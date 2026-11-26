@@ -1,0 +1,53 @@
+{
+  "status": "open",
+  "source": "user supplied section 1.5, 209 lines; ends mid-sentence; figure caption only",
+  "shared_runs": [
+    "RUN_008",
+    "RUN_009"
+  ],
+  "procedure": "v0.3",
+  "concepts": [
+    "capability versus coordination capacity",
+    "information versus reflection",
+    "structure versus dynamics",
+    "expansion versus coherent expansion",
+    "velocity acceleration curvature"
+  ],
+  "root": "Civilizational expansion cannot remain coherent indefinitely unless reflective capacity keeps pace with capability",
+  "equations": [
+    "C=(E*I)*R",
+    "vr>=vk, ar>=ak, kr>=kk"
+  ],
+  "acts": [
+    "motivation",
+    "prior work",
+    "scope",
+    "central claim",
+    "structural formalization",
+    "White law adaptation",
+    "limiting behavior",
+    "AI consequences",
+    "historical cases",
+    "dynamics",
+    "velocity",
+    "acceleration",
+    "curvature",
+    "Japan China comparison",
+    "integration",
+    "forward questions"
+  ],
+  "challenges": [
+    "measurement of reflection",
+    "causal attribution",
+    "mathematical derivation",
+    "predictive validity",
+    "limit with unbounded E and I",
+    "curvature operational definition"
+  ],
+  "closure": "not closed; author decisions and bilateral evidence pending",
+  "limitations": [
+    "source historical claims not independently verified",
+    "actual figure unavailable",
+    "source ending truncated"
+  ]
+}
