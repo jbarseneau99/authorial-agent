@@ -1,0 +1,28 @@
+{
+  "run": "RUN_004",
+  "procedure": "procedures/v0.3.json",
+  "ledger": "v0.4",
+  "status": "provisional manual expression",
+  "construction_reference": "experiments/RUN_003/construction.json",
+  "acts": [
+    "historical grounding",
+    "question necessity",
+    "consider climate and population",
+    "distinguish capability",
+    "question necessity of pressure",
+    "cognitive mechanism",
+    "curiosity hypothesis",
+    "historical comparison",
+    "challenge necessity-only explanation"
+  ],
+  "expression": "For much of our history as a species, we lived in Africa. Some seventy thousand years ago, humans began an expansion that would take them into Asia, Europe and eventually the Americas. In the process, they learned to live in environments quite different from those in Africa.\n\nHow much of this expansion can we attribute to necessity?\n\nWe know that the climate in Africa changed over the course of human history. There would have been times when it was difficult to sustain a population in a particular region. We can also envisage circumstances in which a growing population would have had to look elsewhere for food.\n\nThere is another aspect to this. A population may have had good reason to move but lacked the means to survive in the region into which it would have moved. As humans developed new technologies, the number of environments in which they could sustain themselves increased.\n\nBut did humans have to be under some form of pressure to make use of these capabilities?\n\nOne of the things we are able to do as humans is contemplate a set of circumstances in which we do not currently find ourselves. We can imagine living somewhere else and give some thought to what would be required of us to live there. We may even derive some pleasure from the prospect of going there.\n\nI suspect that curiosity played a role in the expansion out of Africa. How significant a role it played is difficult to establish.\n\nThousands of years later, humans were still finding ways of extending the regions of the world in which they could live. Consider the people who settled the islands of the Pacific or those who learned to sustain themselves in the Arctic. The knowledge and technologies required of these populations were quite different.\n\nI would be interested in knowing how much of this history we could explain if we assumed that humans expanded only when they had to. I suspect we would have difficulty accounting for a good deal of it.",
+  "human_percent": null,
+  "author_validation": null,
+  "limitations": [
+    "No isolated context; source and detector feedback visible",
+    "Construction not formally closed; no independent checks",
+    "Acts recorded retrospectively",
+    "Australia example and explicit species-characteristic hypothesis omitted; pleasure conjecture added; author review required",
+    "Not a compliant test of v0.3"
+  ]
+}
