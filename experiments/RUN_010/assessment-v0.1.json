@@ -1,0 +1,23 @@
+{
+  "run": "RUN_010",
+  "section": "34.7 Why Energy Dominated When It Did",
+  "procedure": "v0.3",
+  "ledger": "v0.4",
+  "detector": "Pangram 4.1",
+  "source": "user reported",
+  "human_percent": 100,
+  "ai_percent": 0,
+  "words": 713,
+  "segments": 1,
+  "flagged": 0,
+  "classification": "Human Written",
+  "segment": "Human High",
+  "credits_remaining": 14697,
+  "limitations": [
+    "manual execution",
+    "no context isolation",
+    "independent checking pending",
+    "substantive qualifications pending author approval",
+    "exact expression not persisted"
+  ]
+}
