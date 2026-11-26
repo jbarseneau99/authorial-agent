@@ -1,0 +1,196 @@
+<PARSED TEXT FOR PAGE: 1 / 9>
+Business Requirements
+AUTHORIAL AGENT / VERSION 0.1 / 24 NOVEMBER 2026
+A graph-native authorial agent for constructing and maintaining the author’s intellectual work.
+
+
+
+Purpose and scope
+The author remains the intellectual authority. The system constructs symbolic intellectual content before
+prose, reuses the canonical loop, and maintains traceability from intent to expression and from requirements
+to implementation and evidence.
+Baseline status: proposed for review. The agreed architectural direction is distinguished from detailed
+candidate requirements and design choices. No implementation or verification completion is asserted.
+
+
+
+Reading the identifiers
+BR-xx identifies a requirement category; BR-xx.yy identifies a subrequirement. DS-xx.yy identifies its initial
+design realization. Mappings are many-to-many in the target graph; matching numbers are a convenient
+initial allocation, not a restriction.
+
+
+
+Architectural boundaries
+Subject ontology: subject knowledge. Writing ontology: intellectual acts, composition and expression.
+Authorial ontology: particular voice and exemplars. Operational ontology: canonical loops, evidence,
+authority and closure. These are connected graph regions, not necessarily separate stores.
+Success means the author can request a chapter and inspect its intent, knowledge, reasoning, composition,
+prose, voice evidence and closure status. The agent must not silently substitute its own intellectual positions.
+<PARSED TEXT FOR PAGE: 2 / 9>
+BR-01 Authorial ownership and authority
+BR-01.01 | DS-01.01
+Preserve the human as author; distinguish author-established positions, external evidence and agent
+proposals.
+Verification: An agent-originated claim cannot be represented as author-endorsed without recorded
+authority.
+
+BR-01.02 | DS-01.02
+Respect delegated scope and seek human authorization for changes outside it.
+Verification: An unapproved change to an authorial position is blocked or staged for review.
+
+
+
+BR-02 Intent and input evidence
+BR-02.01 | DS-02.01
+Represent intent explicitly at work, chapter, section, paragraph and act scales as canonical-loop input
+evidence.
+Verification: Every construction loop resolves a versioned intent and relevant input evidence.
+
+BR-02.02 | DS-02.02
+Assess fulfilment of intent separately from conformance.
+Verification: A conforming paragraph that misses its intent fails validation.
+<PARSED TEXT FOR PAGE: 3 / 9>
+BR-03 Writing Domain Ontology
+BR-03.01 | DS-03.01
+Represent writing as persistent graph objects independent of subject and prose.
+Verification: A work can be retrieved with its acts, knowledge, composition and expressions separately.
+
+BR-03.02 | DS-03.02
+Distinguish classes, attributes, roles, states and relationships.
+Verification: A proposition used as premise and conclusion retains one identity.
+
+
+
+BR-04 Knowledge and research
+BR-04.01 | DS-04.01
+Retrieve author knowledge and relevant external sources before constructing content; identify gaps.
+Verification: A chapter plan identifies unsupported claims and records sources or open questions.
+
+BR-04.02 | DS-04.02
+Preserve proposition identity across epistemic state changes and track content revisions.
+Verification: Refuting a proposition preserves its identity and history; a changed proposition links to its
+predecessor.
+<PARSED TEXT FOR PAGE: 4 / 9>
+BR-05 Intellectual construction and reasoning
+BR-05.01 | DS-05.01
+Construct intellectual acts before generating prose; support atomic and composite acts.
+Verification: A chapter can be inspected as acts and dependencies without reading prose.
+
+BR-05.02 | DS-05.02
+Represent argumentation and intellectual dependencies.
+Verification: A conclusion can be traced to premises, inference, assumptions, evidence and objections.
+
+
+
+BR-06 Composition and literary structure
+BR-06.01 | DS-06.01
+Maintain intellectual and literary structures separately with many-to-many mappings.
+Verification: Reordering paragraphs does not silently alter the underlying argument.
+
+BR-06.02 | DS-06.02
+Support reusable acts and multiple manuscript versions.
+Verification: Two works may reference an act without duplicating its identity.
+<PARSED TEXT FOR PAGE: 5 / 9>
+BR-07 Authorial voice and exemplars
+BR-07.01 | DS-07.01
+Represent linguistic, rhetorical, epistemic and conceptual voice rules.
+Verification: Prompt construction can resolve applicable rules across all four layers.
+
+BR-07.02 | DS-07.02
+Use authentic positive, negative and corrective exemplars.
+Verification: A voice rule can be traced to an exact source passage or author correction.
+
+
+
+BR-08 Expression and prompt construction
+BR-08.01 | DS-08.01
+Generate prose as a realization of encoded intellectual structure, not as the authoritative knowledge source.
+Verification: Alternative expressions can be generated without changing the proposition or act.
+
+BR-08.02 | DS-08.02
+Construct prompts from resolved symbolic inputs and preserve execution provenance.
+Verification: A generated passage can be traced to the prompt, model and input versions.
+<PARSED TEXT FOR PAGE: 6 / 9>
+BR-09 Checking, validation and closure
+BR-09.01 | DS-09.01
+Use the canonical loop for research, composition, expression, editing and learning.
+Verification: Each operation has input evidence, output, checking, validation and closure evidence or an
+explicit unresolved state.
+
+BR-09.02 | DS-09.02
+Separate criteria, instruments and findings; use Pangram as a signal, not proof.
+Verification: A detector flag alone cannot establish authorship or justify automatic rejection.
+
+
+
+BR-10 Editing and deficiency resolution
+BR-10.01 | DS-10.01
+Represent deficiencies as traceable discrepancies and distinguish findings from confirmed deficiencies.
+Verification: A missing premise and a stylistic defect route to different appropriate operations.
+
+BR-10.02 | DS-10.02
+Allow writing to reveal research and reasoning gaps.
+Verification: A discovered unsupported claim triggers research rather than cosmetic rewriting.
+<PARSED TEXT FOR PAGE: 7 / 9>
+BR-11 Authorial learning
+BR-11.01 | DS-11.01
+Learn from author corrections without automatically generalizing local preferences.
+Verification: A single correction is not promoted to a universal rule without justification.
+
+BR-11.02 | DS-11.02
+Separate subject learning from authorial learning.
+Verification: A new subject fact does not silently modify a voice rule.
+
+
+
+BR-12 Change propagation and integrity
+BR-12.01 | DS-12.01
+Track dependencies and reassess affected closures when relevant inputs change.
+Verification: A refuted premise reopens dependent reasoning where justification fails; punctuation alone
+does not reopen research.
+
+BR-12.02 | DS-12.02
+Preserve history and prevent silent overwrites.
+Verification: Previous manuscript and evidence versions remain reconstructable.
+<PARSED TEXT FOR PAGE: 8 / 9>
+BR-13 Platform integration and traceability
+BR-13.01 | DS-13.01
+Bind requirements, design, implementation and verification evidence bidirectionally through persistent
+identities.
+Verification: Every approved requirement resolves to design; implemented design resolves to code and
+evidence, with missing links visible.
+
+BR-13.02 | DS-13.02
+Generate requirements and design documents from the authoritative graph and govern changes through the
+same canonical architecture.
+Verification: A changed requirement marks affected design and code links for reassessment; regenerated
+documents show the new baseline.
+<PARSED TEXT FOR PAGE: 9 / 9>
+Open decisions and integration gates
+   Reconcile candidate classes and operations against the current platform catalog and canonical loop
+    interfaces; establish actual enforcement points.
+   Confirm authority matrix for authorial endorsement, rule generalization, criterion changes, ontology
+    extensions and closure.
+   Finalize intellectual-act taxonomy, epistemic states, composition cardinalities and revision semantics.
+   Select model and Pangram integration, source permissions, retention, security, cost and latency targets.
+   Define code registration granularity, deployment checks, telemetry coverage and independent
+    verification protocol.
+   Establish evaluation corpus of authentic writing and author-reviewed outputs; calibrate fidelity and
+    intent-fulfilment criteria.
+
+
+
+End-to-end acceptance scenario
+Request a chapter distinguishing checking from validation. Resolve author intent and source knowledge;
+construct and inspect the distinction and argument; select voice rules and exemplars; generate alternative
+prose; check fidelity and validate intent; record closure evidence and authority. Change a premise and verify
+selective reopening. Change a requirement and verify impact through design, code and evidence. Missing
+links must remain visible, not be treated as successful verification.
+
+
+
+Reference basis
+Authorial Agent design conversation, 24 November 2026. Platform background: An Autogenic Agent,
+manuscript paper-round22.pdf, section III (declared ontology and coherence framework). Current runtime
+interfaces and enforcement have not been verified.
