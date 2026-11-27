@@ -122,6 +122,31 @@ class PangramTests(unittest.TestCase):
                 self.assertEqual(result['state'], 'flagged')
                 self.assertEqual(result['full_result']['windows'][0]['label'], label)
 
+    def test_human_result_accepts_reported_machine_scale_residue_without_changing_it(self):
+        response = result_for(TEXT)
+        # Numeric residue observed in the unchanged-source live probe. The text
+        # and transport here remain deterministic fixtures, not a new live scan.
+        response['fraction_ai'] = 6.557978722147641e-40
+        _, current = self.complete(response)
+        self.assertEqual(current['state'], 'passed')
+        self.assertEqual(current['full_result']['fraction_ai'], 6.557978722147641e-40)
+        self.assertEqual(current['full_result']['fraction_human'], 1.0)
+        self.assertEqual(current['full_result']['num_ai_segments'], 0)
+
+    def test_meaningful_nonzero_fraction_is_not_accepted_as_rounding(self):
+        response = result_for(TEXT)
+        response.update(fraction_ai=1e-8, fraction_human=1.0 - 1e-8)
+        _, current = self.complete(response)
+        self.assertEqual(current['state'], 'flagged')
+        self.assertEqual(current['full_result']['fraction_ai'], 1e-8)
+
+    def test_machine_scale_residue_cannot_override_ai_segment_count(self):
+        response = result_for(TEXT)
+        response.update(fraction_ai=6.557978722147641e-40, num_ai_segments=1)
+        _, current = self.complete(response)
+        self.assertEqual(current['state'], 'error')
+        self.assertEqual(current['full_result']['num_ai_segments'], 1)
+
     def test_short_paragraph_is_unscorable_without_padding_or_submission(self):
         self.writer.text = 'A short fixture.'
         self.run, self.assessment = self.paragraph()

@@ -68,6 +68,8 @@ The service can normalize returned text and update minor versions within a model
 
 `public_dashboard_link` must be false and the implemented gate policy is `all-human-v1`. That policy accepts only zero AI/AI-assisted fractions and wholly human-labeled windows with consistent coverage and counts. `minimum_words` must be at least 50, following the [model's published input minimum](https://www.pangram.com/research/model-card/pangram-4). A shorter paragraph stops as unscorable; it is not padded or combined with another paragraph.
 
+Zero/one fraction comparisons allow only floating-point residue within `sys.float_info.epsilon`, with zero relative tolerance. Every window must still be Human and both AI/AI-assisted segment counts must still be zero. This [compatibility correction](../docs/pangram-api-compatibility-v0.1.md) was prompted by a live Human Written result containing an AI fraction of about `6.6e-40`; raw values are retained.
+
 Optional configuration fields:
 
 | Field | Meaning |
@@ -150,4 +152,4 @@ Model requests and detector requests are saved before invocation. Responses, exa
 
 `evaluate.py` prepares separate case folders and review records. `--live` also requires `--config-directory` containing one committed, paragraph-gated configuration per case and preflights every case before a subprocess starts. Its live action starts construction only; closure, paragraph steps and author validation remain separate.
 
-The exact verification result is recorded in [verification/paragraph-pangram-v0.1.json](../verification/paragraph-pangram-v0.1.json). Current evidence is from fixtures and mocked transports. No live Pangram credential or production manuscript-quality result was available in this implementation session. Keep run databases and prompt reports separate from routine code publication because they may contain private manuscripts and authorial evidence.
+The initial fixture verification remains in [verification/paragraph-pangram-v0.1.json](../verification/paragraph-pangram-v0.1.json); verification after the numerical correction is recorded separately in [verification/paragraph-pangram-v0.2.json](../verification/paragraph-pangram-v0.2.json). A subsequent [live API check](../verification/pangram-api-probe-v0.1.json) used one unchanged historical paragraph and confirmed credential access and result handling. It did not run construction, expression or authorial checking. Production manuscript-quality validation remains outstanding. Keep run databases and prompt reports separate from routine code publication because they may contain private manuscripts and authorial evidence.

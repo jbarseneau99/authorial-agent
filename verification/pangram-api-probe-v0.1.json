@@ -1,0 +1,62 @@
+{
+  "id": "AA-PANGRAM-LIVE-API-PROBE-001",
+  "version": "0.1",
+  "scope": "live API compatibility probe; unchanged historical paragraph; no new prose or four-layer approval",
+  "source": "src/P006_reference.md",
+  "source_paragraph": 1,
+  "source_commit": "6eac6dae288168cd0abb23fd2b71d8c0f3718e4d",
+  "source_file_sha256": "9bb469c7c271e2428bf96cfb3c2eeb1b2963fae0f454c00f381ed6272b6b1da5",
+  "text_sha256": "015fd9b15befd0fadd640efdb79a862bd5ff7db3d87bced043d060a25c1f817d",
+  "word_count_local": 56,
+  "credential_value_recorded": false,
+  "model_access": {
+    "http_status": 200,
+    "enabled_models": [
+      "default",
+      "pangram-4",
+      "pangram-4.1"
+    ]
+  },
+  "model_selector": "pangram-4",
+  "returned_version": "4.1",
+  "returned_text_matches": true,
+  "stage": "STAGE_SUCCESS",
+  "headline": "Human Written",
+  "fractions": {
+    "human": 1.0,
+    "ai": 6.557978722147641e-40,
+    "ai_assisted": 0.0
+  },
+  "segment_counts": {
+    "human": 1,
+    "ai": 0,
+    "ai_assisted": 0
+  },
+  "windows": [
+    {
+      "label": "Human Written",
+      "confidence": "High"
+    }
+  ],
+  "completed_at_utc": "2026-11-27T23:41:03.089549+00:00",
+  "generated_new_prose": false,
+  "four_layer_checks_run": false,
+  "new_author_voice_validation": null,
+  "original_adapter_verdict": "flagged",
+  "corrected_parser_re_evaluation": {
+    "scope": "Re-evaluation of saved live response; no additional HTTP call",
+    "evaluated_at_utc": "2026-11-27T23:42:12.112459+00:00",
+    "original_adapter_verdict": "flagged",
+    "corrected_adapter_verdict": "passed",
+    "response_sha256": "38e299146668f2cefd6ba2857b8464ce3c481faef5229e38465d77b5db21679d",
+    "adapter_sha256": "8e723d98ea92713626ccc558d52731bd59c456c71bea157f68f47344aa8eb762",
+    "zero_absolute_tolerance": 2.220446049250313e-16,
+    "relative_tolerance": 0.0
+  },
+  "raw_request_response_evidence": "Preserved in the private API probe evidence archive; no credentials included",
+  "does_not_establish": [
+    "New prose quality",
+    "Whole chapter result",
+    "End-to-end procedure reproducibility"
+  ]
+}

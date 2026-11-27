@@ -14,6 +14,7 @@ import math
 import os
 from pathlib import Path
 import re
+import sys
 import urllib.request
 import urllib.error
 import uuid
@@ -270,7 +271,16 @@ class PangramCheck:
                 raise ValueError('Detector segment counts disagree')
             if not math.isclose(fractions[kind], lengths[kind] / len(text), abs_tol=1e-6):
                 raise ValueError('Detector fractions disagree with segment coverage')
-        return 'passed' if fractions['ai'] == 0 and fractions['ai_assisted'] == 0 and counts['human'] == len(windows) else 'flagged'
+        # The service can return machine-scale residue for an otherwise wholly
+        # human result. Account only for float representation precision; this is
+        # not an acceptance threshold for a nonzero AI classification. Preserve
+        # the original values in the result/event without rounding them.
+        zero_ai = math.isclose(fractions['ai'], 0.0, rel_tol=0.0, abs_tol=sys.float_info.epsilon)
+        zero_assisted = math.isclose(fractions['ai_assisted'], 0.0, rel_tol=0.0, abs_tol=sys.float_info.epsilon)
+        all_human = math.isclose(fractions['human'], 1.0, rel_tol=0.0, abs_tol=sys.float_info.epsilon)
+        return 'passed' if (zero_ai and zero_assisted and all_human
+                            and counts['ai'] == 0 and counts['ai_assisted'] == 0
+                            and counts['human'] == len(windows)) else 'flagged'
 
     def advance(self, ident):
         current = self.inspect(ident)

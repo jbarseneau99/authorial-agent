@@ -19,6 +19,8 @@ A detector flag pauses the run. It does not automatically trigger paraphrasing o
 - [Current loop ownership](loops/inventory-v0.3.json)
 - [Author-directed procedure addendum](procedures/addenda/paragraph-pangram-v0.1.json)
 - [Verification record](verification/paragraph-pangram-v0.1.json)
+- [Live API check and numerical compatibility correction](docs/pangram-api-compatibility-v0.1.md)
+- [Verification after the numerical correction](verification/paragraph-pangram-v0.2.json)
 - [Earlier code increment](docs/code-execution-v0.1.md)
 - [Governance](GOVERNANCE.md)
 
@@ -26,7 +28,9 @@ This increment extends baseline commit `68d26bda0effa4e17a33c6c3ac3aca6141c93be5
 
 ## Current limits
 
-Verification uses deterministic fixtures and mocked transports. No live Pangram/API or manuscript-quality result has been established for this increment; a live credential was unavailable during implementation. Paragraphs shorter than the configured minimum of at least 50 words stop as unscorable. The code does not lengthen or combine them to obtain a score.
+Fixture verification covers execution gates and persistence. After the initial implementation, a live API check of the unchanged 56-word opening paragraph of Prototype 006 returned Pangram 4.1 `Human Written`, one Human segment with High confidence. That check exposed and corrected a floating-point zero comparison in the adapter. The original result and both parser verdicts are preserved separately. This was an API check of existing prose; no new prose was generated and no end-to-end manuscript-quality result is claimed.
+
+Paragraphs shorter than the configured minimum of at least 50 words stop as unscorable. The code does not lengthen or combine them to obtain a score.
 
 A separate whole-chapter semantic check is still pending. The assembled chapter preserves `chapter_semantic_check: pending`, including when an authorized host records final author approval. Detector passes and paragraph checks do not silently complete that missing check.
 
