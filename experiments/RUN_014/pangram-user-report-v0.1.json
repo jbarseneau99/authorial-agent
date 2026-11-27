@@ -1,0 +1,39 @@
+{
+  "run_id": "RUN_014",
+  "report_version": "0.1",
+  "recorded_at_utc": "2026-11-27T17:03:40.828932+00:00",
+  "measurement_source": "User-reported Pangram result in this conversation; not independently accessed",
+  "detector": "Pangram 4.1",
+  "expression_version": "v0.2",
+  "expression_sha256": "16d96e7016ad819156ffd58b769c77b009ef56942d186f608bdf3a15526d11aa",
+  "input_association": "Associated with the delivered Chapter 44 v0.2 by conversation and reported section boundaries. Exact submitted bytes and detector report ID were not supplied.",
+  "human_percent": 0,
+  "ai_percent": 100,
+  "classification": "100% AI Generated",
+  "segments": [
+    {
+      "number": 1,
+      "reported_words": 1365,
+      "word_count_approximate": true,
+      "rating": "High confidence AI",
+      "scope": "Title through opening paragraph of 44.5"
+    },
+    {
+      "number": 2,
+      "reported_words": 609,
+      "word_count_approximate": false,
+      "rating": "High confidence AI",
+      "scope": "Remainder of 44.5 through 44.7"
+    }
+  ],
+  "scanned_word_total": null,
+  "sum_of_reported_segment_words": 1974,
+  "sum_is_approximate": true,
+  "local_words_including_headings": 1975,
+  "credits_used_reported": 21,
+  "credits_remaining_reported": 14648,
+  "outcome": "Failed to reproduce previously observed favorable detector result",
+  "author_voice_validation": null,
+  "causal_conclusion": "Not established. Different source chapter and changed execution prevent isolating a cause.",
+  "website_instruction_note": "Reporter said hidden agent instructions on the detector page were ignored; no causal implication established."
+}

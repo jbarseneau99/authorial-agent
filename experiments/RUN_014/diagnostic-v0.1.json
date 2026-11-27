@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_014",
+  "diagnostic_version": "0.1",
+  "recorded_at_utc": "2026-11-27T17:03:40.828932+00:00",
+  "status": "post_result_execution_audit",
+  "prose_version_audited": "v0.2",
+  "prose_sha256": "16d96e7016ad819156ffd58b769c77b009ef56942d186f608bdf3a15526d11aa",
+  "findings": [
+    {
+      "id": "F1",
+      "finding": "Substantial execution of written v0.3 is documented. This is not evidence of faithful replication of the historical successful manual execution.",
+      "certainty": "high within retained records"
+    },
+    {
+      "id": "F2",
+      "finding": "RUN_013 recorded manual execution without context isolation or formal construction closure and reuse of RUN_012 section 43.5. RUN_014 introduced a fresh isolated expression context and a frozen graph.",
+      "certainty": "high"
+    },
+    {
+      "id": "F3",
+      "finding": "The expression voice packet contained 34 spoken excerpts totaling 388 whitespace words, 5 to 19 words each. All were unvalidated for writing; no complete author-validated written passage was supplied. There were 18 candidate rules: 17 unconfirmed and 1 provisional.",
+      "certainty": "high; counts measured from retained input"
+    },
+    {
+      "id": "F4",
+      "finding": "The frozen structure contained 110 claims and 32 acts. Audit qualifications entered the prose. Review finding O01 flagged repeated emphasis on audit status; it remained nonblocking and was retained.",
+      "certainty": "high"
+    },
+    {
+      "id": "F5",
+      "finding": "Review established source fidelity and record integrity more strongly than authorial voice. Rhetorical and linguistic review occurred, but approval of the voice was not established.",
+      "certainty": "high"
+    }
+  ],
+  "responsibility": "The assistant selected the execution conditions and allowed an identified rhetorical concern to remain unresolved. The same procedure and ledger labels were insufficient evidence of execution equivalence.",
+  "cause_of_detector_result": "unknown; observations above identify execution and review defects, not an isolated causal explanation",
+  "corrective_actions_proposed": [
+    "Retain the failed prose, original prompts, checks and pending evaluation snapshots unchanged; append this result.",
+    "Record execution configuration separately from procedure and corpus versions, including actual supplied exemplars and context boundaries.",
+    "Recover exact successful prompts and complete passages where available; identify unrecovered items explicitly.",
+    "Define and enforce a meaningful rhetorical and linguistic review before a further full chapter is presented as a comparable trial.",
+    "Use a small controlled comparison before drawing another full-chapter generalization; freeze changes and preserve all results."
+  ],
+  "implemented_in_this_followup": [
+    "Measured and independently audited retained inputs and reviews",
+    "Appended user-reported detector result",
+    "Corrected current experiment status without altering the tested text"
+  ],
+  "not_implemented": [
+    "No new voice rules or corpus promotion",
+    "No prose rewrite",
+    "No further detector submission"
+  ],
+  "private_audit_sha256": "fec86b2e5e0a2eb0cb4d27afc58fbbd5bee79d048f8e25ff3b92582404f9a5de",
+  "publication_scope": "Metadata only; no manuscript passages, source text, or voice excerpt payload."
+}

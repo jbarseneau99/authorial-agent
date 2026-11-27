@@ -1,0 +1,52 @@
+{
+  "run_id": "RUN_014",
+  "configuration_commit": "720ba1d30f30da07bf64ccfb99ad90e0300c1c70",
+  "procedure": "v0.3 inherits v0.2",
+  "ledger": "v0.4",
+  "rule_and_corpus_changes": false,
+  "status": "failed_external_detector_observation_execution_variant_under_review",
+  "versions": [
+    {
+      "version": "v0.1",
+      "words_including_headings": 1953,
+      "sha256": "21d3eef1446960a8e42935196e90ad0e965603ead9207dc6c687880e8413542d",
+      "internal_fidelity_review": "targeted_corrections_required",
+      "external_detector": null,
+      "author_voice_validation": null
+    },
+    {
+      "version": "v0.2",
+      "words_including_headings": 1975,
+      "sha256": "16d96e7016ad819156ffd58b769c77b009ef56942d186f608bdf3a15526d11aa",
+      "internal_fidelity_review": "pass_after_targeted_corrections",
+      "mechanical_checks_passed": 14,
+      "external_detector": {
+        "detector": "Pangram 4.1",
+        "source": "user_reported",
+        "human_percent": 0,
+        "ai_percent": 100,
+        "classification": "100% AI Generated",
+        "input_bytes_independently_verified": false
+      },
+      "author_voice_validation": null
+    }
+  ],
+  "revision": "Six sentences changed;114 others plus headings and order unchanged. Earlier draft retained privately.",
+  "generation": "LLM workers; Python used for file operations and validation, not prose generation.",
+  "limitations": [
+    "The source-fidelity review and mechanical checks did not establish successful authorial voice.",
+    "The reported detector result is an external observation; it does not identify the cause of the regression.",
+    "Exact historical successful prompts and full execution contexts were not recovered; faithful reproduction cannot be claimed.",
+    "RUN_014 changed execution conditions while retaining procedure v0.3 and ledger v0.4 labels.",
+    "Author approval remains pending. No new generation or detector submission occurred during this audit."
+  ],
+  "publication_scope": "Metadata only. New manuscript, source excerpts, construction and voice payload remain withheld from public GitHub pending explicit publication approval.",
+  "assessment_version": "0.2",
+  "recorded_at_utc": "2026-11-27T17:03:40.828932+00:00",
+  "supersedes_assessment": "assessment-v0.1.json as current evaluation; historical snapshot retained unchanged",
+  "historical_process_reproduction": "not_demonstrated",
+  "written_procedure_execution": "Substantial v0.3 execution documented; author validation and complete end-to-end validation remain unestablished",
+  "execution_variant": "Fresh expression context with selected short spoken excerpts; materially different from documented RUN_013 manual execution",
+  "detector_report": "pangram-user-report-v0.1.json",
+  "diagnostic": "diagnostic-v0.1.json"
+}
