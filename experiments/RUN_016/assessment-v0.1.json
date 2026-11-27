@@ -1,0 +1,46 @@
+{
+  "run_id": "RUN_016",
+  "chapter": 44,
+  "chapter_attempt": 4,
+  "record_version": "0.1",
+  "status": "completed_for_author_review",
+  "configuration_commit": "1bce88fb055c4865f35913ea4f595a8ab1772218",
+  "chapter_sha256": "0c136d22c1bbe5750bfcf47c8980d5e4136798570467ddb4d4e1b251bbcc53fa",
+  "words_whitespace": 2706,
+  "paragraph_count": 35,
+  "procedure": {
+    "ledger": "v0.4",
+    "new_rules": 0,
+    "corpus_modified": false,
+    "construction_before_expression": true,
+    "recorded_paragraph_prompts": 35,
+    "recorded_four_layer_reviews": 35,
+    "writer": "root assistant, manual orchestration",
+    "source_checker": "separate support agent",
+    "python_role": "recording, hashing and assembly only",
+    "local_repair_paragraphs": [
+      "P01",
+      "P16",
+      "P15",
+      "P17"
+    ],
+    "source_context_isolation": false,
+    "exact_historical_replay": "not established"
+  },
+  "source_review": {
+    "outstanding_material_findings": 0,
+    "sha256": "a41cbecd250c84b1a85abd8e888aa5dbf3f0db3e9ff9d1d45e07b4ea18691714"
+  },
+  "performance": {
+    "author_voice_validation": null,
+    "author_content_validation": null,
+    "pangram": null
+  },
+  "private_execution_archive": {
+    "filename": "Chapter_44_RUN016_execution_record.zip",
+    "sha256": "b3787bc1f0a952ec52e7f8a8aa410f5705a881f17f7974b2512654653371d436",
+    "artifact_count": 166
+  },
+  "record_scope": "Metadata only; manuscript, source, prompts, exemplars and detailed review payload remain private.",
+  "result_interpretation": "Assistant checks completed. Author judgment and detector outcome are pending, not assumed to pass."
+}
