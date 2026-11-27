@@ -1,0 +1,40 @@
+{
+  "run_id": "RUN_016",
+  "chapter": 44,
+  "chapter_title": "Measuring Civilizational Health",
+  "chapter_attempt": 4,
+  "configuration_version": "0.1",
+  "status": "registered_before_construction_and_expression",
+  "baseline_commit": "9bc0a1bf3fdab8c92b0add28436110da0c6b0efd",
+  "user_instruction": "Try it again and use the exact procedure from yesterday.",
+  "procedure_basis": [
+    "procedures/v0.1.json",
+    "procedures/v0.2.json",
+    "user-supplied four-layer and paragraph-loop instructions"
+  ],
+  "historical_replay_status": "Exact historical prompts/context unavailable; this records actual manual execution of the documented four-layer paragraph procedure, not certified identical historical execution.",
+  "ledger": "v0.4",
+  "new_rules": false,
+  "corpus_modified": false,
+  "execution": "Root assistant constructs conceptual and epistemic content, binds existing rules and exemplars, then expresses and checks paragraphs sequentially in this conversation. A support reviewer may check source coverage and the final result; no delegated expression worker.",
+  "paragraph_loop": [
+    "pre-record semantic content, act purpose, selected rule/exemplar IDs and expected four-layer choices",
+    "express one paragraph",
+    "assess exact paragraph across conceptual, epistemic, rhetorical and linguistic criteria",
+    "resolve local findings or explicitly record a limitation",
+    "preserve paragraph result and review before proceeding"
+  ],
+  "model": "GPT-6 Astra Pro per session identity; exact deployed model snapshot and sampling configuration unavailable",
+  "checks": "All four layers assessed per paragraph; chapter source completeness reviewed separately. Author judgment and detector observation remain separate.",
+  "outputs": [
+    "Exact text",
+    "pre-expression conceptual/epistemic construction and act bindings",
+    "per-paragraph instructions and four-layer review/repair record",
+    "final assessment and hashes"
+  ],
+  "publication_scope": "Public GitHub receives metadata only; manuscript text and detailed voice/source payload retained privately.",
+  "performance": {
+    "author_voice_validation": null,
+    "pangram": null
+  }
+}
