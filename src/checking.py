@@ -15,7 +15,8 @@ class Checking:
     def snapshot(self,run):
         draft=self.e.inspect(run)
         if draft['state']!='draft_unvalidated': raise ValueError('Current draft required')
-        return {'draft':draft,'construction':self.e.context(draft['plan'])}
+        paragraph=(draft.get('input') or {}).get('paragraph')
+        return {'draft':draft,'construction':self.e.context(draft['plan'],paragraph=paragraph)}
     def assess(self,run):
         ctx=self.snapshot(run); findings=self.reviewer.assess(json.loads(json.dumps(ctx)))
         if not isinstance(findings,list) or len(findings)!=4 or any(not isinstance(f,dict) for f in findings) or {f.get('layer') for f in findings}!=LAYERS: raise ValueError('Exactly one finding per layer required')

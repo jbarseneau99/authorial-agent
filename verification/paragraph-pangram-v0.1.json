@@ -1,0 +1,201 @@
+{
+  "id": "AA-PARAGRAPH-PANGRAM-VERIFICATION-001",
+  "version": "0.1",
+  "started_at_utc": "2026-11-27T23:37:00.437080+00:00",
+  "command": "python3 -m unittest discover -v",
+  "working_directory": "src",
+  "implementation_base_commit": "68d26bda0effa4e17a33c6c3ac3aca6141c93be5",
+  "procedure_addendum": "procedures/addenda/paragraph-pangram-v0.1.json",
+  "exit_code": 0,
+  "tests_run": 124,
+  "duration_seconds": 2.0561,
+  "result": "passed",
+  "evidence_type": "deterministic fixtures and mocked provider/detector transports",
+  "live_model_calls": 0,
+  "live_pangram_calls": 0,
+  "author_voice_validation": null,
+  "detector_observation": null,
+  "log": "verification/paragraph-pangram-v0.1.log",
+  "tested_source_files": [
+    {
+      "path": "src/checking.py",
+      "sha256": "54843e8ca691af135b3bd4b7d24c357554239c55bb0921efa24a7fced65b03ab"
+    },
+    {
+      "path": "src/construction.py",
+      "sha256": "afdef56f4037383c208f3b1dcf548e32df260241ef8672c9edbf34bddb40697f"
+    },
+    {
+      "path": "src/coverage.py",
+      "sha256": "cd5ef32b9069d2a32a40f6cd067ba7513bd94b20574c5e0dba260c7a5c736ab3"
+    },
+    {
+      "path": "src/editing.py",
+      "sha256": "52aa1e88e12b573ca81ba7c558019bcc428255f43765c6107413979386ca79fe"
+    },
+    {
+      "path": "src/evaluate.py",
+      "sha256": "0fac52f7d74290039768e3df6f9266f5fafc80dd7778992076d16b73d11b8ae1"
+    },
+    {
+      "path": "src/execution.py",
+      "sha256": "f094f7f32f0a16497bfd949d4c8faf3fde9a6672bba937ed06106d2052aed03b"
+    },
+    {
+      "path": "src/expression.py",
+      "sha256": "52ecd15ff1b4c80f43709271369207887e522af0e54bd6bd5eb19bf3863ee906"
+    },
+    {
+      "path": "src/faculty.py",
+      "sha256": "e8fdd6db0a2fc92c7c63b898f33dea96a6cccc789d2e92d5cbbea570e74557a7"
+    },
+    {
+      "path": "src/governance.py",
+      "sha256": "58f2cb76f118d8b343f50c95b54ac585e1fa42b6a94b8f56c29dd65305d520d0"
+    },
+    {
+      "path": "src/ingest.py",
+      "sha256": "e4dcbc616c6606b2640b862da27a2c08da2bc2e81407c05c16ce07fda676026e"
+    },
+    {
+      "path": "src/learning.py",
+      "sha256": "24cd452e9403b41acaeec77f78f17b48d5aa793a3013f5fd7494643ea4af6567"
+    },
+    {
+      "path": "src/model.py",
+      "sha256": "fffdcc07baeb2717243722de0a060f69b02847d82a16b6a7b7e1f95abaad900c"
+    },
+    {
+      "path": "src/pangram_check.py",
+      "sha256": "8ce1e09313a8156b99d7095148cff8e31be9b952901cce6a0f32545e2e6d8de4"
+    },
+    {
+      "path": "src/paragraph_loop.py",
+      "sha256": "9be90e5725bc97cab7a9fb37e0b929d9e5a6822820a7707f4f29b3535cd74aef"
+    },
+    {
+      "path": "src/providers.py",
+      "sha256": "7386bc3bd9f43a4ff4bbec7e25bce6511e35b018bc518331fc5c3090aabfff9f"
+    },
+    {
+      "path": "src/research.py",
+      "sha256": "d4cdc34e2d4611974ec4132a647c9e0a7997d772bb57f33fbacdcff2fb4dec89"
+    },
+    {
+      "path": "src/research_loop.py",
+      "sha256": "04d53efc0ec62c82bf59e2627c790d4496dc972b47a5d493ce64e3127005ad6c"
+    },
+    {
+      "path": "src/run_agent.py",
+      "sha256": "5b904fc4f91532d148b8f480507b16ca4b5c4a8fa1ff45289af4145215c99012"
+    },
+    {
+      "path": "src/run_binding.py",
+      "sha256": "c045caff9926a4b4cc38116c95df499b076205ccc13873d2933b588df4915160"
+    },
+    {
+      "path": "src/test_checking.py",
+      "sha256": "faab2a2ec511b2cce7c07688aec2a963571207d692bfad2a4cc71b6b8f3b571d"
+    },
+    {
+      "path": "src/test_construction.py",
+      "sha256": "27974f437c2aee36de23d7ae884375f7e5236a53819902b31e59c58980be99ae"
+    },
+    {
+      "path": "src/test_construction_closure.py",
+      "sha256": "8ebe95ea9dee11cbf6f8078d276f9842e4008ee106be97a9af78c78e702af538"
+    },
+    {
+      "path": "src/test_coverage.py",
+      "sha256": "0a649623b8fad298a35cb3372aa72b1cf6241dfe03e771afe0c49e40fc87f3c5"
+    },
+    {
+      "path": "src/test_editing.py",
+      "sha256": "8f56c05747c43562227ee953cff6e66e4e3b77d7afb3ae8f2aa67d7d29cf9651"
+    },
+    {
+      "path": "src/test_evaluate.py",
+      "sha256": "bd655237d71e8d893736675626069abc2eb5fdd7a02614290fe023160fb2c96f"
+    },
+    {
+      "path": "src/test_execution.py",
+      "sha256": "668c9769806e9f112db988387c4a881e4ac5a8bd587690d84195788ca8a121fd"
+    },
+    {
+      "path": "src/test_expression.py",
+      "sha256": "354692fb990b77cfa99ab36622b9920b8cf9a13016988326ecb208ba0cd9aa45"
+    },
+    {
+      "path": "src/test_faculty.py",
+      "sha256": "cd886d3d5e02ada41e43a22e3ef078ea79a2b95014487e5431232dbf8725fda4"
+    },
+    {
+      "path": "src/test_governance.py",
+      "sha256": "af9172637b0b057629a2583f970a9b36802940afc6b85dc90da7d8ba1552a7af"
+    },
+    {
+      "path": "src/test_helpers.py",
+      "sha256": "c7b756bc693856ed503b0f08d5177873ef8bcdc3c0b9ee7163d970421a64228c"
+    },
+    {
+      "path": "src/test_ingest.py",
+      "sha256": "9fb5623d844f3aab8ee4a93cd7512b6355543a71985da9e3b446b1c1d2c588c0"
+    },
+    {
+      "path": "src/test_learning.py",
+      "sha256": "9deb283f3688fef354919e480cd6e51881ae134294cf4c030c01becf537b546e"
+    },
+    {
+      "path": "src/test_model.py",
+      "sha256": "643c4b2bc793e4cbecc9eff2ff6412b7b1dd013ce02b7912696746d2d28ce2d4"
+    },
+    {
+      "path": "src/test_pangram_check.py",
+      "sha256": "66c8d7d3be471e0442625a32e4a90de8c57993450eb72eff077d7acc8b76bb80"
+    },
+    {
+      "path": "src/test_paragraph_cli.py",
+      "sha256": "6439210c5f45ce8f71193ed55a3fb92044e131168aed576805bf27ec6b836dc3"
+    },
+    {
+      "path": "src/test_paragraph_expression.py",
+      "sha256": "e4457deeb9b678d29123589f764046228959507e41b807b37b490a75b7fa5e3f"
+    },
+    {
+      "path": "src/test_paragraph_loop.py",
+      "sha256": "040c798f6f4feccdb97b0bd899ad16417348a3fe874febe1ad11fb5957bbe91f"
+    },
+    {
+      "path": "src/test_providers.py",
+      "sha256": "1b728629e926d1f06c0806addd8053504559645a11b0d0f41a69858c08372e43"
+    },
+    {
+      "path": "src/test_research.py",
+      "sha256": "3f23a77fe584c590a460652ddb745b0c1c34839a7b08be66a1062a6a3ff8db92"
+    },
+    {
+      "path": "src/test_run_agent.py",
+      "sha256": "2958da32ca29b8bc61f4802879e4e3c4b466717bb84ba232f7808e23766b0689"
+    },
+    {
+      "path": "src/test_run_binding.py",
+      "sha256": "b6d68483c79fa6837af6d3d2a6cb0b6416b5d1fd66ea32c792c698b6d30da266"
+    }
+  ],
+  "coverage": [
+    "One paragraph generated and checked before detector submission",
+    "Pending, flagged, malformed, short, errored or stale scans block next paragraph",
+    "Exact text and current four-layer assessment bound to immutable scan evidence",
+    "Resumption reuses task ID; uncertain submission never automatically retried",
+    "No detector feedback in expression or repair prompts",
+    "Read-only inspection performs no writes or HTTP calls",
+    "Live configuration/addendum/intent/rule/grouping/budget drift rejected before providers"
+  ],
+  "limitations": [
+    "No live detector credential available in the workspace; live service compatibility unverified",
+    "Expected detector version must be explicitly pinned; no claim of API version 4.1 availability",
+    "Default one-act paragraph grouping remains unvalidated",
+    "Whole-chapter semantic review remains pending",
+    "No claim of reproducing historical prose or detector scores"
+  ]
+}

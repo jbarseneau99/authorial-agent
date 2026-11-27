@@ -6,17 +6,25 @@ with the external platform canonical interface remains an explicit requirement.
 import json
 import uuid
 from datetime import datetime, timezone
+from pathlib import Path
 from editing import Editing
+from run_binding import PARAGRAPH_ADDENDUM, PARAGRAPH_ADDENDUM_ID
 
 OWNERS = {'construction': 'src/faculty.py', 'expression': 'src/expression.py',
           'checking': 'src/checking.py', 'editing': 'src/editing.py',
-          'validation': 'src/execution.py'}
+          'validation': 'src/execution.py', 'paragraph': 'src/paragraph_loop.py',
+          'detector': 'src/pangram_check.py'}
 
 
 class Execution:
-    def __init__(self, g, faculty, expression, checking, binding=None):
+    def __init__(self, g, faculty, expression, checking, binding=None, paragraph_loop=None):
         self.g, self.f, self.e, self.c = g, faculty, expression, checking
         self.binding = binding
+        self.paragraph_loop = paragraph_loop
+        if paragraph_loop is not None and (
+                paragraph_loop.g is not g or paragraph_loop.expression is not expression
+                or paragraph_loop.checking is not checking):
+            raise ValueError('Paragraph loop must use this execution graph and faculties')
         self.editing = Editing(g, expression, checking)
         g.db.executescript('''
             CREATE TABLE IF NOT EXISTS execution(id TEXT PRIMARY KEY, data TEXT NOT NULL);
@@ -47,11 +55,12 @@ class Execution:
         if x.get('binding_id'):
             if self.binding is None or self.binding.id != x['binding_id']:
                 raise ValueError('Load the original execution binding before resuming')
-            self._bound_components(self.binding.verify())
+            self._bound_components(self.binding.verify(), intent=x.get('intent'),
+                                   max_attempts=x.get('max_attempts'))
         elif x.get('mode') != 'fixture':
             raise ValueError('A verified run binding is required')
 
-    def _bound_components(self, manifest):
+    def _bound_components(self, manifest, *, intent=None, max_attempts=None):
         """The coordinator cannot claim one binding while its workers use another.
 
         Providers remain interchangeable, but a bound run requires the same
@@ -81,12 +90,48 @@ class Execution:
                 raise ValueError('Provider configuration or prompts differ from the execution binding: ' + role)
         if self.f.baseline_digest != manifest['ledger']['sha256']:
             raise ValueError('Construction must select rules from the bound ledger')
+        if manifest['mode'] == 'live':
+            if self.paragraph_loop is None:
+                raise ValueError('Live execution requires the paragraph detector gate')
+            config = (manifest.get('configuration') or {}).get('contents')
+            if not isinstance(config, dict) or config.get('paragraph_mode') != 'pangram-gated-v1':
+                raise ValueError('Live execution requires its committed paragraph configuration')
+            if config.get('procedure_addenda') != [PARAGRAPH_ADDENDUM]:
+                raise ValueError('Live execution must declare the paragraph Pangram addendum')
+            addenda = manifest.get('procedure_addenda', [])
+            expected_path = (Path(manifest['repository']['root']) / PARAGRAPH_ADDENDUM).resolve()
+            if (len(addenda) != 1 or Path(addenda[0]['path']).resolve() != expected_path
+                    or addenda[0].get('identity', {}).get('id') != PARAGRAPH_ADDENDUM_ID
+                    or addenda[0].get('identity', {}).get('version') != '0.1'):
+                raise ValueError('The declared paragraph addendum must be bound as an exact committed artifact')
+            if self.f.rule_ids != config.get('selected_rule_ids'):
+                raise ValueError('Rule selection differs from the committed configuration')
+            if self.paragraph_loop.paragraph_groups != config.get('paragraph_groups'):
+                raise ValueError('Paragraph grouping differs from the committed configuration')
+            if self.paragraph_loop.max_attempts != config.get('max_attempts', 3):
+                raise ValueError('Paragraph attempt budget differs from the committed configuration')
+            if intent is not None and intent != config.get('intent'):
+                raise ValueError('Author intent differs from the committed configuration')
+            if max_attempts is not None and max_attempts != config.get('max_attempts', 3):
+                raise ValueError('Execution attempt budget differs from the committed configuration')
+            scanner = self.paragraph_loop.pangram
+            if scanner.configuration != config.get('pangram'):
+                raise ValueError('Detector configuration differs from the committed configuration')
+            detector_binding = getattr(scanner, 'binding', None)
+            if (detector_binding is None or detector_binding.id != self.binding.id
+                    or detector_binding.g is not self.g):
+                raise ValueError('Paragraph detector must use the original execution binding')
 
     def inspect(self, ident):
         row = self.g.db.execute('SELECT data FROM execution WHERE id=?', (ident,)).fetchone()
         if row is None:
             raise KeyError(ident)
         x = json.loads(row[0])
+        if x.get('execution_scope') == 'paragraphs' and self.paragraph_loop is not None and x.get('paragraph_progress'):
+            progress = self.paragraph_loop.inspect(ident)
+            x['paragraph_progress'] = progress
+            if progress['state'] == 'stale':
+                x.update(state='stale', unresolved=progress['unresolved'])
         if x.get('assessment') and self.c.inspect(x['assessment'])['state'] == 'stale':
             x.update(state='stale', unresolved='Expression or construction changed')
         elif x.get('closure'):
@@ -104,7 +149,7 @@ class Execution:
         x.update(state=state, active_loop=loop, loop_owner=OWNERS.get(loop), **details)
         x['history'].append({key: x.get(key) for key in (
             'attempts', 'plan', 'construction_review', 'closure', 'run',
-            'assessment', 'state', 'active_loop', 'route')})
+            'assessment', 'state', 'active_loop', 'route', 'paragraph_index', 'scan')})
         self.save(x)
         return x
 
@@ -113,16 +158,23 @@ class Execution:
             raise ValueError('Intent and a positive attempt budget are required')
         if mode not in {'live', 'fixture'}:
             raise ValueError('Declare live or fixture execution')
+        if self.paragraph_loop is not None and max_attempts != self.paragraph_loop.max_attempts:
+            raise ValueError('Execution budget must match the per-paragraph attempt budget')
         if self.binding is None and mode != 'fixture':
             raise ValueError('Live execution requires an immutable run binding')
         if self.binding is not None:
             manifest = self.binding.verify()
             if manifest['mode'] != mode:
                 raise ValueError('Execution mode must match its binding')
-            self._bound_components(manifest)
+            self._bound_components(manifest, intent=intent, max_attempts=max_attempts)
+        if mode == 'live' and self.paragraph_loop is not None:
+            availability = self.paragraph_loop.pangram.preflight(mode=mode)
+            if availability.get('state') != 'ready':
+                raise ValueError('Pangram must be configured and available before live execution')
         x = dict(id=str(uuid.uuid4()), intent=intent, max_attempts=max_attempts,
                  attempts=0, state='constructing', history=[], mode=mode,
                  binding_id=self.binding.id if self.binding else None,
+                 execution_scope='paragraphs' if self.paragraph_loop else 'whole_plan_legacy',
                  active_loop='construction', loop_owner=OWNERS['construction'])
         self.save(x)
         try:
@@ -159,10 +211,51 @@ class Execution:
             raise ValueError('Current passing construction review required')
         self._binding_current(x)
         x['closure'] = self.f.close(x['plan'], x['construction_review'], actor)
+        if self.paragraph_loop is not None:
+            try:
+                progress = self.paragraph_loop.prepare(x['id'], x['plan'], mode=x['mode'])
+            except Exception as exc:
+                return self._checkpoint(x, 'suspended_error', 'paragraph', error=type(exc).__name__)
+            return self._paragraph_checkpoint(x, progress)
         return self._checkpoint(x, 'ready', 'expression', unresolved=None, route=None)
+
+    def _paragraph_checkpoint(self, x, progress):
+        state = progress['state']
+        mapping = {
+            'ready': 'ready', 'ready_for_next_paragraph': 'ready_for_next_paragraph',
+            'complete': 'awaiting_approval', 'detector_pending': 'suspended_detector_pending',
+            'detector_error': 'suspended_detector_error', 'detector_flagged': 'suspended_detector_flagged',
+            'detector_unscorable': 'suspended_detector_unscorable',
+            'detector_blocked': 'suspended_detector_blocked',
+            'expression_repair_required': 'suspended_reopen',
+            'construction_required': 'suspended_reopen', 'author_review_required': 'suspended_reopen',
+            'budget_exhausted': 'budget_exhausted', 'stale': 'stale',
+            'generation_error': 'suspended_error', 'checking_error': 'suspended_error',
+        }
+        current = progress['paragraphs'][progress['active_index']]
+        route = {'expression_repair_required': 'expression', 'construction_required': 'construction',
+                 'author_review_required': 'author_review'}.get(state)
+        loop = ('detector' if state.startswith('detector_') else
+                'validation' if state == 'complete' else 'paragraph')
+        x.update(paragraph_progress=progress, paragraph_index=progress['active_index'],
+                 attempts=sum(len(item['attempts']) for item in progress['paragraphs']),
+                 attempt_budget_scope='per_paragraph', run=current['run'],
+                 assessment=current['assessment'], scan=current['scan'],
+                 chapter_semantic_check=progress['chapter_semantic_check'])
+        if state == 'complete':
+            x.update(text=progress['text'], text_sha256=progress['text_sha256'])
+        return self._checkpoint(x, mapping.get(state, 'suspended_error'), loop, route=route,
+                                unresolved=progress.get('unresolved'))
 
     def advance(self, ident, actor=None):
         x = self.inspect(ident)
+        if x.get('execution_scope') == 'paragraphs':
+            if self.paragraph_loop is None:
+                raise ValueError('Resume requires the original paragraph loop')
+            self._binding_current(x)
+            if x['state'] in {'closed', 'awaiting_approval', 'stale'}:
+                raise ValueError('Paragraph execution is not runnable')
+            return self._paragraph_checkpoint(x, self.paragraph_loop.advance(ident, actor=actor))
         if x['state'] not in {'ready', 'suspended_reopen'}:
             raise ValueError('Execution is not ready for expression or a permitted repair')
         self._binding_current(x)
@@ -207,6 +300,13 @@ class Execution:
             raise PermissionError('Author required')
         x = self.inspect(ident)
         self._binding_current(x)
+        if x.get('execution_scope') == 'paragraphs':
+            if self.paragraph_loop is None or x['state'] != 'awaiting_approval':
+                raise ValueError('Current completed paragraph execution required')
+            self.paragraph_loop.validate_complete(ident)
+            return self._checkpoint(x, 'closed', 'validation', approved_by=actor,
+                                    closure_authority='author', authorial_validation='approved',
+                                    unresolved=None, chapter_semantic_check='pending')
         if x['state'] != 'awaiting_approval' or self.c.inspect(x['assessment'])['state'] != 'checks_passed':
             raise ValueError('Current passing assessment required')
         self.e.c.require_closed(x['plan'])

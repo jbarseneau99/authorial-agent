@@ -14,7 +14,9 @@ from execution import Execution
 from providers import JSONModel
 from research import EuropePMC
 from research_loop import BoundSources, ResearchBridge  # compatibility export
-from run_binding import ProviderJournal, RunBinding
+from run_binding import PARAGRAPH_ADDENDUM, ProviderJournal, RunBinding
+from pangram_check import PangramCheck, validate_configuration as validate_pangram_configuration
+from paragraph_loop import ParagraphLoop
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -24,6 +26,20 @@ def validate_configuration(config):
         raise ValueError('Committed configuration must declare live mode')
     if not isinstance(config.get('intent'), str) or not config['intent'].strip():
         raise ValueError('Author intent is required in the committed configuration')
+    if config.get('paragraph_mode') != 'pangram-gated-v1':
+        raise ValueError('New live runs require paragraph_mode="pangram-gated-v1"')
+    validate_pangram_configuration(config.get('pangram'))
+    if config.get('procedure_addenda') != [PARAGRAPH_ADDENDUM]:
+        raise ValueError('Bind the author-directed paragraph Pangram addendum')
+    groups = config.get('paragraph_groups')
+    if groups is not None:
+        if (not isinstance(groups, list) or not groups
+                or any(not isinstance(group, list) or not group for group in groups)
+                or any(type(index) is not int for group in groups for index in group)):
+            raise ValueError('Paragraph groups must contain ordered integer act indices')
+        flat = [index for group in groups for index in group]
+        if flat != list(range(len(flat))):
+            raise ValueError('Paragraph groups must cover act indices exactly once in order')
     for field in ('procedure', 'ledger', 'prompt_templates_sha256'):
         if not isinstance(config.get(field), str) or not config[field].strip():
             raise ValueError('Configuration requires ' + field)
@@ -56,7 +72,7 @@ def create_binding(graph, configuration_path, repository_root=ROOT):
     binding = RunBinding.create(graph, repository_root=repository_root,
         procedure_path=config['procedure'], ledger_path=config['ledger'], source_paths=config['sources'],
         providers=config['providers'], prompt_templates=JSONModel.prompt_templates(),
-        mode='live', configuration_path=configuration_path)
+        mode='live', configuration_path=configuration_path, addenda_paths=config['procedure_addenda'])
     return binding, config
 
 
@@ -75,16 +91,30 @@ def runtime(graph, binding, config=None):
     sources = BoundSources(binding, bridge)
     faculty = Faculty(graph, models['construction'], sources, baseline_digest=manifest['ledger']['sha256'],
                       rule_ids=config.get('selected_rule_ids'))
-    engine = Execution(graph, faculty, Expression(graph, models['expression']), Checking(graph, models['checking']), binding=binding)
+    expression = Expression(graph, models['expression'])
+    checking = Checking(graph, models['checking'])
+    detector = PangramCheck(graph, expression, checking, binding=binding, configuration=config['pangram'])
+    paragraphs = ParagraphLoop(graph, expression, checking, detector,
+                               paragraph_groups=config.get('paragraph_groups'),
+                               max_attempts=config.get('max_attempts', 3))
+    engine = Execution(graph, faculty, expression, checking, binding=binding, paragraph_loop=paragraphs)
     return engine, sources, config
 
 
 def execute(graph, intent, constructor, writer, reviewer, research, *, binding=None, mode='live',
-            max_attempts=3, selected_rule_ids=None):
+            max_attempts=3, selected_rule_ids=None, pangram_configuration=None,
+            paragraph_groups=None, detector_transport=None):
     """Test/service API. Production callers must supply a verified binding."""
     baseline = binding.inspect()['ledger']['sha256'] if binding is not None else None
+    expression, checking = Expression(graph, writer), Checking(graph, reviewer)
+    paragraphs = None
+    if pangram_configuration is not None:
+        detector = PangramCheck(graph, expression, checking, binding=binding,
+                               configuration=pangram_configuration, transport=detector_transport)
+        paragraphs = ParagraphLoop(graph, expression, checking, detector,
+                                   paragraph_groups=paragraph_groups, max_attempts=max_attempts)
     engine = Execution(graph, Faculty(graph, constructor, research, baseline_digest=baseline, rule_ids=selected_rule_ids),
-                       Expression(graph, writer), Checking(graph, reviewer), binding=binding)
+                       expression, checking, binding=binding, paragraph_loop=paragraphs)
     result = engine.start(intent, max_attempts=max_attempts, mode=mode)
     if getattr(research, 'report', None) is not None:
         result['research_report'] = research.report
@@ -150,6 +180,32 @@ def inspect_execution(graph, ident):
                                           for role in result['binding']['providers']}
     else:
         result['binding_verification'] = {'state': 'unbound_fixture' if execution.get('mode') == 'fixture' else 'missing'}
+    if execution.get('execution_scope') == 'paragraphs':
+        # Reuse SELECT-only inspection helpers. Do not instantiate HTTP providers
+        # or schema-writing constructors for inspection.
+        row = graph.db.execute(
+            'SELECT data FROM paragraph_checkpoint WHERE execution_id=? ORDER BY revision DESC LIMIT 1',
+            (ident,)).fetchone()
+        if row:
+            stored = json.loads(row[0])
+            scanner = object.__new__(PangramCheck)
+            scanner.g, scanner.expression, scanner.checking = graph, expression, checking
+            scanner.binding = binding if execution.get('binding_id') else None
+            scan_id = next((p.get('scan') for p in stored['paragraphs'] if p.get('scan')), None)
+            if scan_id:
+                scan_record = json.loads(graph.db.execute('SELECT record FROM pangram_scan WHERE id=?', (scan_id,)).fetchone()[0])
+                scanner.configuration = scan_record['configuration']
+            elif execution.get('binding_id'):
+                scanner.configuration = binding.inspect()['configuration']['contents']['pangram']
+            else:
+                scanner.configuration = {}
+            loop = object.__new__(ParagraphLoop)
+            loop.g, loop.expression, loop.checking, loop.pangram = graph, expression, checking, scanner
+            result['paragraph_progress'] = loop.inspect(ident)
+            result['paragraph_history'] = loop.history(ident)
+            result['pangram_scans'] = [scanner.inspect(p['scan']) for p in stored['paragraphs'] if p.get('scan')]
+            if result['paragraph_progress']['state'] == 'stale':
+                result['current_state'] = 'stale'
     result['report_scope'] = 'Stored execution evidence plus structural freshness checks; provider judgments do not establish semantic correctness or authorial approval.'
     return result
 

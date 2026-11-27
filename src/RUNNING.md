@@ -1,4 +1,4 @@
-# Running and inspecting the code-only increment
+# Running the paragraph-gated code
 
 Python 3.10+ and `openpyxl` are required. Diagram rendering additionally uses `matplotlib`. Run fixture verification from `src`:
 
@@ -6,25 +6,29 @@ Python 3.10+ and `openpyxl` are required. Diagram rendering additionally uses `m
 python3 -m unittest discover -v
 ```
 
-This increment does not yet implement per-act relevance selection, full epistemic objects, paragraph/chapter iteration, intellectual repair, or the platform canonical-loop interface. It must not be presented as a proven historical writing procedure. See `docs/code-execution-v0.1.md` for coverage and limits.
+Current coverage is documented in [paragraph-pangram-v0.1.md](../docs/paragraph-pangram-v0.1.md). The earlier [code-execution-v0.1.md](../docs/code-execution-v0.1.md) remains a historical record of its increment. Whole-chapter semantic checking, the full epistemic schema, per-act relevance selection, intellectual repair and the external canonical-loop interface remain incomplete.
 
-## Prepare a declared run
+## Prepare the exact run configuration
 
-Use a real Git checkout with committed code, procedure and run configuration. Live start rejects a different runtime checkout, changed tracked files, an undeclared provider, a changed bound input, or a prompt-template mismatch. Supply prepared UTF-8 `.txt` or `.md` source artifacts; PDF extraction is a separate preparation step. Keep actual model credentials in the named environment variable.
+Use the real Git checkout containing this runtime. Commit the code, selected base procedure, paragraph addendum and run configuration before a live start. The runtime binds their identities and the actual Git HEAD; changed tracked files, code, templates or declared inputs block progression.
 
-Obtain this runtime's prompt-template digest from the repository root:
+Prepare source artifacts as UTF-8 `.txt` or `.md` files. PDF extraction is a separate step; the runner does not silently interpret binary sources. Keep private source files outside public source publication when appropriate; their exact paths and bytes are bound for the run. Model credentials and the Pangram API key belong in the named local environment variables, never in configuration JSON or Git.
+
+Print the current prompt-template digest from the repository root:
 
 ```sh
 python3 -c 'import sys; sys.path.insert(0,"src"); from providers import JSONModel; print(JSONModel.templates_digest())'
 ```
 
-Example configuration shape below uses placeholders and is not a runnable baseline. Use the procedure revision actually selected for the experiment. Existing procedure files retain their declared reconstruction/validation status.
+The following is a configuration **shape**, with deliberate placeholders. It is not a runnable experiment or a statement of model availability. Select the actual base procedure, providers, sources and detector version, then commit the completed configuration.
 
 ```json
 {
   "mode": "live",
   "intent": "The exact author intent for this run",
   "procedure": "procedures/v0.2.json",
+  "procedure_addenda": ["procedures/addenda/paragraph-pangram-v0.1.json"],
+  "paragraph_mode": "pangram-gated-v1",
   "ledger": "src/Authorial_Voice_Ledger_v0.4.xlsx",
   "sources": ["/absolute/path/to/prepared-source.txt"],
   "providers": {
@@ -45,31 +49,53 @@ Example configuration shape below uses placeholders and is not a runnable baseli
     }
   },
   "prompt_templates_sha256": "replace-with-the-printed-digest",
+  "pangram": {
+    "endpoint": "https://text.external-api.pangram.com",
+    "model": "pangram-4",
+    "expected_version": "replace-with-the-confirmed-version",
+    "key_env": "PANGRAM_API_KEY",
+    "public_dashboard_link": false,
+    "policy": "all-human-v1",
+    "minimum_words": 50
+  },
   "max_attempts": 3
 }
 ```
 
-Optional `selected_rule_ids` is a list of imported graph rule IDs from the chosen ledger. Omission currently selects all candidate rules in that ledger; it does not perform relevance selection or approve those candidates. Optional `research` must supply both `support` and `challenge` query strings. Retrieval completion is not evidence sufficiency.
+`expected_version` must be an exact numeric version string, such as the version confirmed for the intended service/account. The code does not assume `4.1` is available merely because `pangram-4` was selected. The official API quickstart currently uses `4.0` in its example response. An unexpected returned version pauses the run with an error. See the [official API documentation](https://docs.pangram.com/quickstart-rest).
 
-The configuration contains the intent and exact paths. Commit that configuration before starting. The runtime records the actual containing Git commit separately, avoiding a self-referential commit field. Ledger and source bytes are hashed; private source artifacts need not be published to the repository. The live binding's paths must continue to resolve to those exact bytes on resume.
+The service can normalize returned text and update minor versions within a model series. The strict gate pauses if returned text differs from the original paragraph; normalization mapping is not implemented. See the [API reference](https://docs.pangram.com/api-reference/ai-detection).
 
-## Start, inspect, close, resume
+`public_dashboard_link` must be false and the implemented gate policy is `all-human-v1`. That policy accepts only zero AI/AI-assisted fractions and wholly human-labeled windows with consistent coverage and counts. `minimum_words` must be at least 50, following the [model's published input minimum](https://www.pangram.com/research/model-card/pangram-4). A shorter paragraph stops as unscorable; it is not padded or combined with another paragraph.
 
-From the repository root, with a prepared and committed configuration:
+Optional configuration fields:
+
+| Field | Meaning |
+| --- | --- |
+| `paragraph_groups` | Lists of zero-based closed-plan act indices. Groups must be nonempty and cover every act exactly once in order. Omission currently means one act per paragraph, explicitly labeled an unvalidated default. |
+| `selected_rule_ids` | Imported graph rule IDs from the selected ledger. Omission selects all candidate rules in that ledger; this does not perform per-act relevance selection or approve candidates. |
+| `research` | An object containing both `support` and `challenge` query strings. Retrieval remains distinct from evidence sufficiency. |
+| `max_attempts` | Positive per-paragraph expression/repair budget; default 3. Detector polls do not consume another expression attempt. |
+
+The committed configuration contains the exact intent; there is no separate mutable CLI intent override. The runtime freezes the entire configuration and hashes the base procedure, addendum, ledger and sources. The containing commit is recorded separately, avoiding a self-referential commit field. Paths must continue to resolve to the bound bytes on resume.
+
+## Start construction and inspect it
+
+From the repository root:
 
 ```sh
 python3 src/run_agent.py start --live --config path/to/run-config.json --database /path/to/run.sqlite --output /path/to/start-report.json
 ```
 
-Start constructs and reviews the intellectual structure. It returns an execution ID and stops before prose at `awaiting_construction_closure` when checks pass. Failed findings remain unresolved. A model pass never supplies author authority.
+Live start requires configured Pangram credentials and the declared paragraph gate. Its preflight is local: it checks binding, configuration and credential presence, not live API entitlement. It then constructs and reviews the argument. Passing construction checks leave the run at `awaiting_construction_closure`, before prose generation. Failed or uncertain findings remain unresolved. Model judgments do not grant closure authority.
 
-Inspect stored evidence without creating providers or making model calls:
+Inspect evidence without creating providers or making network calls:
 
 ```sh
 python3 src/run_agent.py inspect --database /path/to/run.sqlite --execution EXECUTION_ID --output /path/to/inspection-v1.json
 ```
 
-Inspection includes the active loop and owner, versioned state, bound files and templates, construction, review, closure, draft and exact provider invocations. Output files are created with exclusive creation; choose a new filename for each report.
+The read-only report includes the stored execution state, current freshness state, active loop/owner, configuration and bindings, construction/review/closure, paragraph checkpoints, detector scans, and exact model-provider invocations. Reports use exclusive file creation; choose a new output filename for each version.
 
 An authorized host may record the author's construction closure:
 
@@ -77,34 +103,51 @@ An authorized host may record the author's construction closure:
 python3 src/run_agent.py close-construction --database /path/to/run.sqlite --execution EXECUTION_ID --actor author
 ```
 
-This command only moves the run to `ready`; it does not call the writer. `--actor author` is a trusted-host assertion, not identity authentication. It must reflect actual authority; the model must not grant itself this identity.
+This closes the current construction and records the paragraph grouping. It does not call the writer. `--actor author` is a trusted-host assertion, not identity authentication; it must reflect actual authority. A grouping inconsistent with the constructed acts remains unresolved.
 
-Then invoke expression and checking through code:
+## Generate, check and poll one paragraph
 
 ```sh
-python3 src/run_agent.py resume --live --database /path/to/run.sqlite --execution EXECUTION_ID --output /path/to/expression-v1.json
+python3 src/run_agent.py resume --live --database /path/to/run.sqlite --execution EXECUTION_ID --output /path/to/paragraph-step-v1.json
 ```
 
-A current linguistic failure can be retried through the editing owner, with explicit author authorization:
+A ready paragraph step checks detector availability locally, generates only the current paragraph, runs all four checks and submits that exact paragraph if those checks pass. Each detector advance makes at most one HTTP request. A resume of a pending detector task polls the existing task; it does not invoke the writer or submit the paragraph again.
+
+| Execution state | Meaning and next action |
+| --- | --- |
+| `ready` / `ready_for_next_paragraph` | A resume may generate the current paragraph. All preceding paragraphs must still have passing evidence. |
+| `suspended_detector_pending` | Resume polls the saved task. It cannot generate the next paragraph. An interrupted submission without a recorded response stays unresolved rather than being resubmitted. |
+| `suspended_detector_flagged` | Review the preserved paragraph and result. Detector flags do not trigger automatic rewriting. |
+| `suspended_detector_unscorable` | The paragraph is below the configured detector minimum. Progression stops; no padding or aggregation is performed. |
+| `suspended_detector_blocked` / `suspended_detector_error` | Inspect credential/configuration/transport or result evidence. There is no automatic resubmission after an uncertain or failed request. |
+| `suspended_reopen` | Inspect the diagnosed layer. Only the implemented linguistic repair route may resume as an expression repair. |
+| `budget_exhausted` / `stale` | Stop; unresolved or changed evidence does not confer closure. |
+| `awaiting_approval` | Every paragraph has current four-layer and detector passes and the exact text is assembled. Whole-chapter semantic checking remains pending. |
+
+A detector pass changes the checkpoint to `ready_for_next_paragraph`; a later resume generates the next paragraph. This makes the progression visible and prevents a single unchecked draft of the remainder of the chapter.
+
+## Repair and author validation
+
+An explicitly authorized linguistic repair uses the existing editing owner:
 
 ```sh
 python3 src/run_agent.py resume --live --database /path/to/run.sqlite --execution EXECUTION_ID --actor author --output /path/to/repair-v1.json
 ```
 
-The repair receives the previous exact draft, exact findings and affected sentence/act IDs. Construction and conceptual/uncertain routes remain explicitly unresolved; they cannot be bypassed with a linguistic retry. The configured attempt budget limits expression attempts and does not confer closure.
+The repair receives the prior exact paragraph, its actual four-layer findings and affected sentence/act IDs, while preserving scope and valid earlier paragraphs. It receives no detector score as a writing instruction. It is rechecked and rescanned. Construction defects and conceptual/uncertain routes cannot be bypassed through linguistic editing. The per-paragraph attempt budget limits generation/repair attempts and does not grant closure.
 
-Final author approval is separate:
+Final author validation remains separate:
 
 ```sh
 python3 src/run_agent.py approve --database /path/to/run.sqlite --execution EXECUTION_ID --actor author --output /path/to/approval-v1.json
 ```
 
-This requires current passing four-layer checks and current construction closure. Detector observations are not author approval and are not injected into generation prompts.
+This requires all paragraphs and their assessments/scans to remain current, plus unchanged construction closure and exact assembled text. The implementation can record author approval, but **it still records `chapter_semantic_check: pending`**. No whole-chapter semantic checker is implemented, and approval must not be described as a machine-verified chapter-level pass.
 
 ## Evidence and evaluation
 
-Requests are recorded before network invocation. Full responses, exact prompts and input references remain bound to the run; parse failures and truncation remain visible. Changed inputs or provider configuration block execution. Credential headers and values are excluded; echoed credential responses are rejected rather than retained.
+Model requests and detector requests are saved before invocation. Responses, exact prompts, hashes, task IDs, returned detector versions and unresolved results remain connected to their run. Changed input or provider conditions block use of earlier evidence. Credential headers/values are excluded; echoed credentials cause response rejection.
 
-`evaluate.py` prepares separate evaluation folders and review records. `--live` additionally requires `--config-directory` containing one committed configuration per case, and preflights all cases before any live subprocess. Its live action starts construction only; closure and author evaluation remain separate.
+`evaluate.py` prepares separate case folders and review records. `--live` also requires `--config-directory` containing one committed, paragraph-gated configuration per case and preflights every case before a subprocess starts. Its live action starts construction only; closure, paragraph steps and author validation remain separate.
 
-The code was verified using fixtures and mocked transports. No live manuscript or voice-validation result is implied by those tests. Do not publish run databases or prompt reports as routine source-code changes; they can contain private manuscripts and authorial evidence.
+The exact verification result is recorded in [verification/paragraph-pangram-v0.1.json](../verification/paragraph-pangram-v0.1.json). Current evidence is from fixtures and mocked transports. No live Pangram credential or production manuscript-quality result was available in this implementation session. Keep run databases and prompt reports separate from routine code publication because they may contain private manuscripts and authorial evidence.

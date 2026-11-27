@@ -1,0 +1,37 @@
+{
+  "id": "AA-PROCEDURE-ADDENDUM-PARAGRAPH-PANGRAM-001",
+  "version": "0.1",
+  "status": "author-directed addition; live validation pending",
+  "author_instruction": "Can put the pangram test at the end of each paragraph generation so we do t waste time creating a whole document.",
+  "instruction_date": "2026-11-27",
+  "applies_to": "The separately selected and bound construction-first procedure revision.",
+  "change": "Generate one paragraph, check all four authorial layers, submit that exact paragraph to Pangram, and require a current acceptable result before generating the next paragraph.",
+  "sequence": [
+    "closed intellectual construction",
+    "record paragraph act grouping",
+    "generate one paragraph through the expression provider",
+    "check conceptual, epistemic, rhetorical and linguistic fidelity",
+    "submit exact checked paragraph to Pangram",
+    "persist detector result against paragraph, assessment and text hash",
+    "continue to next paragraph only after a current passing gate",
+    "assemble paragraphs and obtain author validation"
+  ],
+  "stop_conditions": [
+    "four-layer check unresolved",
+    "Pangram result pending",
+    "AI-generated or AI-assisted content reported",
+    "paragraph below detector minimum",
+    "missing credential or unavailable detector",
+    "malformed response or unexpected detector version",
+    "changed paragraph, construction, assessment, voice evidence or bound input"
+  ],
+  "gate_policy": "all-human-v1: zero AI and AI-assisted fractions, no AI/assisted segment counts, and all returned windows classified Human Written",
+  "minimum_words": 50,
+  "repair": "Preserve the failed paragraph and findings. Detector flags pause progression and do not automatically trigger paraphrasing or enter the expression prompt. Existing diagnosed four-layer repair remains a separate code path.",
+  "authority": "A passing detector observation permits paragraph progression; it does not establish authorial voice, truth or final author approval.",
+  "preservation": "Earlier procedure files, rules, ledgers, drafts and observations remain unchanged. This addendum changes detector timing and paragraph progression, not the four voice layers.",
+  "provider_references": [
+    "https://docs.pangram.com/quickstart-rest",
+    "https://www.pangram.com/research/model-card/pangram-4"
+  ]
+}

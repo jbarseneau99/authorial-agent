@@ -13,6 +13,9 @@ import subprocess
 import uuid
 from urllib.parse import urlsplit
 
+PARAGRAPH_ADDENDUM = 'procedures/addenda/paragraph-pangram-v0.1.json'
+PARAGRAPH_ADDENDUM_ID = 'AA-PROCEDURE-ADDENDUM-PARAGRAPH-PANGRAM-001'
+
 
 def canonical(value):
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
@@ -124,7 +127,7 @@ class RunBinding:
     @classmethod
     def create(cls, graph, *, repository_root, procedure_path, ledger_path,
                source_paths, providers, prompt_templates, mode="live",
-               configuration_path=None, expected_commit=None):
+               configuration_path=None, expected_commit=None, addenda_paths=()):
         if mode not in {"fixture", "live"}:
             raise ValueError("Explicit live or fixture mode required")
         root = Path(repository_root).resolve()
@@ -141,12 +144,22 @@ class RunBinding:
         if not isinstance(specification, dict) or not specification.get("version") or not specification.get("status"):
             raise ValueError("Procedure version and declared validation status required")
         procedure["identity"] = specification
+        addenda = [_file(root, path) for path in addenda_paths]
+        if len({item['path'] for item in addenda}) != len(addenda):
+            raise ValueError('Duplicate procedure addendum')
+        for item in addenda:
+            identity = json.loads(Path(item['path']).read_text(encoding='utf-8'))
+            if not isinstance(identity, dict) or not identity.get('version') or not identity.get('status'):
+                raise ValueError('Procedure addenda require a version and declared status')
+            item['identity'] = identity
         ledger = _file(root, ledger_path)
         sources = [_file(root, source) for source in source_paths]
         if len({source["path"] for source in sources}) != len(sources):
             raise ValueError("Duplicate source artifact")
         code = _code(root)
         configuration = _file(root, configuration_path) if configuration_path else None
+        if configuration:
+            configuration['contents'] = json.loads(Path(configuration['path']).read_text(encoding='utf-8'))
         commit = None
         if mode == "live":
             if Path(__file__).resolve() != root / "src" / "run_binding.py":
@@ -162,7 +175,7 @@ class RunBinding:
                 raise ValueError("Repository commit differs from requested commit")
             if _git(root, "status", "--porcelain", "--untracked-files=no"):
                 raise ValueError("Commit tracked changes before live execution")
-            for item in code + [configuration, procedure]:
+            for item in code + [configuration, procedure] + addenda:
                 relative = _label(root, item["path"])
                 if Path(relative).is_absolute():
                     raise ValueError("Procedure, configuration and code must be committed in the repository")
@@ -174,6 +187,8 @@ class RunBinding:
                 "providers": providers, "prompt_templates_sha256": digest(prompt_templates),
             }
             saved_configuration = json.loads(Path(configuration["path"]).read_text(encoding="utf-8"))
+            if addenda or 'procedure_addenda' in saved_configuration:
+                expected_configuration['procedure_addenda'] = [_label(root, item['path']) for item in addenda]
             if any(saved_configuration.get(key) != value for key, value in expected_configuration.items()):
                 raise ValueError("Runtime inputs differ from the committed run configuration")
         elif expected_commit is not None:
@@ -182,7 +197,7 @@ class RunBinding:
         manifest = {
             "id": ident, "mode": mode, "created_at": _now(),
             "repository": {"root": str(root), "commit": commit, "code_manifest": code},
-            "procedure": procedure, "ledger": ledger, "sources": sources,
+            "procedure": procedure, "procedure_addenda": addenda, "ledger": ledger, "sources": sources,
             "providers": providers, "prompt_templates": prompt_templates,
             "prompt_templates_sha256": digest(prompt_templates),
             "configuration": configuration,
@@ -210,7 +225,7 @@ class RunBinding:
     def verify(self):
         manifest = self.inspect()
         root = Path(manifest["repository"]["root"])
-        files = [manifest["procedure"], manifest["ledger"], *manifest["sources"]]
+        files = [manifest["procedure"], manifest["ledger"], *manifest["sources"], *manifest.get('procedure_addenda', [])]
         if manifest["configuration"]:
             files.append(manifest["configuration"])
         for item in files:

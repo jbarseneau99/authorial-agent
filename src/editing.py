@@ -111,7 +111,9 @@ class Editing:
 
         new_run = None
         try:
-            new_run = self.expression.run(draft['plan'], repair=_copy(context))
+            paragraph = (draft.get('input') or {}).get('paragraph')
+            new_run = self.expression.run(draft['plan'], repair=_copy(context),
+                                          paragraph=_copy(paragraph) if paragraph is not None else None)
             # A provider can return after another caller revised the original
             # draft. Preserve the output but do not accept that repair as current.
             current = self._current(previous_run, assessment_id)
