@@ -1,0 +1,34 @@
+{
+  "id": "AA-PROVIDER-PROFILE-OPENAI-ASTRA-001",
+  "version": "0.1",
+  "selected_on": "2026-11-27",
+  "authority": "Author instruction: Chose the latest best model",
+  "status": "Selected for live validation; authorial effectiveness not established",
+  "providers": {
+    "construction": {
+      "model": "gpt-6.2-astra",
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "key_env": "AGENT_API_KEY"
+    },
+    "expression": {
+      "model": "gpt-6.2-astra",
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "key_env": "AGENT_API_KEY"
+    },
+    "checking": {
+      "model": "gpt-6.2-astra",
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "key_env": "AGENT_API_KEY"
+    }
+  },
+  "selection_basis": {
+    "official_catalog": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+    "capability": "OpenAI lists GPT-6.2 Astra as its most capable general-purpose model",
+    "credential_check": "Authenticated model-list request returned HTTP 200 and included gpt-6.2-astra"
+  },
+  "application": "Copy the providers object into the exact committed run configuration. The existing runner does not implicitly discover or merge profiles.",
+  "preservation": "No phase prompts, voice rules, exemplar selections or procedure definitions are changed by this provider selection.",
+  "request_settings": "Existing JSONModel request shape is retained; optional generation parameters remain omitted and provider defaults therefore apply. Exact requests and returned model identifiers are recorded.",
+  "credential_storage": "The configuration contains environment-variable names only. No key value is stored in this profile.",
+  "version_limit": "The selected model identifier is recorded. It is not a claim that the provider exposes an immutable weights snapshot for this alias."
+}

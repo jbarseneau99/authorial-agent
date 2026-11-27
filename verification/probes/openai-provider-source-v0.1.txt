@@ -1,0 +1,1 @@
+The test object has one input and one output

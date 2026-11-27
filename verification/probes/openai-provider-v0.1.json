@@ -1,0 +1,29 @@
+{
+  "id": "AA-PROBE-OPENAI-PROVIDER-001",
+  "version": "0.1",
+  "status": "synthetic connectivity probe; live result pending",
+  "scope": "One direct existing construction-provider call; no manuscript or author approval",
+  "mode": "live",
+  "procedure": "procedures/v0.2.json",
+  "ledger": "src/Authorial_Voice_Ledger_v0.4.xlsx",
+  "sources": [
+    "verification/probes/openai-provider-source-v0.1.txt",
+    "verification/probes/run_openai_provider_probe.py"
+  ],
+  "providers": {
+    "construction": {
+      "model": "gpt-6.2-astra",
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "key_env": "AGENT_API_KEY"
+    }
+  },
+  "prompt_templates_sha256": "1785ff0097d5bfc83c5762488e1a6583bd0e4611884d6f5195bbe3e845671d0d",
+  "operation": "construction",
+  "constraints": [
+    "Synthetic source only",
+    "One provider invocation",
+    "No Execution, expression, closure or author approval calls",
+    "Output stored outside the source checkout",
+    "Credential never persisted"
+  ]
+}
