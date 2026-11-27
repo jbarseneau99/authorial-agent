@@ -1,0 +1,79 @@
+{
+  "run_id": "RUN_015",
+  "configuration_version": "0.1",
+  "status": "configured_before_construction_and_generation",
+  "baseline_commit": "2395e66b4599ba92e26d2274aaf872bb1cfb79e4",
+  "subject": {
+    "chapter": "43",
+    "title": "Multiplanetary Expansion"
+  },
+  "requirements": [
+    "BR-08.02",
+    "BR-09.01",
+    "BR-12.02"
+  ],
+  "historical_comparison": {
+    "run_id": "RUN_013",
+    "assessment_path": "experiments/RUN_013/assessment-v0.1.json",
+    "diagnostic_path": "experiments/RUN_013/diagnostic-v0.1.json",
+    "detector": "Pangram 4.1",
+    "human_percent": 93,
+    "ai_percent": 7,
+    "words": 1814,
+    "provenance": "author-reported",
+    "author_voice_validation": "not established by detector score"
+  },
+  "procedure_paths": [
+    "procedures/v0.3.json",
+    "procedures/v0.2.json"
+  ],
+  "ledger_revision": "v0.4",
+  "rules": {
+    "changed": false,
+    "canonical_paths": [
+      "rules/v0.4/conceptual.json",
+      "rules/v0.4/epistemic.json",
+      "rules/v0.4/rhetorical.json",
+      "rules/v0.4/linguistic.json"
+    ],
+    "version_source": "baseline_commit"
+  },
+  "exemplars": {
+    "existing_corpus_path": "exemplars/v0.4/all.json",
+    "approved_written_reference_path": "src/P006_reference.md",
+    "trial_addition_count": 3,
+    "trial_addition_type": "newly spoken candidate exemplars",
+    "trial_addition_storage": "private",
+    "promotion_to_approved_status": false,
+    "rule_additions_or_changes": false,
+    "selection": "Select only when relevant to the intended act and scale; record availability, preselection, and observable realization separately."
+  },
+  "execution": "ChatGPT LLM orchestration; encoded construction precedes expression in a fresh context; separate independent paragraph and fidelity review. No claim of executing the Python prototype.",
+  "model": "GPT-6 Astra Pro per session identity; deployment ID and sampling parameters unavailable",
+  "stages": [
+    "Resolve and preserve private source inputs, author intent, canonical rules, and authentic exemplars.",
+    "Construct the semantic argument and paragraph-level intellectual acts; review and freeze the construction before expression.",
+    "Provide a fresh expression context with the closed structure, frozen rules, existing authentic exemplars, and the three private trial candidates; exclude original source prose and detector feedback.",
+    "Record sentence-to-act and paragraph-to-exemplar bindings, including nonselection and unsupported voice claims.",
+    "Perform separate independent paragraph and fidelity review; repair specific defects and recheck affected dependencies and the full chapter.",
+    "Preserve exact private prompts, intermediate outputs, final expression, versions, and review evidence.",
+    "Have the author submit the final expression to Pangram once and report the result; record author voice judgment separately."
+  ],
+  "constraints": [
+    "No detector-guided revision or optimization.",
+    "Preserve substantive source content and qualifications; request reopening for substantive construction defects.",
+    "Do not infer author approval from detector results.",
+    "Do not overwrite completed runs or historical evidence.",
+    "No new or changed authorial rules and no automatic promotion of the three spoken candidates."
+  ],
+  "persistence": "Metadata-only public registration. New manuscript text, source extracts, encoded construction, exact private prompts, candidate transcripts, and private file identifiers remain private. Preserve their exact versions and evidence privately against this configuration commit.",
+  "authorial_validation": "pending",
+  "detector": "not_run",
+  "limitations": [
+    "The exact RUN_013 expression and encoded construction are absent from the current repository; its assessment also records that the exact chapter expression was not persisted.",
+    "RUN_013 was manually executed without context isolation or formal construction closure.",
+    "This run uses separate expression context and independent checking, which differ from the historical execution.",
+    "The historical before-and-after comparison is exploratory and cannot attribute changes causally to the exemplar addition.",
+    "Detector classification and the author's judgment of voice and substance are separate observations."
+  ]
+}
