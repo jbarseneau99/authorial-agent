@@ -3,6 +3,7 @@ from model import Graph
 from faculty import Faculty
 from test_faculty import Reasoner, Research
 from expression import Expression
+from test_helpers import close_fixture_plan
 class Writer:
     def __init__(self,mode): self.mode=mode
     def realize(self,c):
@@ -10,7 +11,7 @@ class Writer:
         return {'status':'draft','sentences':[{'text':'A proposed hypothesis.','acts':c['acts'] if self.mode=='good' else ['unknown']}]}
 class ExpressionTests(unittest.TestCase):
     def setUp(self):
-        self.g=Graph(); self.addCleanup(self.g.db.close); self.p=Faculty(self.g,Reasoner(),Research()).build('Explore memory')
+        self.g=Graph(); self.addCleanup(self.g.db.close); f=Faculty(self.g,Reasoner(),Research()); self.p=f.build('Explore memory'); close_fixture_plan(f,self.p)
     def test_draft_and_invalidation(self):
         e=Expression(self.g,Writer('good')); r=e.run(self.p); s=e.inspect(r); self.assertEqual(s['state'],'draft_unvalidated'); a=self.g.prerequisites(s['sentences'][0]['id'])[0][1]; self.g.revise(a,{'purpose':'Changed'}); self.assertEqual(e.inspect(r)['state'],'stale')
     def test_reject(self):

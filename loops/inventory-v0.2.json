@@ -1,0 +1,141 @@
+{
+  "id": "AA-LOOP-MAP-002",
+  "version": "0.2",
+  "status": "implemented code increment; fixture verification; no live manuscript run",
+  "parent": "loops/inventory-v0.1.json",
+  "implementation_base_commit": "68e2a8a4b8a276e1573efe2d2f2543a06968f15d",
+  "procedure_changes": false,
+  "voice_rule_changes": false,
+  "four_layers": [
+    "conceptual",
+    "epistemic",
+    "rhetorical",
+    "linguistic"
+  ],
+  "ordering": "Conceptual and epistemic construction first; rhetorical planning during construction; rhetorical and linguistic realization during expression; checking all four.",
+  "coordinator": "src/execution.py",
+  "external_canonical_interface": "not integrated; existing Execution extended, no second scheduler",
+  "loops": [
+    {
+      "id": "construction",
+      "owner": "src/faculty.py",
+      "helpers": [
+        "src/construction.py"
+      ],
+      "outputs": [
+        "proposed plan",
+        "three-layer construction review",
+        "explicit author closure witness"
+      ],
+      "limits": [
+        "full epistemic schema",
+        "per-act relevance selection",
+        "intellectual repair"
+      ]
+    },
+    {
+      "id": "research",
+      "owner": "src/research_loop.py",
+      "helpers": [
+        "src/research.py",
+        "src/governance.py"
+      ],
+      "outputs": [
+        "bound text evidence",
+        "bilateral retrieval records"
+      ],
+      "limits": [
+        "retrieval is not sufficiency",
+        "automated query construction"
+      ]
+    },
+    {
+      "id": "expression",
+      "owner": "src/expression.py",
+      "outputs": [
+        "prose with act references",
+        "or reopening request"
+      ],
+      "gate": "current revision-bound construction closure",
+      "limits": [
+        "paragraph iteration",
+        "semantic entailment is provider judged"
+      ]
+    },
+    {
+      "id": "checking",
+      "owner": "src/checking.py",
+      "outputs": [
+        "four-layer findings",
+        "revision-bound reopening tickets"
+      ],
+      "limits": [
+        "provider judgments are not author approval"
+      ]
+    },
+    {
+      "id": "editing",
+      "owner": "src/editing.py",
+      "outputs": [
+        "new expression attempt linked to exact prior draft and findings"
+      ],
+      "limits": [
+        "linguistic failures only"
+      ]
+    },
+    {
+      "id": "validation",
+      "owner": "src/execution.py",
+      "outputs": [
+        "explicit author approval or unresolved state"
+      ],
+      "limits": [
+        "trusted host actor; authentication integration outstanding"
+      ]
+    },
+    {
+      "id": "learning",
+      "owner": "src/learning.py",
+      "status": "unchanged",
+      "limits": [
+        "approved snapshots not integrated into generation"
+      ]
+    },
+    {
+      "id": "composition",
+      "owner": null,
+      "status": "not implemented; flat act placement remains in construction"
+    }
+  ],
+  "prompt_data": {
+    "construction": "selected rules, grounded spoken exemplars and source lineage",
+    "construction_review": "same frozen voice selection and graph revision",
+    "expression": "closed graph, ordered acts, selected rules and actual exemplar passages",
+    "checking": "prose, graph and same selected voice evidence",
+    "editing": "prior exact draft, exact findings and same closure-bound inputs"
+  },
+  "provenance_helpers": [
+    "src/run_binding.py",
+    "src/providers.py"
+  ],
+  "states": [
+    "awaiting_construction_review",
+    "awaiting_construction_closure",
+    "construction_review_required",
+    "ready",
+    "running",
+    "suspended_reopen",
+    "suspended_error",
+    "budget_exhausted",
+    "awaiting_approval",
+    "closed",
+    "stale"
+  ],
+  "effectiveness": {
+    "fixture_result": "see verification/code-execution-v0.1.json",
+    "live_model_result": null,
+    "author_voice_validation": null,
+    "detector_result": null
+  },
+  "coverage_details": "docs/code-execution-v0.1.md"
+}

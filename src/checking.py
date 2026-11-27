@@ -1,5 +1,5 @@
 """Revision-bound checking and reopening tickets; semantic judgments are provider supplied."""
-import json, uuid
+import hashlib, json, uuid
 from typing import Protocol
 from expression import Expression
 
@@ -35,9 +35,9 @@ class Checking:
         if not row: raise KeyError(ident)
         run,snapshot,findings,state=row
         try: current=json.dumps(self.snapshot(run),sort_keys=True)==snapshot
-        except ValueError: current=False
+        except (ValueError, KeyError): current=False
         tickets=[dict(zip(('id','layer','route','state','actor'),r)) for r in self.g.db.execute('SELECT id,layer,route,state,actor FROM reopen_ticket WHERE assessment=?',(ident,))]
-        return {'state':state if current else 'stale','findings':json.loads(findings),'tickets':tickets}
+        return {'id':ident,'run':run,'snapshot_sha256':hashlib.sha256(snapshot.encode('utf-8')).hexdigest(),'state':state if current else 'stale','findings':json.loads(findings),'tickets':tickets}
     def authorize(self,ticket,actor):
         if actor!='author': raise PermissionError('Author authorization required')
         with self.g.db:

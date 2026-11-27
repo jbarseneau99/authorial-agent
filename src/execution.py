@@ -1,46 +1,214 @@
-"""Bounded orchestration with persistent checkpoints; trusted caller authorization."""
-import json, uuid
+"""The existing execution coordinator, with explicit gates and versioned checkpoints.
+
+This is the single scheduler. Loop owners perform their own work. Integration
+with the external platform canonical interface remains an explicit requirement.
+"""
+import json
+import uuid
+from datetime import datetime, timezone
+from editing import Editing
+
+OWNERS = {'construction': 'src/faculty.py', 'expression': 'src/expression.py',
+          'checking': 'src/checking.py', 'editing': 'src/editing.py',
+          'validation': 'src/execution.py'}
+
+
 class Execution:
-    def __init__(self,g,faculty,expression,checking):
-        self.g=g; self.f=faculty; self.e=expression; self.c=checking
-        g.db.execute('CREATE TABLE IF NOT EXISTS execution(id TEXT PRIMARY KEY, data TEXT NOT NULL)')
-    def save(self,x):
-        with self.g.db: self.g.db.execute('INSERT OR REPLACE INTO execution VALUES(?,?)',(x['id'],json.dumps(x)))
-    def inspect(self,i):
-        r=self.g.db.execute('SELECT data FROM execution WHERE id=?',(i,)).fetchone()
-        if not r: raise KeyError(i)
-        x=json.loads(r[0]); a=x.get('assessment')
-        if a and self.c.inspect(a)['state']=='stale': x['state']='stale'
+    def __init__(self, g, faculty, expression, checking, binding=None):
+        self.g, self.f, self.e, self.c = g, faculty, expression, checking
+        self.binding = binding
+        self.editing = Editing(g, expression, checking)
+        g.db.executescript('''
+            CREATE TABLE IF NOT EXISTS execution(id TEXT PRIMARY KEY, data TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS execution_revision(
+                execution_id TEXT NOT NULL, revision INTEGER NOT NULL,
+                recorded_at TEXT NOT NULL, data TEXT NOT NULL,
+                PRIMARY KEY(execution_id, revision));
+            CREATE TRIGGER IF NOT EXISTS execution_revision_no_update
+                BEFORE UPDATE ON execution_revision BEGIN
+                SELECT RAISE(ABORT, 'Execution history is append-only'); END;
+            CREATE TRIGGER IF NOT EXISTS execution_revision_no_delete
+                BEFORE DELETE ON execution_revision BEGIN
+                SELECT RAISE(ABORT, 'Execution history is append-only'); END;
+        ''')
+
+    def save(self, x):
+        with self.g.db:
+            revision = self.g.db.execute(
+                'SELECT COALESCE(MAX(revision),0)+1 FROM execution_revision WHERE execution_id=?',
+                (x['id'],)).fetchone()[0]
+            x['revision'] = revision
+            data = json.dumps(x, sort_keys=True)
+            self.g.db.execute('INSERT INTO execution_revision VALUES(?,?,?,?)',
+                (x['id'], revision, datetime.now(timezone.utc).isoformat(), data))
+            self.g.db.execute('INSERT OR REPLACE INTO execution VALUES(?,?)', (x['id'], data))
+
+    def _binding_current(self, x):
+        if x.get('binding_id'):
+            if self.binding is None or self.binding.id != x['binding_id']:
+                raise ValueError('Load the original execution binding before resuming')
+            self._bound_components(self.binding.verify())
+        elif x.get('mode') != 'fixture':
+            raise ValueError('A verified run binding is required')
+
+    def _bound_components(self, manifest):
+        """The coordinator cannot claim one binding while its workers use another.
+
+        Providers remain interchangeable, but a bound run requires the same
+        journal/configuration contract at every model boundary. Explicit unbound
+        fixture execution does not claim these production provenance guarantees.
+        """
+        if self.binding.g is not self.g:
+            raise ValueError('Execution binding must belong to the execution graph')
+        for role, provider in (
+            ('construction', self.f.reasoner),
+            ('expression', self.e.writer),
+            ('checking', self.c.reviewer),
+        ):
+            journal = getattr(provider, 'journal', None)
+            provider_binding = getattr(journal, 'binding', None)
+            if (journal is None or getattr(journal, 'g', None) is not self.g
+                    or provider_binding is None
+                    or getattr(provider_binding, 'g', None) is not self.g
+                    or getattr(provider_binding, 'id', None) != self.binding.id
+                    or getattr(journal, 'provider_role', None) != role):
+                raise ValueError('Provider must use its declared role and original execution binding: ' + role)
+            configuration = getattr(provider, 'configuration', None)
+            templates = getattr(provider, 'prompt_templates', None)
+            if (not callable(configuration) or not callable(templates)
+                    or configuration() != manifest['providers'].get(role)
+                    or templates() != manifest['prompt_templates']):
+                raise ValueError('Provider configuration or prompts differ from the execution binding: ' + role)
+        if self.f.baseline_digest != manifest['ledger']['sha256']:
+            raise ValueError('Construction must select rules from the bound ledger')
+
+    def inspect(self, ident):
+        row = self.g.db.execute('SELECT data FROM execution WHERE id=?', (ident,)).fetchone()
+        if row is None:
+            raise KeyError(ident)
+        x = json.loads(row[0])
+        if x.get('assessment') and self.c.inspect(x['assessment'])['state'] == 'stale':
+            x.update(state='stale', unresolved='Expression or construction changed')
+        elif x.get('closure'):
+            try:
+                self.e.c.require_closed(x['plan'])
+            except (ValueError, KeyError):
+                x.update(state='stale', unresolved='Construction closure is no longer current')
         return x
-    def start(self,intent,max_attempts=3):
-        if not intent.strip() or type(max_attempts)!=int or max_attempts<1: raise ValueError('Invalid entry')
-        x=dict(id=str(uuid.uuid4()),intent=intent,max_attempts=max_attempts,attempts=0,state='ready',history=[])
-        self.save(x); return self.advance(x['id'])
-    def advance(self,i,actor=None):
-        x=self.inspect(i)
-        if x['state'] not in {'ready','suspended_reopen'}: raise ValueError('Not runnable')
-        if x['state']=='suspended_reopen':
-            if actor!='author': raise PermissionError('Author required')
-            if x['route']!='expression': raise ValueError('Intellectual revision requires explicit new construction; not automated')
-            for t in self.c.inspect(x['assessment'])['tickets']: 
-                if t['state']=='proposed': self.c.authorize(t['id'],actor)
-        if x['attempts']>=x['max_attempts']:
-            x['state']='budget_exhausted'; self.save(x); return x
-        x['attempts']+=1; x['state']='running'; x.pop('assessment',None); self.save(x)
+
+    def history(self, ident):
+        return [json.loads(row[0]) for row in self.g.db.execute(
+            'SELECT data FROM execution_revision WHERE execution_id=? ORDER BY revision', (ident,))]
+
+    def _checkpoint(self, x, state, loop, **details):
+        x.update(state=state, active_loop=loop, loop_owner=OWNERS.get(loop), **details)
+        x['history'].append({key: x.get(key) for key in (
+            'attempts', 'plan', 'construction_review', 'closure', 'run',
+            'assessment', 'state', 'active_loop', 'route')})
+        self.save(x)
+        return x
+
+    def start(self, intent, max_attempts=3, *, mode='live'):
+        if not isinstance(intent, str) or not intent.strip() or type(max_attempts) is not int or max_attempts < 1:
+            raise ValueError('Intent and a positive attempt budget are required')
+        if mode not in {'live', 'fixture'}:
+            raise ValueError('Declare live or fixture execution')
+        if self.binding is None and mode != 'fixture':
+            raise ValueError('Live execution requires an immutable run binding')
+        if self.binding is not None:
+            manifest = self.binding.verify()
+            if manifest['mode'] != mode:
+                raise ValueError('Execution mode must match its binding')
+            self._bound_components(manifest)
+        x = dict(id=str(uuid.uuid4()), intent=intent, max_attempts=max_attempts,
+                 attempts=0, state='constructing', history=[], mode=mode,
+                 binding_id=self.binding.id if self.binding else None,
+                 active_loop='construction', loop_owner=OWNERS['construction'])
+        self.save(x)
         try:
-            if not x.get('plan'): x['plan']=self.f.build(x['intent']); self.save(x)
-            x['run']=self.e.run(x['plan']); self.save(x)
-            draft=self.e.inspect(x['run'])
-            if draft['state']=='reopen_requested': x.update(state='suspended_reopen',route='construction')
-            else:
-                x['assessment']=self.c.assess(x['run']); result=self.c.inspect(x['assessment'])
-                routes={t['route'] for t in result['tickets']}
-                x.update(state='awaiting_approval' if not routes else 'suspended_reopen',route='author_review' if 'author_review' in routes else 'construction' if 'construction' in routes else 'expression' if routes else None)
+            x['plan'] = self.f.build(intent)
         except Exception as exc:
-            x.update(state='suspended_error',error=type(exc).__name__+': '+str(exc))
-        x['history'].append({k:x.get(k) for k in ('attempts','plan','run','assessment','state','route')}); self.save(x); return x
-    def approve(self,i,actor):
-        if actor!='author': raise PermissionError('Author required')
-        x=self.inspect(i)
-        if x['state']!='awaiting_approval' or self.c.inspect(x['assessment'])['state']!='checks_passed': raise ValueError('Current passing assessment required')
-        x.update(state='closed',approved_by=actor); self.save(x); return x
+            return self._checkpoint(x, 'suspended_error', 'construction', error=type(exc).__name__)
+        self._checkpoint(x, 'awaiting_construction_review', 'construction',
+                         unresolved='Construction must be reviewed and closed before expression')
+        if hasattr(self.c.reviewer, 'assess_construction'):
+            return self.review_construction(x['id'])
+        return x
+
+    def review_construction(self, ident, reviewer=None):
+        if self.binding is not None and reviewer is not None and reviewer is not self.c.reviewer:
+            raise ValueError('Bound execution must use its declared checking provider')
+        x = self.inspect(ident)
+        if x['state'] not in {'awaiting_construction_review', 'construction_review_required'}:
+            raise ValueError('Construction is not awaiting review')
+        self._binding_current(x)
+        try:
+            x['construction_review'] = self.f.review(x['plan'], reviewer or self.c.reviewer)
+            finding = self.f.inspect_review(x['construction_review'])
+            passed = all(item['status'] == 'pass' for item in finding['findings'])
+            return self._checkpoint(x,
+                'awaiting_construction_closure' if passed else 'construction_review_required',
+                'construction', unresolved='Explicit construction closure required' if passed
+                else 'Construction findings remain unresolved')
+        except Exception as exc:
+            return self._checkpoint(x, 'suspended_error', 'construction', error=type(exc).__name__)
+
+    def close_construction(self, ident, actor=None):
+        x = self.inspect(ident)
+        if x['state'] != 'awaiting_construction_closure':
+            raise ValueError('Current passing construction review required')
+        self._binding_current(x)
+        x['closure'] = self.f.close(x['plan'], x['construction_review'], actor)
+        return self._checkpoint(x, 'ready', 'expression', unresolved=None, route=None)
+
+    def advance(self, ident, actor=None):
+        x = self.inspect(ident)
+        if x['state'] not in {'ready', 'suspended_reopen'}:
+            raise ValueError('Execution is not ready for expression or a permitted repair')
+        self._binding_current(x)
+        self.e.c.require_closed(x['plan'])
+        retry = x['state'] == 'suspended_reopen'
+        if retry:
+            if actor != 'author':
+                raise PermissionError('Explicit author authorization required for repair')
+            if x.get('route') != 'expression':
+                raise ValueError('Construction or author review required, not expression repair')
+        if x['attempts'] >= x['max_attempts']:
+            return self._checkpoint(x, 'budget_exhausted', 'editing' if retry else 'expression',
+                                    unresolved='Attempt limit reached; no closure granted')
+        prior_run, prior_assessment = x.get('run'), x.get('assessment')
+        x['attempts'] += 1
+        self._checkpoint(x, 'running', 'editing' if retry else 'expression')
+        try:
+            x['run'] = (self.editing.run(prior_run, prior_assessment, actor=actor)
+                        if retry else self.e.run(x['plan']))
+            x.pop('assessment', None)
+            self._checkpoint(x, 'running', 'expression')
+            draft = self.e.inspect(x['run'])
+            if draft['state'] == 'reopen_requested':
+                return self._checkpoint(x, 'suspended_reopen', 'construction',
+                    route='construction', unresolved=draft['detail'])
+            self._checkpoint(x, 'running', 'checking')
+            x['assessment'] = self.c.assess(x['run'])
+            result = self.c.inspect(x['assessment'])
+            routes = {ticket['route'] for ticket in result['tickets']}
+            route = ('author_review' if 'author_review' in routes else
+                     'construction' if 'construction' in routes else
+                     'expression' if routes else None)
+            return self._checkpoint(x, 'suspended_reopen' if routes else 'awaiting_approval',
+                'checking' if routes else 'validation', route=route,
+                unresolved=result['findings'] if routes else None)
+        except Exception as exc:
+            # Provider errors are recorded separately; raw text may contain secrets.
+            return self._checkpoint(x, 'suspended_error', x['active_loop'], error=type(exc).__name__)
+
+    def approve(self, ident, actor):
+        if actor != 'author':
+            raise PermissionError('Author required')
+        x = self.inspect(ident)
+        self._binding_current(x)
+        if x['state'] != 'awaiting_approval' or self.c.inspect(x['assessment'])['state'] != 'checks_passed':
+            raise ValueError('Current passing assessment required')
+        self.e.c.require_closed(x['plan'])
+        return self._checkpoint(x, 'closed', 'validation', approved_by=actor,
+                                closure_authority='author', unresolved=None)
