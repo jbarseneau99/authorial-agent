@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-v"
+  ],
+  "working_directory": "main/src",
+  "exit_code": 0,
+  "seconds": 0.582,
+  "live_model_calls": false,
+  "note": "Existing tests exercised with their supplied fixtures/mocked transports; no manuscript generation."
+}

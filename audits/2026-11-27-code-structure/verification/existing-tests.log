@@ -1,0 +1,43 @@
+test_pass_not_approval (test_checking.CheckingTests.test_pass_not_approval) ... ok
+test_route_and_authority (test_checking.CheckingTests.test_route_and_authority) ... ok
+test_stale (test_checking.CheckingTests.test_stale) ... ok
+test_cycle (test_construction.ConstructionTests.test_cycle) ... ok
+test_gate (test_construction.ConstructionTests.test_gate) ... ok
+test_missing (test_construction.ConstructionTests.test_missing) ... ok
+test_inventory (test_coverage.CoverageTests.test_inventory) ... ok
+test_multilayer_and_live_evidence (test_coverage.CoverageTests.test_multilayer_and_live_evidence) ... ok
+test_unknown (test_coverage.CoverageTests.test_unknown) ... ok
+test_no_overwrite (test_evaluate.EvaluationTests.test_no_overwrite) ... ok
+test_preparation (test_evaluate.EvaluationTests.test_preparation) ... ok
+test_closure (test_execution.ExecutionTests.test_closure) ... ok
+test_intellectual_suspend (test_execution.ExecutionTests.test_intellectual_suspend) ... ok
+test_retry_budget (test_execution.ExecutionTests.test_retry_budget) ... ok
+test_stale (test_execution.ExecutionTests.test_stale) ... ok
+test_draft_and_invalidation (test_expression.ExpressionTests.test_draft_and_invalidation) ... ok
+test_reject (test_expression.ExpressionTests.test_reject) ... ok
+test_reopen (test_expression.ExpressionTests.test_reopen) ... ok
+test_build (test_faculty.FacultyTests.test_build) ... ok
+test_reject_unknown_reference (test_faculty.FacultyTests.test_reject_unknown_reference) ... ok
+test_dedup_and_direction (test_governance.GovernanceTests.test_dedup_and_direction) ... ok
+test_dependency (test_governance.GovernanceTests.test_dependency) ... ok
+test_failed_search (test_governance.GovernanceTests.test_failed_search) ... ok
+test_invalid_judgment (test_governance.GovernanceTests.test_invalid_judgment) ... ok
+test_baseline (test_ingest.ImportTests.test_baseline) ... ok
+test_no_rule_required (test_learning.TestLearning.test_no_rule_required) ... ok
+test_rule_governance (test_learning.TestLearning.test_rule_governance) ... ok
+test_teaching (test_learning.TestLearning.test_teaching) ... ok
+test_graph (test_model.Tests.test_graph) ... ok
+test_persistence (test_model.Tests.test_persistence) ... ok
+test_contract (test_providers.ProviderTests.test_contract) ... ok
+test_missing_key (test_providers.ProviderTests.test_missing_key) ... ok
+test_truncation (test_providers.ProviderTests.test_truncation) ... ok
+test_failure_propagates (test_research.ResearchTests.test_failure_propagates) ... ok
+test_provenance_persisted (test_research.ResearchTests.test_provenance_persisted) ... ok
+test_retrieval (test_research.ResearchTests.test_retrieval) ... ok
+test_end_to_end (test_run_agent.IntegrationTests.test_end_to_end) ... ok
+test_failed_research_suspends (test_run_agent.IntegrationTests.test_failed_research_suspends) ... ok
+
+----------------------------------------------------------------------
+Ran 38 tests in 0.169s
+
+OK

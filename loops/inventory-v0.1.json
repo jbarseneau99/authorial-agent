@@ -1,0 +1,281 @@
+{
+  "id": "AA-LOOP-MAP-001",
+  "version": "0.1",
+  "status": "Observed code inventory and documented requirements; not an executed new writing procedure",
+  "baseline": {
+    "main": "f539b96f598b5cb75548eca069a75f28bb8ef680",
+    "archive": "93480bed885c813e127a7749606a91f435b84be4"
+  },
+  "author_decision": "AA-DEC-2026-11-27-001",
+  "ordering": "Conceptual and epistemic construction precedes expression. Rhetorical act purpose/order is planned during construction; rhetorical realization and linguistic expression follow. Checking spans all four layers.",
+  "layers": [
+    {
+      "id": "conceptual",
+      "required": "Definitions, distinctions, categories and relationships.",
+      "existing": [
+        "src/faculty.py:Faculty.build",
+        "src/construction.py:Construction.check",
+        "src/checking.py:Checking.assess"
+      ],
+      "gap": "No separately enforced conceptual closure; conceptual check is provider-supplied after prose."
+    },
+    {
+      "id": "epistemic",
+      "required": "Typed claims, warrants, evidence, qualifications, assumptions, objections and claim dependencies.",
+      "existing": [
+        "src/model.py:Graph",
+        "src/faculty.py:Faculty.build",
+        "src/construction.py:Construction.check"
+      ],
+      "gap": "Claims have origin/provenance and acts, but construction provider schema does not build warrants, rebuttals or claim dependency structure; evidence validity/sufficiency is not gated."
+    },
+    {
+      "id": "rhetorical",
+      "required": "Purpose/order of intellectual acts and faithful realization, separate from epistemic dependencies.",
+      "existing": [
+        "src/faculty.py:Faculty.build",
+        "src/expression.py:Expression.run"
+      ],
+      "gap": "Ordered flat acts and sentence links exist; separate composition placement/hierarchical paragraph orchestration is absent."
+    },
+    {
+      "id": "linguistic",
+      "required": "Realize acts with resolved applicable rules and authentic exemplars; repair diagnosed voice defects.",
+      "existing": [
+        "src/expression.py:Expression.run",
+        "src/providers.py:JSONModel.realize",
+        "src/checking.py:Checking.assess"
+      ],
+      "gap": "Advisory rule records reach writer; referenced exemplar passages/P006 do not. Retry does not receive prior prose or findings."
+    }
+  ],
+  "loops": [
+    {
+      "id": "execution",
+      "owner_now": "src/execution.py",
+      "entry": "Execution.start / advance",
+      "kind": "Bounded stateful coordinator",
+      "inputs": [
+        "intent",
+        "attempt budget",
+        "faculty",
+        "expression",
+        "checking"
+      ],
+      "outputs": [
+        "execution state",
+        "history",
+        "plan/run/assessment IDs"
+      ],
+      "closure": "Execution.approve requires literal author actor and current checks_passed; CLI offers no approval/resume command.",
+      "open": [
+        "not bound to procedure file revision",
+        "canonical interface not integrated",
+        "trusted actor string requires host authority"
+      ]
+    },
+    {
+      "id": "construction",
+      "owner_now": "src/faculty.py",
+      "support": [
+        "src/construction.py",
+        "src/model.py"
+      ],
+      "kind": "One-pass construction faculty and structural gate",
+      "layers": [
+        "conceptual",
+        "epistemic",
+        "rhetorical planning"
+      ],
+      "inputs": [
+        "intent",
+        "retrieved evidence",
+        "advisory rules"
+      ],
+      "outputs": [
+        "claims",
+        "ordered acts",
+        "plan proposed_unvalidated"
+      ],
+      "closure": "Structural completeness checked; no conceptual/epistemic closure state required before expression.",
+      "open": [
+        "typed warrants and dependencies",
+        "evidence sufficiency",
+        "construction closure witness",
+        "authorial memory/exemplar retrieval"
+      ]
+    },
+    {
+      "id": "research",
+      "owner_now": null,
+      "support": [
+        "src/research.py",
+        "src/governance.py",
+        "src/run_agent.py:ResearchBridge"
+      ],
+      "kind": "Retrieval and bilateral-query helpers across files",
+      "inputs": [
+        "operator-supplied support/challenge queries"
+      ],
+      "outputs": [
+        "unassessed evidence",
+        "retrieval attempts"
+      ],
+      "closure": "Retrieval completion is checked; governance.assess and sufficiency are not connected.",
+      "open": [
+        "single owning loop module",
+        "semantic evidence judgment",
+        "independence/sufficiency closure",
+        "reopening construction"
+      ]
+    },
+    {
+      "id": "composition",
+      "owner_now": null,
+      "support": [
+        "src/faculty.py"
+      ],
+      "kind": "Ordered act list only",
+      "inputs": [
+        "acts"
+      ],
+      "outputs": [
+        "flat ordered act IDs"
+      ],
+      "closure": "No distinct composition-loop closure.",
+      "open": [
+        "separate placement model",
+        "hierarchy and paragraph loop",
+        "intellectual dependencies kept separate"
+      ]
+    },
+    {
+      "id": "expression",
+      "owner_now": "src/expression.py",
+      "support": [
+        "src/providers.py"
+      ],
+      "kind": "One-pass writer with structural checks",
+      "layers": [
+        "rhetorical realization",
+        "linguistic"
+      ],
+      "inputs": [
+        "plan graph",
+        "advisory rules"
+      ],
+      "outputs": [
+        "draft_unvalidated",
+        "or reopen_requested"
+      ],
+      "closure": "All acts/order/sentence references checked; semantic fidelity and voice remain provider judgments.",
+      "open": [
+        "closed-construction gate",
+        "selected exemplars",
+        "frozen rule binding",
+        "paragraph-level loop"
+      ]
+    },
+    {
+      "id": "checking",
+      "owner_now": "src/checking.py",
+      "support": [
+        "src/providers.py"
+      ],
+      "kind": "Four-layer review plus reopening tickets",
+      "inputs": [
+        "revision snapshot",
+        "draft",
+        "construction"
+      ],
+      "outputs": [
+        "exactly one finding per layer",
+        "tickets",
+        "checks_passed or review_required"
+      ],
+      "closure": "Snapshot freshness and result shape checked; no independent establishment of semantic correctness.",
+      "open": [
+        "criterion-to-finding binding",
+        "reviewer inputs include relevant exemplars",
+        "connect findings to targeted repair"
+      ]
+    },
+    {
+      "id": "editing",
+      "owner_now": null,
+      "support": [
+        "src/execution.py:Execution.advance",
+        "src/checking.py:ROUTES"
+      ],
+      "kind": "Limited author-triggered expression retry",
+      "inputs": [
+        "same plan",
+        "author actor"
+      ],
+      "outputs": [
+        "new expression attempt",
+        "suspension",
+        "budget exhausted"
+      ],
+      "closure": "No complete repair closure; intellectual repair explicitly not automated.",
+      "open": [
+        "single owning loop module",
+        "prior draft plus findings in repair input",
+        "construction/research repair routes",
+        "targeted preservation and recheck"
+      ]
+    },
+    {
+      "id": "learning",
+      "owner_now": "src/learning.py",
+      "support": [
+        "src/coverage.py"
+      ],
+      "kind": "Elected teaching and rule-proposal state machine",
+      "inputs": [
+        "feedback",
+        "evidence",
+        "author decisions"
+      ],
+      "outputs": [
+        "learning events",
+        "proposals",
+        "ledger_version snapshots"
+      ],
+      "closure": "Author-governed session/rule decision exists.",
+      "open": [
+        "connect approved snapshots to generation",
+        "scope/coverage assessment and provenance binding"
+      ]
+    }
+  ],
+  "failure_routes_observed": {
+    "epistemic fail": "construction",
+    "rhetorical fail": "construction",
+    "linguistic fail": "expression",
+    "conceptual fail": "author_review",
+    "uncertain": "author_review"
+  },
+  "common_loop_contract": {
+    "source": "loops/design-contract.json and DS-09.01",
+    "required": [
+      "versioned input evidence",
+      "output",
+      "checking",
+      "validation",
+      "closure evidence or explicit unresolved state"
+    ],
+    "distinctions": [
+      "termination",
+      "justified closure",
+      "authority"
+    ],
+    "actual_platform_interface": "not recovered in either branch or any archived Python revision"
+  },
+  "verification": {
+    "existing_unit_tests": 38,
+    "passed": 38,
+    "live_provider_tests": 0,
+    "fixture_probe": "Synthetic fixture confirmed proposed_unvalidated construction reaches expression; writer context omits imported exemplar nodes."
+  }
+}

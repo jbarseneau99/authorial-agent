@@ -1,0 +1,39 @@
+{
+  "id": "AA-DEC-2026-11-27-001",
+  "version": "0.1",
+  "status": "author-directed",
+  "date": "2026-11-27",
+  "source": "Author instruction in the current conversation after review of RUN_016",
+  "instruction": "From now on run the authorial procedure only through code, structure it as loops, keep each loop in its own file, and keep the procedure understandable at every stage.",
+  "scope": "Execution of the authorial manuscript-generation and revision procedure in this repository.",
+  "requirements": [
+    {
+      "id": "CE-01",
+      "text": "Construction, expression, checking and repair must execute through recorded code paths. Chat-created prose or structures must not be substituted and then presented as code-generated results."
+    },
+    {
+      "id": "CE-02",
+      "text": "Each loop has one identifiable owning source file; shared lifecycle behavior and support utilities remain reusable."
+    },
+    {
+      "id": "CE-03",
+      "text": "The current procedure revision, loop, inputs, outputs, checks, unresolved findings, route and closure authority must remain inspectable."
+    }
+  ],
+  "existing_architecture_references": [
+    "BR/DS-05.01",
+    "BR/DS-05.02",
+    "BR/DS-06.01",
+    "BR/DS-08.02",
+    "BR/DS-09.01",
+    "BR/DS-10.02",
+    "BR/DS-12.02",
+    "GOVERNANCE.md"
+  ],
+  "implementation_status": "Policy recorded. Existing implementation is partial; this decision is not a claim that the loop runtime is complete.",
+  "restrictions": "Preserve existing voice rules, historical runs and evidence. Reuse or adapt the existing canonical-loop architecture; no replacement lifecycle is authorized merely by this file.",
+  "audit_baseline": {
+    "main": "f539b96f598b5cb75548eca069a75f28bb8ef680",
+    "archive": "93480bed885c813e127a7749606a91f435b84be4"
+  }
+}
