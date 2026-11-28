@@ -1,6 +1,6 @@
 """Render the implemented flow, separate corpora and verified API connections.
 
-Documentation only; see system-diagram-v0.2.md for evidence and limitations.
+Documentation only; see system-diagram-v0.3.md for evidence and limitations.
 """
 from pathlib import Path
 import argparse
@@ -37,11 +37,11 @@ def render(output, svg=None):
 
     text(.65,25.95,'AUTHORIAL AGENT',27,'bold',ha='left')
     text(.65,25.35,'Construct the intellectual work. Express and check one paragraph at a time.',15,color=MUTED,ha='left')
-    text(19.35,25.91,'SYSTEM DIAGRAM  /  v0.2',11,'bold',MUTED,ha='right')
+    text(19.35,25.91,'SYSTEM DIAGRAM  /  v0.3',11,'bold',MUTED,ha='right')
     text(19.35,25.49,'Connections checked 27 Nov 2026 (Toronto)',10.8,color=MUTED,ha='right')
-    box(.65,23.55,9.05,1.15,'OPENAI CONNECTION VERIFIED','GPT-6.2 Astra returned a valid synthetic claim and act.\nThis checks the provider call; it does not validate authorial writing.',GREEN,GE,13.5,11.8)
-    box(10.3,23.55,9.05,1.15,'PANGRAM CONNECTION VERIFIED','Pangram 4.1 passed a live check of an existing 56-word paragraph.\nAn integrated generated-paragraph trial remains to be run.',GREEN,GE,13.5,11.8)
-    text(10,23.08,'Ready for a controlled paragraph trial once its exact run configuration is committed and construction is closed.\nService probes, writing quality and your approval remain separate evidence.',11.8,'bold',GE)
+    box(.65,23.55,9.05,1.15,'OPENAI CONNECTION VERIFIED','GPT-6.2 Astra calls have generated and checked live paragraphs.\nWriting quality is evaluated separately for each recorded run.',GREEN,GE,13.5,11.8)
+    box(10.3,23.55,9.05,1.15,'PANGRAM CONNECTION VERIFIED','Pangram 4.1 has returned recorded live scan results.\nEach new paragraph reaches scanning after its four-layer checks pass.',GREEN,GE,13.5,11.8)
+    text(10,23.08,'Actual exemplars guide prose structure. Diagnosed defects return to the operation that can repair them.\nService access, writing checks, detector observations and your approval remain separate evidence.',11.8,'bold',GE)
 
     boundary(.6,18.25,18.8,4.4,'VOICE PREPARATION  /  ORIGINAL EVIDENCE IS RETAINED')
     box(.95,20.62,3.95,1.17,'RAW AUTHOR INPUT','Interview answers and transcripts\nOriginal speech / writing records',BLUE,BE,12.6,11)
@@ -53,10 +53,10 @@ def render(output, svg=None):
     box(10.15,18.96,3.85,1.16,'EXEMPLAR CORPUS','Exact passages + source lineage\nCandidate / validation status retained',VIOLET,VE,12.6,10.9)
     arrow([(9.52,20.3),(9.82,20.3),(9.82,21.24),(10.08,21.24)])
     arrow([(9.52,20.3),(9.82,20.3),(9.82,19.54),(10.08,19.54)])
-    box(14.75,19.41,4.25,1.84,'FREEZE PROMPT CONTEXT','Chosen ledger + selected rule IDs\nExpanded rule text + exact exemplars\nResolve their original source records\nKeep each item’s recorded authority',GREEN,GE,12.5,11.1,'construction.py: voice_context')
+    box(14.75,19.41,4.25,1.84,'RESOLVE EXAMPLES PER ACT','Applicable rules + exact example text\nWhat structure to model in this act\nOriginal source context + provenance\nApproved written example kept separate',GREEN,GE,12.5,11.1,'voice_resolution.py + voice_expression.py')
     arrow([(14.07,21.24),(14.4,21.24),(14.4,20.79),(14.68,20.79)],GE)
     arrow([(14.07,19.54),(14.4,19.54),(14.4,19.91),(14.68,19.91)],GE)
-    text(10,18.52,'Current runtime resolves source-matched original spoken excerpts. Per-act relevance and approved learning integration remain open.',10.7,color=MUTED)
+    text(10,18.52,'Review sees the full bound catalog; expression receives selected worked examples. Candidate rules retain their recorded status.',10.7,color=MUTED)
 
     arrow([(16.88,19.34),(16.88,17.99),(4.92,17.99),(4.92,9.05)],GE,True)
     for y in (15.65,13.77,10.45,9.05): arrow([(4.92,y),(5.53,y)],GE,True)
@@ -64,16 +64,16 @@ def render(output, svg=None):
     text(2.64,16.77,'Rules + source-linked passages\nreach construction, review,\nexpression and checking.',11.5,color=GE)
     box(5.6,16.97,8.75,.83,'AUTHOR INTENT + SUBJECT EVIDENCE','Bind procedure, code, ledger, source revisions, providers and prompt templates.',LIGHT,LINE,12.9,10.9)
     arrow([(9.975,16.90),(9.975,16.33)])
-    box(5.6,15.04,8.75,1.22,'1  CONSTRUCTION PROMPT','Conceptual + epistemic work; plan rhetorical purposes and order.\nIntent, evidence, rules and exemplars → claims + ordered intellectual acts.',BLUE,BE,14,11.7,'faculty.py  •  structured graph before prose')
+    box(5.6,15.04,8.75,1.22,'1  CONSTRUCTION PROMPT','Encode meaning; plan rhetorical purposes and order.\nResolve relevant rules, example structures and checking criteria for each act.',BLUE,BE,14,11.7,'faculty.py  •  structured graph before prose')
     arrow([(9.975,14.97),(9.975,14.45)])
-    box(5.6,13.16,8.75,1.22,'2  CONSTRUCTION REVIEW PROMPT','Same structure, evidence, rules and actual exemplar passages.\nReturns findings on conceptual, epistemic and rhetorical-plan fidelity.',BLUE,BE,14,11.7,'faculty.py + construction.py  •  pass / fail / uncertain')
+    box(5.6,13.16,8.75,1.22,'2  CONSTRUCTION REVIEW PROMPT','Structure + subject evidence + full available rules and examples.\nCheck meaning, warranted scope, voice choices, omissions and criteria.',BLUE,BE,14,11.7,'faculty.py + construction.py  •  pass / fail / uncertain')
     arrow([(9.975,13.09),(9.975,12.65)])
     box(5.6,11.87,8.75,.72,'AUTHOR CLOSES THIS CONSTRUCTION','Current passing review + unchanged structure + explicit closure authority.',GREEN,GE,13.2,11.1)
     arrow([(9.975,11.8),(9.975,11.12)])
     boundary(5.24,4.94,9.47,6.61,'PARAGRAPH LOOP','#FBFAFD',VE,True)
-    box(5.6,9.88,8.75,1.14,'3  EXPRESSION PROMPT','Closed structure + scoped acts + prior accepted paragraphs.\nSame rules and exemplars → one paragraph with sentence-to-act references.',VIOLET,VE,14,11.5,'expression.py  •  no later paragraphs generated')
+    box(5.6,9.88,8.75,1.14,'3  EXPRESSION PROMPT','Closed meaning + actual worked examples paired to each act.\nWrite prose structured like those examples; map sentences to acts.',VIOLET,VE,14,11.5,'expression.py  •  one paragraph; earlier text supplies continuity')
     arrow([(9.975,9.81),(9.975,9.44)])
-    box(5.6,8.25,8.75,1.14,'4  FOUR-LAYER CHECKING PROMPT','Exact paragraph + closed structure + the same voice evidence.\nConceptual  •  Epistemic  •  Rhetorical  •  Linguistic findings',AMBER,AE,14,11.7,'checking.py  •  reasons + affected sentence IDs')
+    box(5.6,8.25,8.75,1.14,'4  FOUR-LAYER CHECKING PROMPT','Exact paragraph + closed meaning + the same worked examples.\nConceptual  •  Epistemic  •  Rhetorical  •  Linguistic criteria',AMBER,AE,14,11.7,'checking.py  •  diagnosed defect + targets + repair criterion')
     arrow([(9.975,8.18),(9.975,7.73)],label='all four layers pass',at=(11.45,7.96),size=10.6)
     box(5.6,6.48,8.75,1.18,'5  PANGRAM CHECK OF THIS PARAGRAPH','Submit the exact checked text; preserve its hash, task and result.\nAt least 50 words; shorter text pauses as unscorable.',GREEN,GE,13.8,11.7,'pangram_check.py  •  poll the same saved task')
     arrow([(9.975,6.41),(9.975,6.01)])
@@ -92,10 +92,10 @@ def render(output, svg=None):
     text(17.58,12.9,'The key authenticates the API.\nIt is excluded from prompts,\nconfiguration files and logs.',10.9,color=MUTED)
     box(.65,12.42,3.95,3.23,'VERSIONED RUN RECORD','Procedure + code commit\nLedger + source hashes\nProvider configuration\nExact resolved prompts\nEvery output and finding\nLoop state + repair route\nClosure authority',LIGHT,LINE,12.7,11.6,'run_binding.py  •  append-only call evidence')
     text(2.63,11.68,'Source manuscript claims may inform\nsubject evidence. AI-like manuscript\nwording is not voice evidence.',10.9,color=MUTED)
-    box(.65,7.75,3.95,2.72,'TARGETED LINGUISTIC REPAIR','Author-authorized linguistic failure\nPrevious exact paragraph + findings\nAffected sentences and acts\nSame closed plan + voice context\nRecheck all layers, then rescan',AMBER,AE,11.8,11,'editing.py  •  bounded attempt budget')
-    arrow([(5.53,8.65),(4.67,8.65)],AE,label='linguistic fail',at=(5.04,8.84),size=9.7)
+    box(.65,7.75,3.95,2.72,'TARGETED EXPRESSION REPAIR','Authorized expression defect, any layer\nPrevious exact paragraph + diagnosis\nAffected sentences and acts\nClosed meaning + the same examples\nPreserve clean text; recheck all layers',AMBER,AE,11.8,10.6,'editing.py  •  bounded attempt budget')
+    arrow([(5.53,8.65),(4.67,8.65)],AE,label='expression defect',at=(5.04,8.84),size=8.9)
     arrow([(2.625,10.54),(2.625,10.89),(5.53,10.89)],AE,label='repair prompt',at=(4.06,10.9),size=9.7)
-    box(.65,4.99,3.95,2.03,'STOP / REOPEN','Epistemic or rhetorical → construction\nConceptual or uncertain → author review\nIntellectual repair is not automated',AMBER,AE,12.3,10.8)
+    box(.65,4.99,3.95,2.03,'STOP / REOPEN','Construction defect → construction\nEvidence gap / uncertainty → review\nIntellectual repair is not automated',AMBER,AE,12.3,10.8)
     arrow([(5.53,8.45),(5.12,8.45),(5.12,5.99),(4.67,5.99)],AE)
     text(3.0,7.37,'Other failures or uncertainty',10.1,color=AE)
     box(15.83,6.44,3.5,2.03,'PANGRAM SERVICE','Model selector: pangram-4\nConfirmed result version: 4.1\nCredential: PANGRAM_API_KEY\nPrivate scan of exact text',GREEN,GE,12.5,10.8)
@@ -106,7 +106,7 @@ def render(output, svg=None):
     text(2.625,3.99,'Existing Execution coordinates\nconstruction, paragraph progression\nand author-approval state.',11,color=MUTED)
     text(2.625,2.95,'One owning module per implemented loop.\nExternal canonical-loop integration\nremains unfinished.',10.7,color=MUTED)
     boundary(.65,.43,18.7,1.0,'CURRENT LIMITS')
-    text(10,.81,'Full epistemic schema • evidence sufficiency • per-act voice selection • intellectual repair • authenticated authority\nWhole-chapter semantic checking and a complete live authorial trial remain outstanding.',11.1,color=MUTED)
+    text(10,.81,'Full epistemic schema • evidence sufficiency • automatic intellectual repair • authenticated authority\nFixed sentence count during local repair • whole-chapter checking • external canonical-loop integration',11.1,color=MUTED)
     output.parent.mkdir(parents=True,exist_ok=True); fig.savefig(output,dpi=150,facecolor='white')
     if svg:
         svg.parent.mkdir(parents=True,exist_ok=True); fig.savefig(svg,facecolor='white')

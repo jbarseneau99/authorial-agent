@@ -45,26 +45,38 @@ class Editing:
         if assessment['state'] != 'review_required':
             raise ValueError('Current failed assessment required for editing')
         failed = [f for f in assessment['findings'] if f['status'] != 'pass']
-        if not failed or any(
-            f['layer'] != 'linguistic' or f['status'] != 'fail' for f in failed
-        ):
-            raise ValueError('Only linguistic failures may enter expression editing')
         tickets = assessment['tickets']
-        if len(tickets) != len(failed) or any(
-            t['layer'] != 'linguistic' or t['route'] != 'expression'
-            or t['state'] not in {'proposed', 'authorized'} for t in tickets
-        ):
-            raise ValueError('Current expression reopening ticket required')
         draft = self.expression.inspect(previous_run)
         if (draft.get('input') or {}).get('execution_profile') == 'resolved-voice-v1':
-            checks = [check for finding in failed for check in finding.get('checks', [])
-                      if check.get('status') != 'pass']
-            if not checks or any(check.get('status') != 'fail'
-                                 or check.get('defect_type') != 'expression'
-                                 or not isinstance(check.get('repair'), str)
-                                 or not check['repair'].strip() for check in checks):
+            routes = self.checking.current_repair_routes(assessment)
+            if not routes or any(route != 'expression' for route in routes.values()):
                 raise ValueError('Local editing requires diagnosed expression defects; construction and evidence limits remain unresolved')
+            if (len(tickets) != len(routes) or len({ticket['layer'] for ticket in tickets}) != len(tickets)
+                    or {ticket['layer'] for ticket in tickets} != set(routes)
+                    or any(ticket['route'] != routes[ticket['layer']]
+                           or ticket['state'] not in {'proposed', 'authorized'} for ticket in tickets)):
+                raise ValueError('Current expression tickets must match every diagnosed layer and repair route')
+        else:
+            if not failed or any(
+                finding['layer'] != 'linguistic' or finding['status'] != 'fail' for finding in failed
+            ):
+                raise ValueError('Only linguistic failures may enter expression editing')
+            if len(tickets) != len(failed) or any(
+                ticket['layer'] != 'linguistic' or ticket['route'] != 'expression'
+                or ticket['state'] not in {'proposed', 'authorized'} for ticket in tickets
+            ):
+                raise ValueError('Current expression reopening ticket required')
         return assessment
+
+    @staticmethod
+    def _same_authorized_diagnosis(expected, current, actor):
+        """Findings and ticket identities must stay bound across the call."""
+        def identities(tickets):
+            return {(ticket['id'], ticket['layer'], ticket['route']) for ticket in tickets}
+        return (current['findings'] == expected['findings']
+                and identities(current['tickets']) == identities(expected['tickets'])
+                and all(ticket['state'] == 'authorized' and ticket['actor'] == actor
+                        for ticket in current['tickets']))
 
     def _local_sequence(self, draft):
         return self.checking._sentence_records(draft, draft['input']['acts'])
@@ -151,7 +163,8 @@ class Editing:
         # Authorization may cross a transaction boundary. Recheck before saving
         # the immutable request and before any provider invocation.
         current = self._current(previous_run, assessment_id)
-        if current['snapshot_sha256'] != assessment['snapshot_sha256']:
+        if (current['snapshot_sha256'] != assessment['snapshot_sha256']
+                or (resolved and not self._same_authorized_diagnosis(assessment, current, actor))):
             raise ValueError('Assessment changed before editing')
         with self.g.db:
             self.g.db.execute(
@@ -168,7 +181,8 @@ class Editing:
             # A provider can return after another caller revised the original
             # draft. Preserve the output but do not accept that repair as current.
             current = self._current(previous_run, assessment_id)
-            if current['snapshot_sha256'] != assessment['snapshot_sha256']:
+            if (current['snapshot_sha256'] != assessment['snapshot_sha256']
+                    or (resolved and not self._same_authorized_diagnosis(assessment, current, actor))):
                 raise ValueError('Assessment changed during editing')
             if resolved:
                 self._validate_local_result(draft, self.expression.inspect(new_run), set(affected))

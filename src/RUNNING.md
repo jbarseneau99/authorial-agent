@@ -6,7 +6,7 @@ Python 3.10+ and `openpyxl` are required. Diagram rendering additionally uses `m
 python3 -m unittest discover -v
 ```
 
-Current coverage is documented in [paragraph-pangram-v0.1.md](../docs/paragraph-pangram-v0.1.md). The earlier [code-execution-v0.1.md](../docs/code-execution-v0.1.md) remains a historical record of its increment. Whole-chapter semantic checking, the full epistemic schema, per-act relevance selection, intellectual repair and the external canonical-loop interface remain incomplete.
+Current coverage is documented in [paragraph-pangram-v0.1.md](../docs/paragraph-pangram-v0.1.md), [resolved-voice-profile-v0.1.md](../docs/resolved-voice-profile-v0.1.md), and [procedure-fidelity-v0.1.md](../docs/procedure-fidelity-v0.1.md). The earlier [code-execution-v0.1.md](../docs/code-execution-v0.1.md) remains a historical record of its increment. Whole-chapter semantic checking, the full epistemic schema, automatic intellectual repair and the external canonical-loop interface remain incomplete. The resolved profile implements per-act relevance selection and review; its semantic adequacy still requires live evaluation.
 
 ## Prepare the exact run configuration
 
@@ -122,7 +122,7 @@ A ready paragraph step checks detector availability locally, generates only the 
 | `suspended_detector_flagged` | Review the preserved paragraph and result. Detector flags do not trigger automatic rewriting. |
 | `suspended_detector_unscorable` | The paragraph is below the configured detector minimum. Progression stops; no padding or aggregation is performed. |
 | `suspended_detector_blocked` / `suspended_detector_error` | Inspect credential/configuration/transport or result evidence. There is no automatic resubmission after an uncertain or failed request. |
-| `suspended_reopen` | Inspect the diagnosed layer. Only the implemented linguistic repair route may resume as an expression repair. |
+| `suspended_reopen` | Inspect the diagnosed defect and route. In the resolved profile, definite expression defects across layers may enter local editing; construction, evidence and uncertain findings remain gated. Legacy runs retain linguistic-only editing. |
 | `budget_exhausted` / `stale` | Stop; unresolved or changed evidence does not confer closure. |
 | `awaiting_approval` | Every paragraph has current four-layer and detector passes and the exact text is assembled. Whole-chapter semantic checking remains pending. |
 
@@ -130,13 +130,13 @@ A detector pass changes the checkpoint to `ready_for_next_paragraph`; a later re
 
 ## Repair and author validation
 
-An explicitly authorized linguistic repair uses the existing editing owner:
+An explicitly authorized expression repair uses the existing editing owner:
 
 ```sh
 python3 src/run_agent.py resume --live --database /path/to/run.sqlite --execution EXECUTION_ID --actor author --output /path/to/repair-v1.json
 ```
 
-The repair receives the prior exact paragraph, its actual four-layer findings and affected sentence/act IDs, while preserving scope and valid earlier paragraphs. It receives no detector score as a writing instruction. It is rechecked and rescanned. Construction defects and conceptual/uncertain routes cannot be bypassed through linguistic editing. The per-paragraph attempt budget limits generation/repair attempts and does not grant closure.
+The repair receives the prior exact paragraph, its actual four-layer findings and affected sentence/act IDs, while preserving scope and valid earlier paragraphs. It receives no detector score as a writing instruction. The result is rechecked and submitted to the detector only after all checks pass. In the resolved profile, an expression defect identified by a conceptual, epistemic or rhetorical check can be repaired against the unchanged closed construction. Construction defects, evidence limitations and uncertainty cannot be bypassed through editing. The per-paragraph attempt budget limits generation/repair attempts and does not grant closure.
 
 Final author validation remains separate:
 

@@ -183,6 +183,32 @@ def compact_writer_context(context):
                                 'exemplar_type': payload['Exemplar type'],
                                 'written_validation': payload.get('Written validation'),
                                 'authority': exemplar['authority']})
+    rule_examples = {rule['id']: rule for rule in voice_rules}
+    exemplar_examples = {exemplar['id']: exemplar for exemplar in voice_exemplars}
+    for act in intellectual_plan:
+        worked = []
+        for index, binding in enumerate(act['voice_bindings']):
+            rule = rule_examples[binding['rule_id']]
+            examples = []
+            for ident in binding['exemplar_ids']:
+                exemplar = exemplar_examples[ident]
+                examples.append({
+                    'id': ident, 'key': exemplar['key'], 'example_text': exemplar['excerpt'],
+                    'source_context_refs': list(exemplar['source_ids']),
+                    'exemplar_type': exemplar['exemplar_type'],
+                    'authority': exemplar['authority'],
+                    'written_validation': exemplar['written_validation'],
+                    'use': 'A structural example for the selected application to this act.',
+                })
+            worked.append({
+                'criterion_id': f'binding:{act["id"]}:{index}', 'layer': binding['layer'],
+                'rule': _copy(rule), 'structure_to_model': binding['application'],
+                'acceptance_criterion': binding['criterion'], 'examples': examples,
+                'instruction': ('Write this act using the relevant structure demonstrated by these '
+                                'actual examples and the stated application. Adapt their form to '
+                                'the constructed claim; examples supply no new subject claims.'),
+            })
+        act['worked_examples'] = worked
     packet = {
         'execution_profile': PROFILE, 'intent': _text(intent['payload'].get('text'), 'Author intent'),
         'acts': list(context['acts']), 'intellectual_plan': intellectual_plan,
@@ -190,10 +216,21 @@ def compact_writer_context(context):
         'voice_rules': voice_rules, 'voice_exemplars': voice_exemplars,
         'source_contexts': [sources[key] for key in sorted(sources)],
         'written_calibration': validate_written_calibration(context.get('written_calibration', [])),
+        'written_calibration_usage': (
+            'Use the full approved written passages below as worked examples of paragraph '
+            'development: how clauses and sentences develop a question, distinction, qualification '
+            'or other relevant act. Their authority is passage_only and generated_author_approved_passage. '
+            'They are separate from authentic spoken examples and do not supply subject evidence '
+            'or promote a general voice rule.'),
         'criteria': resolved_criteria(context), 'prior_paragraphs': _copy(context.get('prior_paragraphs', [])),
         'subject_source_policy': 'references_only; source prose is available only to the independent checker',
-        'instruction': ('Realize this ordered intellectual plan using its per-act voice applications and '
-                        'criteria. Preserve claim content and epistemic boundaries. Candidate rules retain '
+        'instruction': ('Write prose structured like these examples. Each act pairs actual exemplar '
+                        'text with the rule, structure to model, and observable criterion. Use the '
+                        'examples\' relevant clause ordering and development, including questions, '
+                        'distinctions and qualifications where the selected application calls for them. '
+                        'Adapt that structure to the constructed content rather than mechanically copying '
+                        'phrases or importing example facts. Preserve claim content and epistemic '
+                        'boundaries. Candidate rules retain '
                         'their recorded scope; approved generated calibration is passage-level evidence, '
                         'not a general rule or subject evidence. Return sentences with act IDs in order, '
                         'or request reopening for a construction defect.'),

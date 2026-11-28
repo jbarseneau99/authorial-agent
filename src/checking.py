@@ -135,22 +135,60 @@ class Checking:
         if seen!=set(by_id):
             raise ValueError('Every declared criterion must be checked exactly once')
 
-    def assess(self,run):
-        ctx=self.snapshot(run); request=self.reviewer_context(run,ctx)
-        findings=self.reviewer.assess(json.loads(json.dumps(request)))
+    def _validate_findings(self,findings,ctx,request):
         if not isinstance(findings,list) or len(findings)!=4 or any(not isinstance(f,dict) for f in findings) or {f.get('layer') for f in findings}!=LAYERS: raise ValueError('Exactly one finding per layer required')
         ids={s['id'] for s in ctx['draft']['sentences']}
         for f in findings:
             if f.get('status') not in {'pass','fail','uncertain'} or not isinstance(f.get('reason'),str) or not f['reason'].strip() or not self._valid_refs(f.get('sentences'),ids,required=f['status']!='pass'): raise ValueError('Invalid finding')
         if ctx['construction'].get('execution_profile')==RESOLVED_PROFILE:
             self._validate_resolved_findings(findings,request)
+
+    @staticmethod
+    def repair_route(finding,profile=None):
+        """Route the object requiring repair, not the layer that detected it.
+
+        Only the resolved profile carries validated criterion-level diagnoses.
+        Legacy findings retain their original conservative layer-based routes.
+        """
+        if finding['status']=='pass':
+            return None
+        if profile!=RESOLVED_PROFILE:
+            return ROUTES[finding['layer']] if finding['status']=='fail' else 'author_review'
+        defects=[check for check in finding['checks'] if check['status']!='pass']
+        if not defects:
+            raise ValueError('A nonpassing finding requires unresolved criterion diagnoses')
+        if any(check['status']=='uncertain' or check['defect_type']=='evidence_limit' for check in defects):
+            return 'author_review'
+        if any(check['defect_type']=='construction' for check in defects):
+            return 'construction'
+        if all(check['status']=='fail' and check['defect_type']=='expression' for check in defects):
+            return 'expression'
+        raise ValueError('Unresolved criterion diagnosis has no permitted repair route')
+
+    def current_repair_routes(self,assessment):
+        """Revalidate current criterion scopes before a repair uses stored findings."""
+        ctx=self.snapshot(assessment['run'])
+        snapshot=json.dumps(ctx,sort_keys=True)
+        if hashlib.sha256(snapshot.encode('utf-8')).hexdigest()!=assessment['snapshot_sha256']:
+            raise ValueError('Repair assessment no longer identifies the current draft and construction')
+        request=self.reviewer_context(assessment['run'],ctx)
+        self._validate_findings(assessment['findings'],ctx,request)
+        profile=ctx['construction'].get('execution_profile')
+        return {finding['layer']:self.repair_route(finding,profile)
+                for finding in assessment['findings'] if finding['status']!='pass'}
+
+    def assess(self,run):
+        ctx=self.snapshot(run); request=self.reviewer_context(run,ctx)
+        findings=self.reviewer.assess(json.loads(json.dumps(request)))
+        self._validate_findings(findings,ctx,request)
+        profile=ctx['construction'].get('execution_profile')
         ident=str(uuid.uuid4()); state='review_required' if any(f['status']!='pass' for f in findings) else 'checks_passed'
         with self.g.db:
             self.g.db.execute('BEGIN IMMEDIATE')
             if self.snapshot(run)!=ctx: raise ValueError('Draft changed during review')
             self.g.db.execute('INSERT INTO assessment VALUES(?,?,?,?,?)',(ident,run,json.dumps(ctx,sort_keys=True),json.dumps(findings),state))
             for f in findings:
-                if f['status']!='pass': self.g.db.execute('INSERT INTO reopen_ticket VALUES(?,?,?,?,?,NULL)',(str(uuid.uuid4()),ident,f['layer'],ROUTES[f['layer']] if f['status']=='fail' else 'author_review','proposed'))
+                if f['status']!='pass': self.g.db.execute('INSERT INTO reopen_ticket VALUES(?,?,?,?,?,NULL)',(str(uuid.uuid4()),ident,f['layer'],self.repair_route(f,profile),'proposed'))
         return ident
     def inspect(self,ident):
         row=self.g.db.execute('SELECT run,snapshot,findings,state FROM assessment WHERE id=?',(ident,)).fetchone()

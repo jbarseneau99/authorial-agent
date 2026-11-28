@@ -188,13 +188,14 @@ def construction_review_packet(snapshot):
         if node['payload'].get('origin') == 'author_input':
             node['payload'] = {'origin': 'author_input', 'reference': 'top-level intent'}
         evidence.append(node)
-    bindings = [binding for act in acts for binding in act['voice_bindings']]
     return {'execution_profile': PROFILE, 'plan': snapshot['plan'],
             'intent': nodes[snapshot['intent']]['node']['payload']['text'],
             'acts': acts, 'claims': claims, 'evidence': evidence,
-            'voice_catalog': compact_voice_catalog(snapshot, bindings),
+            'voice_catalog': compact_voice_catalog(snapshot),
             'written_calibration': copy.deepcopy(snapshot.get('written_calibration', [])),
-            'instruction': ('Review the construction and each act-specific voice choice. '
+            'instruction': ('Review the construction and each act-specific voice choice against the '
+                            'full available catalog, including material omissions and criteria that '
+                            'only repeat subject content. '
                             'Check whether its application and criterion fit the act and '
                             'the cited rule and authentic exemplar. Preserve candidate rule '
                             'status and distinguish passage approval from corpus validation.')}

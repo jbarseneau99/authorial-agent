@@ -1,0 +1,43 @@
+{
+  "id": "AA-PROCEDURE-FIDELITY-VERIFICATION-001",
+  "scope": "Synthetic fixture and data-flow verification; live outcomes are separate",
+  "base_code_commit": "401399927558a7d2f7b3087d50d420263873a319",
+  "tests": {
+    "command": "python3 -m unittest discover -v",
+    "count": 172,
+    "seconds": 2.787,
+    "result": "passed",
+    "log_sha256": "3b365e5dc8537bf49bbce7f19122f01d531ed3425c757379f5f85446bc2db2e2"
+  },
+  "checks": [
+    "Worked examples carry actual selected excerpt text paired with the intended act, rule and application",
+    "Unselected exemplars and raw subject prose remain absent from writer inputs",
+    "Approved written example retains exact text and passage-only provenance",
+    "Review can inspect unselected candidates in the available bound catalog",
+    "Definite expression diagnoses across layers enter local repair",
+    "Construction, evidence and uncertainty gates remain in force",
+    "Current findings, tickets, authorization and unaffected expression are preserved"
+  ],
+  "changed_artifacts": [
+    "docs/procedure-fidelity-v0.1.md",
+    "docs/render_procedure_diagram.py",
+    "docs/system-diagram-v0.3.md",
+    "loops/inventory-v0.4.json",
+    "src/RUNNING.md",
+    "src/checking.py",
+    "src/editing.py",
+    "src/providers.py",
+    "src/test_diagnosis_routing.py",
+    "src/test_voice_resolution.py",
+    "src/test_worked_voice_examples.py",
+    "src/voice_expression.py",
+    "src/voice_resolution.py"
+  ],
+  "limitations": [
+    "Exact successful historical prompt trace not recovered",
+    "Model judgments do not establish semantic or authorial correctness",
+    "Fixed sentence boundaries remain an implementation restriction",
+    "Automatic construction repair and author-review resume remain incomplete",
+    "Detector observations and final author approval remain separate"
+  ]
+}

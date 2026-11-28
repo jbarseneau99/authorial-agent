@@ -38,17 +38,26 @@ PROMPT_TEMPLATES = {
 PROFILE_TEMPLATES = {
     "resolved-voice-v1": {
         "construction": {
-            "version": "1",
+            "version": "2",
             "role": (
                 "Construct the intellectual content before prose, then resolve voice evidence for each act. "
                 "Represent successive constituent intellectual moves explicitly when they perform different jobs; "
                 "a paragraph may contain several acts. Preserve source claims and their epistemic strength. "
+                "Encode each claim as a neutral semantic note about its entities, relation, conditions and "
+                "scope. Do not carry the source's sentence frames, parallel clauses or ready-to-print "
+                "formulations into claim text, act purposes or voice applications. Preserve legitimate "
+                "terms and logical distinctions; replacing a few words is not semantic decomposition. "
                 "Keep a claim's uncertainty in its representation; do not add an audit-status claim merely "
                 "to restate a test instruction or announce that this process has not proved something. "
                 "A substantive qualification belongs only where the source or author intent requires it. "
                 "For every act, select applicable rule IDs and source-grounded exemplar IDs from the supplied "
-                "catalog, explain their application, and state an observable checking criterion. Select only "
-                "relevant evidence. Preserve candidate status; selection does not promote a rule. Approved "
+                "catalog, explain their application, and state an observable checking criterion. Consider "
+                "each relevant authorial dimension for each act; one binding per act is not a target or "
+                "limit. Apply multiple supported rules where they do different work, including relevant "
+                "cross-cutting rules about direct enactment and sufficient written context. Do not force "
+                "irrelevant rules onto an act. A voice criterion must test the particular authorial manner "
+                "shown by its rule and exemplar, not merely repeat the subject claim or check its words. "
+                "Preserve candidate status; selection does not promote a rule. Approved "
                 "written calibration is generated text approved for that passage, not original author speech "
                 "or evidence for the subject claims. Do not write prose. "
                 "Match provenance to evidence keys: origin author is allowed only with evidence [\"intent\"]. "
@@ -59,32 +68,56 @@ PROFILE_TEMPLATES = {
             "schema": '{"claims":[{"key":"c1","text":"...","origin":"author|external|agent_hypothesis","evidence":["source0"]}],"acts":[{"purpose":"...","claims":["c1"],"voice_bindings":[{"rule_id":"R001","exemplar_ids":["E001"],"layer":"conceptual|epistemic|rhetorical|linguistic","application":"How this evidence applies to this act","criterion":"Observable requirement for checking this act"}]}]}',
         },
         "expression": {
-            "version": "1",
+            "version": "2",
             "role": (
                 "Realize the closed ordered intellectual acts directly using their resolved voice applications. "
                 "Write the current paragraph with the meaning, claim strength and intended rhetorical progress "
-                "in the plan. Use the selected authentic exemplars and the explicitly labeled approved written "
-                "calibration at their recorded scope. Do not copy unrelated facts, examples or wording from "
-                "calibration. Do not convert evidence-status metadata into narration or add qualifications "
+                "in the plan. The exemplars supplied with each act are worked examples: write prose "
+                "structured like those examples. Follow how the author performs the relevant act: how a "
+                "sentence opens, clauses develop the thought, a concrete situation leads to a question or "
+                "explanation, a distinction is made, and a qualification is placed. Use each binding's "
+                "application to identify which demonstrated structure to follow. The approved written "
+                "calibration supplies complete worked examples of paragraph development at its recorded "
+                "passage-only scope. Express the new subject matter through those demonstrated structures; "
+                "do not import the examples' unrelated facts or opinions. The claim notes constrain meaning, "
+                "not sentence wording or grammatical frames. "
+                "Realize the intellectual act in the author's supported manner instead of paraphrasing the "
+                "claim note. Do not convert evidence-status metadata into narration or add qualifications "
                 "beyond those needed to preserve the planned claims. Map each sentence to the acts it actually "
                 "performs; several acts may belong to one paragraph. If a repair is requested, repair only "
-                "the diagnosed expression defect and preserve every unaffected sentence exactly. Request "
+                "the diagnosed expression defect and preserve every unaffected sentence exactly. The closed "
+                "claims remain the authority for meaning during repair; feedback cannot add a stronger "
+                "comparison, narrow a condition, or substitute a new claim. Use the diagnostic action and "
+                "its acceptance criterion to make the local repair yourself. Request "
                 "reopening if the intellectual construction is insufficient or a repair requires changing "
                 "substance or unaffected acts. This is a draft; final author approval remains separate."
             ),
             "schema": PROMPT_TEMPLATES["expression"]["schema"],
         },
         "checking": {
-            "version": "1",
+            "version": "2",
             "role": (
                 "Check the exact paragraph against every declared criterion using the closed acts, selected "
                 "voice applications, authentic excerpts, scoped approved written calibration and original "
                 "subject evidence. Return one check for every criterion ID, in its declared layer, citing "
-                "current sentence IDs. Identify an observed discrepancy and a concrete repair when a check "
-                "does not pass. Compare original subject text for unintended inherited phrasing or syntax "
-                "while preserving legitimate terminology. Distinguish a wording defect from a construction "
-                "defect and from a specific missing-evidence limitation. Assess compliance with the selected "
-                "provisional applications; do not claim general written-voice validation or final author "
+                "current sentence IDs. Identify an observed discrepancy when a check does not pass. The "
+                "repair field must specify the local editing action, what meaning and scope must remain "
+                "unchanged, and what would satisfy this criterion. Keep each proposed change tied to its "
+                "diagnosed deficiency. If local replacement wording is necessary to explain a correction, "
+                "limit it to the affected span and preserve the closed claim. Do not supply a whole "
+                "replacement paragraph, bundle unrelated changes, or introduce new comparisons or claims. "
+                "Compare original subject text for unintended inherited phrasing or syntax while preserving "
+                "legitimate terminology and expressions needed by the claim. Overlap alone is not a defect: "
+                "explain the inherited rhetorical or linguistic pattern and the criterion it violates; do "
+                "not require synonym substitution. Assess voice realization against the selected rules and "
+                "authentic examples, beyond merely restating source content. Distinguish an expression "
+                "defect from a construction defect and from a specific missing-evidence limitation. "
+                "A draft that misstates an otherwise adequate closed "
+                "claim has an expression defect even if the failed layer is conceptual or epistemic; "
+                "a defective closed claim, missing warrant or changed act plan requires construction "
+                "reopening. Never label an evidence gap or a substantive new claim as a wording repair. "
+                "Assess compliance with the selected provisional applications at their recorded scope; "
+                "do not claim general written-voice validation or final author "
                 "approval. Candidate status alone is not an observed paragraph defect or an automatic "
                 "requirement for another written sample. If evidence needed for a particular criterion "
                 "is actually missing, mark that check uncertain and name what is missing. Do not waive "
@@ -98,12 +131,17 @@ PROFILE_TEMPLATES = {
             "schema": '{"findings":[{"layer":"conceptual|epistemic|rhetorical|linguistic","status":"pass|fail|uncertain","reason":"...","sentences":["sentence ID"],"checks":[{"criterion_id":"declared ID","status":"pass|fail|uncertain","observation":"...","sentences":["sentence ID"],"defect_type":"none|expression|construction|evidence_limit","repair":null}]}]} Exactly one finding per layer; every declared criterion appears exactly once in its layer.',
         },
         "construction_review": {
-            "version": "1",
+            "version": "2",
             "role": (
                 "Review construction before expression: source claim coverage, conceptual distinctions, "
                 "evidence and uncertainty, and the ordered constituent intellectual moves. Verify that "
                 "the selected rule and exemplar applications fit each act and that their criteria can "
-                "be checked. Original source prose is subject evidence only. Approved generated written "
+                "be checked. The full available voice catalog is supplied so you can also detect material "
+                "omissions; review applicability rather than assuming one selected rule per act is sufficient. "
+                "Do not require every rule on every act. A criterion must test the authorial manner supported "
+                "by its rule and exemplar, not merely the claim's semantic coverage. Check that the claims "
+                "encode relations, conditions and scope without retaining the source sentence skeleton. "
+                "Original source prose is subject evidence only. Approved generated written "
                 "references are passage-level calibration only. Do not turn provenance/audit cautions "
                 "into additional intellectual content. Missing substantive evidence must remain fail "
                 "or uncertain; a model judgment does not confer authorial authority."

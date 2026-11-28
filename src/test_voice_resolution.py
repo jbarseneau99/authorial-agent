@@ -5,6 +5,7 @@ import json
 import unittest
 
 from faculty import Faculty
+from expression import Expression
 from model import Graph, Kind
 from providers import SuppliedResearch
 from test_construction_closure import ClosureReviewer, close_fixture_plan
@@ -150,6 +151,24 @@ class VoiceResolutionTests(unittest.TestCase):
             self.graph.db.execute("DELETE FROM edge WHERE src=? AND rel='applies'", (act,))
         with self.assertRaisesRegex(ValueError, 'edges differ'):
             faculty.c.require_closed(plan)
+
+    def test_review_can_detect_omitted_rule_without_expanding_writer_evidence(self):
+        other = self.graph.add(Kind.RULE, {'Rule ID': 'R002', 'Layer': 'Rhetorical',
+            'Candidate rule': 'A second available synthetic application',
+            'Status': 'Unconfirmed', 'activation': 'candidate_only'})
+        self.graph.link(other, 'grounded_in', self.ids['exemplar'])
+        faculty = self.faculty()
+        plan = faculty.build('Construct the synthetic fixture')
+        reviewer = CapturingReviewer()
+        review = faculty.review(plan, reviewer)
+        self.assertEqual({rule['rule_id'] for rule in reviewer.context['voice_catalog']['rules']},
+                         {'R001', 'R002'})
+        self.assertEqual(json.dumps(reviewer.context).count(TRANSCRIPT), 1)
+        faculty.close(plan, review, 'author')
+        expression = Expression(self.graph, None)
+        packet = expression.writer_context(expression.context(plan))
+        self.assertEqual({rule['key'] for rule in packet['voice_rules']}, {'R001'})
+        self.assertEqual({item['key'] for item in packet['voice_exemplars']}, {'E001'})
 
     def test_calibration_requires_exact_generated_passage_approval(self):
         self.assertEqual(validate_written_calibration(None), [])
