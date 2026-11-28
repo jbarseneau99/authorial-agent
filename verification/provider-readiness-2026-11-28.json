@@ -1,0 +1,56 @@
+{
+  "id": "AA-PROVIDER-READINESS-2026-11-28-001",
+  "version": "0.1",
+  "checked_at_utc": "2026-11-28T00:04:02.590712+00:00",
+  "user_local_date": "2026-11-27",
+  "user_timezone": "America/Toronto",
+  "scope": "Connection readiness and existing automated regression suite; no manuscript trial.",
+  "source_repository": "jbarseneau99/authorial-agent",
+  "tested_commit": "b037978ea7ba1aad553c9a6cb71a001289550b89",
+  "regression": {
+    "command": "python3 -m unittest discover -v",
+    "working_directory": "src",
+    "tests_run": 127,
+    "tests_passed": 127,
+    "seconds": 1.811,
+    "exit_code": 0,
+    "transport": "fixture and mocked transports"
+  },
+  "openai": {
+    "verification": "Fresh live invocation of verification/probes/run_openai_provider_probe.py",
+    "configuration": "verification/probes/openai-provider-v0.1.json",
+    "status": "passed",
+    "configured_model": "gpt-6.2-astra",
+    "returned_model": "gpt-6.2-astra",
+    "provider_invocations": 1,
+    "input_source": "verification/probes/openai-provider-source-v0.1.txt",
+    "claims_returned": 1,
+    "acts_returned": 1,
+    "validation": "JSON response shape, declared claim origins, evidence references and act references passed.",
+    "token_usage": {
+      "prompt_tokens": 181,
+      "completion_tokens": 60,
+      "total_tokens": 241
+    },
+    "credential_recorded": false,
+    "manuscript_generated": false,
+    "prior_failure": "A prior conversation reported credit_balance_exhausted. This fresh call succeeded; no remaining credit blocker was observed in this test."
+  },
+  "pangram": {
+    "verification": "Existing recorded live probe reviewed during this check; no additional submission.",
+    "record": "verification/pangram-api-probe-v0.1.json",
+    "recorded_completion_utc": "2026-11-27T23:41:03.089549+00:00",
+    "returned_version": "4.1",
+    "status": "passed_after_saved_response_parser_correction",
+    "exact_returned_text_matches": true,
+    "input": "One unchanged 56-word historical paragraph from src/P006_reference.md",
+    "new_prose_generated": false
+  },
+  "readiness": "Both provider connections have successful live evidence. The implemented runtime supports a controlled paragraph trial after its exact committed run configuration is prepared and construction is explicitly closed.",
+  "remaining": [
+    "No new end-to-end authorial paragraph trial in this verification.",
+    "No author approval, writing-quality result, whole-chapter semantic validation or completed platform canonical-loop integration is claimed.",
+    "The provider profile is explicit configuration data; the runner does not automatically merge it into a manuscript run."
+  ],
+  "evidence_preservation": "Exact synthetic prompt, response, binding and database retained in the private connection-test evidence package; credentials excluded."
+}

@@ -1,4 +1,7 @@
-"""Exact prompt/data flow and paragraph gates; regenerated from code."""
+"""Render the implemented flow, separate corpora and verified API connections.
+
+Documentation only; see system-diagram-v0.2.md for evidence and limitations.
+"""
 from pathlib import Path
 import argparse
 import matplotlib
@@ -6,114 +9,115 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
-parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--output', type=Path, default=Path('Authorial_Agent_Four_Layer_Procedure.png'))
-args = parser.parse_args()
-fig, ax = plt.subplots(figsize=(17, 20.5), dpi=150)
-ax.set_xlim(0, 17); ax.set_ylim(0, 20.5); ax.axis('off')
-fig.patch.set_facecolor('white')
-ink = '#18324B'; border = '#8DA0B6'; blue = '#E8F0FC'
-violet = '#EEE8F8'; amber = '#FFF0DD'; green = '#E4F2E9'
+INK='#173247'; MUTED='#536879'; LINE='#7990A1'
+BLUE='#EAF2FB'; BE='#547DA5'; GREEN='#EAF5EE'; GE='#428069'
+VIOLET='#F1EDFA'; VE='#8269A2'; AMBER='#FFF4E4'; AE='#B48440'; LIGHT='#F6F8FA'
 
-def box(x, y, w, h, title, body, color, fs=12):
-    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle='round,pad=0.10,rounding_size=0.12',
-                               lw=1.3, edgecolor=border, facecolor=color))
-    ax.text(x+w/2, y+h-.17, title, ha='center', va='top', fontsize=fs+1,
-            fontweight='bold', color=ink)
-    ax.text(x+w/2, y+h/2-.18, body, ha='center', va='center', fontsize=fs,
-            color=ink, linespacing=1.45)
 
-def arrow(points, color='#55728E', style='-', label=None, at=None):
-    for a, b in zip(points[:-2], points[1:-1]):
-        ax.plot([a[0], b[0]], [a[1], b[1]], lw=1.65, color=color, linestyle=style)
-    ax.add_patch(FancyArrowPatch(points[-2], points[-1], arrowstyle='-|>', mutation_scale=13,
-                                lw=1.65, color=color, linestyle=style))
-    if label:
-        ax.text(*at, label, ha='center', va='center', fontsize=10.5, color=color,
-                bbox=dict(facecolor='white', edgecolor='none', pad=2))
+def render(output, svg=None):
+    plt.rcParams.update({'font.family':'DejaVu Sans','svg.fonttype':'none'})
+    fig,ax=plt.subplots(figsize=(20,26.5),dpi=150)
+    fig.patch.set_facecolor('white'); ax.set_position([0,0,1,1])
+    ax.set_xlim(0,20); ax.set_ylim(0,26.5); ax.axis('off')
+    def text(x,y,value,size=12,weight='normal',color=INK,ha='center',va='center',**kw):
+        return ax.text(x,y,value,fontsize=size,fontweight=weight,color=color,ha=ha,va=va,linespacing=1.4,**kw)
+    def box(x,y,w,h,title,body,fill=LIGHT,edge=LINE,ts=13.5,bs=11.5,footer=None):
+        ax.add_patch(FancyBboxPatch((x,y),w,h,boxstyle='round,pad=.055,rounding_size=.10',lw=1.25,edgecolor=edge,facecolor=fill,zorder=3))
+        text(x+w/2,y+h-.18,title,ts,'bold',va='top',zorder=4)
+        text(x+w/2,y+h/2-(.04 if footer else .12),body,bs,zorder=4)
+        if footer: text(x+w/2,y+.14,footer,9.1,color=MUTED,va='bottom',zorder=4)
+    def arrow(points,color=LINE,dashed=False,double=False,label=None,at=None,size=10.5):
+        style=(0,(4,3)) if dashed else '-'
+        for a,b in zip(points[:-2],points[1:-1]): ax.plot([a[0],b[0]],[a[1],b[1]],color=color,lw=1.5,linestyle=style,zorder=2)
+        ax.add_patch(FancyArrowPatch(points[-2],points[-1],arrowstyle='<|-|>' if double else '-|>',mutation_scale=13,lw=1.5,color=color,linestyle=style,zorder=2))
+        if label: text(*at,label,size,color=color,zorder=5,bbox={'facecolor':'white','edgecolor':'none','pad':2.5})
+    def boundary(x,y,w,h,title,fill=LIGHT,edge='#CAD5DE',dashed=False):
+        ax.add_patch(FancyBboxPatch((x,y),w,h,boxstyle='round,pad=.06,rounding_size=.13',lw=1.15,edgecolor=edge,facecolor=fill,linestyle=(0,(5,4)) if dashed else '-',zorder=0))
+        text(x+.22,y+h-.22,title,13.5,'bold',ha='left',va='top')
 
-ax.text(8.5, 20.35, 'FOUR LAYERS — ONE CHECKED PARAGRAPH AT A TIME',
-        ha='center', va='top', fontsize=22, fontweight='bold', color=ink)
-ax.text(8.5, 19.62, 'The same Execution coordinator runs every loop. Code records exact prompts, outputs and versions.',
-        ha='center', fontsize=12.8, color='#526578')
+    text(.65,25.95,'AUTHORIAL AGENT',27,'bold',ha='left')
+    text(.65,25.35,'Construct the intellectual work. Express and check one paragraph at a time.',15,color=MUTED,ha='left')
+    text(19.35,25.91,'SYSTEM DIAGRAM  /  v0.2',11,'bold',MUTED,ha='right')
+    text(19.35,25.49,'Connections checked 27 Nov 2026 (Toronto)',10.8,color=MUTED,ha='right')
+    box(.65,23.55,9.05,1.15,'OPENAI CONNECTION VERIFIED','GPT-6.2 Astra returned a valid synthetic claim and act.\nThis checks the provider call; it does not validate authorial writing.',GREEN,GE,13.5,11.8)
+    box(10.3,23.55,9.05,1.15,'PANGRAM CONNECTION VERIFIED','Pangram 4.1 passed a live check of an existing 56-word paragraph.\nAn integrated generated-paragraph trial remains to be run.',GREEN,GE,13.5,11.8)
+    text(10,23.08,'Ready for a controlled paragraph trial once its exact run configuration is committed and construction is closed.\nService probes, writing quality and your approval remain separate evidence.',11.8,'bold',GE)
 
-box(.3, 15.9, 3.55, 3.0, 'VERSIONED VOICE CORPUS',
-    'Conceptual rules\nEpistemic rules\nRhetorical rules\nLinguistic rules\n\nAuthentic exemplar passages\nwith original source lineage', blue, 12)
-box(.3, 12.95, 3.55, 2.25, 'SELECT AND FREEZE',
-    'Selected rule IDs\nExemplar IDs + exact passages\nSource references\nLedger version + hashes\n\nRetain candidate / approval status', green, 11.5)
-arrow([(2.08, 15.8), (2.08, 15.3)])
+    boundary(.6,18.25,18.8,4.4,'VOICE PREPARATION  /  ORIGINAL EVIDENCE IS RETAINED')
+    box(.95,20.62,3.95,1.17,'RAW AUTHOR INPUT','Interview answers and transcripts\nOriginal speech / writing records',BLUE,BE,12.6,11)
+    box(.95,18.94,3.95,1.16,'SOURCE CORPUS','Exact original wording + source IDs\nVersions and provenance preserved',BLUE,BE,12.6,11)
+    arrow([(2.925,20.56),(2.925,20.17)])
+    box(5.6,19.49,3.85,1.62,'PREPARE + IMPORT LEDGER','Curated source / excerpt / rule links\nImport the frozen workbook into a graph\nImport does not approve candidate rules',BLUE,BE,12.4,10.7,'ingest.py  •  original records remain linked')
+    arrow([(4.97,19.52),(5.28,19.52),(5.28,20.3),(5.53,20.3)])
+    box(10.15,20.69,3.85,1.1,'RULE CORPUS','Conceptual  •  Epistemic\nRhetorical  •  Linguistic',BLUE,BE,12.6,11)
+    box(10.15,18.96,3.85,1.16,'EXEMPLAR CORPUS','Exact passages + source lineage\nCandidate / validation status retained',VIOLET,VE,12.6,10.9)
+    arrow([(9.52,20.3),(9.82,20.3),(9.82,21.24),(10.08,21.24)])
+    arrow([(9.52,20.3),(9.82,20.3),(9.82,19.54),(10.08,19.54)])
+    box(14.75,19.41,4.25,1.84,'FREEZE PROMPT CONTEXT','Chosen ledger + selected rule IDs\nExpanded rule text + exact exemplars\nResolve their original source records\nKeep each item’s recorded authority',GREEN,GE,12.5,11.1,'construction.py: voice_context')
+    arrow([(14.07,21.24),(14.4,21.24),(14.4,20.79),(14.68,20.79)],GE)
+    arrow([(14.07,19.54),(14.4,19.54),(14.4,19.91),(14.68,19.91)],GE)
+    text(10,18.52,'Current runtime resolves source-matched original spoken excerpts. Per-act relevance and approved learning integration remain open.',10.7,color=MUTED)
 
-box(4.85, 18.05, 6.15, .8, 'AUTHOR INTENT + SOURCE EVIDENCE',
-    'Bind procedure, code, ledger, sources and paragraph grouping.', '#F3F6FA', 10.8)
-arrow([(7.93, 17.95), (7.93, 17.55)])
+    arrow([(16.88,19.34),(16.88,17.99),(4.92,17.99),(4.92,9.05)],GE,True)
+    for y in (15.65,13.77,10.45,9.05): arrow([(4.92,y),(5.53,y)],GE,True)
+    text(2.64,17.43,'GREEN DASHED INPUTS',11.4,'bold',GE)
+    text(2.64,16.77,'Rules + source-linked passages\nreach construction, review,\nexpression and checking.',11.5,color=GE)
+    box(5.6,16.97,8.75,.83,'AUTHOR INTENT + SUBJECT EVIDENCE','Bind procedure, code, ledger, source revisions, providers and prompt templates.',LIGHT,LINE,12.9,10.9)
+    arrow([(9.975,16.90),(9.975,16.33)])
+    box(5.6,15.04,8.75,1.22,'1  CONSTRUCTION PROMPT','Conceptual + epistemic work; plan rhetorical purposes and order.\nIntent, evidence, rules and exemplars → claims + ordered intellectual acts.',BLUE,BE,14,11.7,'faculty.py  •  structured graph before prose')
+    arrow([(9.975,14.97),(9.975,14.45)])
+    box(5.6,13.16,8.75,1.22,'2  CONSTRUCTION REVIEW PROMPT','Same structure, evidence, rules and actual exemplar passages.\nReturns findings on conceptual, epistemic and rhetorical-plan fidelity.',BLUE,BE,14,11.7,'faculty.py + construction.py  •  pass / fail / uncertain')
+    arrow([(9.975,13.09),(9.975,12.65)])
+    box(5.6,11.87,8.75,.72,'AUTHOR CLOSES THIS CONSTRUCTION','Current passing review + unchanged structure + explicit closure authority.',GREEN,GE,13.2,11.1)
+    arrow([(9.975,11.8),(9.975,11.12)])
+    boundary(5.24,4.94,9.47,6.61,'PARAGRAPH LOOP','#FBFAFD',VE,True)
+    box(5.6,9.88,8.75,1.14,'3  EXPRESSION PROMPT','Closed structure + scoped acts + prior accepted paragraphs.\nSame rules and exemplars → one paragraph with sentence-to-act references.',VIOLET,VE,14,11.5,'expression.py  •  no later paragraphs generated')
+    arrow([(9.975,9.81),(9.975,9.44)])
+    box(5.6,8.25,8.75,1.14,'4  FOUR-LAYER CHECKING PROMPT','Exact paragraph + closed structure + the same voice evidence.\nConceptual  •  Epistemic  •  Rhetorical  •  Linguistic findings',AMBER,AE,14,11.7,'checking.py  •  reasons + affected sentence IDs')
+    arrow([(9.975,8.18),(9.975,7.73)],label='all four layers pass',at=(11.45,7.96),size=10.6)
+    box(5.6,6.48,8.75,1.18,'5  PANGRAM CHECK OF THIS PARAGRAPH','Submit the exact checked text; preserve its hash, task and result.\nAt least 50 words; shorter text pauses as unscorable.',GREEN,GE,13.8,11.7,'pangram_check.py  •  poll the same saved task')
+    arrow([(9.975,6.41),(9.975,6.01)])
+    box(5.6,5.25,8.75,.69,'CURRENT PASS: KEEP THE PARAGRAPH','More acts → next paragraph     •     All complete → assemble',GREEN,GE,13,11.5)
+    arrow([(14.42,5.6),(15.0,5.6),(15.0,11.66),(9.975,11.66),(9.975,11.08)],VE,label='next paragraph only after current pass',at=(12.28,11.66),size=10.5)
+    arrow([(9.975,5.18),(9.975,4.52)],label='all paragraphs passed',at=(11.62,4.73),size=10.6)
+    box(5.6,3.49,8.75,.96,'ASSEMBLE EXACT ACCEPTED PARAGRAPHS','Preserve text and order. Whole-chapter semantic checking remains pending.',BLUE,BE,13.3,11.2)
+    arrow([(9.975,3.42),(9.975,3.01)])
+    box(5.6,1.96,8.75,.98,'AUTHOR VALIDATION','Your judgment of voice and substance. Keep it separate from detector results.\nRecord approval against the unchanged construction, paragraphs and evidence.',GREEN,GE,13.4,11.3)
 
-box(4.85, 15.95, 6.15, 1.5, '1  CONSTRUCTION PROMPT',
-    'Intent + source evidence\nConceptual and epistemic rules + exemplar passages\nRhetorical rules for intellectual-act purpose and order', blue, 11.4)
-box(11.65, 15.95, 3.85, 1.5, 'LLM RETURNS STRUCTURE',
-    'Claims: text, origin, evidence IDs\nOrdered intellectual acts:\npurpose + claim IDs', blue, 11.2)
-arrow([(11.1, 16.7), (11.55, 16.7)], label='call', at=(11.33, 17.0))
-arrow([(13.57, 15.85), (13.57, 15.4), (7.93, 15.4), (7.93, 15.02)],
-      label='exact structured output', at=(10.6, 15.4))
+    box(15.83,14.71,3.5,3.02,'OPENAI MODEL SERVICE','GPT-6.2 Astra\n\nConstruction + review\nExpression + checking\n\nOne adapter; distinct prompts\nCredential: AGENT_API_KEY',BLUE,BE,12.5,11.2)
+    ax.plot([15.48,15.48],[8.82,16.1],color=BE,lw=1.4,linestyle=(0,(3,3)),zorder=1)
+    arrow([(15.48,16.1),(15.76,16.1)],BE,True,True)
+    for y in (15.65,13.77,10.45,8.82): arrow([(14.42,y),(15.41,y)],BE,True,True)
+    text(17.58,13.95,'Blue links = prompt + context\nout; structured JSON back.',10.7,color=BE)
+    text(17.58,12.9,'The key authenticates the API.\nIt is excluded from prompts,\nconfiguration files and logs.',10.9,color=MUTED)
+    box(.65,12.42,3.95,3.23,'VERSIONED RUN RECORD','Procedure + code commit\nLedger + source hashes\nProvider configuration\nExact resolved prompts\nEvery output and finding\nLoop state + repair route\nClosure authority',LIGHT,LINE,12.7,11.6,'run_binding.py  •  append-only call evidence')
+    text(2.63,11.68,'Source manuscript claims may inform\nsubject evidence. AI-like manuscript\nwording is not voice evidence.',10.9,color=MUTED)
+    box(.65,7.75,3.95,2.72,'TARGETED LINGUISTIC REPAIR','Author-authorized linguistic failure\nPrevious exact paragraph + findings\nAffected sentences and acts\nSame closed plan + voice context\nRecheck all layers, then rescan',AMBER,AE,11.8,11,'editing.py  •  bounded attempt budget')
+    arrow([(5.53,8.65),(4.67,8.65)],AE,label='linguistic fail',at=(5.04,8.84),size=9.7)
+    arrow([(2.625,10.54),(2.625,10.89),(5.53,10.89)],AE,label='repair prompt',at=(4.06,10.9),size=9.7)
+    box(.65,4.99,3.95,2.03,'STOP / REOPEN','Epistemic or rhetorical → construction\nConceptual or uncertain → author review\nIntellectual repair is not automated',AMBER,AE,12.3,10.8)
+    arrow([(5.53,8.45),(5.12,8.45),(5.12,5.99),(4.67,5.99)],AE)
+    text(3.0,7.37,'Other failures or uncertainty',10.1,color=AE)
+    box(15.83,6.44,3.5,2.03,'PANGRAM SERVICE','Model selector: pangram-4\nConfirmed result version: 4.1\nCredential: PANGRAM_API_KEY\nPrivate scan of exact text',GREEN,GE,12.5,10.8)
+    arrow([(14.42,7.07),(15.76,7.07)],GE,False,True)
+    box(15.83,3.63,3.5,2.03,'DETECTOR PAUSE','Pending → poll existing task\nFlagged / error / unscorable → stop\nNo new paragraph while paused\nNo automatic detector-driven rewrite',AMBER,AE,12.4,10.5)
+    arrow([(17.58,6.37),(17.58,5.73)],AE,label='no current pass',at=(17.58,6.04),size=10.2)
+    text(17.58,2.66,'Detector results are observations.\nThey do not approve the argument\nor establish your authorial voice.',10.8,color=MUTED)
+    text(2.625,3.99,'Existing Execution coordinates\nconstruction, paragraph progression\nand author-approval state.',11,color=MUTED)
+    text(2.625,2.95,'One owning module per implemented loop.\nExternal canonical-loop integration\nremains unfinished.',10.7,color=MUTED)
+    boundary(.65,.43,18.7,1.0,'CURRENT LIMITS')
+    text(10,.81,'Full epistemic schema • evidence sufficiency • per-act voice selection • intellectual repair • authenticated authority\nWhole-chapter semantic checking and a complete live authorial trial remain outstanding.',11.1,color=MUTED)
+    output.parent.mkdir(parents=True,exist_ok=True); fig.savefig(output,dpi=150,facecolor='white')
+    if svg:
+        svg.parent.mkdir(parents=True,exist_ok=True); fig.savefig(svg,facecolor='white')
+    plt.close(fig)
 
-box(4.85, 13.4, 6.15, 1.5, '2  CONSTRUCTION REVIEW PROMPT',
-    'Constructed argument + source evidence\nSame frozen conceptual / epistemic bindings\nRhetorical plan + its rules and exemplar passages', blue, 11.4)
-box(11.65, 13.4, 3.85, 1.5, 'LLM RETURNS FINDINGS',
-    'Conceptual fidelity\nEvidence and reasoning\nIntellectual-act plan', blue, 11.4)
-arrow([(11.1, 14.15), (11.55, 14.15)], label='call', at=(11.33, 14.45))
-arrow([(13.57, 13.3), (13.57, 12.98), (7.93, 12.98), (7.93, 12.7)])
-box(4.85, 11.85, 6.15, .72, 'CODE GATE: CONSTRUCTION CLOSED',
-    'Require current checks, exact revision and closure authority.', green, 10.8)
-arrow([(7.93, 11.75), (7.93, 11.22)])
 
-box(4.85, 9.6, 6.15, 1.5, '3  EXPRESSION PROMPT — ONE PARAGRAPH',
-    'Closed argument + current paragraph’s ordered acts\nRhetorical and linguistic rules + actual exemplar passages\nDefinitions, qualifications + prior checked paragraphs', violet, 11.2)
-box(11.65, 9.6, 3.85, 1.5, 'LLM RETURNS ONE PARAGRAPH',
-    'Sentences + sentence-to-act IDs\nOR a construction-reopen request\nCode rejects extra paragraphs', violet, 11.0)
-arrow([(11.1, 10.35), (11.55, 10.35)], label='call', at=(11.33, 10.65))
-arrow([(13.57, 9.5), (13.57, 9.05), (7.93, 9.05), (7.93, 8.72)],
-      label='exact paragraph + act mapping', at=(10.6, 9.05))
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output',type=Path,default=Path('Authorial_Agent_Four_Layer_Procedure.png'))
+    parser.add_argument('--svg',type=Path,help='Optional scalable copy of the same diagram')
+    args=parser.parse_args(); render(args.output,args.svg)
 
-box(4.85, 7.1, 6.15, 1.5, '4  FOUR-LAYER CHECKING PROMPT',
-    'Paragraph + closed argument + sentence / act mapping\nSame selected rules and actual exemplar passages\nConceptual, epistemic, rhetorical and linguistic fidelity', amber, 11.1)
-box(11.65, 7.1, 3.85, 1.5, 'LLM RETURNS FINDINGS',
-    'Pass / fail / uncertain\nReasons + affected sentences\nCode selects the repair route', amber, 11.3)
-arrow([(11.1, 7.85), (11.55, 7.85)], label='call', at=(11.33, 8.15))
-arrow([(13.57, 7.0), (13.57, 6.55), (7.93, 6.55), (7.93, 6.17)],
-      label='all four layers pass', at=(10.6, 6.55))
 
-# The same selected rule/exemplar evidence reaches all four prompts.
-bus = '#50856F'
-ax.plot([4.3, 4.3], [7.85, 16.7], color=bus, lw=1.8, linestyle='--')
-arrow([(3.95, 14.08), (4.3, 14.08)], bus, style='--')
-for y in (16.7, 14.15, 10.35, 7.85):
-    arrow([(4.3, y), (4.75, y)], bus, style='--')
-ax.text(2.08, 12.3, 'Green dashed arrows =\nselected rules AND\nactual exemplar passages\nin every prompt.', ha='center', va='top', fontsize=12,
-        color=bus, linespacing=1.45)
-box(.3, 7.1, 3.55, 3.0, 'FOUR-LAYER REPAIR',
-    'Previous exact paragraph\n+ exact check findings\n+ same frozen voice bindings\n\nExpression defect → edit\nReasoning defect → construct\nConceptual change → author', amber, 10.8)
-
-box(4.85, 4.6, 6.15, 1.45, 'PANGRAM GATE — THIS PARAGRAPH ONLY',
-    'Submit exact checked text + preserve its hash\nPoll the same task; record the complete result\nA detector result is separate from authorial validation', green, 11.1)
-box(11.65, 4.6, 3.85, 1.45, 'DETECTOR RESULT',
-    'Passed: progression permitted\nPending / flagged / error /\nunscorable: PAUSE', amber, 11.4)
-arrow([(11.1, 5.32), (11.55, 5.32)], label='API', at=(11.33, 5.62))
-# A passing scan returns to the SAME expression loop for the next paragraph.
-arrow([(15.6, 5.65), (16.3, 5.65), (16.3, 11.48), (7.93, 11.48), (7.93, 11.22)],
-      '#8165A7', label='Current pass + more paragraphs → next paragraph', at=(12.6, 11.48))
-arrow([(13.57, 4.5), (13.57, 4.02), (7.93, 4.02), (7.93, 3.62)],
-      label='all paragraphs passed', at=(10.6, 4.02))
-
-box(.3, 3.95, 3.55, 2.35, 'CODE CONTROLS PROGRESSION',
-    'Check detector setup before writing.\nA pending scan starts no new prose.\nA flag starts no automatic rewrite.\nChanged text invalidates its checks.\nKeep each attempt and result.', '#F3F6FA', 10.5)
-box(4.85, 2.5, 6.15, 1.0, 'ASSEMBLE THE CHECKED PARAGRAPHS',
-    'Preserve their exact text and order.\nSeparate whole-chapter semantic review remains PENDING.', blue, 10.9)
-arrow([(7.93, 2.4), (7.93, 2.08)])
-box(4.85, .95, 6.15, 1.0, 'YOUR VALIDATION + VERSIONED RESULT',
-    'Recheck every paragraph and scan before author approval.\nPreserve procedure, ledger, prompts, outputs and observations.', green, 10.7)
-box(11.65, 1.0, 3.85, 1.45, 'ONE EXECUTION COORDINATOR',
-    'One owning file per loop.\nNo second scheduler.\nNo silent procedure changes.', '#F3F6FA', 11.3)
-ax.text(8.5, .30, 'Diagram of the coded flow. Fixture verification is distinct from a live manuscript run and from your voice judgment.',
-        ha='center', va='center', fontsize=10.4, color='#526578')
-args.output.parent.mkdir(parents=True, exist_ok=True)
-fig.savefig(args.output, bbox_inches='tight', pad_inches=.2)
-plt.close(fig)
+if __name__=='__main__': main()
