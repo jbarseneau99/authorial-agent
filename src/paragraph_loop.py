@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 from editing import Editing
-from run_binding import digest, paragraph_addendum, PARAGRAPH_RETRY_ADDENDUM
+from run_binding import digest, paragraph_addendum, PARAGRAPH_RETRY_ADDENDUM, PARAGRAPH_OVER99_ADDENDUM
 
 
 FRESH_EXPRESSION_POLICY = 'author-authorized-v1'
@@ -84,7 +84,7 @@ class ParagraphLoop:
                 or configuration.get('fresh_expression_retry') != self.fresh_expression_retry
                 or configuration.get('max_fresh_retries', 0) != self.max_fresh_retries):
             raise ValueError('Paragraph grouping or retry budgets differ from committed configuration')
-        if self.fresh_expression_retry and paragraph_addendum(configuration)[0] != PARAGRAPH_RETRY_ADDENDUM:
+        if self.fresh_expression_retry and paragraph_addendum(configuration)[0] not in {PARAGRAPH_RETRY_ADDENDUM, PARAGRAPH_OVER99_ADDENDUM}:
             raise ValueError('Fresh expression retries require the separately bound v0.2 addendum')
 
     def prepare(self, execution_id, plan, *, mode='live'):
