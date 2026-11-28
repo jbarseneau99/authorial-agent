@@ -66,7 +66,7 @@ def render(output, svg=None):
     arrow([(9.975,16.90),(9.975,16.33)])
     box(5.6,15.04,8.75,1.22,'1  CONSTRUCTION PROMPT','Encode meaning; plan rhetorical purposes and order.\nResolve relevant rules, example structures and checking criteria for each act.',BLUE,BE,14,11.7,'faculty.py  •  structured graph before prose')
     arrow([(9.975,14.97),(9.975,14.45)])
-    box(5.6,13.16,8.75,1.22,'2  CONSTRUCTION REVIEW PROMPT','Structure + subject evidence + full available rules and examples.\nCheck meaning, warranted scope, voice choices, omissions and criteria.',BLUE,BE,14,11.7,'faculty.py + construction.py  •  pass / fail / uncertain')
+    box(5.6,13.16,8.75,1.22,'2  CONSTRUCTION REVIEW PROMPT','Structure + subject evidence + full available rules and examples.\nCheck meaning, warranted scope, voice choices, omissions and criteria.',BLUE,BE,14,11.7,'faculty.py  •  binding-only defect → scoped repair + fresh review')
     arrow([(9.975,13.09),(9.975,12.65)])
     box(5.6,11.87,8.75,.72,'AUTHOR CLOSES THIS CONSTRUCTION','Current passing review + unchanged structure + explicit closure authority.',GREEN,GE,13.2,11.1)
     arrow([(9.975,11.8),(9.975,11.12)])

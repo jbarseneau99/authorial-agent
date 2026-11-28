@@ -17,9 +17,13 @@ OWNERS = {'construction': 'src/faculty.py', 'expression': 'src/expression.py',
 
 
 class Execution:
-    def __init__(self, g, faculty, expression, checking, binding=None, paragraph_loop=None):
+    def __init__(self, g, faculty, expression, checking, binding=None, paragraph_loop=None,
+                 max_voice_repairs=0):
         self.g, self.f, self.e, self.c = g, faculty, expression, checking
         self.binding = binding
+        if type(max_voice_repairs) is not int or max_voice_repairs < 0:
+            raise ValueError('Nonnegative voice repair budget required')
+        self.max_voice_repairs = max_voice_repairs
         self.paragraph_loop = paragraph_loop
         if paragraph_loop is not None and (
                 paragraph_loop.g is not g or paragraph_loop.expression is not expression
@@ -108,6 +112,8 @@ class Execution:
                 raise ValueError('Rule selection differs from the committed configuration')
             if getattr(self.f, 'execution_profile', None) != config.get('execution_profile'):
                 raise ValueError('Construction profile differs from the committed configuration')
+            if self.max_voice_repairs != config.get('max_voice_repairs', 0):
+                raise ValueError('Voice repair budget differs from the committed configuration')
             if getattr(self.f, 'written_calibration', []) != config.get('written_calibration', []):
                 raise ValueError('Written calibration differs from the committed configuration')
             if self.paragraph_loop.paragraph_groups != config.get('paragraph_groups'):
@@ -177,6 +183,7 @@ class Execution:
                 raise ValueError('Pangram must be configured and available before live execution')
         x = dict(id=str(uuid.uuid4()), intent=intent, max_attempts=max_attempts,
                  attempts=0, state='constructing', history=[], mode=mode,
+                 voice_repair_attempts=0, max_voice_repairs=self.max_voice_repairs,
                  binding_id=self.binding.id if self.binding else None,
                  execution_scope='paragraphs' if self.paragraph_loop else 'whole_plan_legacy',
                  active_loop='construction', loop_owner=OWNERS['construction'])
@@ -222,6 +229,44 @@ class Execution:
                 return self._checkpoint(x, 'suspended_error', 'paragraph', error=type(exc).__name__)
             return self._paragraph_checkpoint(x, progress)
         return self._checkpoint(x, 'ready', 'expression', unresolved=None, route=None)
+
+    def repair_voice(self, ident, actor=None):
+        """Repair reviewed bindings under the existing construction owner."""
+        if actor != 'author':
+            raise PermissionError('Explicit authorization required for voice binding repair')
+        x = self.inspect(ident)
+        if x['state'] != 'construction_review_required' or x.get('closure'):
+            raise ValueError('Voice binding repair requires an unclosed construction with failed review')
+        self._binding_current(x)
+        if (getattr(self.f, 'execution_profile', None) != 'resolved-voice-v1'
+                or self.max_voice_repairs < 1
+                or x.get('max_voice_repairs', 0) != self.max_voice_repairs):
+            raise ValueError('A committed resolved-profile voice repair budget is required')
+        review = self.f.inspect_review(x['construction_review'])
+        status = {finding['layer']: finding['status'] for finding in review['findings']}
+        if (review['state'] != 'review_required' or review['plan'] != x['plan']
+                or status != {'conceptual': 'pass', 'epistemic': 'pass', 'rhetorical_plan': 'fail'}):
+            raise ValueError('Only a definite voice-plan defect with current meaning checks passed may be repaired')
+        if x.get('voice_repair_attempts', 0) >= self.max_voice_repairs:
+            return self._checkpoint(x, 'construction_review_required', 'construction', route='voice',
+                                    unresolved='Voice binding repair budget exhausted; no closure granted')
+        x['voice_repair_attempts'] = x.get('voice_repair_attempts', 0) + 1
+        self._checkpoint(x, 'revising_voice', 'construction', route='voice',
+                         unresolved='Repairing bindings; claims and intellectual act order remain fixed')
+        from faculty import VoiceRepairReopen
+        try:
+            plan = self.f.repair_voice(x['plan'], x['construction_review'], actor=actor)
+        except VoiceRepairReopen as exc:
+            return self._checkpoint(x, 'construction_review_required', 'construction', route='construction',
+                                    unresolved={'reason': exc.reason, 'layer': exc.layer,
+                                                'voice_repair_attempt': exc.attempt})
+        except Exception as exc:
+            return self._checkpoint(x, 'suspended_error', 'construction', error=type(exc).__name__,
+                                    unresolved='Voice binding repair did not produce an accepted plan')
+        self._checkpoint(x, 'awaiting_construction_review', 'construction', plan=plan,
+                         construction_review=None, closure=None, route=None,
+                         unresolved='Revised bindings require a fresh construction review')
+        return self.review_construction(ident)
 
     def _paragraph_checkpoint(self, x, progress):
         state = progress['state']

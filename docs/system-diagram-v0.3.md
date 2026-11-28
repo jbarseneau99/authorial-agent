@@ -4,7 +4,7 @@ This version shows the resolved execution profile and the author's explicit
 instruction to include exemplars as worked examples and ask for prose structured
 like them. It documents the changes in
 [procedure-fidelity-v0.1.md](procedure-fidelity-v0.1.md) and
-[the current loop map](../loops/inventory-v0.4.json).
+[the current loop map](../loops/inventory-v0.5.json).
 
 Construction review sees the complete available bound catalog to assess relevant
 omissions. Expression receives selected authentic example text paired with the
@@ -12,6 +12,11 @@ corresponding act, rule, structure to model and criterion. The approved generate
 written passage remains separately labeled at passage-only authority. The writer
 is explicitly asked to realize the new subject through those demonstrated
 structures. Checking assesses both meaning and that authorial realization.
+
+Reviewed binding or criterion defects can return to a separately budgeted voice
+resolution call within the construction owner. That call preserves claims and
+act purposes/order and requires a fresh review. See
+[voice-binding-repair-v0.1.md](voice-binding-repair-v0.1.md).
 
 The repair path now follows the diagnosed defect in the resolved profile. A
 definite expression defect found in any of the four layers may receive a scoped

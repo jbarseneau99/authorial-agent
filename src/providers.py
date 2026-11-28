@@ -34,6 +34,32 @@ PROMPT_TEMPLATES = {
         "role": "Review the intellectual construction before expression. Assess definitions and distinctions; warrants, evidence, uncertainty, assumptions, objections and sufficiency; and ordered intellectual-act purposes. Missing evidence must be fail or uncertain. A model judgment does not confer authorial authority.",
         "schema": '{"findings":[{"layer":"conceptual|epistemic|rhetorical_plan","status":"pass|fail|uncertain","reason":"..."}]} Exactly one finding for each of the three layers.',
     },
+    "voice_resolution": {
+        "version": "1",
+        "role": (
+            "Repair the voice bindings of the supplied fixed intellectual construction. The exact "
+            "failed construction review is in repair.review; address only the exemplar, application "
+            "and criterion errors identified there. Use the full available voice_catalog to choose "
+            "authentic examples grounded in the selected rules. An example must actually demonstrate "
+            "the structure claimed in its application; a self-report about how the author writes or "
+            "speaks does not by itself enact that structure. State which observable structure the "
+            "example demonstrates and how the writer should write prose structured like that example "
+            "for this act, without copying phrases or importing the example's subject claims. "
+            "The criterion must test that supported authorial realization, not only claim coverage. "
+            "Use the catalog's human rule_id and exemplar_id keys in voice_bindings. Preserve rule "
+            "status and evidence authority. Approved written calibration supplies worked passage "
+            "examples only at its recorded passage scope; it is generated author-approved text, "
+            "not authentic speech, a new rule or evidence for the subject claims. "
+            "Return every supplied act exactly once, in its existing order, using its exact id and "
+            "only its voice_bindings. Return unchanged bindings where no correction is required. "
+            "Do not add, remove or edit claims, claim meanings, evidence, act purposes, claim-to-act "
+            "associations or the act sequence. Do not write or replace paragraph prose. If the "
+            "failed review cannot be resolved with supported binding changes alone, request reopen "
+            "with the affected construction layer and a specific reason; do not disguise a content "
+            "or plan change as a voice-binding repair."
+        ),
+        "schema": '{"status":"bindings","acts":[{"id":"exact supplied act UUID","voice_bindings":[{"rule_id":"R001","exemplar_ids":["E001"],"layer":"conceptual|epistemic|rhetorical|linguistic","application":"Demonstrated example structure and its application to this fixed act","criterion":"Observable requirement for this authorial realization"}]}]} OR {"status":"reopen","layer":"conceptual|epistemic|rhetorical_plan","reason":"Why supported binding changes cannot resolve the failed review"}',
+    },
 }
 PROFILE_TEMPLATES = {
     "resolved-voice-v1": {
@@ -148,6 +174,7 @@ PROFILE_TEMPLATES = {
             ),
             "schema": PROMPT_TEMPLATES["construction_review"]["schema"],
         },
+        "voice_resolution": dict(PROMPT_TEMPLATES["voice_resolution"]),
     }
 }
 ENVELOPE = {
@@ -256,6 +283,9 @@ class JSONModel:
 
     def assess_construction(self, context):
         return self.call("construction_review", context)["findings"]
+
+    def resolve_voice(self, context):
+        return self.call("voice_resolution", context)
 
 
 class SuppliedResearch:

@@ -1,0 +1,216 @@
+{
+  "id": "AA-LOOP-MAP-005",
+  "version": "0.5",
+  "parent": "loops/inventory-v0.4.json",
+  "status": "reviewed voice binding repair added within existing construction owner; live outcomes remain separate",
+  "implementation_base_commit": "647c7b5a961e72cd97b12766cdc960d9ea3eec1c",
+  "procedure_addendum": "procedures/addenda/paragraph-pangram-v0.1.json",
+  "procedure_change": "Existing construction, voice resolution and defect routing requirements implemented more faithfully; no rule, ledger or detector policy change.",
+  "voice_rule_changes": false,
+  "four_layers": [
+    "conceptual",
+    "epistemic",
+    "rhetorical",
+    "linguistic"
+  ],
+  "ordering": "Construct conceptual and epistemic structure and rhetorical act order; close construction; realize one paragraph rhetorically and linguistically; check all four layers; scan that exact paragraph; permit next paragraph only on current passes.",
+  "coordinator": "src/execution.py",
+  "external_canonical_interface": "not integrated; existing Execution extended, no second scheduler",
+  "loops": [
+    {
+      "id": "construction",
+      "owner": "src/faculty.py",
+      "helpers": [
+        "src/construction.py",
+        "src/voice_resolution.py"
+      ],
+      "outputs": [
+        "proposed plan",
+        "three-layer construction review",
+        "explicit author closure witness",
+        "act-level rule/exemplar applications and criteria reviewed against the available bound catalog",
+        "versioned binding-only repair with unchanged claim identities, act purpose and order, followed by fresh review"
+      ],
+      "limits": [
+        "full epistemic schema",
+        "general intellectual repair",
+        "model-judged semantic abstraction and voice applicability"
+      ]
+    },
+    {
+      "id": "research",
+      "owner": "src/research_loop.py",
+      "helpers": [
+        "src/research.py",
+        "src/governance.py"
+      ],
+      "outputs": [
+        "bound text evidence",
+        "bilateral retrieval records"
+      ],
+      "limits": [
+        "retrieval is not sufficiency",
+        "automated query construction"
+      ]
+    },
+    {
+      "id": "paragraph",
+      "owner": "src/paragraph_loop.py",
+      "inputs": [
+        "closed plan",
+        "ordered act groups",
+        "per-paragraph attempt budget",
+        "current prior paragraph assessments and detector observations"
+      ],
+      "outputs": [
+        "versioned paragraph checkpoints",
+        "current paragraph expression/check/scan references",
+        "exact assembled text and SHA-256"
+      ],
+      "gate": "the next paragraph cannot be generated until the previous paragraph has current passing four-layer and Pangram evidence",
+      "limits": [
+        "default one act per paragraph is unvalidated",
+        "whole-chapter semantic check pending",
+        "no autonomous detector-driven rewrite"
+      ]
+    },
+    {
+      "id": "expression",
+      "owner": "src/expression.py",
+      "outputs": [
+        "one scoped paragraph with exact text/hash and sentence-to-act references",
+        "or reopening request",
+        "actual writer request with authentic worked examples paired to intellectual acts"
+      ],
+      "gate": "current revision-bound construction closure and exact accepted paragraph prefix",
+      "limits": [
+        "semantic entailment remains provider judged"
+      ],
+      "helpers": [
+        "src/voice_expression.py"
+      ]
+    },
+    {
+      "id": "checking",
+      "owner": "src/checking.py",
+      "outputs": [
+        "criterion-linked four-layer findings",
+        "revision-bound reopening tickets routed by diagnosed defect in the resolved profile"
+      ],
+      "limits": [
+        "provider judgments are not author approval"
+      ]
+    },
+    {
+      "id": "detector",
+      "owner": "src/pangram_check.py",
+      "inputs": [
+        "exact checked paragraph",
+        "paragraph/run/assessment identities",
+        "text and assessment snapshot hashes",
+        "bound detector configuration"
+      ],
+      "outputs": [
+        "append-only scan and request/response events",
+        "saved async task ID",
+        "passed, flagged, pending, unscorable, error or stale observation"
+      ],
+      "gate": "all-human-v1; explicit exact detector version; complete and consistent window coverage",
+      "limits": [
+        "at least 50 words per paragraph; shorter paragraphs stop without padding or aggregation",
+        "one HTTP request per advance; uncertain submission never automatically resubmitted",
+        "a detector pass is not authorial or epistemic approval",
+        "live API validation pending"
+      ]
+    },
+    {
+      "id": "editing",
+      "owner": "src/editing.py",
+      "outputs": [
+        "new scoped paragraph attempt linked to exact prior paragraph and four-layer findings"
+      ],
+      "limits": [
+        "resolved profile: definite expression defects only; uncertainty, evidence and construction defects remain gated",
+        "legacy profile: linguistic failures only",
+        "fixed sentence count and act placement remain conservative prototype restrictions",
+        "detector flags do not enter writing prompts or automatically initiate repair"
+      ]
+    },
+    {
+      "id": "validation",
+      "owner": "src/execution.py",
+      "outputs": [
+        "current exact paragraph assembly",
+        "explicit author approval or unresolved state"
+      ],
+      "limits": [
+        "whole-chapter semantic check remains pending, including after author approval",
+        "trusted host actor; authentication integration outstanding"
+      ]
+    },
+    {
+      "id": "learning",
+      "owner": "src/learning.py",
+      "status": "unchanged",
+      "limits": [
+        "approved snapshots not integrated into generation"
+      ]
+    },
+    {
+      "id": "composition",
+      "owner": null,
+      "status": "ordered act grouping recorded in paragraph_loop; independent semantic composition faculty not implemented",
+      "helpers": [
+        "src/paragraph_loop.py"
+      ],
+      "limits": [
+        "default one act per paragraph is explicitly unvalidated"
+      ]
+    }
+  ],
+  "configuration": {
+    "required_additions": [
+      "paragraph_mode=\"pangram-gated-v1\"",
+      "procedure_addenda=[\"procedures/addenda/paragraph-pangram-v0.1.json\"]",
+      "complete explicit pangram configuration"
+    ],
+    "optional_paragraph_groups": "ordered zero-based act-index groups covering every closed-plan act exactly once",
+    "default_grouping": "one_act_per_paragraph_default_unvalidated",
+    "max_attempts_scope": "per_paragraph",
+    "detector_version": "explicit expected_version required; no assumed 4.1 availability",
+    "max_voice_repairs": "separate explicit nonnegative binding-repair budget; default0; resolved profile only"
+  },
+  "provenance_helpers": [
+    "src/run_binding.py",
+    "src/providers.py"
+  ],
+  "new_execution_states": [
+    "ready_for_next_paragraph",
+    "suspended_detector_pending",
+    "suspended_detector_flagged",
+    "suspended_detector_unscorable",
+    "suspended_detector_blocked",
+    "suspended_detector_error"
+  ],
+  "inherited_execution_states": [
+    "awaiting_construction_review",
+    "awaiting_construction_closure",
+    "construction_review_required",
+    "ready",
+    "running",
+    "suspended_reopen",
+    "suspended_error",
+    "budget_exhausted",
+    "awaiting_approval",
+    "closed",
+    "stale"
+  ],
+  "chapter_semantic_check": "pending; not automatically completed by paragraph checks or author approval",
+  "effectiveness": {
+    "fixture_result": "verification/voice-binding-repair-v0.1.json",
+    "live_model_result": "recorded separately for each private bound experiment",
+    "live_pangram_result": "recorded separately for each private bound experiment",
+    "author_voice_validation": "requires exact passage approval"
+  },
+  "coverage_details": "docs/voice-binding-repair-v0.1.md"
+}

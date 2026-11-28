@@ -15,4 +15,4 @@ The author requires code-only execution of the writing procedure and one owning 
 
 ## Current implementation baseline
 
-`audits/2026-11-27-code-structure/repository-map.md` and `loops/inventory-v0.1.json` map existing code and outstanding gaps. The audit found 38 passing fixture tests, but the existing prototype is not yet a complete implementation of the declared procedure. No live manuscript run was performed during that audit.
+The historical audit is preserved in `audits/2026-11-27-code-structure/repository-map.md` and `loops/inventory-v0.1.json`. The current owner and capability map is `loops/inventory-v0.5.json`; read `docs/procedure-fidelity-v0.1.md` and `docs/voice-binding-repair-v0.1.md` for the worked-example and binding-repair increments. Verification records under `verification/` distinguish synthetic tests from separately retained live execution evidence. General intellectual repair and external canonical-loop integration remain incomplete; no passing fixture suite establishes authorial quality or final approval.

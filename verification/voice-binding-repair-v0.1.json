@@ -1,0 +1,51 @@
+{
+  "id": "AA-VOICE-BINDING-REPAIR-VERIFICATION-001",
+  "scope": "Synthetic fixture and state/data-flow verification; live outcomes remain separate",
+  "base_code_commit": "647c7b5a961e72cd97b12766cdc960d9ea3eec1c",
+  "requirements": [
+    "DS-07.01",
+    "DS-08.02",
+    "DS-09.01",
+    "DS-10.02"
+  ],
+  "finding": "CODE_PARAGRAPH_003 construction review identified an exemplar application and criterion defect while conceptual and epistemic findings passed.",
+  "tests": {
+    "command": "python3 -m unittest discover -v",
+    "count": 192,
+    "seconds": 3.258,
+    "result": "passed",
+    "log_sha256": "4335bfd0028148d37cd690c76f13d0018fb3c7d7e2ee13486b313526c158990a"
+  },
+  "checks": [
+    "Binding-only repair requires current exact conceptual and epistemic passes and a definite rhetorical-plan failure",
+    "Original claim identities, intent, act purposes and order remain fixed",
+    "Only grounded rule/exemplar bindings, applications and criteria can change",
+    "Exact input and response, lineage, operational actor and unresolved outcomes are retained",
+    "Stale inputs and invalid output cannot create a revised plan",
+    "Fresh independent construction review precedes explicit closure and expression",
+    "An explicit committed max_voice_repairs budget bounds the new operation",
+    "Read-only inspection exposes binding repairs without provider calls or schema writes"
+  ],
+  "changed_artifacts": [
+    "AGENTS.md",
+    "docs/render_procedure_diagram.py",
+    "docs/system-diagram-v0.3.md",
+    "docs/voice-binding-repair-v0.1.md",
+    "loops/inventory-v0.5.json",
+    "src/RUNNING.md",
+    "src/execution.py",
+    "src/faculty.py",
+    "src/providers.py",
+    "src/run_agent.py",
+    "src/test_voice_binding_repair.py",
+    "src/test_voice_repair_execution.py",
+    "src/test_voice_resolution_provider.py"
+  ],
+  "limitations": [
+    "Semantic validity of binding applications requires independent review",
+    "General intellectual repair remains incomplete",
+    "Final author voice approval remains separate",
+    "Exact historical prompts were not recovered",
+    "Detector outcomes are not established by these tests"
+  ]
+}

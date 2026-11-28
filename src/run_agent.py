@@ -66,6 +66,11 @@ def validate_configuration(config):
     budget = config.get('max_attempts', 3)
     if type(budget) is not int or budget < 1:
         raise ValueError('Positive attempt budget required')
+    voice_budget = config.get('max_voice_repairs', 0)
+    if type(voice_budget) is not int or voice_budget < 0:
+        raise ValueError('Nonnegative voice repair budget required')
+    if voice_budget and profile != 'resolved-voice-v1':
+        raise ValueError('Voice binding repair requires the resolved voice profile')
     if config['prompt_templates_sha256'] != JSONModel.templates_digest():
         raise ValueError('Configuration prompt templates differ from this runtime')
     return config
@@ -107,7 +112,8 @@ def runtime(graph, binding, config=None):
     paragraphs = ParagraphLoop(graph, expression, checking, detector,
                                paragraph_groups=config.get('paragraph_groups'),
                                max_attempts=config.get('max_attempts', 3))
-    engine = Execution(graph, faculty, expression, checking, binding=binding, paragraph_loop=paragraphs)
+    engine = Execution(graph, faculty, expression, checking, binding=binding, paragraph_loop=paragraphs,
+                       max_voice_repairs=config.get('max_voice_repairs', 0))
     return engine, sources, config
 
 
@@ -156,6 +162,13 @@ def inspect_execution(graph, ident):
     if execution.get('construction_review'):
         row = graph.db.execute('SELECT snapshot,findings,state FROM construction_review WHERE id=?', (execution['construction_review'],)).fetchone()
         result['construction_review'] = {'snapshot': json.loads(row[0]), 'findings': json.loads(row[1]), 'state': row[2]} if row else None
+    if graph.db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='voice_repair_attempt'").fetchone():
+        plans = {item.get('plan') for item in result['history']} | {execution.get('plan')}
+        faculty_view = object.__new__(Faculty)
+        faculty_view.g = graph
+        result['voice_binding_repairs'] = [faculty_view.inspect_voice_repair(ident)
+            for ident, previous_plan in graph.db.execute('SELECT id,previous_plan FROM voice_repair_attempt ORDER BY rowid')
+            if previous_plan in plans]
     if execution.get('closure'):
         row = graph.db.execute('SELECT plan,review,snapshot,actor,authority FROM construction_closure WHERE id=?', (execution['closure'],)).fetchone()
         result['construction_closure'] = dict(zip(('plan', 'review', 'snapshot', 'actor', 'authority'), row)) if row else None
@@ -249,19 +262,19 @@ def main(argv=None):
     start.add_argument('--database', required=True, type=Path)
     start.add_argument('--live', action='store_true')
     start.add_argument('--output', type=Path)
-    for name in ('inspect', 'review-construction', 'close-construction', 'resume', 'approve'):
+    for name in ('inspect', 'review-construction', 'repair-voice', 'close-construction', 'resume', 'approve'):
         command = commands.add_parser(name)
         command.add_argument('--database', required=True, type=Path)
         command.add_argument('--execution', required=True)
         command.add_argument('--output', type=Path)
-        if name in {'review-construction', 'resume'}:
+        if name in {'review-construction', 'repair-voice', 'resume'}:
             command.add_argument('--live', action='store_true')
-        if name in {'close-construction', 'approve'}:
+        if name in {'repair-voice', 'close-construction', 'approve'}:
             command.add_argument('--actor', choices=['author'], required=True)
         elif name == 'resume':
             command.add_argument('--actor', choices=['author'])
     args = parser.parse_args(argv)
-    if args.command in {'start', 'resume', 'review-construction'} and not args.live:
+    if args.command in {'start', 'resume', 'review-construction', 'repair-voice'} and not args.live:
         parser.error('Explicit --live required for commands that may call providers')
     if args.output and args.output.exists():
         parser.error('Report already exists; choose a new output version')
@@ -293,6 +306,8 @@ def main(argv=None):
             engine, _, _ = runtime(graph, binding)
             if args.command == 'review-construction':
                 result = engine.review_construction(args.execution)
+            elif args.command == 'repair-voice':
+                result = engine.repair_voice(args.execution, actor=args.actor)
             elif args.command == 'close-construction':
                 result = engine.close_construction(args.execution, actor=args.actor)
             elif args.command == 'resume':

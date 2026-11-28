@@ -78,6 +78,7 @@ Optional configuration fields:
 | `selected_rule_ids` | Imported graph rule IDs from the selected ledger. Omission selects all candidate rules in that ledger; this does not perform per-act relevance selection or approve candidates. |
 | `research` | An object containing both `support` and `challenge` query strings. Retrieval remains distinct from evidence sufficiency. |
 | `max_attempts` | Positive per-paragraph expression/repair budget; default 3. Detector polls do not consume another expression attempt. |
+| `max_voice_repairs` | Nonnegative budget for reviewed binding-only construction repairs; default 0. Requires `resolved-voice-v1`. Claims and act purposes/order cannot change through this operation. |
 
 The committed configuration contains the exact intent; there is no separate mutable CLI intent override. The runtime freezes the entire configuration and hashes the base procedure, addendum, ledger and sources. The containing commit is recorded separately, avoiding a self-referential commit field. Paths must continue to resolve to the bound bytes on resume.
 
@@ -106,6 +107,20 @@ python3 src/run_agent.py close-construction --database /path/to/run.sqlite --exe
 ```
 
 This closes the current construction and records the paragraph grouping. It does not call the writer. `--actor author` is a trusted-host assertion, not identity authentication; it must reflect actual authority. A grouping inconsistent with the constructed acts remains unresolved.
+
+When conceptual and epistemic review pass but the rhetorical plan has a definite
+example/application/criterion defect, an explicitly budgeted and authorized
+binding-only repair is available:
+
+```sh
+python3 src/run_agent.py repair-voice --live --database /path/to/run.sqlite --execution EXECUTION_ID --actor author --output /path/to/voice-repair-v1.json
+```
+
+The construction provider receives the exact reviewed plan and failed findings.
+It may revise voice bindings only, or request broader reopening. Claims retain
+their identities; intent, act purpose and order remain fixed. The original plan
+and review remain available. A revised plan receives a fresh construction review
+and still requires explicit construction closure before expression.
 
 ## Generate, check and poll one paragraph
 
