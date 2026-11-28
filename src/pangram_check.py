@@ -52,7 +52,7 @@ def validate_configuration(configuration):
         raise ValueError('Pangram endpoint must be the declared official task service')
     if configuration['model'] != 'pangram-4' or configuration['public_dashboard_link'] is not False:
         raise ValueError('Explicit pangram-4 and private result handling are required')
-    if configuration['policy'] != 'all-human-v1':
+    if configuration['policy'] not in {'all-human-v1', 'reported-over-99-human-v1'}:
         raise ValueError('Unsupported Pangram gate policy')
     if not isinstance(configuration['expected_version'], str) or not re.fullmatch(r'\d+\.\d+(?:\.\d+)?', configuration['expected_version']):
         raise ValueError('An exact expected detector version is required')
@@ -278,6 +278,12 @@ class PangramCheck:
         zero_ai = math.isclose(fractions['ai'], 0.0, rel_tol=0.0, abs_tol=sys.float_info.epsilon)
         zero_assisted = math.isclose(fractions['ai_assisted'], 0.0, rel_tol=0.0, abs_tol=sys.float_info.epsilon)
         all_human = math.isclose(fractions['human'], 1.0, rel_tol=0.0, abs_tol=sys.float_info.epsilon)
+        if self.configuration['policy'] == 'reported-over-99-human-v1':
+            if result.get('prediction_short') not in {'Human', 'Mixed', 'AI'}:
+                raise ValueError('Unrecognized detector prediction_short')
+            # Fraction is the sole score gate; validated windows remain evidence.
+            # Strict inequality: an exact 0.99 result must fail.
+            return 'passed' if fractions['human'] > 0.99 else 'flagged'
         return 'passed' if (zero_ai and zero_assisted and all_human
                             and counts['ai'] == 0 and counts['ai_assisted'] == 0
                             and counts['human'] == len(windows)) else 'flagged'
