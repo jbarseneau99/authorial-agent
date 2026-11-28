@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 
 from editing import Editing
+from run_binding import digest
 
 
 def _copy(value):
@@ -97,6 +98,29 @@ class ParagraphLoop:
             ],
         }
         return self._save(progress, 'ready', unresolved=None)
+
+    def continue_expression(self, execution_id, parent, reference, *, actor=None):
+        """Prepare the next normal editing attempt, preserving the source work ID."""
+        if actor != 'author':
+            raise PermissionError('Explicit author authorization required for continuation')
+        if (digest(parent) != reference['source_progress_sha256']
+                or parent['execution_id'] != reference['source_execution_id']
+                or parent['state'] != 'budget_exhausted'
+                or len(parent['paragraphs']) != 1 or parent['active_index'] != 0
+                or self.max_attempts <= parent['max_attempts_per_paragraph']):
+            raise ValueError('Exact exhausted paragraph evidence and an extended total budget required')
+        paragraph = parent['paragraphs'][0]
+        assessment = self.editing._current(paragraph['run'], paragraph['assessment'])
+        progress = self.prepare(execution_id, parent['plan'], mode=parent['mode'])
+        if progress['act_groups'] != parent['act_groups']:
+            raise ValueError('Continuation cannot change paragraph grouping')
+        # Paragraph identity describes the same closed intellectual work. New
+        # execution, binding, editing attempt, expression and assessment IDs are
+        # recorded separately; no prior checkpoint or attempt is relabeled.
+        progress['paragraphs'] = _copy(parent['paragraphs'])
+        progress['continuation'] = _copy(reference)
+        return self._save(progress, 'expression_repair_required',
+                          pending_action='editing', unresolved=assessment['findings'])
 
     def inspect(self, execution_id):
         row = self.g.db.execute(

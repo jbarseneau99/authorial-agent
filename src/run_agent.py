@@ -78,6 +78,9 @@ def validate_configuration(config):
         raise ValueError('Nonnegative voice repair budget required')
     if voice_budget and profile != 'resolved-voice-v1':
         raise ValueError('Voice binding repair requires the resolved voice profile')
+    if 'continuation' in config:
+        from continuation import validate_reference
+        validate_reference(config['continuation'])
     if config['prompt_templates_sha256'] != JSONModel.templates_digest():
         raise ValueError('Configuration prompt templates differ from this runtime')
     return config
@@ -271,6 +274,17 @@ def main(argv=None):
     start.add_argument('--database', required=True, type=Path)
     start.add_argument('--live', action='store_true')
     start.add_argument('--output', type=Path)
+    reference = commands.add_parser('continuation-reference')
+    reference.add_argument('--database', required=True, type=Path)
+    reference.add_argument('--execution', required=True)
+    reference.add_argument('--output', type=Path)
+    continuation = commands.add_parser('continue-expression')
+    continuation.add_argument('--config', required=True, type=Path)
+    continuation.add_argument('--source-database', required=True, type=Path)
+    continuation.add_argument('--database', required=True, type=Path)
+    continuation.add_argument('--actor', choices=['author'], required=True)
+    continuation.add_argument('--live', action='store_true')
+    continuation.add_argument('--output', type=Path)
     for name in ('inspect', 'review-construction', 'repair-voice', 'close-construction', 'resume', 'approve'):
         command = commands.add_parser(name)
         command.add_argument('--database', required=True, type=Path)
@@ -283,20 +297,41 @@ def main(argv=None):
         elif name == 'resume':
             command.add_argument('--actor', choices=['author'])
     args = parser.parse_args(argv)
-    if args.command in {'start', 'resume', 'review-construction', 'repair-voice'} and not args.live:
+    if args.command in {'start', 'resume', 'review-construction', 'repair-voice', 'continue-expression'} and not args.live:
         parser.error('Explicit --live required for commands that may call providers')
     if args.output and args.output.exists():
         parser.error('Report already exists; choose a new output version')
     graph = None
     try:
+        if args.command == 'continuation-reference':
+            from continuation import continuation_reference
+            result = continuation_reference(args.database, args.execution)
+            if args.output:
+                with args.output.open('x', encoding='utf-8') as stream:
+                    json.dump(result, stream, indent=2)
+                print(str(args.output.resolve()))
+            else:
+                print(json.dumps(result, indent=2))
+            return result
         if args.command == 'inspect':
             graph = _read_only_graph(args.database)
             return _report(graph, args.execution, args.output)
-        if args.command != 'start' and not args.database.is_file():
+        if args.command not in {'start', 'continue-expression'} and not args.database.is_file():
             raise ValueError('Execution database does not exist')
-        if args.command == 'start':
+        if args.command == 'continue-expression':
+            from continuation import copy_source_database
+            config = read_configuration(args.config)
+            copy_source_database(args.source_database, args.database, config.get('continuation'))
+            graph = Graph(str(args.database))
+            binding, config = create_binding(graph, args.config)
+            BoundSources(binding)
+            engine, _, _ = runtime(graph, binding, config)
+            result = engine.continue_expression(actor=args.actor)
+        elif args.command == 'start':
             # Validate before creating a database or constructing providers.
-            read_configuration(args.config)
+            config = read_configuration(args.config)
+            if config.get('continuation') is not None:
+                raise ValueError('Use continue-expression with the registered source database')
             graph = Graph(str(args.database))
             binding, config = create_binding(graph, args.config)
             BoundSources(binding)  # reject binary/missing sources before ingest or model use

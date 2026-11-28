@@ -180,6 +180,8 @@ class Execution:
             manifest = self.binding.verify()
             if manifest['mode'] != mode:
                 raise ValueError('Execution mode must match its binding')
+            if ((manifest.get('configuration') or {}).get('contents') or {}).get('continuation') is not None:
+                raise ValueError('Use the explicit expression-continuation entry for this binding')
             self._bound_components(manifest, intent=intent, max_attempts=max_attempts)
         if mode == 'live' and self.paragraph_loop is not None:
             availability = self.paragraph_loop.pangram.preflight(mode=mode)
@@ -201,6 +203,48 @@ class Execution:
         if hasattr(self.c.reviewer, 'assess_construction'):
             return self.review_construction(x['id'])
         return x
+
+    def continue_expression(self, *, actor=None):
+        """Append a new bound execution for an imported, diagnosed local repair.
+
+        The source execution and its budget are never rewritten. The existing
+        paragraph/editing owners retain all previous attempts and perform the
+        next repair, fresh checking and detector gating on later advance calls.
+        """
+        if actor != 'author':
+            raise PermissionError('Explicit author authorization required for continuation')
+        if self.binding is None or self.paragraph_loop is None:
+            raise ValueError('Continuation requires a new binding and the existing paragraph loop')
+        from continuation import imported_source, validate_binding
+        manifest = self.binding.verify()
+        config = (manifest.get('configuration') or {}).get('contents') or {}
+        reference = config.get('continuation')
+        source = imported_source(self.g, reference)
+        parent = source['execution']
+        validate_binding(source['manifest'], manifest, reference)
+        budget = config['max_attempts']
+        if budget != self.paragraph_loop.max_attempts:
+            raise ValueError('Continuation budget must match its paragraph owner')
+        self._bound_components(manifest, intent=parent['intent'], max_attempts=budget)
+        if any(json.loads(row[0]).get('binding_id') == self.binding.id
+               for row in self.g.db.execute('SELECT data FROM execution')):
+            raise ValueError('This continuation binding already has an execution; resume its exact ID')
+        x = dict(id=str(uuid.uuid4()), intent=parent['intent'], max_attempts=budget,
+                 attempts=parent['attempts'], state='continuing_expression', history=[],
+                 mode=parent['mode'], binding_id=self.binding.id, execution_scope='paragraphs',
+                 active_loop='paragraph', loop_owner=OWNERS['paragraph'],
+                 plan=parent['plan'], construction_review=parent['construction_review'],
+                 closure=parent['closure'], voice_repair_attempts=parent['voice_repair_attempts'],
+                 max_voice_repairs=self.max_voice_repairs, continuation=reference,
+                 continuation_authority={'actor': actor, 'scope': 'diagnosed_local_expression_repair'})
+        self.save(x)
+        try:
+            progress = self.paragraph_loop.continue_expression(
+                x['id'], source['progress'], reference, actor=actor)
+        except Exception as exc:
+            return self._checkpoint(x, 'suspended_error', 'paragraph', error=type(exc).__name__,
+                                    unresolved='Continuation did not prepare an authorized repair')
+        return self._paragraph_checkpoint(x, progress)
 
     def review_construction(self, ident, reviewer=None):
         if self.binding is not None and reviewer is not None and reviewer is not self.c.reviewer:

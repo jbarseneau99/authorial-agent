@@ -1,0 +1,26 @@
+{
+  "id": "AA-CONSISTENCY-RECOVERY-001",
+  "version": "0.1",
+  "author_instruction_date": "2026-11-28",
+  "author_instruction": "So why have you stopped. We need to continue until we hit 100% on pangram consistently?",
+  "authority": "The author explicitly requires continued iterative experiments and repeatability testing. Earlier instructions limiting detector observations to a single attempt do not terminate this authorized experimental work.",
+  "preserved_requirements": [
+    "Code constructs conceptual and epistemic structure with rules and actual exemplars before expression.",
+    "Code realizes closed acts rhetorically and linguistically, then checks all four layers.",
+    "Original ledgers, source text, previous runs, findings and detector thresholds remain unchanged.",
+    "A new candidate must preserve source meaning and uncertainty; no manually authored prose or plan is backfilled into run records.",
+    "A detector result does not grant authorial approval or waive a writing finding."
+  ],
+  "experimental_protocol": [
+    "Register each variant and immutable configuration before generation.",
+    "Observe previously unscanned exact draft versions to measure the effects of individual repairs; reuse existing results for already-scanned hashes.",
+    "Continue a diagnosed expression repair only under a new explicitly bound continuation, preserving the parent execution and its exhausted budget.",
+    "Run independent fresh generations to assess a fixed candidate procedure; retain every unsuccessful attempt.",
+    "Declare a confirmation batch of five fresh runs using one frozen configuration. A batch passes only if all five final exact paragraphs pass every writing check and the unchanged Pangram all-human-v1 policy.",
+    "A failed confirmation batch remains failed. Changing the procedure requires a newly declared batch; a selected streak is not a reliability estimate.",
+    "Validate across additional source paragraphs before extending a same-source result into a general claim about the writing procedure."
+  ],
+  "measurement_scope": "The first confirmation target is operational repeatability for the present paragraph task. It is not a guarantee of all future writing, a population success-rate estimate, or author validation.",
+  "initial_evidence": "RECOVERY_001 and RECOVERY_002 reached fraction_human 1.0 with linguistic findings remaining; RECOVERY_003 through RECOVERY_005 passed writing review but failed the detector policy. The prior five trials did not complete both gates on one paragraph.",
+  "loop_ownership": "Existing Execution, Faculty, Expression, Checking, Editing, ParagraphLoop and PangramCheck owners remain authoritative. Experiment commands orchestrate them; they do not replace the lifecycle."
+}

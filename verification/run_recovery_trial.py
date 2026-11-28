@@ -26,10 +26,23 @@ def save(path, value):
         json.dump(value, stream, indent=2, ensure_ascii=False)
 
 
+def select_execution(rows, execution_id=None):
+    executions = [json.loads(row[0]) for row in rows]
+    if execution_id is not None:
+        matches = [item for item in executions if item['id'] == execution_id]
+        if len(matches) != 1:
+            raise ValueError('The requested execution ID is not present in this trial database')
+        return matches[0]
+    if len(executions) > 1:
+        raise ValueError('Select --execution explicitly when a database retains parent executions')
+    return executions[0] if executions else None
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--execution", help="Exact execution ID, required for a continuation database")
     args = parser.parse_args()
     config = read_configuration(args.config)
     delegation = config.get("recovery_authorization", {})
@@ -41,14 +54,14 @@ def main():
     try:
         rows = graph.db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='execution'").fetchall()
         executions = graph.db.execute("SELECT data FROM execution").fetchall() if rows else []
-        if len(executions) > 1:
-            raise ValueError("One execution per trial directory is required")
-        if executions:
-            current = json.loads(executions[0][0])
+        current = select_execution(executions, args.execution)
+        if current is not None:
             binding = RunBinding.load(graph, current["binding_id"])
             engine, _, _ = runtime(graph, binding, config)
             current = engine.inspect(current["id"])
         else:
+            if config.get('continuation') is not None:
+                raise ValueError('Prepare the imported continuation through run_agent continue-expression first')
             binding, config = create_binding(graph, args.config, repository_root=ROOT)
             ingest(graph, binding.inspect()["ledger"]["path"])
             engine, _, _ = runtime(graph, binding, config)
