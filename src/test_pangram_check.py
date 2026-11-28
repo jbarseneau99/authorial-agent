@@ -122,6 +122,30 @@ class PangramTests(unittest.TestCase):
                 self.assertEqual(result['state'], 'flagged')
                 self.assertEqual(result['full_result']['windows'][0]['label'], label)
 
+    def test_mixed_authorship_fractions_need_not_equal_window_character_shares(self):
+        boundary = len(TEXT) // 2
+        response = result_for(TEXT)
+        response.update(fraction_human=0.2, fraction_ai=0.8, num_ai_segments=1)
+        response['windows'] = [
+            {'text': TEXT[:boundary], 'label': 'Human Written', 'confidence': 'Low',
+             'start_index': 0, 'end_index': boundary},
+            {'text': TEXT[boundary:], 'label': 'AI-Generated', 'confidence': 'Low',
+             'start_index': boundary, 'end_index': len(TEXT)},
+        ]
+        _, current = self.complete(response)
+        self.assertEqual(current['state'], 'flagged')
+        self.assertEqual(current['full_result'], response)
+
+    def test_all_human_fractions_cannot_override_ai_or_assisted_windows(self):
+        for label in ('AI-Generated', 'AI-Assisted'):
+            with self.subTest(label=label):
+                self.run, self.assessment = self.paragraph()
+                response = result_for(TEXT, label)
+                response.update(fraction_human=1.0, fraction_ai=0.0, fraction_ai_assisted=0.0)
+                _, current = self.complete(response)
+                self.assertEqual(current['state'], 'flagged')
+                self.assertEqual(current['full_result'], response)
+
     def test_human_result_accepts_reported_machine_scale_residue_without_changing_it(self):
         response = result_for(TEXT)
         # Numeric residue observed in the unchanged-source live probe. The text
@@ -169,6 +193,10 @@ class PangramTests(unittest.TestCase):
             lambda value: value['windows'][0].update(end_index=10),
             lambda value: value.update(num_human_segments=2),
             lambda value: value.update(fraction_ai=float('nan')),
+            lambda value: value.update(fraction_ai=float('inf')),
+            lambda value: value.update(fraction_ai=-0.1),
+            lambda value: value.update(fraction_human=1.1),
+            lambda value: value.update(fraction_human=0.5),
             lambda value: value['windows'][0].update(label='Unknown'),
         ]
         for mutate in mutations:

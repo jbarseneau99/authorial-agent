@@ -250,7 +250,7 @@ class PangramCheck:
         windows = result.get('windows')
         if not isinstance(windows, list) or not windows:
             raise ValueError('Missing detector windows')
-        cursor, counts, lengths = 0, dict.fromkeys(LABEL_FIELDS.values(), 0), dict.fromkeys(LABEL_FIELDS.values(), 0)
+        cursor, counts = 0, dict.fromkeys(LABEL_FIELDS.values(), 0)
         for window in windows:
             if not isinstance(window, dict) or window.get('label') not in LABEL_FIELDS or window.get('confidence') not in {'High', 'Medium', 'Low'}:
                 raise ValueError('Malformed detector window')
@@ -261,7 +261,6 @@ class PangramCheck:
                 raise ValueError('Detector window text differs from the paragraph')
             kind = LABEL_FIELDS[window['label']]
             counts[kind] += 1
-            lengths[kind] += end - start
             cursor = end
         if cursor != len(text):
             raise ValueError('Incomplete detector window coverage')
@@ -269,8 +268,9 @@ class PangramCheck:
             count = result.get('num_' + kind + '_segments')
             if type(count) is not int or count != counts[kind]:
                 raise ValueError('Detector segment counts disagree')
-            if not math.isclose(fractions[kind], lengths[kind] / len(text), abs_tol=1e-6):
-                raise ValueError('Detector fractions disagree with segment coverage')
+        # The API exposes aggregate authorship fractions and classified windows
+        # separately. It does not define those fractions as character shares.
+        # Validate each representation and require both to satisfy the policy.
         # The service can return machine-scale residue for an otherwise wholly
         # human result. Account only for float representation precision; this is
         # not an acceptance threshold for a nonzero AI classification. Preserve
