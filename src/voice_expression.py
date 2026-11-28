@@ -6,7 +6,7 @@ rules and approved generated calibration retain their limited recorded authority
 """
 import hashlib
 import json
-from voice_resolution import (PROFILE, FULL_CORPUS_SCOPE, LAYERS, rule_layers,
+from voice_resolution import (PROFILE, FULL_CORPUS_SCOPE, HISTORICAL_COMPACT_PRESENTATION, LAYERS, rule_layers,
                               validate_written_calibration)
 
 
@@ -126,11 +126,16 @@ def _repair(context):
     return result
 
 
-def compact_writer_context(context):
+def compact_writer_context(context, *, for_review=False):
     plans, rules, exemplars = _resolved(context)
     full_corpus = context.get('voice_context_scope') == FULL_CORPUS_SCOPE
+    historical_compact = context.get('voice_context_presentation') == HISTORICAL_COMPACT_PRESENTATION
+    if historical_compact and not full_corpus:
+        raise ValueError('Historical compact presentation requires full_corpus_v1')
     if full_corpus:
         exemplars = {item['id']: item for item in context['authentic_exemplars']}
+    if historical_compact:
+        rules = {item['id']: item for item in context['voice_candidates']}
     nodes = context['nodes']
     intent = nodes.get(context.get('intent'), {}).get('node', {})
     if intent.get('kind') != 'intent':
@@ -173,6 +178,14 @@ def compact_writer_context(context):
          'activation': rule['payload'].get('activation')}
         for ident, rule in sorted(rules.items())
     ]
+    if historical_compact:
+        for rule in voice_rules:
+            rule['allowed_layers'] = sorted(rule_layers(rules[rule['id']]))
+            rule['grounding_ids'] = [target for relation, target in
+                context['voice_evidence'][rule['id']]['edges'] if relation == 'grounded_in']
+            rule['selected_for_acts'] = [act_id for act_id, act in plans
+                if any(binding['rule_id'] == rule['id']
+                       for binding in act['node']['payload']['voice_bindings'])]
     voice_exemplars, sources = [], {}
     for ident, exemplar in sorted(exemplars.items()):
         node, source_ids = exemplar['node'], []
@@ -288,6 +301,17 @@ def compact_writer_context(context):
             'availability does not create new rule grounding or change candidate authority, '
             'the closed intellectual construction, or the existing checking criteria. '
             'Source records may be excerpts; retain their recorded gaps and modality.')
+    if historical_compact:
+        packet['voice_context_presentation'] = HISTORICAL_COMPACT_PRESENTATION
+        if not for_review:
+            packet['source_contexts'] = []
+            packet['corpus_usage'] = (
+                'The complete bound rule catalog and authentic exemplar texts are supplied '
+                'in compact form. Selected worked examples and the full approved written '
+                'calibration remain available. Source IDs preserve provenance; full recorded '
+                'transcripts are retained in the frozen corpus and supplied to reviewers. '
+                'Do not infer missing source context or new grounding. Candidate authority, '
+                'closed claims and checking criteria remain unchanged.')
     if 'repair' in context:
         packet['repair'] = _repair(context['repair'])
     return packet

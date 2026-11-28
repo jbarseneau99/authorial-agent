@@ -1,0 +1,23 @@
+{
+  "change": "Opt-in historical compact presentation of all18 rules and84 exact exemplars",
+  "configuration": {
+    "voice_context_scope": "full_corpus_v1",
+    "voice_context_presentation": "historical_compact_v1"
+  },
+  "generation_source_contexts": 0,
+  "review_source_contexts": 35,
+  "full_suite_passed": 205,
+  "full_suite_seconds": 5.516,
+  "reported_by": "procedure_diagnosis agent in shared checkout",
+  "integration_requests_verified": 8,
+  "diff_check": "passed",
+  "live_quality": "recorded separately",
+  "invariants": [
+    "complete frozen corpus freshness",
+    "canonical grounding and candidate authority",
+    "full written calibration",
+    "source-complete independent review",
+    "unchanged closed criteria",
+    "source manuscript excluded from expression"
+  ]
+}

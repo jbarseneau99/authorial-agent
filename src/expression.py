@@ -83,7 +83,7 @@ class Expression:
         base = {key: snapshot[key] for key in (
             'intent', 'acts', 'nodes', 'baseline_digest', 'voice_candidates',
             'voice_evidence', 'authentic_exemplars', 'selection_status')}
-        for key in ('execution_profile', 'written_calibration', 'voice_context_scope'):
+        for key in ('execution_profile', 'written_calibration', 'voice_context_scope', 'voice_context_presentation'):
             if key in snapshot:
                 base[key] = json.loads(json.dumps(snapshot[key]))
         base.update(construction_closure=closure, instruction=(
@@ -135,7 +135,7 @@ class Expression:
         return self._scoped_context(base, scope, resolved)
 
     @staticmethod
-    def writer_context(context):
+    def writer_context(context, *, for_review=False):
         """Project subject evidence to references for expression only.
 
         The full context remains the closure/freshness and checker input. The
@@ -145,7 +145,7 @@ class Expression:
         """
         profile = context.get('execution_profile')
         if profile == RESOLVED_VOICE_PROFILE:
-            return compact_writer_context(context)
+            return compact_writer_context(context, for_review=for_review)
         if profile is not None:
             raise ValueError('Unknown expression execution profile')
         voice_ids = set(context.get('voice_evidence', {}))

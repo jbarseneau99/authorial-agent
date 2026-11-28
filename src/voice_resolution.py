@@ -10,7 +10,16 @@ import re
 
 PROFILE = 'resolved-voice-v1'
 FULL_CORPUS_SCOPE = 'full_corpus_v1'
+HISTORICAL_COMPACT_PRESENTATION = 'historical_compact_v1'
 LAYERS = {'conceptual', 'epistemic', 'rhetorical', 'linguistic'}
+
+
+def validate_voice_presentation(value, scope):
+    if value not in {None, HISTORICAL_COMPACT_PRESENTATION}:
+        raise ValueError('Unsupported voice context presentation')
+    if value is not None and scope != FULL_CORPUS_SCOPE:
+        raise ValueError('Historical compact presentation requires full_corpus_v1')
+    return value
 
 
 def validate_written_calibration(value):
@@ -144,7 +153,7 @@ def _provider_grounding_record(node):
     return projected
 
 
-def compact_voice_catalog(voice, bindings=None):
+def compact_voice_catalog(voice, bindings=None, *, for_generation=False):
     """Project voice evidence once, retaining authority without audit feedback."""
     rules, exemplars = _catalog(voice)
     selected_rules = None if bindings is None else {item['rule_id'] for item in bindings}
@@ -191,24 +200,46 @@ def compact_voice_catalog(voice, bindings=None):
             node = record['node']
             if node['kind'] == 'evidence' and 'User transcript (segments joined)' in node['payload']:
                 sources[ident] = copy.deepcopy(node)
-    return {'rules': rule_records, 'exemplars': exemplar_records,
+    catalog = {'rules': rule_records, 'exemplars': exemplar_records,
             'sources': [sources[key] for key in sorted(sources)],
             'grounding_records': [other[key] for key in sorted(other)]}
+    if for_generation and voice.get('voice_context_presentation') == HISTORICAL_COMPACT_PRESENTATION:
+        catalog['rules'] = [
+            {'id': item['id'], 'rule_id': item['rule_id'], 'layer': item['payload']['Layer'],
+             'allowed_layers': item['allowed_layers'], 'text': item['payload']['Candidate rule'],
+             'status': item['payload'].get('Status'), 'applicability': item['payload'].get('Applicability'),
+             'activation': item['payload'].get('activation'), 'authority': item['authority'],
+             'grounding_ids': item['grounding_ids'], 'exemplar_ids': item['exemplar_ids']}
+            for item in rule_records]
+        catalog['exemplars'] = [
+            {'id': item['id'], 'exemplar_id': item['exemplar_id'], 'layer': item['payload'].get('Layer'),
+             'intellectual_act': item['payload'].get('Intellectual act'),
+             'text': item['payload']['Exact excerpt'], 'status': item['payload'].get('Status'),
+             'exemplar_type': item['payload']['Exemplar type'],
+             'written_validation': item['payload'].get('Written validation'),
+             'authority': item['authority'], 'source_ids': item['source_ids'],
+             'grounded_rule_ids': item['grounded_rule_ids']}
+            for item in exemplar_records]
+        catalog['sources'] = []
+        catalog['source_context_policy'] = 'Exact source context is retained in the frozen corpus and supplied to reviewers.'
+    return catalog
 
 
 def construction_packet(context):
     evidence = copy.deepcopy(context['evidence'])
     evidence['intent'] = {'origin': 'author_input', 'reference': 'top-level intent'}
     packet = {'execution_profile': PROFILE, 'intent': context['intent'], 'evidence': evidence,
-            'voice_catalog': compact_voice_catalog(context),
+            'voice_catalog': compact_voice_catalog(context, for_generation=True),
             'written_calibration': copy.deepcopy(context.get('written_calibration', [])),
             'instruction': context['instruction']}
     if context.get('voice_context_scope') == FULL_CORPUS_SCOPE:
         packet['voice_context_scope'] = FULL_CORPUS_SCOPE
+    if context.get('voice_context_presentation') is not None:
+        packet['voice_context_presentation'] = context['voice_context_presentation']
     return packet
 
 
-def construction_review_packet(snapshot):
+def construction_review_packet(snapshot, *, for_generation=False):
     nodes = snapshot['nodes']
     acts, claim_ids = [], set()
     for ident in snapshot['acts']:
@@ -231,7 +262,7 @@ def construction_review_packet(snapshot):
     packet = {'execution_profile': PROFILE, 'plan': snapshot['plan'],
             'intent': nodes[snapshot['intent']]['node']['payload']['text'],
             'acts': acts, 'claims': claims, 'evidence': evidence,
-            'voice_catalog': compact_voice_catalog(snapshot),
+            'voice_catalog': compact_voice_catalog(snapshot, for_generation=for_generation),
             'written_calibration': copy.deepcopy(snapshot.get('written_calibration', [])),
             'instruction': ('Review the construction and each act-specific voice choice against the '
                             'full available catalog, including material omissions and criteria that '
@@ -241,4 +272,6 @@ def construction_review_packet(snapshot):
                             'status and distinguish passage approval from corpus validation.')}
     if snapshot.get('voice_context_scope') == FULL_CORPUS_SCOPE:
         packet['voice_context_scope'] = FULL_CORPUS_SCOPE
+    if snapshot.get('voice_context_presentation') is not None:
+        packet['voice_context_presentation'] = snapshot['voice_context_presentation']
     return packet

@@ -114,6 +114,8 @@ class Execution:
                 raise ValueError('Construction profile differs from the committed configuration')
             if getattr(self.f, 'voice_context_scope', None) != config.get('voice_context_scope'):
                 raise ValueError('Voice context scope differs from the committed configuration')
+            if getattr(self.f, 'voice_context_presentation', None) != config.get('voice_context_presentation'):
+                raise ValueError('Voice context presentation differs from the committed configuration')
             if self.max_voice_repairs != config.get('max_voice_repairs', 0):
                 raise ValueError('Voice repair budget differs from the committed configuration')
             if getattr(self.f, 'written_calibration', []) != config.get('written_calibration', []):

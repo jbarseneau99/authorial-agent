@@ -7,7 +7,7 @@ import json
 import uuid
 from model import Kind
 from voice_resolution import (PROFILE, FULL_CORPUS_SCOPE, validate_resolved_bindings,
-                              validate_written_calibration)
+                              validate_written_calibration, validate_voice_presentation)
 
 CONSTRUCTION_LAYERS = {'conceptual', 'epistemic', 'rhetorical_plan'}
 
@@ -119,7 +119,7 @@ class Construction:
             collect(root)
         return nodes
 
-    def voice_context(self, rules, baseline_digest=None, scope=None):
+    def voice_context(self, rules, baseline_digest=None, scope=None, presentation=None):
         """Resolve selected grounding without activating candidate rules.
 
         Original spoken excerpts must match their source transcript. Experimental
@@ -129,6 +129,7 @@ class Construction:
         """
         if scope not in {None, FULL_CORPUS_SCOPE}:
             raise ValueError('Unsupported voice context scope')
+        validate_voice_presentation(presentation, scope)
         for selected in rules:
             ident = selected['id']
             obj = self.g.get(ident)
@@ -185,6 +186,8 @@ class Construction:
                 'selection_status': 'explicit_rule_set; per_act_relevance_not_assessed'}
         if scope == FULL_CORPUS_SCOPE:
             result['voice_context_scope'] = FULL_CORPUS_SCOPE
+        if presentation is not None:
+            result['voice_context_presentation'] = presentation
         return result
 
     def snapshot(self, plan):
@@ -198,7 +201,7 @@ class Construction:
         if errors:
             raise ValueError('; '.join(errors))
         voice = self.voice_context(context.get('voice_candidates', []), context.get('baseline_digest'),
-                                   context.get('voice_context_scope'))
+                                   context.get('voice_context_scope'), context.get('voice_context_presentation'))
         # Legacy plans lacking frozen exemplar context cannot bypass new closure.
         if 'voice_evidence' not in context or self._encoded(voice) != self._encoded({key: context[key] for key in voice}):
             raise ValueError('Voice inputs changed or were not frozen; rebuild construction')

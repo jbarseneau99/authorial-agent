@@ -4,7 +4,8 @@ from typing import Protocol
 from model import Kind
 from construction import Construction, CONSTRUCTION_LAYERS
 from voice_resolution import (PROFILE, FULL_CORPUS_SCOPE, construction_packet, construction_review_packet,
-                              resolve_voice_bindings, validate_written_calibration)
+                              resolve_voice_bindings, validate_written_calibration, validate_voice_presentation,
+                              HISTORICAL_COMPACT_PRESENTATION)
 
 class Reasoner(Protocol):
     def propose(self, context: dict) -> dict: ...
@@ -23,7 +24,8 @@ class VoiceRepairReopen(ValueError):
 
 class Faculty:
     def __init__(self, graph, reasoner: Reasoner, research: Research, baseline_digest=None, rule_ids=None,
-                 execution_profile=None, written_calibration=None, voice_context_scope=None):
+                 execution_profile=None, written_calibration=None, voice_context_scope=None,
+                 voice_context_presentation=None):
         self.g=graph; self.c=Construction(graph); self.reasoner=reasoner; self.research=research
         self.baseline_digest=baseline_digest
         if execution_profile not in {None, PROFILE}:
@@ -34,6 +36,7 @@ class Faculty:
         if voice_context_scope is not None and execution_profile != PROFILE:
             raise ValueError('Full voice corpus requires the resolved voice profile')
         self.voice_context_scope=voice_context_scope
+        self.voice_context_presentation=validate_voice_presentation(voice_context_presentation, voice_context_scope)
         self.written_calibration=validate_written_calibration(written_calibration)
         if self.written_calibration and execution_profile != PROFILE:
             raise ValueError('Written calibration requires the resolved voice profile')
@@ -69,6 +72,8 @@ class Faculty:
         available={ident:json.loads(payload) for ident,payload in records}
         selected=sorted(available) if self.rule_ids is None else self.rule_ids
         if not set(selected)<=set(available): raise ValueError('Selected voice rule missing, stale or outside bound ledger')
+        if self.voice_context_presentation == HISTORICAL_COMPACT_PRESENTATION and set(selected) != set(available):
+            raise ValueError('Historical compact presentation requires the complete bound rule catalog')
         return [{'id':ident,'payload':available[ident],'authority':'advisory_only'} for ident in selected]
     def build(self, text):
         if not text.strip(): raise ValueError('Intent required')
@@ -78,7 +83,7 @@ class Faculty:
         for n,s in enumerate(sources):
             if not s.get('text') or not s.get('source'): raise ValueError('Research provenance required')
             evidence[f'source{n}']={'text':s['text'],'source':s['source'],'origin':'retrieved_unverified','metadata':s.get('metadata',{})}
-        voice=self.c.voice_context(self._rules(),self.baseline_digest,self.voice_context_scope)
+        voice=self.c.voice_context(self._rules(),self.baseline_digest,self.voice_context_scope,self.voice_context_presentation)
         context={'intent':text,'evidence':evidence,**voice,'instruction':'Return claims with local key, text, origin and evidence keys; ordered acts with purpose and claim keys. No prose. Agent hypotheses are not established facts. Voice rules remain advisory; authentic spoken exemplars retain their recorded written-validation status.'}
         packet=context
         if self.execution_profile == PROFILE:
@@ -97,7 +102,7 @@ class Faculty:
                 'into a separate explanatory claim.')
             packet=construction_packet(context)
         proposal=self.reasoner.propose(json.loads(json.dumps(packet)))
-        if self.c._encoded(self.c.voice_context(voice['voice_candidates'],self.baseline_digest,self.voice_context_scope))!=self.c._encoded(voice):
+        if self.c._encoded(self.c.voice_context(voice['voice_candidates'],self.baseline_digest,self.voice_context_scope,self.voice_context_presentation))!=self.c._encoded(voice):
             raise ValueError('Voice inputs changed during construction')
         claims=proposal['claims']; acts=proposal['acts']; keys=set()
         if not claims or not acts: raise ValueError('Empty construction')
@@ -212,7 +217,7 @@ class Faculty:
             review = self._voice_repair_review(plan, review_id)
             snapshot = review['snapshot']
             encoded_snapshot = self.c._encoded(snapshot)
-            request = construction_review_packet(snapshot)
+            request = construction_review_packet(snapshot, for_generation=True)
             request['repair'] = {
                 'attempt': attempt, 'previous_plan': plan,
                 'review': {key: review[key] for key in ('id', 'plan', 'state', 'findings')},

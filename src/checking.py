@@ -46,7 +46,7 @@ class Checking:
         """Compact only the provider request; retain the complete bound snapshot."""
         if context['construction'].get('execution_profile')!=RESOLVED_PROFILE:
             return json.loads(json.dumps(context))
-        construction=self.e.writer_context(context['construction'])
+        construction=self.e.writer_context(context['construction'],for_review=True)
         criteria=construction.get('criteria')
         if not isinstance(criteria,list) or not criteria:
             raise ValueError('Resolved checking criteria are missing')

@@ -63,6 +63,8 @@ def validate_configuration(config):
         raise ValueError('Unsupported voice context scope')
     if voice_scope is not None and profile != 'resolved-voice-v1':
         raise ValueError('Full voice corpus requires the resolved voice profile')
+    from voice_resolution import validate_voice_presentation
+    validate_voice_presentation(config.get('voice_context_presentation'), voice_scope)
     if profile == 'resolved-voice-v1':
         from voice_resolution import validate_written_calibration
         validate_written_calibration(config.get('written_calibration', []))
@@ -111,7 +113,8 @@ def runtime(graph, binding, config=None):
                       rule_ids=config.get('selected_rule_ids'),
                       execution_profile=config.get('execution_profile'),
                       written_calibration=config.get('written_calibration', []),
-                      voice_context_scope=config.get('voice_context_scope'))
+                      voice_context_scope=config.get('voice_context_scope'),
+                      voice_context_presentation=config.get('voice_context_presentation'))
     expression = Expression(graph, models['expression'])
     checking = Checking(graph, models['checking'])
     detector = PangramCheck(graph, expression, checking, binding=binding, configuration=config['pangram'])
