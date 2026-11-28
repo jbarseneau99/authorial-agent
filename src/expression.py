@@ -130,6 +130,52 @@ class Expression:
             raise ValueError('Current paragraph must immediately follow the accepted act prefix')
         return self._scoped_context(base, scope, resolved)
 
+    @staticmethod
+    def writer_context(context):
+        """Project subject evidence to references for expression only.
+
+        The full context remains the closure/freshness and checker input. The
+        writer realizes constructed claims, not the original subject prose.
+        Preserve voice evidence verbatim and project repeated graph nodes in
+        repair's prior-draft context as well as the current plan.
+        """
+        voice_ids = set(context.get('voice_evidence', {}))
+        references = {}
+        for ident, record in context['nodes'].items():
+            node = record['node']
+            payload = node['payload']
+            if (ident in voice_ids or node['kind'] != 'evidence'
+                    or payload.get('origin') != 'retrieved_unverified'):
+                continue
+            source_text = payload.get('text')
+            if not isinstance(source_text, str):
+                raise ValueError('Subject source evidence requires its original text')
+            reference = {key: value for key, value in payload.items() if key != 'text'}
+            reference.update(text_sha256=hashlib.sha256(source_text.encode('utf-8')).hexdigest(),
+                             text_visibility='withheld_from_expression')
+            references[ident] = reference
+
+        def project(value):
+            if isinstance(value, list):
+                return [project(item) for item in value]
+            if not isinstance(value, dict):
+                return value
+            result = {key: project(item) for key, item in value.items()}
+            if result.get('kind') == 'evidence' and result.get('id') in references:
+                result['payload'] = json.loads(json.dumps(references[result['id']]))
+            return result
+
+        projected = project(context)
+        projected['subject_source_policy'] = {
+            'version': '1', 'mode': 'references_only',
+            'source_node_ids': sorted(references),
+            'instruction': ('Realize the closed claims and acts. Original subject-source '
+                            'bodies are withheld; source references and hashes remain. '
+                            'Authentic voice evidence is unchanged. Request reopening '
+                            'if the closed construction is insufficient.'),
+        }
+        return projected
+
     def run(self, plan, repair=None, paragraph=None):
         base_context = self.context(plan, paragraph=paragraph)
         context = json.loads(json.dumps(base_context))
@@ -137,7 +183,9 @@ class Expression:
             if not isinstance(repair, dict):
                 raise ValueError('Structured repair context required')
             context['repair'] = json.loads(json.dumps(repair))
-        result = self.writer.realize(json.loads(json.dumps(context)))
+        # ProviderJournal records this exact projected request. Keep the full
+        # context below for source-aware checking and revision invalidation.
+        result = self.writer.realize(self.writer_context(context))
         run, acts, ids = str(uuid.uuid4()), context['acts'], []
         if not isinstance(result, dict):
             raise ValueError('Expected structured response')
