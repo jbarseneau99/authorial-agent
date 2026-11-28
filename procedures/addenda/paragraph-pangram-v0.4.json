@@ -1,0 +1,35 @@
+{
+  "id": "AA-PROCEDURE-ADDENDUM-PARAGRAPH-PANGRAM-004",
+  "version": "0.4",
+  "parent": "procedures/addenda/paragraph-pangram-v0.3.json",
+  "status": "reconstructed from archived policy record; implementation on experiment branch is not the missing original commit",
+  "author_instruction": "Anything over 99 is acceptable now. Change the rule.",
+  "instruction_date": "2026-11-28",
+  "applies_to": "A committed configuration selecting this addendum with pangram.policy=reported-over-99-human-v1; existing fresh retry opt-in and budget are independent",
+  "preserved_sequence": [
+    "closed intellectual construction",
+    "select paragraph act grouping",
+    "generate candidate from closed plan and bound voice evidence",
+    "check all four authorial layers",
+    "scan the exact checked candidate",
+    "progress only after both writing and detector gates pass",
+    "retain separate author approval"
+  ],
+  "gate_policy": "Accept if and only if validated Pangram fraction_human > 0.99. Exact equality 0.99 fails. No rounding. Keep recognized nonhuman windows and class labels as recorded evidence; they are not a second all-human gate.",
+  "detector_result_validation": [
+    "Exact source text and detector version",
+    "successful terminal stage",
+    "finite fractions in [0,1] with sum within existing tolerance",
+    "complete contiguous exact-text windows",
+    "recognized window labels, confidence and consistent segment counts",
+    "recognized prediction_short: Human, Mixed or AI"
+  ],
+  "fresh_candidate_retry": {
+    "opt_in": "author-authorized-v1 with positive max_fresh_retries",
+    "behavior": "Fresh candidate from the same closed act plan; no Pangram rejection details or rejected text in the new Expression prompt; full four-layer recheck",
+    "preservation": "Retain original candidates, assessments, detector results and immutable run bindings"
+  },
+  "existing_expression_repair": "Diagnosed writing failures may receive bounded sentence-level editing; Pangram results never authorize sentence repair.",
+  "compatibility": "Legacy all-human-v1 and earlier addenda remain available and original detector results are immutable.",
+  "limitations": "This is a reconstructed declaration, not byte-identical to lost v0.4 and does not by itself reproduce the five original model outputs."
+}
