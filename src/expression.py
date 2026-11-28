@@ -5,6 +5,7 @@ import re
 import uuid
 from typing import Protocol
 from construction import Construction
+from voice_expression import PROFILE as RESOLVED_VOICE_PROFILE, compact_writer_context
 
 
 class Writer(Protocol):
@@ -82,6 +83,9 @@ class Expression:
         base = {key: snapshot[key] for key in (
             'intent', 'acts', 'nodes', 'baseline_digest', 'voice_candidates',
             'voice_evidence', 'authentic_exemplars', 'selection_status')}
+        for key in ('execution_profile', 'written_calibration'):
+            if key in snapshot:
+                base[key] = json.loads(json.dumps(snapshot[key]))
         base.update(construction_closure=closure, instruction=(
             'Return sentences with text and act IDs in plan order, or a reopen request '
             'with layer, act IDs and reason. Preserve claims and uncertainty; no new '
@@ -139,6 +143,11 @@ class Expression:
         Preserve voice evidence verbatim and project repeated graph nodes in
         repair's prior-draft context as well as the current plan.
         """
+        profile = context.get('execution_profile')
+        if profile == RESOLVED_VOICE_PROFILE:
+            return compact_writer_context(context)
+        if profile is not None:
+            raise ValueError('Unknown expression execution profile')
         voice_ids = set(context.get('voice_evidence', {}))
         references = {}
         for ident, record in context['nodes'].items():

@@ -35,6 +35,83 @@ PROMPT_TEMPLATES = {
         "schema": '{"findings":[{"layer":"conceptual|epistemic|rhetorical_plan","status":"pass|fail|uncertain","reason":"..."}]} Exactly one finding for each of the three layers.',
     },
 }
+PROFILE_TEMPLATES = {
+    "resolved-voice-v1": {
+        "construction": {
+            "version": "1",
+            "role": (
+                "Construct the intellectual content before prose, then resolve voice evidence for each act. "
+                "Represent successive constituent intellectual moves explicitly when they perform different jobs; "
+                "a paragraph may contain several acts. Preserve source claims and their epistemic strength. "
+                "Keep a claim's uncertainty in its representation; do not add an audit-status claim merely "
+                "to restate a test instruction or announce that this process has not proved something. "
+                "A substantive qualification belongs only where the source or author intent requires it. "
+                "For every act, select applicable rule IDs and source-grounded exemplar IDs from the supplied "
+                "catalog, explain their application, and state an observable checking criterion. Select only "
+                "relevant evidence. Preserve candidate status; selection does not promote a rule. Approved "
+                "written calibration is generated text approved for that passage, not original author speech "
+                "or evidence for the subject claims. Do not write prose. "
+                "Match provenance to evidence keys: origin author is allowed only with evidence [\"intent\"]. "
+                "A claim drawn from supplied subject evidence requires origin external and a source evidence "
+                "key, even when the manuscript belongs to the author. Use agent_hypothesis for a new inference. "
+                "Use only supplied claim evidence, rule and exemplar identifiers."
+            ),
+            "schema": '{"claims":[{"key":"c1","text":"...","origin":"author|external|agent_hypothesis","evidence":["source0"]}],"acts":[{"purpose":"...","claims":["c1"],"voice_bindings":[{"rule_id":"R001","exemplar_ids":["E001"],"layer":"conceptual|epistemic|rhetorical|linguistic","application":"How this evidence applies to this act","criterion":"Observable requirement for checking this act"}]}]}',
+        },
+        "expression": {
+            "version": "1",
+            "role": (
+                "Realize the closed ordered intellectual acts directly using their resolved voice applications. "
+                "Write the current paragraph with the meaning, claim strength and intended rhetorical progress "
+                "in the plan. Use the selected authentic exemplars and the explicitly labeled approved written "
+                "calibration at their recorded scope. Do not copy unrelated facts, examples or wording from "
+                "calibration. Do not convert evidence-status metadata into narration or add qualifications "
+                "beyond those needed to preserve the planned claims. Map each sentence to the acts it actually "
+                "performs; several acts may belong to one paragraph. If a repair is requested, repair only "
+                "the diagnosed expression defect and preserve every unaffected sentence exactly. Request "
+                "reopening if the intellectual construction is insufficient or a repair requires changing "
+                "substance or unaffected acts. This is a draft; final author approval remains separate."
+            ),
+            "schema": PROMPT_TEMPLATES["expression"]["schema"],
+        },
+        "checking": {
+            "version": "1",
+            "role": (
+                "Check the exact paragraph against every declared criterion using the closed acts, selected "
+                "voice applications, authentic excerpts, scoped approved written calibration and original "
+                "subject evidence. Return one check for every criterion ID, in its declared layer, citing "
+                "current sentence IDs. Identify an observed discrepancy and a concrete repair when a check "
+                "does not pass. Compare original subject text for unintended inherited phrasing or syntax "
+                "while preserving legitimate terminology. Distinguish a wording defect from a construction "
+                "defect and from a specific missing-evidence limitation. Assess compliance with the selected "
+                "provisional applications; do not claim general written-voice validation or final author "
+                "approval. Candidate status alone is not an observed paragraph defect or an automatic "
+                "requirement for another written sample. If evidence needed for a particular criterion "
+                "is actually missing, mark that check uncertain and name what is missing. Do not waive "
+                "a real uncertainty. A pass check has defect_type none and repair null; every nonpass check "
+                "has a specific defect type and nonempty repair. Each layer is uncertain if any of its "
+                "checks is uncertain, otherwise fail if any fails, otherwise pass. Each check cites at least "
+                "one current sentence realizing an act within that criterion's scope. A layer's sentences "
+                "are exactly the union of its nonpassing check sentence references, or all its check "
+                "sentence references when every check passes."
+            ),
+            "schema": '{"findings":[{"layer":"conceptual|epistemic|rhetorical|linguistic","status":"pass|fail|uncertain","reason":"...","sentences":["sentence ID"],"checks":[{"criterion_id":"declared ID","status":"pass|fail|uncertain","observation":"...","sentences":["sentence ID"],"defect_type":"none|expression|construction|evidence_limit","repair":null}]}]} Exactly one finding per layer; every declared criterion appears exactly once in its layer.',
+        },
+        "construction_review": {
+            "version": "1",
+            "role": (
+                "Review construction before expression: source claim coverage, conceptual distinctions, "
+                "evidence and uncertainty, and the ordered constituent intellectual moves. Verify that "
+                "the selected rule and exemplar applications fit each act and that their criteria can "
+                "be checked. Original source prose is subject evidence only. Approved generated written "
+                "references are passage-level calibration only. Do not turn provenance/audit cautions "
+                "into additional intellectual content. Missing substantive evidence must remain fail "
+                "or uncertain; a model judgment does not confer authorial authority."
+            ),
+            "schema": PROMPT_TEMPLATES["construction_review"]["schema"],
+        },
+    }
+}
 ENVELOPE = {
     "version": "1",
     "prefix": " Return JSON only. Required shape: ",
@@ -58,7 +135,8 @@ class JSONModel:
 
     @staticmethod
     def prompt_templates():
-        return json.loads(canonical({"operations": PROMPT_TEMPLATES, "envelope": ENVELOPE}))
+        return json.loads(canonical({"operations": PROMPT_TEMPLATES,
+                                     "profiles": PROFILE_TEMPLATES, "envelope": ENVELOPE}))
 
     @classmethod
     def templates_digest(cls):
@@ -73,6 +151,11 @@ class JSONModel:
         if operation not in PROMPT_TEMPLATES:
             raise ValueError("Unknown declared prompt operation")
         template = PROMPT_TEMPLATES[operation]
+        profile = context.get("execution_profile")
+        if profile is not None:
+            if profile not in PROFILE_TEMPLATES:
+                raise ValueError("Unknown execution prompt profile")
+            template = PROFILE_TEMPLATES[profile][operation]
         body = {
             "model": self.model, "response_format": {"type": "json_object"},
             "messages": [
@@ -84,6 +167,10 @@ class JSONModel:
         invocation = self.journal.begin(operation, self.configuration(), self.prompt_templates(), request_body)
         try:
             mode = self.journal.binding.inspect()["mode"]
+            if mode == "live":
+                bound = (self.journal.binding.inspect().get("configuration") or {}).get("contents") or {}
+                if bound.get("execution_profile") != profile:
+                    raise ValueError("Prompt profile differs from the committed execution configuration")
             if mode == "fixture" and self.is_live_transport:
                 raise RuntimeError("Fixture binding cannot invoke live transport")
             if mode == "live" and not self.is_live_transport:

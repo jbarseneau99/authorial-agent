@@ -1,0 +1,34 @@
+{
+  "id": "AA-RESOLVED-VOICE-PROFILE-001",
+  "scope": "Implementation and synthetic regression verification; live writing results recorded separately",
+  "requirements": [
+    "procedures/v0.1.json resolve operation",
+    "procedures/v0.3.json isolated expression and source-aware diagnosis",
+    "DS-05.01",
+    "DS-10.01",
+    "DS-10.02"
+  ],
+  "base_commit": "3b1f0c39bbd7370bd528fc1698bc8fd234173939",
+  "profile": "resolved-voice-v1",
+  "regression": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -v",
+    "working_directory": "src",
+    "tests_passed": 156,
+    "seconds": 2.187,
+    "exit_code": 0
+  },
+  "preserved": [
+    "candidate rule authority",
+    "original subject source isolation",
+    "explicit construction closure",
+    "final author validation separate",
+    "all-human-v1 Pangram gate"
+  ],
+  "remaining": [
+    "author-review resolution and resume",
+    "automatic construction repair",
+    "external canonical-loop integration",
+    "general written-voice validation"
+  ],
+  "publication": "Source code, synthetic tests and implementation metadata only."
+}

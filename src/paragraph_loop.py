@@ -62,7 +62,10 @@ class ParagraphLoop:
         acts = context['acts']
         groups = self.paragraph_groups
         default = groups is None
-        if default:
+        single_paragraph = groups == 'all_acts_one_paragraph'
+        if single_paragraph:
+            groups = [list(range(len(acts)))]
+        elif default:
             groups = [[index] for index in range(len(acts))]
         if (not isinstance(groups, list) or not groups
                 or any(not isinstance(group, list) or not group for group in groups)
@@ -81,6 +84,7 @@ class ParagraphLoop:
         progress = {
             'execution_id': execution_id, 'plan': plan, 'mode': mode, 'active_index': 0,
             'grouping_policy': ('one_act_per_paragraph_default_unvalidated' if default
+                                else 'all_closed_acts_in_one_paragraph' if single_paragraph
                                 else 'explicit_ordered_act_groups'),
             'act_groups': _copy(groups), 'max_attempts_per_paragraph': self.max_attempts,
             'chapter_semantic_check': 'pending', 'authorial_validation': 'pending',

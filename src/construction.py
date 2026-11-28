@@ -6,6 +6,7 @@ construction gate; they neither create a second lifecycle nor certify truth.
 import json
 import uuid
 from model import Kind
+from voice_resolution import PROFILE, validate_resolved_bindings, validate_written_calibration
 
 CONSTRUCTION_LAYERS = {'conceptual', 'epistemic', 'rhetorical_plan'}
 
@@ -36,13 +37,18 @@ class Construction:
             self.g.link(claim, 'supports', p)
         return claim
 
-    def act(self, intent, purpose, claims):
+    def act(self, intent, purpose, claims, voice_bindings=None):
         if self.g.get(intent)['kind'] != 'intent' or not purpose.strip() or not claims:
             raise ValueError('Intent, purpose and claims required')
         for claim in claims:
             if self.g.get(claim)['kind'] != 'claim':
                 raise ValueError('Expected claim')
-        act = self.g.add(Kind.ACT, {'purpose': purpose})
+        payload = {'purpose': purpose}
+        if voice_bindings is not None:
+            if not isinstance(voice_bindings, list) or not voice_bindings:
+                raise ValueError('Act voice bindings must be nonempty when supplied')
+            payload['voice_bindings'] = json.loads(json.dumps(voice_bindings))
+        act = self.g.add(Kind.ACT, payload)
         self.g.link(act, 'addresses', intent)
         for claim in set(claims):
             self.g.link(act, 'asserts', claim)
@@ -171,8 +177,22 @@ class Construction:
             raise ValueError('Voice inputs changed or were not frozen; rebuild construction')
         nodes = self._collect([intent] + acts)
         nodes.update(voice['voice_evidence'])
-        return {'plan': plan, 'intent': intent, 'acts': acts, 'context': context,
-                'nodes': nodes, **voice}
+        result = {'plan': plan, 'intent': intent, 'acts': acts, 'context': context,
+                  'nodes': nodes, **voice}
+        if context.get('execution_profile') == PROFILE:
+            payloads = [nodes[ident]['node']['payload'] for ident in acts]
+            validate_resolved_bindings(payloads, voice)
+            for ident, payload in zip(acts, payloads):
+                expected = {binding['rule_id'] for binding in payload['voice_bindings']}
+                actual = {target for relation, target in nodes[ident]['edges'] if relation == 'applies'}
+                if expected != actual:
+                    raise ValueError('Act rule edges differ from frozen voice bindings')
+            result.update(execution_profile=PROFILE,
+                          written_calibration=validate_written_calibration(context.get('written_calibration')),
+                          selection_status='per_act_bindings_validated; relevance_requires_review')
+        elif context.get('execution_profile') is not None:
+            raise ValueError('Unknown frozen construction execution profile')
+        return result
 
     @staticmethod
     def _encoded(value):

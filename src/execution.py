@@ -106,6 +106,10 @@ class Execution:
                 raise ValueError('The declared paragraph addendum must be bound as an exact committed artifact')
             if self.f.rule_ids != config.get('selected_rule_ids'):
                 raise ValueError('Rule selection differs from the committed configuration')
+            if getattr(self.f, 'execution_profile', None) != config.get('execution_profile'):
+                raise ValueError('Construction profile differs from the committed configuration')
+            if getattr(self.f, 'written_calibration', []) != config.get('written_calibration', []):
+                raise ValueError('Written calibration differs from the committed configuration')
             if self.paragraph_loop.paragraph_groups != config.get('paragraph_groups'):
                 raise ValueError('Paragraph grouping differs from the committed configuration')
             if self.paragraph_loop.max_attempts != config.get('max_attempts', 3):

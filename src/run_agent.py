@@ -32,7 +32,7 @@ def validate_configuration(config):
     if config.get('procedure_addenda') != [PARAGRAPH_ADDENDUM]:
         raise ValueError('Bind the author-directed paragraph Pangram addendum')
     groups = config.get('paragraph_groups')
-    if groups is not None:
+    if groups is not None and groups != 'all_acts_one_paragraph':
         if (not isinstance(groups, list) or not groups
                 or any(not isinstance(group, list) or not group for group in groups)
                 or any(type(index) is not int for group in groups for index in group)):
@@ -55,6 +55,14 @@ def validate_configuration(config):
     if selected is not None and (not isinstance(selected, list) or any(not isinstance(value, str) or not value.strip() for value in selected)
             or len(set(selected)) != len(selected)):
         raise ValueError('Selected rule IDs must be a unique list')
+    profile = config.get('execution_profile')
+    if profile not in {None, 'resolved-voice-v1'}:
+        raise ValueError('Unsupported execution profile')
+    if profile == 'resolved-voice-v1':
+        from voice_resolution import validate_written_calibration
+        validate_written_calibration(config.get('written_calibration', []))
+    elif config.get('written_calibration'):
+        raise ValueError('Written calibration requires the resolved voice profile')
     budget = config.get('max_attempts', 3)
     if type(budget) is not int or budget < 1:
         raise ValueError('Positive attempt budget required')
@@ -90,7 +98,9 @@ def runtime(graph, binding, config=None):
     bridge = ResearchBridge(EuropePMC(), research['support'], research['challenge'], graph, binding) if research else None
     sources = BoundSources(binding, bridge)
     faculty = Faculty(graph, models['construction'], sources, baseline_digest=manifest['ledger']['sha256'],
-                      rule_ids=config.get('selected_rule_ids'))
+                      rule_ids=config.get('selected_rule_ids'),
+                      execution_profile=config.get('execution_profile'),
+                      written_calibration=config.get('written_calibration', []))
     expression = Expression(graph, models['expression'])
     checking = Checking(graph, models['checking'])
     detector = PangramCheck(graph, expression, checking, binding=binding, configuration=config['pangram'])
