@@ -143,7 +143,7 @@ PROFILE_TEMPLATES = {
             "schema": PROMPT_TEMPLATES["expression"]["schema"],
         },
         "checking": {
-            "version": "2",
+            "version": "3",
             "role": (
                 "Check the exact paragraph against every declared criterion using the closed acts, selected "
                 "voice applications, authentic excerpts, scoped approved written calibration and original "
@@ -172,7 +172,13 @@ PROFILE_TEMPLATES = {
                 "a real uncertainty. A pass check has defect_type none and repair null; every nonpass check "
                 "has a specific defect type and nonempty repair. Each layer is uncertain if any of its "
                 "checks is uncertain, otherwise fail if any fails, otherwise pass. Each check cites at least "
-                "one current sentence realizing an act within that criterion's scope. A layer's sentences "
+                "one current target sentence. Every ID in a check's sentences list must be in that "
+                "criterion's target_sentence_ids; these are the current sentences realizing its scoped "
+                "acts. Other sentences remain available as context: inspect and describe them in "
+                "observation when a criterion compares an opening with a close or compares two cases, "
+                "but do not include those contextual peers in the check's sentences list. For a "
+                "comparative criterion, assess the scoped act's contribution to the relationship. "
+                "Contextual comparison does not authorize changing the peer act. A layer's sentences "
                 "are exactly the union of its nonpassing check sentence references, or all its check "
                 "sentence references when every check passes."
             ),

@@ -50,6 +50,13 @@ class Checking:
         criteria=construction.get('criteria')
         if not isinstance(criteria,list) or not criteria:
             raise ValueError('Resolved checking criteria are missing')
+        draft=context['draft']
+        sentences=self._sentence_records(draft,context['construction']['acts'])
+        # The entire paragraph is comparison context. Make each criterion's
+        # permitted targets explicit without changing canonical act scope.
+        for criterion in criteria:
+            criterion['target_sentence_ids']=[sentence['id'] for sentence in sentences
+                                              if set(sentence['acts']) & set(criterion['act_ids'])]
         voice_ids=set(context['construction'].get('voice_evidence',{}))
         sources=[]
         for ident,record in context['construction']['nodes'].items():
@@ -63,11 +70,10 @@ class Checking:
             sources.append({'id':ident,'revision':node['revision'],
                             'origin':payload['origin'],'reference':payload.get('source'),
                             'text':text,'text_sha256':hashlib.sha256(text.encode('utf-8')).hexdigest()})
-        draft=context['draft']
         return {'execution_profile':RESOLVED_PROFILE,
                 'draft':{'run':run,'plan':draft['plan'],'text':draft['text'],
                          'text_sha256':draft['text_sha256'],
-                         'sentences':self._sentence_records(draft,context['construction']['acts'])},
+                         'sentences':sentences},
                 'construction':construction,'subject_sources':sources,
                 'evaluation_scope':{
                     'criteria':'Evaluate every construction.criteria item against the exact draft.',

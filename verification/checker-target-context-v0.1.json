@@ -1,0 +1,27 @@
+{
+  "id": "AA-CHECKER-TARGET-CONTEXT-VERIFICATION-001",
+  "base_code_commit": "16d69d534e30ddc93fdbf29966bdd9a1a6f530c9",
+  "requirement": [
+    "BR/DS-09",
+    "BR/DS-10"
+  ],
+  "finding": "Comparative criteria legitimately use contextual peer sentences, but the prior prompt minimum-reference wording did not match the validator subset requirement.",
+  "change": "Provide explicit target_sentence_ids per projected criterion and distinguish comparison context from repair targets in the prompt. Preserve canonical criteria and all validators.",
+  "tests": {
+    "command": "python -B -m unittest discover -s src",
+    "count": 197,
+    "result": "passed",
+    "log_sha256": "54c6e655d1ce70e691e4c2628c0cc466829b5302ac4a0a2a7e3b0a0281801cc2"
+  },
+  "coverage": [
+    "Projection preserves canonical snapshots and scope",
+    "Comparative observations can use contextual peers while returning own scoped targets",
+    "Out-of-scope target references remain rejected for pass and fail",
+    "Local repair preserves the mentioned peer exactly"
+  ],
+  "limitations": [
+    "No historical response is rewritten or made valid retroactively",
+    "Live results must bind this revision separately",
+    "Provider compliance and authorial quality are not established by fixtures"
+  ]
+}
