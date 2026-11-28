@@ -1,6 +1,6 @@
 """Render the implemented flow, separate corpora and verified API connections.
 
-Documentation only; see system-diagram-v0.3.md for evidence and limitations.
+Documentation only; see system-diagram-v0.4.md for evidence and limitations.
 """
 from pathlib import Path
 import argparse
@@ -37,11 +37,11 @@ def render(output, svg=None):
 
     text(.65,25.95,'AUTHORIAL AGENT',27,'bold',ha='left')
     text(.65,25.35,'Construct the intellectual work. Express and check one paragraph at a time.',15,color=MUTED,ha='left')
-    text(19.35,25.91,'SYSTEM DIAGRAM  /  v0.3',11,'bold',MUTED,ha='right')
+    text(19.35,25.91,'SYSTEM DIAGRAM  /  v0.4',11,'bold',MUTED,ha='right')
     text(19.35,25.49,'Connections checked 27 Nov 2026 (Toronto)',10.8,color=MUTED,ha='right')
     box(.65,23.55,9.05,1.15,'OPENAI CONNECTION VERIFIED','GPT-6.2 Astra calls have generated and checked live paragraphs.\nWriting quality is evaluated separately for each recorded run.',GREEN,GE,13.5,11.8)
     box(10.3,23.55,9.05,1.15,'PANGRAM CONNECTION VERIFIED','Pangram 4.1 has returned recorded live scan results.\nEach new paragraph reaches scanning after its four-layer checks pass.',GREEN,GE,13.5,11.8)
-    text(10,23.08,'Actual exemplars guide prose structure. Diagnosed defects return to the operation that can repair them.\nService access, writing checks, detector observations and your approval remain separate evidence.',11.8,'bold',GE)
+    text(10,23.08,'Rules and actual exemplars shape intellectual construction and written expression.\nService access, writing checks, detector observations and your approval remain separate evidence.',11.8,'bold',GE)
 
     boundary(.6,18.25,18.8,4.4,'VOICE PREPARATION  /  ORIGINAL EVIDENCE IS RETAINED')
     box(.95,20.62,3.95,1.17,'RAW AUTHOR INPUT','Interview answers and transcripts\nOriginal speech / writing records',BLUE,BE,12.6,11)
@@ -64,14 +64,14 @@ def render(output, svg=None):
     text(2.64,16.77,'Rules + source-linked passages\nreach construction, review,\nexpression and checking.',11.5,color=GE)
     box(5.6,16.97,8.75,.83,'AUTHOR INTENT + SUBJECT EVIDENCE','Bind procedure, code, ledger, source revisions, providers and prompt templates.',LIGHT,LINE,12.9,10.9)
     arrow([(9.975,16.90),(9.975,16.33)])
-    box(5.6,15.04,8.75,1.22,'1  CONSTRUCTION PROMPT','Encode meaning; plan rhetorical purposes and order.\nResolve relevant rules, example structures and checking criteria for each act.',BLUE,BE,14,11.7,'faculty.py  •  structured graph before prose')
+    box(5.6,15.04,8.75,1.22,'1  CONSTRUCTION PROMPT','Conceptual + epistemic rules, with their actual exemplars,\nshape concepts, distinctions, relationships and warranted claims.',BLUE,BE,14,11.5,'faculty.py  •  form the argument; plan rhetorical purposes and order')
     arrow([(9.975,14.97),(9.975,14.45)])
-    box(5.6,13.16,8.75,1.22,'2  CONSTRUCTION REVIEW PROMPT','Structure + subject evidence + full available rules and examples.\nCheck meaning, warranted scope, voice choices, omissions and criteria.',BLUE,BE,14,11.7,'faculty.py  •  binding-only defect → scoped repair + fresh review')
+    box(5.6,13.16,8.75,1.22,'2  CONSTRUCTION REVIEW PROMPT','Check how the conceptual + epistemic examples shaped the encoded work.\nReview meaning, evidence, voice bindings, omissions and criteria.',BLUE,BE,14,11.2,'faculty.py  •  binding-only defect → scoped repair + fresh review')
     arrow([(9.975,13.09),(9.975,12.65)])
     box(5.6,11.87,8.75,.72,'AUTHOR CLOSES THIS CONSTRUCTION','Current passing review + unchanged structure + explicit closure authority.',GREEN,GE,13.2,11.1)
     arrow([(9.975,11.8),(9.975,11.12)])
     boundary(5.24,4.94,9.47,6.61,'PARAGRAPH LOOP','#FBFAFD',VE,True)
-    box(5.6,9.88,8.75,1.14,'3  EXPRESSION PROMPT','Closed meaning + actual worked examples paired to each act.\nWrite prose structured like those examples; map sentences to acts.',VIOLET,VE,14,11.5,'expression.py  •  one paragraph; earlier text supplies continuity')
+    box(5.6,9.88,8.75,1.14,'3  EXPRESSION PROMPT','Rhetorical + linguistic rules, with actual exemplars for each act.\nWrite prose structured like them, preserving the closed construction.',VIOLET,VE,14,11.1,'expression.py  •  one paragraph; map sentences to acts')
     arrow([(9.975,9.81),(9.975,9.44)])
     box(5.6,8.25,8.75,1.14,'4  FOUR-LAYER CHECKING PROMPT','Exact paragraph + closed meaning + the same worked examples.\nConceptual  •  Epistemic  •  Rhetorical  •  Linguistic criteria',AMBER,AE,14,11.7,'checking.py  •  diagnosed defect + targets + repair criterion')
     arrow([(9.975,8.18),(9.975,7.73)],label='all four layers pass',at=(11.45,7.96),size=10.6)

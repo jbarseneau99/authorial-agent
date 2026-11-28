@@ -1,0 +1,32 @@
+{
+  "id": "AA-CONSTRUCTION-VOICE-CONDITIONING-VERIFICATION-001",
+  "base_code_commit": "c1d2c09b29f2c664c75d382d99ea44d67e3f3ada",
+  "scope": "Prompt, projection and fixture verification; live authorial outcomes recorded separately",
+  "requirements": [
+    "BR/DS-05",
+    "BR/DS-07",
+    "BR/DS-08",
+    "P03-02",
+    "Author clarification: rules and exemplars shape conceptual and epistemic construction"
+  ],
+  "tests": {
+    "command": "python -B -m unittest discover -s src",
+    "count": 193,
+    "result": "passed",
+    "log_sha256": "c29b7e1a01d9fbf99b9b885e4fc0cf6c93ec152b09912673208a373822a6644d"
+  },
+  "verification": [
+    "Full existing suite including 8 journaled operation requests in metadata-isolation regression",
+    "Original metadata remains in authoritative graph, snapshots and prior evidence",
+    "Authentic quoted text is preserved without keyword scrubbing",
+    "Manual read-only projection of actual prior construction and expression inputs confirms removal of historical measurement fields",
+    "Independent review of stage-specific prompt duties and defect routing",
+    "System diagram rendered and visually inspected"
+  ],
+  "limitations": [
+    "Fixtures do not establish authorial quality or detector performance",
+    "No exact historical replay or score causality is claimed",
+    "Full epistemic graph and general construction repair remain incomplete",
+    "Final author validation remains separate"
+  ]
+}

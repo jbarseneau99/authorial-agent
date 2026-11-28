@@ -78,7 +78,13 @@ class Faculty:
         packet=context
         if self.execution_profile == PROFILE:
             context.update(execution_profile=PROFILE, written_calibration=validate_written_calibration(self.written_calibration))
-            context['instruction'] += (' Resolve each act separately and return its voice_bindings: '
+            context['instruction'] += (' Use the conceptual and epistemic rules together with their '
+                'actual exemplars to form the concepts, distinctions, relationships and epistemic '
+                'commitments of this construction. For each selected binding in those layers, '
+                'record the demonstrated operation, the specific encoded decision it shapes, and '
+                'a criterion by which that decision can be checked in the claims or acts. '
+                'Resolve rhetorical and linguistic bindings for the later expression of those acts. '
+                'Resolve each act separately and return its voice_bindings: '
                 'rule_id and exemplar_ids from this catalog, one declared layer, an explicit '
                 'application to this act, and an observable check criterion. Select relevant '
                 'grounded evidence; do not treat paragraph count as intellectual-act count. '

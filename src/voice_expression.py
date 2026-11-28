@@ -159,11 +159,14 @@ def compact_writer_context(context):
         intellectual_plan.append({'id': act_id, 'purpose': record['node']['payload']['purpose'],
                                   'claim_ids': claim_ids, 'voice_bindings': _copy(bindings),
                                   'criterion_ids': [f'binding:{act_id}:{i}' for i in range(len(bindings))]})
+    # Review notes belong to the retained ledger/audit record, not a writing
+    # instruction. They can contain historical detector scores. Project the
+    # rule's authority and applicability explicitly without filtering excerpts.
     voice_rules = [
         {'id': ident, 'key': rule['payload']['Rule ID'], 'layer': rule['payload']['Layer'],
          'candidate_rule': rule['payload']['Candidate rule'], 'authority': rule['authority'],
          'status': rule['payload'].get('Status'), 'applicability': rule['payload'].get('Applicability'),
-         'review_note': rule['payload'].get('Review note'), 'activation': rule['payload'].get('activation')}
+         'activation': rule['payload'].get('activation')}
         for ident, rule in sorted(rules.items())
     ]
     voice_exemplars, sources = [], {}
@@ -198,7 +201,9 @@ def compact_writer_context(context):
                     'exemplar_type': exemplar['exemplar_type'],
                     'authority': exemplar['authority'],
                     'written_validation': exemplar['written_validation'],
-                    'use': 'A structural example for the selected application to this act.',
+                    'use': ('Evidence for the selected application. Model only the structure actually '
+                            'demonstrated by the excerpt and its supplied context; a stated preference '
+                            'does not by itself enact a complete structure.'),
                 })
             worked.append({
                 'criterion_id': f'binding:{act["id"]}:{index}', 'layer': binding['layer'],

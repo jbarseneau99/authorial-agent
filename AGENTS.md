@@ -16,3 +16,9 @@ The author requires code-only execution of the writing procedure and one owning 
 ## Current implementation baseline
 
 The historical audit is preserved in `audits/2026-11-27-code-structure/repository-map.md` and `loops/inventory-v0.1.json`. The current owner and capability map is `loops/inventory-v0.5.json`; read `docs/procedure-fidelity-v0.1.md` and `docs/voice-binding-repair-v0.1.md` for the worked-example and binding-repair increments. Verification records under `verification/` distinguish synthetic tests from separately retained live execution evidence. General intellectual repair and external canonical-loop integration remain incomplete; no passing fixture suite establishes authorial quality or final approval.
+
+The construction prompt must use conceptual and epistemic rules with their actual
+exemplars while forming the intellectual work. Read
+`docs/construction-voice-conditioning-v0.1.md` for the explicit application and
+review requirement, and for separation of historical measurement metadata from
+provider inputs. Preserve the original evidence records.

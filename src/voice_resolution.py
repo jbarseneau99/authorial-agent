@@ -124,8 +124,27 @@ def validate_resolved_bindings(acts, voice):
         raise ValueError('Frozen voice binding identities differ from their corpus grounding')
 
 
+def _provider_grounding_record(node):
+    """Keep historical passage provenance and judgment, not experiment results.
+
+    This projection applies only to the ledger's structured Prototype records.
+    The full node remains in the graph and bound snapshots. Authentic excerpts
+    and their transcripts never pass through this metadata projection.
+    """
+    projected = copy.deepcopy(node)
+    payload = node['payload']
+    if 'Prototype' in payload and 'Author validation' in payload:
+        projected['payload'] = {key: copy.deepcopy(payload[key]) for key in (
+            'Prototype', 'Topic', 'Ledger', 'Author validation', 'Lineage') if key in payload}
+        projected['projection_use'] = (
+            'Any recorded author judgment applies only to its historical passage. '
+            'It does not validate an isolated rule or establish generalization. '
+            'Experiment results and mixed change notes are retained only in the audit record.')
+    return projected
+
+
 def compact_voice_catalog(voice, bindings=None):
-    """Each catalog rule, excerpt, source transcript and result appears once."""
+    """Project voice evidence once, retaining authority without audit feedback."""
     rules, exemplars = _catalog(voice)
     selected_rules = None if bindings is None else {item['rule_id'] for item in bindings}
     selected_exemplars = None if bindings is None else {
@@ -138,13 +157,17 @@ def compact_voice_catalog(voice, bindings=None):
         grounded = [target for relation, target in voice['voice_evidence'][item['id']]['edges']
                     if relation == 'grounded_in']
         rule_records.append({'id': item['id'], 'rule_id': key,
-                             'payload': copy.deepcopy(item['payload']),
+                             # Review notes can mix detector results with audit
+                             # history; recorded status and scope remain below.
+                             'payload': {field: copy.deepcopy(value)
+                                         for field, value in item['payload'].items()
+                                         if field != 'Review note'},
                              'authority': item['authority'], 'grounding_ids': grounded,
                              'exemplar_ids': sorted(exemplar_key for exemplar_key, exemplar in exemplars.items()
                                                     if exemplar['id'] in grounded)})
         for ident in grounded:
             if ident not in authentic_ids:
-                other[ident] = copy.deepcopy(voice['voice_evidence'][ident]['node'])
+                other[ident] = _provider_grounding_record(voice['voice_evidence'][ident]['node'])
     for key, item in sorted(exemplars.items()):
         if selected_exemplars is not None and item['id'] not in selected_exemplars:
             continue

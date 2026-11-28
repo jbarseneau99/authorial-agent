@@ -35,17 +35,24 @@ PROMPT_TEMPLATES = {
         "schema": '{"findings":[{"layer":"conceptual|epistemic|rhetorical_plan","status":"pass|fail|uncertain","reason":"..."}]} Exactly one finding for each of the three layers.',
     },
     "voice_resolution": {
-        "version": "1",
+        "version": "2",
         "role": (
             "Repair the voice bindings of the supplied fixed intellectual construction. The exact "
             "failed construction review is in repair.review; address only the exemplar, application "
             "and criterion errors identified there. Use the full available voice_catalog to choose "
             "authentic examples grounded in the selected rules. An example must actually demonstrate "
             "the structure claimed in its application; a self-report about how the author writes or "
-            "speaks does not by itself enact that structure. State which observable structure the "
-            "example demonstrates and how the writer should write prose structured like that example "
-            "for this act, without copying phrases or importing the example's subject claims. "
-            "The criterion must test that supported authorial realization, not only claim coverage. "
+            "speaks does not by itself enact that structure. State the observable operation demonstrated "
+            "by the example and its application at the binding's layer. For rhetorical and linguistic "
+            "bindings, explain how to write prose structured like that example for this act, without "
+            "copying phrases or importing example subject claims. The criterion must test the supported "
+            "construction decision or expression realization, as appropriate to the layer. "
+            "For conceptual and epistemic bindings, identify the supported decision already present "
+            "in the fixed claims or acts; those bindings govern intellectual construction. Replace an "
+            "inapplicable binding with evidence that fits the sound existing construction; its supposed "
+            "decision need not be added to the argument. If the "
+            "required decision is absent or defective, request construction reopening rather than "
+            "inventing it in an application or disguising it as a later wording choice. "
             "Use the catalog's human rule_id and exemplar_id keys in voice_bindings. Preserve rule "
             "status and evidence authority. Approved written calibration supplies worked passage "
             "examples only at its recorded passage scope; it is generated author-approved text, "
@@ -58,15 +65,21 @@ PROMPT_TEMPLATES = {
             "with the affected construction layer and a specific reason; do not disguise a content "
             "or plan change as a voice-binding repair."
         ),
-        "schema": '{"status":"bindings","acts":[{"id":"exact supplied act UUID","voice_bindings":[{"rule_id":"R001","exemplar_ids":["E001"],"layer":"conceptual|epistemic|rhetorical|linguistic","application":"Demonstrated example structure and its application to this fixed act","criterion":"Observable requirement for this authorial realization"}]}]} OR {"status":"reopen","layer":"conceptual|epistemic|rhetorical_plan","reason":"Why supported binding changes cannot resolve the failed review"}',
+        "schema": '{"status":"bindings","acts":[{"id":"exact supplied act UUID","voice_bindings":[{"rule_id":"R001","exemplar_ids":["E001"],"layer":"conceptual|epistemic|rhetorical|linguistic","application":"Demonstrated operation and its construction decision or expression realization in this fixed act","criterion":"Observable requirement for that decision or realization"}]}]} OR {"status":"reopen","layer":"conceptual|epistemic|rhetorical_plan","reason":"Why supported binding changes cannot resolve the failed review"}',
     },
 }
 PROFILE_TEMPLATES = {
     "resolved-voice-v1": {
         "construction": {
-            "version": "2",
+            "version": "3",
             "role": (
-                "Construct the intellectual content before prose, then resolve voice evidence for each act. "
+                "Construct the intellectual content before prose using the applicable conceptual and "
+                "epistemic rules together with their actual exemplars in the supplied catalog. Use the "
+                "demonstrated conceptual patterns to form concepts, distinctions and relationships. Use "
+                "the demonstrated epistemic patterns to form evidential commitments, distinguish evidence "
+                "from inference and hypothesis, and place justified qualifications on the relevant claims. "
+                "Resolve these applications while forming the construction. Examples guide the author's "
+                "manner of reasoning; subject evidence and intent determine the permitted content. "
                 "Represent successive constituent intellectual moves explicitly when they perform different jobs; "
                 "a paragraph may contain several acts. Preserve source claims and their epistemic strength. "
                 "Encode each claim as a neutral semantic note about its entities, relation, conditions and "
@@ -77,7 +90,14 @@ PROFILE_TEMPLATES = {
                 "to restate a test instruction or announce that this process has not proved something. "
                 "A substantive qualification belongs only where the source or author intent requires it. "
                 "For every act, select applicable rule IDs and source-grounded exemplar IDs from the supplied "
-                "catalog, explain their application, and state an observable checking criterion. Consider "
+                "catalog, explain their application, and state an observable checking criterion. For a "
+                "conceptual or epistemic binding, name the operation demonstrated by the exemplar and the "
+                "specific decision it shapes in the encoded claims or acts. Its criterion must allow the "
+                "reviewer to locate that decision in the construction; future sentence style alone is "
+                "insufficient. For rhetorical and linguistic bindings, record the supported intended "
+                "realization of the acts for the later expression stage. A stated preference is evidence "
+                "of that preference; it is not by itself a worked demonstration of the entire operation. "
+                "Use exact excerpts and their source context only for the features they actually demonstrate. Consider "
                 "each relevant authorial dimension for each act; one binding per act is not a target or "
                 "limit. Apply multiple supported rules where they do different work, including relevant "
                 "cross-cutting rules about direct enactment and sufficient written context. Do not force "
@@ -91,15 +111,17 @@ PROFILE_TEMPLATES = {
                 "key, even when the manuscript belongs to the author. Use agent_hypothesis for a new inference. "
                 "Use only supplied claim evidence, rule and exemplar identifiers."
             ),
-            "schema": '{"claims":[{"key":"c1","text":"...","origin":"author|external|agent_hypothesis","evidence":["source0"]}],"acts":[{"purpose":"...","claims":["c1"],"voice_bindings":[{"rule_id":"R001","exemplar_ids":["E001"],"layer":"conceptual|epistemic|rhetorical|linguistic","application":"How this evidence applies to this act","criterion":"Observable requirement for checking this act"}]}]}',
+            "schema": '{"claims":[{"key":"c1","text":"...","origin":"author|external|agent_hypothesis","evidence":["source0"]}],"acts":[{"purpose":"...","claims":["c1"],"voice_bindings":[{"rule_id":"R001","exemplar_ids":["E001"],"layer":"conceptual|epistemic|rhetorical|linguistic","application":"Demonstrated operation and the construction decision or planned expression it shapes in this act","criterion":"Observable requirement for that decision or realization"}]}]}',
         },
         "expression": {
-            "version": "2",
+            "version": "3",
             "role": (
                 "Realize the closed ordered intellectual acts directly using their resolved voice applications. "
                 "Write the current paragraph with the meaning, claim strength and intended rhetorical progress "
-                "in the plan. The exemplars supplied with each act are worked examples: write prose "
-                "structured like those examples. Follow how the author performs the relevant act: how a "
+                "in the plan. Use the structures actually demonstrated by each act's exemplars as worked "
+                "examples: write prose structured like those examples. A stated preference supports that "
+                "preference but does not by itself enact a complete structure. Preserve that evidence "
+                "role when applying it. Follow how the author performs the relevant act: how a "
                 "sentence opens, clauses develop the thought, a concrete situation leads to a question or "
                 "explanation, a distinction is made, and a qualification is placed. Use each binding's "
                 "application to identify which demonstrated structure to follow. The approved written "
@@ -157,11 +179,24 @@ PROFILE_TEMPLATES = {
             "schema": '{"findings":[{"layer":"conceptual|epistemic|rhetorical|linguistic","status":"pass|fail|uncertain","reason":"...","sentences":["sentence ID"],"checks":[{"criterion_id":"declared ID","status":"pass|fail|uncertain","observation":"...","sentences":["sentence ID"],"defect_type":"none|expression|construction|evidence_limit","repair":null}]}]} Exactly one finding per layer; every declared criterion appears exactly once in its layer.',
         },
         "construction_review": {
-            "version": "2",
+            "version": "3",
             "role": (
                 "Review construction before expression: source claim coverage, conceptual distinctions, "
                 "evidence and uncertainty, and the ordered constituent intellectual moves. Verify that "
-                "the selected rule and exemplar applications fit each act and that their criteria can "
+                "the construction and its applications instantiate the relevant patterns supported by "
+                "the conceptual and epistemic rules and their actual exemplars. For each selected binding "
+                "in those layers, locate the "
+                "claimed distinction, relationship, evidential commitment or qualification in the encoded "
+                "claims or acts, and compare it with the operation actually demonstrated by the cited "
+                "example. Merely naming a rule or prescribing future sentence style does not establish "
+                "its application to construction. Assess these decisions in their conceptual or epistemic "
+                "layer; a defective claim or missing intellectual relation requires construction reopening. "
+                "When the constructed meaning and epistemic commitments are sound and only an exemplar "
+                "selection, binding application or criterion is defective, record that bounded binding "
+                "defect in the rhetorical_plan finding with the exact act and binding. This routing "
+                "allows the existing binding-only repair; it does not excuse any defect in the claims "
+                "or intellectual relationships. "
+                "Also verify that the selected rule and exemplar applications fit each act and that their criteria can "
                 "be checked. The full available voice catalog is supplied so you can also detect material "
                 "omissions; review applicability rather than assuming one selected rule per act is sufficient. "
                 "Do not require every rule on every act. A criterion must test the authorial manner supported "
