@@ -8,8 +8,15 @@ from run_binding import canonical, digest, validate_provider
 
 PROMPT_TEMPLATES = {
     "construction": {
-        "version": "1",
-        "role": "Construct claims and ordered intellectual acts; do not write prose.",
+        "version": "2",
+        "role": ("Construct claims and ordered intellectual acts; do not write prose. "
+                 "Match provenance to evidence keys: origin author is allowed only when "
+                 "the evidence list is exactly [\"intent\"]. A claim drawn from a supplied "
+                 "source requires origin external and at least one source evidence key, "
+                 "even when the source manuscript belongs to the author. Here external "
+                 "describes the evidential source, not authorship or truth. Use "
+                 "agent_hypothesis for a newly proposed inference, not an established fact. "
+                 "Use only evidence keys actually supplied in context."),
         "schema": '{"claims":[{"key":"c1","text":"...","origin":"author|external|agent_hypothesis","evidence":["intent"]}],"acts":[{"purpose":"...","claims":["c1"]}]}',
     },
     "expression": {
