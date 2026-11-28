@@ -1,0 +1,509 @@
+{
+  "schema": "authorial-recovery-results-metadata-v1",
+  "generated_at_utc": "2026-11-28T04:29:12.775275+00:00",
+  "primary_result": "RECOVERY_002",
+  "fresh_full_context_confirmation": {
+    "experiment": "RECOVERY_005",
+    "reproduced_fraction_human_one": false,
+    "four_layer_and_detector_gates_passed": false
+  },
+  "experiments": [
+    {
+      "id": "RECOVERY_001",
+      "variant": "full_corpus_baseline",
+      "configuration_label": "Full-context baseline",
+      "attempts": 3,
+      "max_attempts": 3,
+      "construction_voice_repairs": 2,
+      "execution_state": "budget_exhausted",
+      "measurement_mode": "standalone",
+      "fraction_human": 1.0,
+      "fraction_ai": 1.0409783862975839e-39,
+      "fraction_ai_assisted": 4.344025239406933e-44,
+      "detector_version": "4.1",
+      "detector_policy_result": "passed",
+      "canonical_state": "review_required",
+      "canonical_layers": {
+        "conceptual": "pass",
+        "epistemic": "pass",
+        "rhetorical": "pass",
+        "linguistic": "fail"
+      },
+      "text_sha256": "b1c71eee9cc8bcca47fe5c1292f960b395e5b182b9ad6901336bf78998f4440c",
+      "words_whitespace": 134,
+      "bound_repository_commit": "7518be178eda413433a7357ba26f6f767868c2f4",
+      "registered_code_base_commit": "be2b821541496eabafdeff75032206d817601a0c",
+      "prompt_templates_sha256": "9011662eaa0e85b646399929a2a1c629b4e2053dea032002e974825ae57e0a8d",
+      "prompt_availability": {
+        "construction": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "construction_review": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "expression": {
+          "requests_observed": 3,
+          "rules_available": [
+            9
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "four_layer_review": {
+          "requests_observed": 3,
+          "rules_available": [
+            9
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        }
+      },
+      "four_layer_and_detector_gates_passed": false,
+      "author_approval": "pending"
+    },
+    {
+      "id": "RECOVERY_002",
+      "variant": "full_corpus_recovered_expression_contract",
+      "configuration_label": "Full context plus recovered expression instructions",
+      "attempts": 3,
+      "max_attempts": 3,
+      "construction_voice_repairs": 2,
+      "execution_state": "budget_exhausted",
+      "measurement_mode": "standalone",
+      "fraction_human": 1.0,
+      "fraction_ai": 9.762244063917904e-20,
+      "fraction_ai_assisted": 3.776086816933772e-22,
+      "detector_version": "4.1",
+      "detector_policy_result": "passed",
+      "canonical_state": "review_required",
+      "canonical_layers": {
+        "conceptual": "pass",
+        "epistemic": "pass",
+        "rhetorical": "pass",
+        "linguistic": "fail"
+      },
+      "text_sha256": "eb0614683a3741217cef698e2232edee6682eacad6d8db9dbe0cb94bcd3053cc",
+      "words_whitespace": 115,
+      "bound_repository_commit": "7518be178eda413433a7357ba26f6f767868c2f4",
+      "registered_code_base_commit": "be2b821541496eabafdeff75032206d817601a0c",
+      "prompt_templates_sha256": "9011662eaa0e85b646399929a2a1c629b4e2053dea032002e974825ae57e0a8d",
+      "prompt_availability": {
+        "construction": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "construction_review": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "expression": {
+          "requests_observed": 3,
+          "rules_available": [
+            7
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "four_layer_review": {
+          "requests_observed": 3,
+          "rules_available": [
+            7
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        }
+      },
+      "four_layer_and_detector_gates_passed": false,
+      "author_approval": "pending"
+    },
+    {
+      "id": "RECOVERY_003",
+      "variant": "historical_compact_corpus",
+      "configuration_label": "Compact corpus plus recovered expression instructions",
+      "attempts": 3,
+      "max_attempts": 3,
+      "construction_voice_repairs": 2,
+      "execution_state": "suspended_detector_flagged",
+      "measurement_mode": "integrated",
+      "fraction_human": 0.18198499083518982,
+      "fraction_ai": 0.8180150389671326,
+      "fraction_ai_assisted": 5.365810148771433e-15,
+      "detector_version": "4.1",
+      "detector_policy_result": "flagged",
+      "canonical_state": "checks_passed",
+      "canonical_layers": {
+        "conceptual": "pass",
+        "epistemic": "pass",
+        "rhetorical": "pass",
+        "linguistic": "pass"
+      },
+      "text_sha256": "0fcfca66ba07edeb34f93fa3bbdef576675b621dfaf8c95b1ab0d9568ea92a48",
+      "words_whitespace": 114,
+      "bound_repository_commit": "fcd17af2efb120821d4bf4807236b79c063d6864",
+      "registered_code_base_commit": "4882f6b36fb9a7e73abb41d6d2a4c257ee744e23",
+      "prompt_templates_sha256": "9011662eaa0e85b646399929a2a1c629b4e2053dea032002e974825ae57e0a8d",
+      "prompt_availability": {
+        "construction": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            0
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "construction_review": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "expression": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            0
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "four_layer_review": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        }
+      },
+      "four_layer_and_detector_gates_passed": false,
+      "author_approval": "pending"
+    },
+    {
+      "id": "RECOVERY_004",
+      "variant": "historical_compact_with_written_example_applications",
+      "configuration_label": "Compact corpus plus explicit P006 applications",
+      "attempts": 3,
+      "max_attempts": 3,
+      "construction_voice_repairs": 3,
+      "execution_state": "suspended_detector_flagged",
+      "measurement_mode": "integrated",
+      "fraction_human": 0.6499420404434204,
+      "fraction_ai": 0.3500579595565796,
+      "fraction_ai_assisted": 3.884981378238872e-20,
+      "detector_version": "4.1",
+      "detector_policy_result": "flagged",
+      "canonical_state": "checks_passed",
+      "canonical_layers": {
+        "conceptual": "pass",
+        "epistemic": "pass",
+        "rhetorical": "pass",
+        "linguistic": "pass"
+      },
+      "text_sha256": "7b8c80183dae8708fb447ad8fc210ce9b756c4af2fd140007fe79e539d88858d",
+      "words_whitespace": 127,
+      "bound_repository_commit": "fcd17af2efb120821d4bf4807236b79c063d6864",
+      "registered_code_base_commit": "4882f6b36fb9a7e73abb41d6d2a4c257ee744e23",
+      "prompt_templates_sha256": "9011662eaa0e85b646399929a2a1c629b4e2053dea032002e974825ae57e0a8d",
+      "prompt_availability": {
+        "construction": {
+          "requests_observed": 4,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            0
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "construction_review": {
+          "requests_observed": 4,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "expression": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            0
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "four_layer_review": {
+          "requests_observed": 3,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        }
+      },
+      "four_layer_and_detector_gates_passed": false,
+      "author_approval": "pending"
+    },
+    {
+      "id": "RECOVERY_005",
+      "variant": "confirmation_of_full_corpus_recovered_expression_contract",
+      "configuration_label": "Fresh full-context confirmation; six-attempt budget",
+      "attempts": 3,
+      "max_attempts": 6,
+      "construction_voice_repairs": 3,
+      "execution_state": "suspended_detector_flagged",
+      "measurement_mode": "integrated",
+      "fraction_human": 0.18992963433265686,
+      "fraction_ai": 0.8100703358650208,
+      "fraction_ai_assisted": 1.1354341132672335e-13,
+      "detector_version": "4.1",
+      "detector_policy_result": "flagged",
+      "canonical_state": "checks_passed",
+      "canonical_layers": {
+        "conceptual": "pass",
+        "epistemic": "pass",
+        "rhetorical": "pass",
+        "linguistic": "pass"
+      },
+      "text_sha256": "5b66357bb309e46b2daebd919b6b7ca4ba8cb61de23239e005ae293a23f0ce41",
+      "words_whitespace": 127,
+      "bound_repository_commit": "90a325898c638c4d8851a3438b7318451a3810fa",
+      "registered_code_base_commit": "7518be178eda413433a7357ba26f6f767868c2f4",
+      "prompt_templates_sha256": "9011662eaa0e85b646399929a2a1c629b4e2053dea032002e974825ae57e0a8d",
+      "prompt_availability": {
+        "construction": {
+          "requests_observed": 4,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "construction_review": {
+          "requests_observed": 4,
+          "rules_available": [
+            18
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "expression": {
+          "requests_observed": 3,
+          "rules_available": [
+            7
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        },
+        "four_layer_review": {
+          "requests_observed": 3,
+          "rules_available": [
+            7
+          ],
+          "excerpts_available": [
+            84
+          ],
+          "source_context_records_available": [
+            35
+          ],
+          "written_calibration_word_counts": [
+            436
+          ]
+        }
+      },
+      "four_layer_and_detector_gates_passed": false,
+      "author_approval": "pending"
+    }
+  ],
+  "historical_all_84_evidence": {
+    "record": "RUN_015 retained expression input",
+    "available_rules": 18,
+    "available_original_spoken_excerpts": 84,
+    "original_spoken_excerpt_words": 960,
+    "original_excerpts_preselected_in_plan": 8,
+    "original_excerpts_available_only": 76,
+    "full_source_context_table_available_to_expression": false,
+    "approved_P006_words": 436,
+    "new_candidate_entries_available": 3,
+    "paragraph_layer_application_count": 96,
+    "original_spoken_applications": {
+      "uses": 32,
+      "unique_excerpts": 8
+    },
+    "P006_written_span_applications": {
+      "uses": 118,
+      "unique_spans": 15
+    },
+    "new_trial_span_applications": {
+      "uses": 7,
+      "unique_spans": 4
+    },
+    "detector_status": "not_run",
+    "author_validation": "pending",
+    "limits": [
+      "Prompt availability is established; it does not mean all 84 excerpts were selected or individually applied.",
+      "Each selected original spoken excerpt has an existing grounding link to at least one rule in its paragraph/layer group.",
+      "Written P006 spans and new trial examples are task-specific applications; they do not change original ledger grounding.",
+      "The record does not establish historical selection of the 37 original excerpts without rule-grounding links.",
+      "The saved input is not the original HTTP request envelope for P006 or RUN_004.",
+      "P006 and RUN_004 have separate historical success records; their reported detector outcomes cannot be assigned to RUN_015."
+    ]
+  },
+  "interpretation": [
+    "Detector observations and canonical writing checks are separate recorded results.",
+    "Standalone scans preserve unresolved canonical findings and do not advance the writing run.",
+    "Full context means the 35 recorded ledger source-context records, some already excerpted; it does not mean complete original interviews.",
+    "The compact presentation changes both source-context inclusion and the expression rule-catalog presentation.",
+    "These single generated trials do not isolate a causal effect or establish repeatability.",
+    "No final author approval is inferred from a detector score or passing automated review."
+  ]
+}

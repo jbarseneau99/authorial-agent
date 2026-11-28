@@ -64,3 +64,36 @@ the exact same text. Report the number of attempts and the actual raw result.
 After a qualifying candidate, one independent generation with the same working
 configuration can test repeatability. Author voice and substance approval
 remain for the author.
+
+## Recorded live outcomes
+
+Five declared trials completed, each with three paragraph versions and one
+Pangram task on its final exact text. The unchanged detector policy was used
+throughout. All five used all 84 original excerpts and the full approved P006.
+
+| Trial | Generation presentation | Human fraction | Four-layer review | Measurement |
+| --- | --- | ---: | --- | --- |
+| RECOVERY_001 | Full source context; baseline intent | 1.0 | Linguistic wording finding remains | Standalone observation |
+| RECOVERY_002 | Full source context; recovered expression contract | 1.0 | Linguistic wording finding remains | Standalone observation |
+| RECOVERY_003 | Compact corpus; recovered expression contract | 0.18198499083518982 | All four pass | Integrated gate |
+| RECOVERY_004 | Compact corpus; explicit written-example applications | 0.6499420404434204 | All four pass | Integrated gate |
+| RECOVERY_005 | Independent full-context confirmation; larger repair allowance | 0.18992963433265686 | All four pass | Integrated gate |
+
+The first two observations recovered the requested detector target. Their
+canonical writing states remain unchanged, with one linguistic finding each.
+The independent confirmation did not reproduce that detector result. No trial
+has both current writing and detector gates passed; none has final author
+approval. Exact fractions, layer states, prompt counts, commits and text hashes
+are recorded in [the verification metadata](../verification/recovery-live-results-v0.1.json).
+
+Full-context expression used applicable rule subsets (nine rules in trial 001,
+seven in trials 002 and 005), all 84 excerpts and all 35 recorded source
+contexts. Compact expression used all 18 rules and all 84 excerpts without the
+full source-context table. Thus those comparisons changed both context
+inclusion and rule-catalog presentation. Individual generated outputs do not
+isolate one cause for the detector differences.
+
+The exact texts, every provider request and response, all paragraph versions,
+review findings, detector records and stable database snapshots are retained
+in the private recovery evidence package. Public metadata contains no
+manuscript text, exemplar text, private prompts or credentials.
