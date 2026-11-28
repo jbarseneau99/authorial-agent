@@ -15,7 +15,14 @@ The author requires code-only execution of the writing procedure and one owning 
 
 ## Current implementation baseline
 
-The historical audit is preserved in `audits/2026-11-27-code-structure/repository-map.md` and `loops/inventory-v0.1.json`. The current owner and capability map is `loops/inventory-v0.5.json`; read `docs/procedure-fidelity-v0.1.md` and `docs/voice-binding-repair-v0.1.md` for the worked-example and binding-repair increments. Verification records under `verification/` distinguish synthetic tests from separately retained live execution evidence. General intellectual repair and external canonical-loop integration remain incomplete; no passing fixture suite establishes authorial quality or final approval.
+The historical audit is preserved in `audits/2026-11-27-code-structure/repository-map.md` and `loops/inventory-v0.1.json`. The current owner and capability map is `loops/inventory-v0.6.json`; read `docs/procedure-fidelity-v0.1.md` and `docs/voice-binding-repair-v0.1.md` for the worked-example and binding-repair increments. Verification records under `verification/` distinguish synthetic tests from separately retained live execution evidence. General intellectual repair and external canonical-loop integration remain incomplete; no passing fixture suite establishes authorial quality or final approval.
+
+Read `docs/expression-continuation-v0.1.md` before continuing an exhausted
+diagnosed repair under a new binding, and `docs/fresh-expression-retry-v0.1.md`
+before using the explicitly enabled fresh-candidate route. Both reuse the
+existing owners and preserve prior attempts; neither waives writing checks,
+detector policy or author approval. The current overview is
+`docs/system-diagram-v0.6.md`.
 
 The construction prompt must use conceptual and epistemic rules with their actual
 exemplars while forming the intellectual work. Read

@@ -1,0 +1,297 @@
+{
+  "id": "AA-LOOP-MAP-006",
+  "version": "0.6",
+  "parent": "loops/inventory-v0.5.json",
+  "status": "full corpus, immutable repair continuation and explicitly authorized fresh candidates documented within existing owners; repeatability remains pending",
+  "implementation_base_commit": "a4c9938cefa5a043d875d7be3bd453a476955908",
+  "procedure_change": "Optional paragraph addendum v0.2 adds bounded author-authorized fresh expression after a current exact detector flag. Original v0.1 behavior remains supported. Continuation preserves the parent run and inherited attempts. No authorial rule, ledger or detector threshold change.",
+  "voice_rule_changes": false,
+  "four_layers": [
+    "conceptual",
+    "epistemic",
+    "rhetorical",
+    "linguistic"
+  ],
+  "ordering": "Construct conceptual and epistemic structure and rhetorical act order with available voice examples; close construction; realize one paragraph rhetorically and linguistically; check all four layers; scan that exact paragraph; optionally request a separately authorized fresh candidate within both budgets; permit the next paragraph only on current passes.",
+  "coordinator": "src/execution.py",
+  "external_canonical_interface": "not integrated; existing Execution extended, no second scheduler",
+  "loops": [
+    {
+      "id": "construction",
+      "owner": "src/faculty.py",
+      "helpers": [
+        "src/construction.py",
+        "src/voice_resolution.py"
+      ],
+      "outputs": [
+        "proposed plan",
+        "three-layer construction review",
+        "explicit author closure witness",
+        "act-level rule/exemplar applications and criteria reviewed against the available bound catalog",
+        "versioned binding-only repair with unchanged claim identities, act purpose and order, followed by fresh review",
+        "optional full-corpus availability: all 84 exact exemplars and 35 recorded source contexts from v0.4, preserving existing grounding and authority"
+      ],
+      "limits": [
+        "full epistemic schema",
+        "general intellectual repair",
+        "model-judged semantic abstraction and voice applicability"
+      ]
+    },
+    {
+      "id": "research",
+      "owner": "src/research_loop.py",
+      "helpers": [
+        "src/research.py",
+        "src/governance.py"
+      ],
+      "outputs": [
+        "bound text evidence",
+        "bilateral retrieval records"
+      ],
+      "limits": [
+        "retrieval is not sufficiency",
+        "automated query construction"
+      ]
+    },
+    {
+      "id": "paragraph",
+      "owner": "src/paragraph_loop.py",
+      "inputs": [
+        "closed plan",
+        "ordered act groups",
+        "per-paragraph attempt budget",
+        "current prior paragraph assessments and detector observations",
+        "optional committed fresh-expression policy and separate fresh allowance",
+        "explicit author authority for a fresh candidate"
+      ],
+      "outputs": [
+        "versioned paragraph checkpoints",
+        "current paragraph expression/check/scan references",
+        "exact assembled text and SHA-256",
+        "versioned fresh-candidate source witness and retained prior candidates, assessments and scans",
+        "current and inherited attempt counts without budget reset"
+      ],
+      "gate": "the next paragraph cannot be generated until the previous paragraph has current passing four-layer and Pangram evidence",
+      "limits": [
+        "default one act per paragraph is unvalidated",
+        "whole-chapter semantic check pending",
+        "no unconfigured or unauthorized fresh retry; detector scores and failed prose do not enter the fresh writer prompt"
+      ],
+      "fresh_expression_gate": "Optional v0.2 policy; current unchanged closed construction; all four writing layers passed; completed flagged scan matching the exact current paragraph, expression, assessment, text hash and assessment snapshot; author authority; remaining total and fresh budgets. Pending, error, stale and unscorable observations cannot enter."
+    },
+    {
+      "id": "expression",
+      "owner": "src/expression.py",
+      "outputs": [
+        "one scoped paragraph with exact text/hash and sentence-to-act references",
+        "or reopening request",
+        "actual writer request with authentic worked examples paired to intellectual acts",
+        "optional full84 corpus and full approved P006; fresh candidates use the same closed construction and normal examples without repair context"
+      ],
+      "gate": "current revision-bound construction closure and exact accepted paragraph prefix",
+      "limits": [
+        "semantic entailment remains provider judged"
+      ],
+      "helpers": [
+        "src/voice_expression.py"
+      ]
+    },
+    {
+      "id": "checking",
+      "owner": "src/checking.py",
+      "outputs": [
+        "criterion-linked four-layer findings",
+        "revision-bound reopening tickets routed by diagnosed defect in the resolved profile",
+        "full35 recorded source contexts retained for review, including when generation uses compact presentation"
+      ],
+      "limits": [
+        "provider judgments are not author approval"
+      ]
+    },
+    {
+      "id": "detector",
+      "owner": "src/pangram_check.py",
+      "inputs": [
+        "exact checked paragraph",
+        "paragraph/run/assessment identities",
+        "text and assessment snapshot hashes",
+        "bound detector configuration"
+      ],
+      "outputs": [
+        "append-only scan and request/response events",
+        "saved async task ID",
+        "passed, flagged, pending, unscorable, error or stale observation"
+      ],
+      "gate": "all-human-v1; explicit exact detector version; complete and consistent window coverage",
+      "limits": [
+        "at least 50 words per paragraph; shorter paragraphs stop without padding or aggregation",
+        "one HTTP request per advance; uncertain submission never automatically resubmitted",
+        "a detector pass is not authorial or epistemic approval",
+        "live exact-text passes are recorded separately; fixed-configuration repeatability remains unestablished"
+      ]
+    },
+    {
+      "id": "editing",
+      "owner": "src/editing.py",
+      "outputs": [
+        "new scoped paragraph attempt linked to exact prior paragraph and four-layer findings"
+      ],
+      "limits": [
+        "resolved profile: definite expression defects only; uncertainty, evidence and construction defects remain gated",
+        "legacy profile: linguistic failures only",
+        "fixed sentence count and act placement remain conservative prototype restrictions",
+        "detector flags are not writing diagnoses; the optional fresh-expression route belongs to the paragraph owner"
+      ]
+    },
+    {
+      "id": "validation",
+      "owner": "src/execution.py",
+      "outputs": [
+        "current exact paragraph assembly",
+        "explicit author approval or unresolved state"
+      ],
+      "limits": [
+        "whole-chapter semantic check remains pending, including after author approval",
+        "trusted host actor; authentication integration outstanding"
+      ]
+    },
+    {
+      "id": "learning",
+      "owner": "src/learning.py",
+      "status": "unchanged",
+      "limits": [
+        "approved snapshots not integrated into generation"
+      ]
+    },
+    {
+      "id": "composition",
+      "owner": null,
+      "status": "ordered act grouping recorded in paragraph_loop; independent semantic composition faculty not implemented",
+      "helpers": [
+        "src/paragraph_loop.py"
+      ],
+      "limits": [
+        "default one act per paragraph is explicitly unvalidated"
+      ]
+    }
+  ],
+  "configuration": {
+    "required_additions": [
+      "paragraph_mode=\"pangram-gated-v1\"",
+      "exactly one supported paragraph addendum: v0.1 or v0.2",
+      "complete explicit pangram configuration"
+    ],
+    "optional_paragraph_groups": "ordered zero-based act-index groups covering every closed-plan act exactly once",
+    "default_grouping": "one_act_per_paragraph_default_unvalidated",
+    "max_attempts_scope": "per_paragraph",
+    "detector_version": "explicit expected_version required; no assumed 4.1 availability",
+    "max_voice_repairs": "separate explicit nonnegative binding-repair budget; default0; resolved profile only",
+    "voice_context_scope": "full_corpus_v1 is explicit opt-in under resolved-voice-v1; omitted scope preserves legacy projection",
+    "voice_context_presentation": "optional historical_compact_v1 under full_corpus_v1: all18 rules and all84 exact excerpts in generation; full35 source contexts retained in review",
+    "fresh_expression_retry": "author-authorized-v1 requires paragraph addendum v0.2 and a positive max_fresh_retries smaller than max_attempts; omission enables no retry",
+    "max_fresh_retries_scope": "per paragraph; every fresh writer call consumes this allowance and the unchanged total max_attempts budget",
+    "continuation": "new committed run with typed parent references and a larger total budget; same closed construction and writing inputs; retain parent database and all inherited attempts"
+  },
+  "provenance_helpers": [
+    "src/run_binding.py",
+    "src/providers.py",
+    "src/continuation.py"
+  ],
+  "new_execution_states": [
+    "ready_for_fresh_expression",
+    "fresh_retry_exhausted"
+  ],
+  "inherited_execution_states": [
+    "ready_for_next_paragraph",
+    "suspended_detector_pending",
+    "suspended_detector_flagged",
+    "suspended_detector_unscorable",
+    "suspended_detector_blocked",
+    "suspended_detector_error",
+    "awaiting_construction_review",
+    "awaiting_construction_closure",
+    "construction_review_required",
+    "ready",
+    "running",
+    "suspended_reopen",
+    "suspended_error",
+    "budget_exhausted",
+    "awaiting_approval",
+    "closed",
+    "stale"
+  ],
+  "chapter_semantic_check": "pending; not automatically completed by paragraph checks or author approval",
+  "effectiveness": {
+    "fixture_result": "verification/voice-binding-repair-v0.1.json",
+    "live_model_result": "recorded separately for each private bound experiment",
+    "live_pangram_result": "recorded separately for each private bound experiment",
+    "author_voice_validation": "all three observed executions await final author approval of their exact passages",
+    "observed_live_paragraphs": [
+      {
+        "experiment": "RECOVERY_006",
+        "kind": "fresh_execution",
+        "execution_id": "0727a6f9-f06f-4d02-9385-bf8dd47be352",
+        "assessment_id": "62f2416f-ccad-40d9-a65a-e87d43653c06",
+        "scan_id": "e852824a-a4b6-439a-b5d9-fb38809d1f98",
+        "text_sha256": "6b29769c949091e4a40e2af66330ef85bbfbe321ffc00891dde3bae12d616e73",
+        "paragraph_attempts": 5,
+        "four_layer_state": "checks_passed",
+        "pangram_state": "passed",
+        "fraction_human": 1.0,
+        "pangram_version": "4.1",
+        "detector_policy": "all-human-v1",
+        "author_validation": "awaiting_approval"
+      },
+      {
+        "experiment": "RECOVERY_007",
+        "kind": "fresh_execution",
+        "execution_id": "6e70feb7-594b-4e72-b54c-83394fac72af",
+        "assessment_id": "7782429d-cbc5-497c-b086-e3a25c479b1d",
+        "scan_id": "76258afd-4eb5-477e-8c48-29d1ceade58f",
+        "text_sha256": "2775b57c1f0cfebfec69bdf92018a2626f785c5818a5475dffd5028d80b94e2f",
+        "paragraph_attempts": 5,
+        "four_layer_state": "checks_passed",
+        "pangram_state": "passed",
+        "fraction_human": 1.0,
+        "pangram_version": "4.1",
+        "detector_policy": "all-human-v1",
+        "author_validation": "awaiting_approval"
+      },
+      {
+        "experiment": "RECOVERY_008",
+        "kind": "diagnosed_continuation_of_RECOVERY_002",
+        "execution_id": "ed937035-0389-443f-8083-3bb3e7004c08",
+        "assessment_id": "abbe042f-27c0-4458-ae36-d496c87699a0",
+        "scan_id": "de166be5-85b1-49f2-9d7f-ef3123d9419a",
+        "text_sha256": "34ec45203054b0e0d009c04fec6657c51d482f63eca0fe255c0b652a7af065b0",
+        "paragraph_attempts": 4,
+        "four_layer_state": "checks_passed",
+        "pangram_state": "passed",
+        "fraction_human": 1.0,
+        "pangram_version": "4.1",
+        "detector_policy": "all-human-v1",
+        "author_validation": "awaiting_approval"
+      }
+    ],
+    "observation_source": "Retained private run.sqlite execution, paragraph_checkpoint, assessment and pangram_event records for each named experiment; no manuscript, exemplar or prompt text included here.",
+    "repeatability": "pending fixed-configuration confirmation; these selected observed paragraph outcomes do not estimate a population success rate or establish whole-chapter quality"
+  },
+  "coverage_details": [
+    "docs/voice-binding-repair-v0.1.md",
+    "docs/full-voice-corpus-v0.1.md",
+    "docs/historical-compact-presentation-v0.1.md",
+    "docs/expression-continuation-v0.1.md",
+    "docs/fresh-expression-retry-v0.1.md",
+    "docs/system-diagram-v0.6.md"
+  ],
+  "procedure_addenda_supported": [
+    "procedures/addenda/paragraph-pangram-v0.1.json",
+    "procedures/addenda/paragraph-pangram-v0.2.json"
+  ],
+  "entry_points": {
+    "continuation-reference": "read-only parent reference through src/run_agent.py",
+    "continue-expression": "new immutable binding and copied parent evidence through Execution.continue_expression; no provider call during preparation",
+    "retry-fresh-expression": "author-authorized preparation through Execution.retry_fresh_expression and the existing ParagraphLoop owner; no provider call during preparation",
+    "resume": "advance the exact selected execution through existing owners; inherited and fresh attempts remain within their declared budgets"
+  }
+}
