@@ -35,7 +35,7 @@ PROMPT_TEMPLATES = {
         "schema": '{"findings":[{"layer":"conceptual|epistemic|rhetorical_plan","status":"pass|fail|uncertain","reason":"..."}]} Exactly one finding for each of the three layers.',
     },
     "voice_resolution": {
-        "version": "2",
+        "version": "3",
         "role": (
             "Repair the voice bindings of the supplied fixed intellectual construction. The exact "
             "failed construction review is in repair.review; address only the exemplar, application "
@@ -53,7 +53,9 @@ PROMPT_TEMPLATES = {
             "decision need not be added to the argument. If the "
             "required decision is absent or defective, request construction reopening rather than "
             "inventing it in an application or disguising it as a later wording choice. "
-            "Use the catalog's human rule_id and exemplar_id keys in voice_bindings. Preserve rule "
+            "Use the catalog's human rule_id and exemplar_id keys in voice_bindings. A binding's "
+            "layer must be one of that selected rule's allowed_layers, or its declared Layer when "
+            "allowed_layers is absent. Applying a rule through wording does not change its layer. Preserve rule "
             "status and evidence authority. Approved written calibration supplies worked passage "
             "examples only at its recorded passage scope; it is generated author-approved text, "
             "not authentic speech, a new rule or evidence for the subject claims. "
@@ -71,7 +73,7 @@ PROMPT_TEMPLATES = {
 PROFILE_TEMPLATES = {
     "resolved-voice-v1": {
         "construction": {
-            "version": "3",
+            "version": "4",
             "role": (
                 "Construct the intellectual content before prose using the applicable conceptual and "
                 "epistemic rules together with their actual exemplars in the supplied catalog. Use the "
@@ -80,6 +82,10 @@ PROFILE_TEMPLATES = {
                 "from inference and hypothesis, and place justified qualifications on the relevant claims. "
                 "Resolve these applications while forming the construction. Examples guide the author's "
                 "manner of reasoning; subject evidence and intent determine the permitted content. "
+                "When the full authentic corpus is supplied, consider its intact recorded source "
+                "passages as well as individual excerpts to understand the author's complete intellectual "
+                "moves. Choose the examples relevant to this task, including examples on other subjects. "
+                "Availability of an example does not make it evidence for an unrelated rule. "
                 "Represent successive constituent intellectual moves explicitly when they perform different jobs; "
                 "a paragraph may contain several acts. Preserve source claims and their epistemic strength. "
                 "Encode each claim as a neutral semantic note about its entities, relation, conditions and "
@@ -90,7 +96,9 @@ PROFILE_TEMPLATES = {
                 "to restate a test instruction or announce that this process has not proved something. "
                 "A substantive qualification belongs only where the source or author intent requires it. "
                 "For every act, select applicable rule IDs and source-grounded exemplar IDs from the supplied "
-                "catalog, explain their application, and state an observable checking criterion. For a "
+                "catalog, explain their application, and state an observable checking criterion. Each binding's "
+                "layer must belong to its selected rule's allowed_layers, or declared Layer when that "
+                "list is absent; a rule does not become linguistic merely because it affects wording. For a "
                 "conceptual or epistemic binding, name the operation demonstrated by the exemplar and the "
                 "specific decision it shapes in the encoded claims or acts. Its criterion must allow the "
                 "reviewer to locate that decision in the construction; future sentence style alone is "
@@ -114,12 +122,17 @@ PROFILE_TEMPLATES = {
             "schema": '{"claims":[{"key":"c1","text":"...","origin":"author|external|agent_hypothesis","evidence":["source0"]}],"acts":[{"purpose":"...","claims":["c1"],"voice_bindings":[{"rule_id":"R001","exemplar_ids":["E001"],"layer":"conceptual|epistemic|rhetorical|linguistic","application":"Demonstrated operation and the construction decision or planned expression it shapes in this act","criterion":"Observable requirement for that decision or realization"}]}]}',
         },
         "expression": {
-            "version": "3",
+            "version": "4",
             "role": (
                 "Realize the closed ordered intellectual acts directly using their resolved voice applications. "
                 "Write the current paragraph with the meaning, claim strength and intended rhetorical progress "
                 "in the plan. Use the structures actually demonstrated by each act's exemplars as worked "
-                "examples: write prose structured like those examples. A stated preference supports that "
+                "examples: write prose structured like those examples. When the full authentic corpus "
+                "is supplied, use its intact recorded source passages to understand how the author "
+                "develops whole intellectual moves and connects them. The selected worked examples "
+                "identify applicable evidence; they are not a requirement to produce one sentence "
+                "per excerpt, binding or claim. Preserve the closed acts and their intended order. "
+                "A stated preference supports that "
                 "preference but does not by itself enact a complete structure. Preserve that evidence "
                 "role when applying it. Follow how the author performs the relevant act: how a "
                 "sentence opens, clauses develop the thought, a concrete situation leads to a question or "

@@ -6,7 +6,8 @@ rules and approved generated calibration retain their limited recorded authority
 """
 import hashlib
 import json
-from voice_resolution import PROFILE, LAYERS, rule_layers, validate_written_calibration
+from voice_resolution import (PROFILE, FULL_CORPUS_SCOPE, LAYERS, rule_layers,
+                              validate_written_calibration)
 
 
 BASE_CRITERIA = (
@@ -127,6 +128,9 @@ def _repair(context):
 
 def compact_writer_context(context):
     plans, rules, exemplars = _resolved(context)
+    full_corpus = context.get('voice_context_scope') == FULL_CORPUS_SCOPE
+    if full_corpus:
+        exemplars = {item['id']: item for item in context['authentic_exemplars']}
     nodes = context['nodes']
     intent = nodes.get(context.get('intent'), {}).get('node', {})
     if intent.get('kind') != 'intent':
@@ -180,12 +184,43 @@ def compact_writer_context(context):
             source_ids.append(source['id'])
             sources[source['id']] = {'id': source['id'], 'source_key': source['payload'].get('Source ID'),
                                      'transcript': transcript}
-        voice_exemplars.append({'id': ident, 'key': payload['Exemplar ID'], 'source_ids': source_ids,
+            if full_corpus:
+                sources[source['id']].update(
+                    revision=source['revision'], status=source['status'],
+                    provenance={key: _copy(value) for key, value in source['payload'].items()
+                                if key != 'User transcript (segments joined)'})
+        projected = {'id': ident, 'key': payload['Exemplar ID'], 'source_ids': source_ids,
                                 'excerpt': payload['Exact excerpt'], 'layer': payload.get('Layer'),
                                 'intellectual_act': payload.get('Intellectual act'),
                                 'exemplar_type': payload['Exemplar type'],
                                 'written_validation': payload.get('Written validation'),
-                                'authority': exemplar['authority']})
+                                'authority': exemplar['authority']}
+        if full_corpus:
+            projected.update(
+                revision=node['revision'], status=payload.get('Status'),
+                source_key=payload.get('Source ID'),
+                parent_exemplar_id=payload.get('Parent exemplar ID'),
+                grounded_rule_ids=sorted(rule['payload']['Rule ID'] for rule in context['voice_candidates']
+                    if ('grounded_in', ident) in [tuple(edge) for edge in
+                        context['voice_evidence'][rule['id']]['edges']]),
+                selected_for_acts=[act_id for act_id, act in plans
+                    if any(ident in binding['exemplar_ids']
+                           for binding in act['node']['payload']['voice_bindings'])])
+        voice_exemplars.append(projected)
+    if full_corpus:
+        # Some recorded source answers have no derived exemplar. Keep their
+        # context available without creating an exemplar or rule-grounding link.
+        for ident, record in context['voice_evidence'].items():
+            source = record['node']
+            if source['kind'] != 'evidence' or 'User transcript (segments joined)' not in source['payload']:
+                continue
+            sources[ident] = {
+                'id': ident, 'source_key': source['payload'].get('Source ID'),
+                'transcript': _text(source['payload']['User transcript (segments joined)'], 'Voice transcript'),
+                'revision': source['revision'], 'status': source['status'],
+                'provenance': {key: _copy(value) for key, value in source['payload'].items()
+                               if key != 'User transcript (segments joined)'},
+            }
     rule_examples = {rule['id']: rule for rule in voice_rules}
     exemplar_examples = {exemplar['id']: exemplar for exemplar in voice_exemplars}
     for act in intellectual_plan:
@@ -243,6 +278,16 @@ def compact_writer_context(context):
     if 'paragraph' in context:
         packet['paragraph'] = _copy(context['paragraph'])
         packet['instruction'] += ' Return exactly one paragraph without paragraph separators; prior paragraphs are continuity context.'
+    if full_corpus:
+        packet['voice_context_scope'] = FULL_CORPUS_SCOPE
+        packet['corpus_usage'] = (
+            'The voice_exemplars and source_contexts contain the complete authentic spoken '
+            'corpus from the bound ledger, including examples without rule-grounding links. '
+            'Use their exact recorded contexts to interpret the demonstrated operations. '
+            'The worked_examples identify the selected grounded applications; broader corpus '
+            'availability does not create new rule grounding or change candidate authority, '
+            'the closed intellectual construction, or the existing checking criteria. '
+            'Source records may be excerpts; retain their recorded gaps and modality.')
     if 'repair' in context:
         packet['repair'] = _repair(context['repair'])
     return packet

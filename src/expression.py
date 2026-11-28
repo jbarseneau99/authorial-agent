@@ -83,7 +83,7 @@ class Expression:
         base = {key: snapshot[key] for key in (
             'intent', 'acts', 'nodes', 'baseline_digest', 'voice_candidates',
             'voice_evidence', 'authentic_exemplars', 'selection_status')}
-        for key in ('execution_profile', 'written_calibration'):
+        for key in ('execution_profile', 'written_calibration', 'voice_context_scope'):
             if key in snapshot:
                 base[key] = json.loads(json.dumps(snapshot[key]))
         base.update(construction_closure=closure, instruction=(

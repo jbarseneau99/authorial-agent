@@ -9,6 +9,7 @@ import re
 
 
 PROFILE = 'resolved-voice-v1'
+FULL_CORPUS_SCOPE = 'full_corpus_v1'
 LAYERS = {'conceptual', 'epistemic', 'rhetorical', 'linguistic'}
 
 
@@ -149,6 +150,8 @@ def compact_voice_catalog(voice, bindings=None):
     selected_rules = None if bindings is None else {item['rule_id'] for item in bindings}
     selected_exemplars = None if bindings is None else {
         ident for item in bindings for ident in item['exemplar_ids']}
+    if voice.get('voice_context_scope') == FULL_CORPUS_SCOPE:
+        selected_exemplars = None
     rule_records, exemplar_records, sources, other = [], [], {}, {}
     authentic_ids = {item['id'] for item in exemplars.values()}
     for key, item in sorted(rules.items()):
@@ -157,6 +160,7 @@ def compact_voice_catalog(voice, bindings=None):
         grounded = [target for relation, target in voice['voice_evidence'][item['id']]['edges']
                     if relation == 'grounded_in']
         rule_records.append({'id': item['id'], 'rule_id': key,
+                             'allowed_layers': sorted(rule_layers(item)),
                              # Review notes can mix detector results with audit
                              # history; recorded status and scope remain below.
                              'payload': {field: copy.deepcopy(value)
@@ -171,12 +175,22 @@ def compact_voice_catalog(voice, bindings=None):
     for key, item in sorted(exemplars.items()):
         if selected_exemplars is not None and item['id'] not in selected_exemplars:
             continue
-        exemplar_records.append({'id': item['id'], 'exemplar_id': key,
-                                 'payload': copy.deepcopy(item['node']['payload']),
-                                 'authority': item['authority'],
-                                 'source_ids': [source['id'] for source in item['sources']]})
+        record = {'id': item['id'], 'exemplar_id': key,
+                  'payload': copy.deepcopy(item['node']['payload']),
+                  'authority': item['authority'],
+                  'source_ids': [source['id'] for source in item['sources']]}
+        if voice.get('voice_context_scope') == FULL_CORPUS_SCOPE:
+            record['grounded_rule_ids'] = sorted(rule_key for rule_key, rule in rules.items()
+                if ('grounded_in', item['id']) in [tuple(edge) for edge in
+                    voice['voice_evidence'][rule['id']]['edges']])
+        exemplar_records.append(record)
         for source in item['sources']:
             sources[source['id']] = copy.deepcopy(source)
+    if voice.get('voice_context_scope') == FULL_CORPUS_SCOPE:
+        for ident, record in voice['voice_evidence'].items():
+            node = record['node']
+            if node['kind'] == 'evidence' and 'User transcript (segments joined)' in node['payload']:
+                sources[ident] = copy.deepcopy(node)
     return {'rules': rule_records, 'exemplars': exemplar_records,
             'sources': [sources[key] for key in sorted(sources)],
             'grounding_records': [other[key] for key in sorted(other)]}
@@ -185,10 +199,13 @@ def compact_voice_catalog(voice, bindings=None):
 def construction_packet(context):
     evidence = copy.deepcopy(context['evidence'])
     evidence['intent'] = {'origin': 'author_input', 'reference': 'top-level intent'}
-    return {'execution_profile': PROFILE, 'intent': context['intent'], 'evidence': evidence,
+    packet = {'execution_profile': PROFILE, 'intent': context['intent'], 'evidence': evidence,
             'voice_catalog': compact_voice_catalog(context),
             'written_calibration': copy.deepcopy(context.get('written_calibration', [])),
             'instruction': context['instruction']}
+    if context.get('voice_context_scope') == FULL_CORPUS_SCOPE:
+        packet['voice_context_scope'] = FULL_CORPUS_SCOPE
+    return packet
 
 
 def construction_review_packet(snapshot):
@@ -211,7 +228,7 @@ def construction_review_packet(snapshot):
         if node['payload'].get('origin') == 'author_input':
             node['payload'] = {'origin': 'author_input', 'reference': 'top-level intent'}
         evidence.append(node)
-    return {'execution_profile': PROFILE, 'plan': snapshot['plan'],
+    packet = {'execution_profile': PROFILE, 'plan': snapshot['plan'],
             'intent': nodes[snapshot['intent']]['node']['payload']['text'],
             'acts': acts, 'claims': claims, 'evidence': evidence,
             'voice_catalog': compact_voice_catalog(snapshot),
@@ -222,3 +239,6 @@ def construction_review_packet(snapshot):
                             'Check whether its application and criterion fit the act and '
                             'the cited rule and authentic exemplar. Preserve candidate rule '
                             'status and distinguish passage approval from corpus validation.')}
+    if snapshot.get('voice_context_scope') == FULL_CORPUS_SCOPE:
+        packet['voice_context_scope'] = FULL_CORPUS_SCOPE
+    return packet

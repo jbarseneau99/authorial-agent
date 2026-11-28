@@ -1,0 +1,33 @@
+{
+  "change": "Opt-in complete authenticated spoken voice corpus throughout construction and expression",
+  "configuration": {
+    "voice_context_scope": "full_corpus_v1"
+  },
+  "actual_ledger_counts": {
+    "exemplars": 84,
+    "sources": 35,
+    "directly_referenced_sources": 34
+  },
+  "verification": {
+    "focused_tests_passed": 40,
+    "full_suite_passed": 202,
+    "full_suite_seconds": 4.322,
+    "full_suite_command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s src -p 'test_*.py' -q",
+    "reported_by": "procedure_diagnosis agent in shared checkout",
+    "diff_check": "passed",
+    "live_calls": "not performed by fixture verification"
+  },
+  "invariants": [
+    "exact exemplar text and source provenance",
+    "unchanged grounding links and candidate status",
+    "wrong declared layer rejected",
+    "scope checked against committed configuration",
+    "unlinked-exemplar revision invalidates closure",
+    "legacy default preserved"
+  ],
+  "limitations": [
+    "Live authorial quality and detector observations recorded separately",
+    "No original successful HTTP prompt recovered",
+    "Final author approval remains pending"
+  ]
+}

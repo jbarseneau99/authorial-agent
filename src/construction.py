@@ -6,7 +6,8 @@ construction gate; they neither create a second lifecycle nor certify truth.
 import json
 import uuid
 from model import Kind
-from voice_resolution import PROFILE, validate_resolved_bindings, validate_written_calibration
+from voice_resolution import (PROFILE, FULL_CORPUS_SCOPE, validate_resolved_bindings,
+                              validate_written_calibration)
 
 CONSTRUCTION_LAYERS = {'conceptual', 'epistemic', 'rhetorical_plan'}
 
@@ -118,13 +119,16 @@ class Construction:
             collect(root)
         return nodes
 
-    def voice_context(self, rules, baseline_digest=None):
+    def voice_context(self, rules, baseline_digest=None, scope=None):
         """Resolve selected grounding without activating candidate rules.
 
         Original spoken excerpts must match their source transcript. Experimental
         results remain evidence records, never newly authenticated exemplars.
-        Selection is explicit; this helper does not invent per-act relevance.
+        Full-corpus scope also collects unlinked authentic exemplars from the
+        bound ledger. Availability never adds a rule-grounding edge.
         """
+        if scope not in {None, FULL_CORPUS_SCOPE}:
+            raise ValueError('Unsupported voice context scope')
         for selected in rules:
             ident = selected['id']
             obj = self.g.get(ident)
@@ -135,7 +139,26 @@ class Construction:
                                         (baseline_digest, 'Candidate rules', ident)).fetchone()
                 if not row:
                     raise ValueError('Selected rule does not belong to bound ledger')
-        nodes = self._collect([rule['id'] for rule in rules])
+        roots = [rule['id'] for rule in rules]
+        if scope == FULL_CORPUS_SCOPE:
+            if baseline_digest is None:
+                raise ValueError('Full voice corpus requires a bound imported ledger')
+            baseline = self.g.db.execute('SELECT 1 FROM imported_baseline WHERE digest=?',
+                                         (baseline_digest,)).fetchone()
+            if not baseline:
+                raise ValueError('Full voice corpus requires the bound imported ledger')
+            records = self.g.db.execute(
+                "SELECT n.id,n.payload FROM node n JOIN imported_record r ON r.node_id=n.id "
+                "WHERE r.digest=? AND r.sheet='Exemplars' AND n.kind='evidence' ORDER BY r.record_key",
+                (baseline_digest,)).fetchall()
+            roots.extend(ident for ident, payload in records
+                         if json.loads(payload).get('Exemplar type') == 'Original spoken')
+            if not records:
+                raise ValueError('Bound voice corpus has no exemplar records')
+            roots.extend(ident for ident, in self.g.db.execute(
+                "SELECT node_id FROM imported_record WHERE digest=? AND sheet='Source evidence'",
+                (baseline_digest,)))
+        nodes = self._collect(roots)
         exemplars = []
         for ident, record in sorted(nodes.items()):
             obj = record['node']
@@ -157,9 +180,12 @@ class Construction:
                 raise ValueError('Spoken exemplar does not match its recorded source: ' + ident)
             exemplars.append({'id': ident, 'node': obj, 'sources': sources,
                               'authority': 'original_spoken; written validation remains as recorded'})
-        return {'baseline_digest': baseline_digest, 'voice_candidates': rules,
+        result = {'baseline_digest': baseline_digest, 'voice_candidates': rules,
                 'voice_evidence': nodes, 'authentic_exemplars': exemplars,
                 'selection_status': 'explicit_rule_set; per_act_relevance_not_assessed'}
+        if scope == FULL_CORPUS_SCOPE:
+            result['voice_context_scope'] = FULL_CORPUS_SCOPE
+        return result
 
     def snapshot(self, plan):
         """Capture exact construction, placement and selected voice evidence."""
@@ -171,7 +197,8 @@ class Construction:
         errors = self.check(intent, acts)
         if errors:
             raise ValueError('; '.join(errors))
-        voice = self.voice_context(context.get('voice_candidates', []), context.get('baseline_digest'))
+        voice = self.voice_context(context.get('voice_candidates', []), context.get('baseline_digest'),
+                                   context.get('voice_context_scope'))
         # Legacy plans lacking frozen exemplar context cannot bypass new closure.
         if 'voice_evidence' not in context or self._encoded(voice) != self._encoded({key: context[key] for key in voice}):
             raise ValueError('Voice inputs changed or were not frozen; rebuild construction')
