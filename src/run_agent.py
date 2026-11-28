@@ -14,7 +14,7 @@ from execution import Execution
 from providers import JSONModel
 from research import EuropePMC
 from research_loop import BoundSources, ResearchBridge  # compatibility export
-from run_binding import (PARAGRAPH_ADDENDUM, PARAGRAPH_RETRY_ADDENDUM,
+from run_binding import (PARAGRAPH_ADDENDUM, PARAGRAPH_RETRY_ADDENDUM, PARAGRAPH_OVER99_ADDENDUM,
                          paragraph_addendum, ProviderJournal, RunBinding)
 from pangram_check import PangramCheck, validate_configuration as validate_pangram_configuration
 from paragraph_loop import ParagraphLoop, validate_fresh_retry
@@ -75,8 +75,12 @@ def validate_configuration(config):
         raise ValueError('Positive attempt budget required')
     retry_policy, fresh_budget = config.get('fresh_expression_retry'), config.get('max_fresh_retries', 0)
     validate_fresh_retry(retry_policy, fresh_budget, budget)
-    if retry_policy is not None and addendum_path != PARAGRAPH_RETRY_ADDENDUM:
-        raise ValueError('Fresh expression retries require the separately committed v0.2 paragraph addendum')
+    if retry_policy is not None and addendum_path not in {PARAGRAPH_RETRY_ADDENDUM, PARAGRAPH_OVER99_ADDENDUM}:
+        raise ValueError('Fresh expression retries require a compatible committed paragraph addendum')
+    if config['pangram']['policy'] == 'reported-over-99-human-v1' and addendum_path != PARAGRAPH_OVER99_ADDENDUM:
+        raise ValueError('Over-99 human policy requires the separately committed v0.4 paragraph addendum')
+    if addendum_path == PARAGRAPH_OVER99_ADDENDUM and config['pangram']['policy'] != 'reported-over-99-human-v1':
+        raise ValueError('v0.4 requires the recorded strictly over-99 human policy')
     voice_budget = config.get('max_voice_repairs', 0)
     if type(voice_budget) is not int or voice_budget < 0:
         raise ValueError('Nonnegative voice repair budget required')
