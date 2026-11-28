@@ -1,0 +1,39 @@
+{
+  "id": "AA-PROCEDURE-ADDENDUM-PARAGRAPH-PANGRAM-002",
+  "version": "0.2",
+  "parent": "procedures/addenda/paragraph-pangram-v0.1.json",
+  "status": "author-directed bounded fresh-candidate retry; validation is recorded per run",
+  "author_instruction": "So why have you stopped. We need to continue until we hit 100% on pangram consistently?",
+  "instruction_date": "2026-11-28",
+  "authorization_record": "decisions/consistency-recovery-v0.1.json",
+  "applies_to": "A separately committed run selecting this addendum and explicitly enabling author-authorized-v1 fresh expression retries.",
+  "preserved_sequence": [
+    "closed intellectual construction",
+    "record paragraph act grouping",
+    "generate one paragraph through the expression provider",
+    "check all four authorial layers",
+    "scan that exact checked paragraph and preserve the observation",
+    "continue to the next paragraph only after current writing and detector gates pass",
+    "assemble accepted paragraphs and obtain separate author validation"
+  ],
+  "fresh_candidate_retry": {
+    "opt_in": "fresh_expression_retry=author-authorized-v1 with positive max_fresh_retries",
+    "entry": "Explicit author action or recorded delegation, a current unchanged closed construction, current four-layer-passing paragraph and completed flagged detector result for that exact paragraph.",
+    "generation": "Generate a new candidate from the same closed act scope and voice examples through Expression.run. Supply neither the current failed prose nor detector result, score, scan reference or retry commentary to the writer.",
+    "review": "Every new candidate receives a fresh four-layer assessment; only a passing assessment can reach its exact-text detector scan.",
+    "budgets": "Each fresh writer attempt consumes one existing total per-paragraph attempt and one max_fresh_retries allowance. Budgets are fixed before execution; authorizing or waiting for availability consumes no writer attempt.",
+    "preservation": "Retain every prior candidate, assessment, detector result and failed attempt. Record exact source witnesses and author action in execution evidence, outside generation prompts.",
+    "continuation": "A blocked preflight or generation failure retains the original retry witness and requires explicit author retry authority on resumption. Revalidate source freshness before any writer call."
+  },
+  "stop_conditions": [
+    "missing opt-in or author authorization",
+    "total attempt or fresh retry limit exhausted",
+    "four-layer finding requiring review or construction reopening",
+    "pending, error, unscorable, malformed or stale detector observation",
+    "changed construction, paragraph, assessment, source, voice evidence, configuration or binding"
+  ],
+  "existing_expression_repair": "Diagnosed writing defects continue through the existing Editing owner and its local repair limits. A detector flag is not a writing diagnosis and cannot enter that route.",
+  "gate_policy": "The existing all-human-v1 policy and exact detector-version checks are unchanged.",
+  "authority": "Detector acceptance permits paragraph progression; it does not establish truth, authorial voice, author approval or statistical repeatability.",
+  "compatibility": "Runs bound to v0.1 retain their original behavior. Selecting v0.2 alone does not enable retries; the explicit policy and limit are also required. Earlier records and thresholds are unchanged."
+}

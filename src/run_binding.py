@@ -15,6 +15,20 @@ from urllib.parse import urlsplit
 
 PARAGRAPH_ADDENDUM = 'procedures/addenda/paragraph-pangram-v0.1.json'
 PARAGRAPH_ADDENDUM_ID = 'AA-PROCEDURE-ADDENDUM-PARAGRAPH-PANGRAM-001'
+PARAGRAPH_RETRY_ADDENDUM = 'procedures/addenda/paragraph-pangram-v0.2.json'
+PARAGRAPH_RETRY_ADDENDUM_ID = 'AA-PROCEDURE-ADDENDUM-PARAGRAPH-PANGRAM-002'
+PARAGRAPH_ADDENDA = {
+    PARAGRAPH_ADDENDUM: {'id': PARAGRAPH_ADDENDUM_ID, 'version': '0.1'},
+    PARAGRAPH_RETRY_ADDENDUM: {'id': PARAGRAPH_RETRY_ADDENDUM_ID, 'version': '0.2'},
+}
+
+
+def paragraph_addendum(configuration):
+    paths = configuration.get('procedure_addenda')
+    if (not isinstance(paths, list) or len(paths) != 1
+            or not isinstance(paths[0], str) or paths[0] not in PARAGRAPH_ADDENDA):
+        raise ValueError('Declare one supported paragraph Pangram addendum')
+    return paths[0], PARAGRAPH_ADDENDA[paths[0]]
 
 
 def canonical(value):

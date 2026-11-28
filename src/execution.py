@@ -8,7 +8,8 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from editing import Editing
-from run_binding import PARAGRAPH_ADDENDUM, PARAGRAPH_ADDENDUM_ID
+from run_binding import (PARAGRAPH_ADDENDUM, PARAGRAPH_ADDENDUM_ID,
+                         PARAGRAPH_RETRY_ADDENDUM, paragraph_addendum)
 
 OWNERS = {'construction': 'src/faculty.py', 'expression': 'src/expression.py',
           'checking': 'src/checking.py', 'editing': 'src/editing.py',
@@ -100,13 +101,12 @@ class Execution:
             config = (manifest.get('configuration') or {}).get('contents')
             if not isinstance(config, dict) or config.get('paragraph_mode') != 'pangram-gated-v1':
                 raise ValueError('Live execution requires its committed paragraph configuration')
-            if config.get('procedure_addenda') != [PARAGRAPH_ADDENDUM]:
-                raise ValueError('Live execution must declare the paragraph Pangram addendum')
+            addendum_path, addendum_identity = paragraph_addendum(config)
             addenda = manifest.get('procedure_addenda', [])
-            expected_path = (Path(manifest['repository']['root']) / PARAGRAPH_ADDENDUM).resolve()
+            expected_path = (Path(manifest['repository']['root']) / addendum_path).resolve()
             if (len(addenda) != 1 or Path(addenda[0]['path']).resolve() != expected_path
-                    or addenda[0].get('identity', {}).get('id') != PARAGRAPH_ADDENDUM_ID
-                    or addenda[0].get('identity', {}).get('version') != '0.1'):
+                    or any(addenda[0].get('identity', {}).get(key) != value
+                           for key, value in addendum_identity.items())):
                 raise ValueError('The declared paragraph addendum must be bound as an exact committed artifact')
             if self.f.rule_ids != config.get('selected_rule_ids'):
                 raise ValueError('Rule selection differs from the committed configuration')
@@ -124,6 +124,11 @@ class Execution:
                 raise ValueError('Paragraph grouping differs from the committed configuration')
             if self.paragraph_loop.max_attempts != config.get('max_attempts', 3):
                 raise ValueError('Paragraph attempt budget differs from the committed configuration')
+            if (self.paragraph_loop.fresh_expression_retry != config.get('fresh_expression_retry')
+                    or self.paragraph_loop.max_fresh_retries != config.get('max_fresh_retries', 0)):
+                raise ValueError('Fresh-expression policy or limit differs from the committed configuration')
+            if self.paragraph_loop.fresh_expression_retry and addendum_path != PARAGRAPH_RETRY_ADDENDUM:
+                raise ValueError('Fresh expression retries require the bound v0.2 paragraph addendum')
             if intent is not None and intent != config.get('intent'):
                 raise ValueError('Author intent differs from the committed configuration')
             if max_attempts is not None and max_attempts != config.get('max_attempts', 3):
@@ -325,13 +330,16 @@ class Execution:
             'detector_unscorable': 'suspended_detector_unscorable',
             'detector_blocked': 'suspended_detector_blocked',
             'expression_repair_required': 'suspended_reopen',
+            'fresh_expression_required': 'ready_for_fresh_expression',
+            'fresh_retry_exhausted': 'fresh_retry_exhausted',
             'construction_required': 'suspended_reopen', 'author_review_required': 'suspended_reopen',
             'budget_exhausted': 'budget_exhausted', 'stale': 'stale',
             'generation_error': 'suspended_error', 'checking_error': 'suspended_error',
         }
         current = progress['paragraphs'][progress['active_index']]
         route = {'expression_repair_required': 'expression', 'construction_required': 'construction',
-                 'author_review_required': 'author_review'}.get(state)
+                 'author_review_required': 'author_review',
+                 'fresh_expression_required': 'fresh_expression'}.get(state)
         loop = ('detector' if state.startswith('detector_') else
                 'validation' if state == 'complete' else 'paragraph')
         x.update(paragraph_progress=progress, paragraph_index=progress['active_index'],
@@ -343,6 +351,18 @@ class Execution:
             x.update(text=progress['text'], text_sha256=progress['text_sha256'])
         return self._checkpoint(x, mapping.get(state, 'suspended_error'), loop, route=route,
                                 unresolved=progress.get('unresolved'))
+
+    def retry_fresh_expression(self, ident, *, actor=None):
+        """Authorize a new candidate, not an edit justified by a detector score."""
+        if actor != 'author':
+            raise PermissionError('Explicit author authorization required for fresh expression')
+        x = self.inspect(ident)
+        if (x.get('execution_scope') != 'paragraphs' or self.paragraph_loop is None
+                or x['state'] != 'suspended_detector_flagged'):
+            raise ValueError('Current completed detector flag required for fresh expression')
+        self._binding_current(x)
+        progress = self.paragraph_loop.retry_fresh_expression(ident, actor=actor)
+        return self._paragraph_checkpoint(x, progress)
 
     def advance(self, ident, actor=None):
         x = self.inspect(ident)

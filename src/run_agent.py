@@ -14,9 +14,10 @@ from execution import Execution
 from providers import JSONModel
 from research import EuropePMC
 from research_loop import BoundSources, ResearchBridge  # compatibility export
-from run_binding import PARAGRAPH_ADDENDUM, ProviderJournal, RunBinding
+from run_binding import (PARAGRAPH_ADDENDUM, PARAGRAPH_RETRY_ADDENDUM,
+                         paragraph_addendum, ProviderJournal, RunBinding)
 from pangram_check import PangramCheck, validate_configuration as validate_pangram_configuration
-from paragraph_loop import ParagraphLoop
+from paragraph_loop import ParagraphLoop, validate_fresh_retry
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -29,8 +30,7 @@ def validate_configuration(config):
     if config.get('paragraph_mode') != 'pangram-gated-v1':
         raise ValueError('New live runs require paragraph_mode="pangram-gated-v1"')
     validate_pangram_configuration(config.get('pangram'))
-    if config.get('procedure_addenda') != [PARAGRAPH_ADDENDUM]:
-        raise ValueError('Bind the author-directed paragraph Pangram addendum')
+    addendum_path, _ = paragraph_addendum(config)
     groups = config.get('paragraph_groups')
     if groups is not None and groups != 'all_acts_one_paragraph':
         if (not isinstance(groups, list) or not groups
@@ -73,6 +73,10 @@ def validate_configuration(config):
     budget = config.get('max_attempts', 3)
     if type(budget) is not int or budget < 1:
         raise ValueError('Positive attempt budget required')
+    retry_policy, fresh_budget = config.get('fresh_expression_retry'), config.get('max_fresh_retries', 0)
+    validate_fresh_retry(retry_policy, fresh_budget, budget)
+    if retry_policy is not None and addendum_path != PARAGRAPH_RETRY_ADDENDUM:
+        raise ValueError('Fresh expression retries require the separately committed v0.2 paragraph addendum')
     voice_budget = config.get('max_voice_repairs', 0)
     if type(voice_budget) is not int or voice_budget < 0:
         raise ValueError('Nonnegative voice repair budget required')
@@ -123,7 +127,9 @@ def runtime(graph, binding, config=None):
     detector = PangramCheck(graph, expression, checking, binding=binding, configuration=config['pangram'])
     paragraphs = ParagraphLoop(graph, expression, checking, detector,
                                paragraph_groups=config.get('paragraph_groups'),
-                               max_attempts=config.get('max_attempts', 3))
+                               max_attempts=config.get('max_attempts', 3),
+                               fresh_expression_retry=config.get('fresh_expression_retry'),
+                               max_fresh_retries=config.get('max_fresh_retries', 0))
     engine = Execution(graph, faculty, expression, checking, binding=binding, paragraph_loop=paragraphs,
                        max_voice_repairs=config.get('max_voice_repairs', 0))
     return engine, sources, config
@@ -285,14 +291,15 @@ def main(argv=None):
     continuation.add_argument('--actor', choices=['author'], required=True)
     continuation.add_argument('--live', action='store_true')
     continuation.add_argument('--output', type=Path)
-    for name in ('inspect', 'review-construction', 'repair-voice', 'close-construction', 'resume', 'approve'):
+    for name in ('inspect', 'review-construction', 'repair-voice', 'close-construction',
+                 'resume', 'retry-fresh-expression', 'approve'):
         command = commands.add_parser(name)
         command.add_argument('--database', required=True, type=Path)
         command.add_argument('--execution', required=True)
         command.add_argument('--output', type=Path)
         if name in {'review-construction', 'repair-voice', 'resume'}:
             command.add_argument('--live', action='store_true')
-        if name in {'repair-voice', 'close-construction', 'approve'}:
+        if name in {'repair-voice', 'close-construction', 'retry-fresh-expression', 'approve'}:
             command.add_argument('--actor', choices=['author'], required=True)
         elif name == 'resume':
             command.add_argument('--actor', choices=['author'])
@@ -356,6 +363,8 @@ def main(argv=None):
                 result = engine.close_construction(args.execution, actor=args.actor)
             elif args.command == 'resume':
                 result = engine.advance(args.execution, actor=args.actor)
+            elif args.command == 'retry-fresh-expression':
+                result = engine.retry_fresh_expression(args.execution, actor=args.actor)
             else:
                 result = engine.approve(args.execution, actor=args.actor)
         return _report(graph, result['id'], args.output)

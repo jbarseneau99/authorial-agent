@@ -38,6 +38,14 @@ def select_execution(rows, execution_id=None):
     return executions[0] if executions else None
 
 
+def driver_step_limit(config, act_count):
+    """Operational ceiling including polling; never a replacement writing budget."""
+    groups = config.get('paragraph_groups')
+    paragraphs = 1 if groups == 'all_acts_one_paragraph' else len(groups) if isinstance(groups, list) else max(1, act_count)
+    # Allow roughly thirty async polls per candidate, plus owner transitions.
+    return 16 + 3 * config.get('max_voice_repairs', 0) + 32 * config.get('max_attempts', 3) * paragraphs
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
@@ -68,7 +76,12 @@ def main():
             print(json.dumps({"experiment": config["id"], "stage": "construction_started"}), flush=True)
             current = engine.start(config["intent"], max_attempts=config["max_attempts"], mode="live")
         seen_revisions = {int(p.stem.split("-")[-1]) for p in out.glob("checkpoint-*.json")}
-        for _ in range(60):
+        plan = graph.db.execute('SELECT acts FROM construction_plan WHERE id=?',
+                                (current.get('plan'),)).fetchone()
+        step_limit = driver_step_limit(config, len(json.loads(plan[0])) if plan else 1)
+        steps, limit_reached = 0, False
+        for step in range(step_limit):
+            steps = step + 1
             report = inspect_execution(graph, current["id"])
             revision = current["revision"]
             if revision not in seen_revisions:
@@ -107,12 +120,31 @@ def main():
                 current = engine.advance(current["id"])
             elif state == "suspended_reopen" and current.get("route") == "expression":
                 current = engine.advance(current["id"], actor="author")
+            elif state == "suspended_detector_flagged":
+                if (not config.get('fresh_expression_retry')
+                        or delegation.get('fresh_expression_after_detector_flag') is not True):
+                    break
+                current = engine.retry_fresh_expression(current['id'], actor='author')
+            elif state == 'ready_for_fresh_expression':
+                if delegation.get('fresh_expression_after_detector_flag') is not True:
+                    break
+                current = engine.advance(current['id'], actor='author')
             else:
                 break
+        else:
+            limit_reached = True
         final = inspect_execution(graph, current["id"])
+        final['driver'] = {
+            'step_limit': step_limit, 'steps': steps,
+            'stop_reason': 'driver_step_limit_reached' if limit_reached else 'owner_or_authorization_gate',
+            'resume_execution': current['id'] if limit_reached else None,
+            'scope': 'Operational polling/transition ceiling only. Resume this exact execution and database; committed writing and fresh-retry budgets do not reset.',
+        }
         result_name = "result-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ") + ".json"
         save(out / result_name, final)
-        print(json.dumps({"result_file": str(out / result_name), "state": current["state"]}), flush=True)
+        print(json.dumps({"result_file": str(out / result_name), "state": current["state"],
+                          'driver_stop_reason': final['driver']['stop_reason'],
+                          'resume_execution': final['driver']['resume_execution']}), flush=True)
     finally:
         graph.db.close()
 
